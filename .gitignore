@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Audit scratch and generated test reports
+work/
+playwright-report/
+test-results/

@@ -1,3 +1,8 @@
+> Atualização de 05/11/2026: este documento descreve a estrutura anterior à integração.
+> A home agora recebe dados e controles reais de Router/Query/Axios/MSW.
+> Filtros já não ficam desabilitados na execução normal. Consulte CATALOG_API.md e ARCHITECTURE.md.
+> As observações de falta de acesso ao Figma abaixo são históricas; a auditoria posterior acessou a cópia indicada pelo usuário.
+
 # Página inicial Kurio
 
 Implementação estrutural baseada nas dimensões e cores fornecidas pelo usuário.

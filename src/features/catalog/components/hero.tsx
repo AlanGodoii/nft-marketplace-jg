@@ -24,7 +24,13 @@ export function Hero({ featured }: { featured: RemoteData<FeaturedNft | null> })
           <><span className="sr-only" role="status">Carregando destaque</span><Skeleton aria-hidden="true" className="size-full rounded-none" /></>
         ) : featured.status === 'success' && featured.data ? (
           <Link to="/nfts/$nftId" params={{ nftId: featured.data.nft.id }} className="relative block size-full">
-            <img src={featured.data.nft.image.src} alt={featured.data.nft.image.alt} width="450" height="450" className="size-full object-cover" />
+            {featured.data.nft.image.src ? (
+              <img src={featured.data.nft.image.src} alt={featured.data.nft.image.alt} width="450" height="450" className="size-full object-cover" />
+            ) : (
+              <div role="img" aria-label={featured.data.nft.image.alt} className="nft-art-placeholder size-full">
+                <ImageOff aria-hidden="true" className="size-8" /><span>Arte original indisponível</span>
+              </div>
+            )}
             <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-4 bg-background/95 p-5">
               <div><h2 className="font-bold">{featured.data.nft.name}</h2>
                 <p className="mt-1 text-xs text-muted-foreground">{featured.data.description}</p>

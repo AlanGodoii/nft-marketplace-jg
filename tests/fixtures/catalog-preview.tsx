@@ -1,4 +1,5 @@
 // Test-only fixtures. Never imported by application routes.
+import { createNftFixtures, collections, networks } from '../../src/mocks/fixtures'
 import { createRoot } from 'react-dom/client'
 import { RouterContextProvider } from '@tanstack/react-router'
 import { router } from '@/router'
@@ -13,17 +14,11 @@ export function mountCatalogPreview(status: 'loading' | 'success' | 'empty' | 'e
       : {
         status: 'success',
         data: {
-          items: status === 'empty' ? [] : Array.from({ length: 6 }, (_, index) => ({
-            id: `teste-${index}`,
-            name: `NFT de teste ${index}`,
-            collection: 'Coleção de teste',
-            image: { src: '/favicon.svg', alt: 'Imagem usada somente no teste' },
-            price: { amount: '1.00', currency: 'ETH' },
-          })),
+          items: status === 'empty' ? [] : createNftFixtures().slice(0, 6).map((nft, index) => ({ ...nft, id: `teste-${index}` })),
           total: status === 'empty' ? 0 : 6,
           page: 1,
           pageCount: 1,
-          collections: [],
+          collections, networks, pageSize: 6,
         },
       }
   const original = document.getElementById('root')

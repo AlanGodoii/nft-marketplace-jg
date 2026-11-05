@@ -1,9 +1,11 @@
-import { useState } from 'react'
 import { Hero } from './components/hero'
 import { CatalogFilters } from './components/catalog-filters'
 import { CatalogToolbar } from './components/catalog-toolbar'
 import { CatalogGrid } from './components/catalog-grid'
 import { CatalogPagination } from './components/catalog-pagination'
+import type { Collection, Network } from '@/contracts/nft'
+import { defaultCatalogSearch } from '@/contracts/catalog'
+import { Button } from '@/components/ui/button'
 import type { CatalogControls, CatalogPage, FeaturedNft, RemoteData } from './types'
 
 interface HomePageProps {
@@ -11,23 +13,23 @@ interface HomePageProps {
   featured?: RemoteData<FeaturedNft | null>
   controls?: CatalogControls
   onRetry?: () => void
+  onRefresh?: () => void
+  updating?: boolean
+  options?: { collections: Collection[]; networks: Network[] }
 }
 
 export function HomePage({
   catalog = { status: 'unavailable' },
   featured = { status: 'unavailable' },
   controls,
-  onRetry,
+  onRetry, onRefresh, updating = false, options,
 }: HomePageProps) {
-  const [fallbackFilters] = useState<CatalogControls['filters']>({
-    search: '', collection: '', minPrice: '', maxPrice: '', availableOnly: false, sort: 'recent',
-  })
-  const filters = controls?.filters ?? fallbackFilters
+  const filters = controls?.filters ?? defaultCatalogSearch
   const onFiltersChange: CatalogControls['onFiltersChange'] = value => controls?.onFiltersChange(value)
   const onPageChange = (page: number) => controls?.onPageChange(page)
   const data = catalog.status === 'success' ? catalog.data : undefined
-  const disabled = !controls || catalog.status !== 'success'
-  const filterProps = { filters, onFiltersChange, collections: data?.collections ?? [], disabled }
+  const disabled = !controls
+  const filterProps = { filters, onFiltersChange, collections: data?.collections ?? options?.collections ?? [], networks: data?.networks ?? options?.networks ?? [], disabled }
 
   return (
     <div className="space-y-16 pb-16">
@@ -40,8 +42,12 @@ export function HomePage({
             <div className="pt-5"><CatalogFilters {...filterProps} /></div>
           </details>
           <CatalogToolbar total={data?.total} filters={filters} onFiltersChange={onFiltersChange} disabled={disabled} />
-          <div className="py-8"><CatalogGrid catalog={catalog} onRetry={onRetry} /></div>
-          <CatalogPagination page={data?.page} pageCount={data?.pageCount}
+          <div className="mt-4 flex min-h-9 items-center justify-between gap-4">
+            <p role="status" aria-live="polite" className="text-xs text-muted-foreground">{updating ? 'Atualizando catálogo…' : ''}</p>
+            {onRefresh && <Button variant="link" disabled={updating} onClick={onRefresh}>Atualizar catálogo</Button>}
+          </div>
+          <div className="py-8" aria-busy={updating}><CatalogGrid catalog={catalog} onRetry={onRetry} /></div>
+          <CatalogPagination page={data?.page} pageCount={data?.pageCount} disabled={updating}
             onPageChange={onPageChange} />
         </div>
       </section>
