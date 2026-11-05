@@ -128,3 +128,226 @@
     @apply font-sans;
     }
 }
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/roboto-mono-latin-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/assets/fonts/roboto-mono-latin-500-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/assets/fonts/roboto-mono-latin-700-normal.woff2') format('woff2');
+}
+
+/* Home theme is scoped so checkout and authentication keep their current theme. */
+.kurio-theme {
+  --background: #140D0A;
+  --foreground: #F5F1EB;
+  --primary: #D28A4C;
+  --primary-foreground: #140D0A;
+  --muted-foreground: #CFB28C;
+  --muted: #2c211b;
+  --border: #4b382b;
+  --input: #4b382b;
+  --card: #1e1510;
+  --card-foreground: #F5F1EB;
+  --accent: #302218;
+  --accent-foreground: #F5F1EB;
+  --ring: #D28A4C;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: 'Roboto Mono', monospace;
+}
+.kurio-theme :where(a, button, input, select, summary):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+.kurio-theme [data-slot="skeleton"] {
+  background: var(--muted);
+}
+.kurio-container {
+  width: calc(100% - 48px);
+  max-width: 1200px;
+  margin-inline: auto;
+}
+.kurio-header {
+  padding-block: 32px;
+}
+.header-inner {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 45px;
+}
+.kurio-wordmark {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 45px;
+  letter-spacing: -3px;
+}
+.kurio-wordmark span {
+  color: var(--primary);
+}
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.header-link {
+  color: var(--muted-foreground);
+  font-size: 14px;
+}
+.header-link:hover, .header-link.is-active {
+  color: var(--foreground);
+}
+.header-link.is-active {
+  text-decoration: underline;
+  text-decoration-color: var(--primary);
+  text-underline-offset: 8px;
+}
+.mobile-menu-toggle {
+  display: none;
+}
+.kurio-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 450px;
+  min-height: 450px;
+  background: #21160f;
+}
+.hero-copy {
+  align-self: center;
+  min-width: 0;
+  padding: 40px 48px;
+}
+.hero-art {
+  width: 450px;
+  height: 450px;
+  background: #1a120e;
+}
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 48px;
+}
+.catalog-filters {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.kurio-select {
+  height: 44px;
+  border: 1px solid var(--input);
+  border-radius: 4px;
+  background: var(--background);
+  color: var(--foreground);
+  padding-inline: 12px;
+  font-size: 12px;
+}
+.kurio-select:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+.nft-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+}
+.nft-card {
+  min-width: 0;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  box-shadow: none;
+}
+.nft-card-link {
+  display: block;
+  height: 100%;
+}
+.nft-card-link:focus-visible {
+  outline-offset: -3px;
+}
+.nft-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+.catalog-empty {
+  display: flex;
+  min-height: 380px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  border: 1px dashed var(--border);
+  padding: 32px 24px;
+  text-align: center;
+}
+.mobile-filters {
+  display: none;
+}
+@media (max-width: 1199px) {
+  .catalog-layout { grid-template-columns: 260px minmax(0, 1fr); gap: 28px; }
+  .nft-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .kurio-hero { grid-template-columns: minmax(0, 1fr) 40%; }
+  .hero-art { width: 100%; height: 100%; min-height: 400px; }
+  .hero-copy { padding: 32px; }
+  .header-links { gap: 20px; }
+}
+@media (max-width: 899px) {
+  .catalog-layout { display: block; }
+  .desktop-filters { display: none; }
+  .mobile-filters { display: block; }
+  .mobile-filters .catalog-filters { border: 0; padding: 0; }
+  .header-links { gap: 16px; }
+  .header-link { font-size: 12px; }
+  .hero-copy { padding: 28px; }
+  .hero-copy h1 { font-size: 36px; }
+}
+@media (max-width: 639px) {
+  .kurio-container { width: calc(100% - 32px); }
+  .kurio-header { padding-block: 20px; }
+  .header-inner { gap: 16px; }
+  .kurio-wordmark { font-size: 32px; }
+  .mobile-menu-toggle { display: inline-flex; }
+  .header-links {
+    display: none;
+    position: absolute;
+    inset: calc(100% + 12px) 0 auto;
+    z-index: 20;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border: 1px solid var(--border);
+    padding: 8px;
+    background: var(--background);
+    box-shadow: 0 12px 32px #0004;
+  }
+  .header-links.is-open { display: flex; }
+  .header-link { padding: 14px; font-size: 14px; }
+  .kurio-hero { display: flex; flex-direction: column; min-height: 0; }
+  .hero-copy { align-self: stretch; padding: 32px 24px; }
+  .hero-copy h1 { font-size: 32px; }
+  .hero-art { width: 100%; height: auto; min-height: 0; aspect-ratio: 1; }
+  .nft-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .kurio-theme *, .kurio-theme *::before, .kurio-theme *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
