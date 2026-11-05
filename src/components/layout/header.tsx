@@ -1,3 +1,4 @@
+import { AuthActions } from '@/features/auth/auth-actions'
 import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { Menu, ShoppingBag, X } from 'lucide-react'
@@ -7,6 +8,7 @@ const links = [
   { to: '/', label: 'Início' },
   { to: '/perfil', label: 'Perfil' },
   { to: '/carteiras', label: 'Carteiras' },
+  { to: '/favoritos', label: 'Favoritos' },
   { to: '/login', label: 'Entrar' },
   { to: '/cadastro', label: 'Cadastrar' },
 ] as const
@@ -24,7 +26,7 @@ export function Header() {
               onClick={() => setMenuOpen(false)}>{label}</Link>
           ))}
         </nav>
-        <div className="flex shrink-0 items-center gap-3">
+        <div className="flex shrink-0 items-center gap-3"><AuthActions />
           <Link to="/carrinho" aria-label="Carrinho" className={buttonVariants({ variant: 'outline', className: 'size-11 rounded-sm' })} onClick={() => setMenuOpen(false)}>
             <ShoppingBag aria-hidden="true" className="size-5" />
           </Link>

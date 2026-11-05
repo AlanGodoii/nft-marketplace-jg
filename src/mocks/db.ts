@@ -2,13 +2,13 @@ import { z } from 'zod'
 import { nftSchema, type Nft } from '@/contracts/nft'
 import { createNftFixtures } from './fixtures'
 
-const storageKey = 'kurio.mock.database.v1'
-const stateSchema = z.object({ version: z.literal(1), nfts: z.array(nftSchema) })
+const storageKey = 'kurio.mock.database.v2'
+const stateSchema = z.object({ version: z.literal(2), nfts: z.array(nftSchema) })
 export type MockState = z.infer<typeof stateSchema>
 
 // One state owner for REST today and future cart/checkout handlers. No UI imports.
 export function createMockDatabase(storage?: Pick<Storage, 'getItem' | 'setItem'>) {
-  const seed = (): MockState => ({ version: 1, nfts: createNftFixtures() })
+  const seed = (): MockState => ({ version: 2, nfts: createNftFixtures() })
   let state = seed()
   try {
     const persisted = storage?.getItem(storageKey)

@@ -379,3 +379,59 @@
 @media (prefers-reduced-motion: reduce) {
   .skeleton-shimmer::after { animation: none; transform: none; }
 }
+
+/* Stage 3: scoped Kurio surfaces, based on Figma detail/cart/auth frames. */
+.auth-card { width: min(500px, calc(100vw - 32px)); max-width: 500px; padding: 36px; border-radius: 8px; border-bottom: 8px solid var(--primary); max-height: calc(100dvh - 32px); overflow-y: auto; }
+.auth-form { display: grid; gap: 12px; min-width: 0; }
+.auth-form [data-slot="input"] { height: 40px; }
+.auth-form button[type="submit"] { height: 45px; margin-top: 12px; }
+.field-error { color: #ffb6a4; font-size: 12px; overflow-wrap: anywhere; }
+.session-actions { display: flex; align-items: center; gap: 8px; }
+.session-actions [role="alert"] { max-width: 180px; }
+.detail-layout { display: grid; grid-template-columns: minmax(0, 573px) minmax(0, 1fr); gap: 32px; }
+.detail-gallery { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 28px; align-items: start; }
+.detail-thumbnails { display: grid; gap: 16px; }
+.detail-thumb { width: 100%; aspect-ratio: 1; border: 1px solid var(--border); border-radius: 8px; background: #241612; padding: 8px; font-size: 12px; }
+.detail-thumb[aria-pressed="true"] { border-color: var(--primary); }
+.detail-art { display: grid; place-items: center; width: 100%; min-width: 0; aspect-ratio: 1; background: #241612; padding: 16px; border-radius: 8px; color: var(--muted-foreground); font-size: 13px; text-align: center; }
+.detail-art img, .detail-thumb img { width: 100%; height: 100%; object-fit: contain; border-radius: 8px; }
+.cart-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(270px, 1fr); gap: 40px; align-items: start; }
+.cart-line { display: grid; grid-template-columns: 60px minmax(0, 1fr) 140px minmax(100px, .7fr); align-items: center; gap: 16px; background: #241612; padding: 16px; border-radius: 6px; }
+.cart-art { width: 60px; aspect-ratio: 1; display: grid; place-items: center; background: #2f1d15; font-size: 9px; color: var(--muted-foreground); text-align: center; }
+.cart-art img { width: 100%; height: 100%; object-fit: contain; }
+.cart-quantity { display: grid; gap: 8px; min-width: 0; }
+.cart-line-message { grid-column: 1 / -1; font-size: 13px; }
+.cart-summary { padding: 24px; border: 1px solid var(--border); background: #241612; border-radius: 6px; min-width: 0; }
+.quote-totals { display: grid; gap: 16px; font-size: 13px; }
+.quote-totals > div { display: flex; justify-content: space-between; gap: 16px; }
+.quote-totals dd { overflow-wrap: anywhere; text-align: right; }
+.favorites-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+body:has(.auth-card) [data-slot="dialog-overlay"] { background: #140d0a99; }
+@media (max-width: 1100px) { .cart-layout { grid-template-columns: minmax(0, 1fr); } .cart-summary { width: 100%; max-width: 600px; } }
+@media (max-width: 1000px) {
+  .mobile-menu-toggle { display: inline-flex; }
+  .header-links { display: none; position: absolute; inset: calc(100% + 12px) 0 auto; z-index: 20; flex-direction: column; align-items: stretch; border: 1px solid var(--border); padding: 8px; background: var(--background); }
+  .header-links.is-open { display: flex; }
+  .header-link { padding: 12px; }
+  .detail-gallery { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .detail-thumbnails { grid-template-columns: repeat(4, minmax(0, 1fr)); order: 2; }
+}
+@media (max-width: 767px) {
+  .detail-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .detail-info { background: #241612; padding: 24px; border-radius: 24px 24px 8px 8px; }
+  .detail-info h1 { font-size: 22px; }
+  .cart-line { grid-template-columns: 52px minmax(0, 1fr); gap: 12px; }
+  .cart-art { width: 52px; }
+  .cart-quantity { grid-column: 2; }
+  .cart-summary { padding: 20px; }
+  .favorites-grid { grid-template-columns: minmax(0, 1fr); }
+  .session-actions { flex-direction: column; gap: 4px; }
+  .session-actions > span { max-width: 80px; overflow: hidden; text-overflow: ellipsis; }
+  .auth-card { padding: 24px; }
+}
+@media (min-width: 768px) and (max-width: 1000px) {
+  .detail-layout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+  .cart-line > div:last-of-type { grid-column: 2; }
+}

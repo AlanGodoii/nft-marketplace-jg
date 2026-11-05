@@ -32,8 +32,8 @@ for (const width of [390, 768, 1440]) {
       await page.keyboard.press('Enter')
       await expect(page.getByRole('navigation', { name: 'Navegação principal' })).toBeVisible()
       await page.getByRole('link', { name: 'Perfil', exact: true }).click()
-      await expect(page.getByRole('heading', { name: 'Perfil', exact: true })).toBeVisible()
-      await expect(page.getByRole('button', { name: 'Abrir menu' })).toHaveAttribute('aria-expanded', 'false')
+      await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+      await expect(page.locator('.mobile-menu-toggle')).toHaveAttribute('aria-expanded', 'false')
       await page.goBack()
       await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
     }
@@ -43,8 +43,13 @@ for (const width of [390, 768, 1440]) {
 }
 
 test('preserva as outras oito rotas e a página não encontrada', async ({ page }) => {
+  await page.goto(baseURL + '/login')
+  await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
+  await page.getByLabel('Senha', { exact: true }).fill('Kurio123!')
+  await page.getByRole('button', { name: 'Entrar', exact: true }).click()
+  await expect(page.getByLabel('Usuário conectado')).toHaveText('Alice')
   const routes = [
-    ['/nfts/exemplo', 'Detalhes do NFT'], ['/carrinho', 'Carrinho'],
+    ['/nfts/exemplo', 'NFT não encontrado'], ['/carrinho', 'Carrinho'],
     ['/checkout', 'Checkout'], ['/pedido/confirmacao', 'Confirmação do pedido'],
     ['/login', 'Login'], ['/cadastro', 'Cadastro'], ['/perfil', 'Perfil'],
     ['/carteiras', 'Carteiras'], ['/nao-existe', 'Página não encontrada'],

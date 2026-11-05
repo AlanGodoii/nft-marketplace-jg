@@ -13,10 +13,13 @@ export const editionSchema = z.object({
   price: z.object({ amount: ethSchema, currency: z.literal('ETH') }),
   availability: availabilitySchema,
 })
+export const imageSchema = z.object({ src: z.string().nullable(), alt: z.string() })
 export const nftSchema = z.object({
   id: z.string(), name: z.string(), description: z.string(),
   collection: collectionSchema, network: networkSchema,
-  image: z.object({ src: z.string().nullable(), alt: z.string() }),
+  image: imageSchema,
+  gallery: z.array(imageSchema).default([]),
+  creator: z.object({ id: z.string(), name: z.string() }).default({ id: 'kurio-studio', name: 'Estúdio Kurio' }),
   price: z.object({ amount: ethSchema, currency: z.literal('ETH') }),
   availability: availabilitySchema, editions: z.array(editionSchema).min(1),
   createdAt: z.iso.datetime(), version: z.number().int().positive(),

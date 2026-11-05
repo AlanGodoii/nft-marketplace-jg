@@ -1,3 +1,5 @@
+> Atualização da etapa 3: autenticação, favoritos e carrinho agora estão implementados; detalhes em `STAGE3_API.md`. O catálogo mantém os 36 NFTs e o comportamento P0. NFT ganhou criador, galeria e edições; banco público passa a v2. As limitações de ausência desses módulos registradas abaixo descrevem a entrega P0 histórica.
+
 # Catálogo — contratos REST e simulação
 
 Implementação P0 de 05/11/2026. Esta etapa cobre apenas leitura do catálogo. Conta, favoritos, carrinho, checkout e Socket.IO continuam fora desta implementação.
