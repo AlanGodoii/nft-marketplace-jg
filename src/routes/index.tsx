@@ -1,17 +1,6 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { PagePlaceholder } from '@/components/page-placeholder'
-import { buttonVariants } from '@/components/ui/button'
+import { createFileRoute } from '@tanstack/react-router'
+import { HomePage } from '@/features/catalog/home-page'
 
 export const Route = createFileRoute('/')({
-  component: Page,
+  component: HomePage,
 })
-
-function Page() {
-  return (
-    <PagePlaceholder title="Início" description="Explore o marketplace de NFTs da Jungle Gaming.">
-      <Link to="/nfts/$nftId" params={{ nftId: 'exemplo' }} className={buttonVariants({ variant: 'outline' })}>
-        Ver NFT de exemplo
-      </Link>
-    </PagePlaceholder>
-  )
-}

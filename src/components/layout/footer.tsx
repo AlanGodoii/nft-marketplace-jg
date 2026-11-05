@@ -1,9 +1,12 @@
+import { Link } from '@tanstack/react-router'
+
 export function Footer() {
   return (
     <footer className="border-t">
-      <p className="mx-auto max-w-6xl px-6 py-6 text-sm text-muted-foreground">
-        Jungle Gaming · Marketplace de NFTs
-      </p>
+      <div className="kurio-container flex flex-wrap items-center justify-between gap-6 py-8">
+        <Link to="/" className="text-xl font-bold" aria-label="Kurio — início">kurio.</Link>
+        <p className="text-xs text-muted-foreground">Kurio · NFT Marketplace</p>
+      </div>
     </footer>
   )
 }

@@ -1,0 +1,20 @@
+import { defineConfig } from '@playwright/test'
+
+const baseURL = process.env.TEST_BASE_URL ?? 'http://127.0.0.1:5173'
+
+export default defineConfig({
+  testDir: './tests',
+  outputDir: './node_modules/.cache/playwright-results',
+  use: {
+    baseURL,
+    browserName: 'chromium',
+    launchOptions: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE
+      ? { executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE }
+      : {},
+  },
+  webServer: process.env.TEST_BASE_URL ? undefined : {
+    command: 'npm run dev -- --host 127.0.0.1 --port 5173 --strictPort',
+    url: baseURL,
+    reuseExistingServer: !process.env.CI,
+  },
+})
