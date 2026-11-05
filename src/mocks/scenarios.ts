@@ -4,6 +4,7 @@ const faultSchema = z.object({ status: z.number().int().min(400).max(599).option
 export const scenarioSchema = z.object({
   name: z.enum(['normal', 'empty', 'server-error', 'transient-error', 'slow', 'out-of-order', 'network-error']).default('normal'),
   faults: z.record(z.string(), faultSchema).optional(),
+  walletConnection: z.enum(['connected', 'refused', 'disconnected']).optional(),
   sessionTtlMs: z.number().int().min(100).max(86400000).optional(),
   latencyMs: z.number().int().min(0).max(30000).optional(),
   delaysBySearch: z.record(z.string(), z.number().int().min(0).max(30000)).optional(),
@@ -56,3 +57,5 @@ export function beginOperation(name: string) {
   return { latency: fault?.latencyMs ?? config.latencyMs ?? 100, status: active ? fault.status : undefined, networkError: active ? fault.networkError : false }
 }
 export function sessionTtl() { return config.sessionTtlMs ?? 1800000 }
+
+export function walletConnectionOutcome() { return config.walletConnection ?? 'connected' }

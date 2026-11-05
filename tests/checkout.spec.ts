@@ -1,0 +1,55 @@
+import { expect, test } from '@playwright/test'
+import { configure, login, request, reset } from './helpers/market'
+test.beforeEach(async ({ page }) => reset(page))
+
+test('A: cadastra carteira secundária, valida endereço e persiste edição', async ({ page }) => {
+  await login(page)
+  await page.getByRole('button', { name: 'Adicionar carteira' }).click()
+  await page.getByLabel('Nome de usuário', { exact: true }).fill('alice-reserva')
+  await page.getByLabel('Nome do perfil', { exact: true }).fill('Coleção reserva')
+  await page.getByLabel('Código de indicação', { exact: true }).fill('KURIO')
+  await page.getByLabel('Nome ENS', { exact: true }).fill('reserva.eth')
+  await page.getByLabel('Apelido da carteira').fill('Reserva')
+  await page.getByLabel('Endereço da carteira', { exact: true }).fill('invalido')
+  await page.getByRole('button', { name: 'Salvar carteira' }).click()
+  await expect(page.getByText('Endereço inválido para a rede selecionada.')).toBeVisible()
+  await page.getByLabel('Endereço da carteira', { exact: true }).fill(`0x${'3'.repeat(40)}`)
+  await page.getByRole('button', { name: 'Salvar carteira' }).click()
+  await expect(page.getByTestId('wallet-card')).toHaveCount(2)
+  await page.getByRole('button', { name: 'Editar Reserva' }).click()
+  await page.getByLabel('Apelido da carteira').fill('Reserva editada')
+  await page.getByRole('button', { name: 'Salvar carteira' }).click()
+  await expect(page.getByText('Reserva editada · Secundária')).toBeVisible()
+  await page.reload()
+  await expect(page.getByText('Reserva editada · Secundária')).toBeVisible()
+})
+
+test('A: carteiras isoladas e API retorna 400,401,404,409', async ({ page }) => {
+  expect((await request(page, '/api/wallets', 'GET')).status).toBe(401)
+  await login(page)
+  const initial = await request(page, '/api/wallets', 'GET')
+  const wallet = initial.body.items[0]
+  expect((await request(page, '/api/wallets', 'POST', {})).status).toBe(400)
+  const { id: _id, version: _version, ...input } = wallet
+  expect((await request(page, '/api/wallets', 'POST', input)).status).toBe(409)
+  await page.getByRole('button', { name: 'Sair', exact: true }).click()
+  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await login(page, 'bob')
+  await expect(page.getByText(`0x${'2'.repeat(40)}`, { exact: true })).toBeVisible()
+  await expect(page.getByText(wallet.address, { exact: true })).toHaveCount(0)
+  expect((await request(page, `/api/wallets/${wallet.id}`, 'PATCH', input)).status).toBe(404)
+})
+
+test('A: falha de carteira500 tem recuperação e conexão simulada pode recusar', async ({ page }) => {
+  await login(page)
+  await configure(page, { name: 'normal', latencyMs: 10, faults: { 'wallets.read': { status: 500 } }, walletConnection: 'refused' })
+  await page.reload()
+  await expect(page.getByRole('alert')).toContainText('Não foi possível')
+  await configure(page, { name: 'normal', latencyMs: 10, walletConnection: 'refused' })
+  await page.getByRole('button', { name: 'Tentar novamente', exact: true }).click()
+  await expect(page.getByTestId('wallet-card')).toHaveCount(1)
+  const connection = await request(page, '/api/wallets/wallet-alice/connection', 'POST', { action: 'connect' })
+  expect(connection.body.status).toBe('refused')
+  const disconnected = await request(page, '/api/wallets/wallet-alice/connection', 'POST', { action: 'disconnect' })
+  expect(disconnected.body.status).toBe('disconnected')
+})
