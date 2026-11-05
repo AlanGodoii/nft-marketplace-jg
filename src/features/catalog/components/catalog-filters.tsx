@@ -2,14 +2,16 @@ import { useId } from 'react'
 import { SlidersHorizontal } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import type { CatalogControls, FilterOption } from '../types'
+import type { Collection, Network } from '@/contracts/nft'
+import type { CatalogControls } from '../types'
 
 interface Props extends Pick<CatalogControls, 'filters' | 'onFiltersChange'> {
-  collections: FilterOption[]
+  collections: Collection[]
+  networks: Network[]
   disabled: boolean
 }
 
-export function CatalogFilters({ filters, onFiltersChange, collections, disabled }: Props) {
+export function CatalogFilters({ filters, onFiltersChange, collections, networks, disabled }: Props) {
   const id = useId()
   const update = (patch: Partial<typeof filters>) => onFiltersChange({ ...filters, ...patch })
   return (
@@ -17,7 +19,7 @@ export function CatalogFilters({ filters, onFiltersChange, collections, disabled
       <div className="flex items-center justify-between gap-4 border-b pb-6">
         <h2 className="flex items-center gap-3 text-lg font-bold"><SlidersHorizontal aria-hidden="true" className="size-5" />Filtros</h2>
         <Button variant="link" className="px-0 text-xs" disabled={disabled} onClick={() => update({
-          collection: '', minPrice: '', maxPrice: '', availableOnly: false,
+          collection: '', network: '', minPrice: '', maxPrice: '', availableOnly: false,
         })}>Limpar</Button>
       </div>
       <fieldset disabled={disabled} aria-describedby={disabled ? `${id}-filters-unavailable` : undefined} className="space-y-7 pt-6 disabled:opacity-60">
@@ -26,7 +28,16 @@ export function CatalogFilters({ filters, onFiltersChange, collections, disabled
           <label htmlFor={`${id}-collection`} className="mb-4 block text-sm font-medium">Coleção</label>
           <select id={`${id}-collection`} className="kurio-select w-full" value={filters.collection} onChange={event => update({ collection: event.target.value })}>
             <option value="">Todas as coleções</option>
-            {collections.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+            {filters.collection && !collections.some(option => option.id === filters.collection) && <option value={filters.collection}>{filters.collection}</option>}
+            {collections.map(option => <option key={option.id} value={option.id}>{option.name}</option>)}
+          </select>
+        </div>
+        <div>
+          <label htmlFor={`${id}-network`} className="mb-4 block text-sm font-medium">Rede</label>
+          <select id={`${id}-network`} className="kurio-select w-full" value={filters.network} onChange={event => update({ network: event.target.value })}>
+            <option value="">Todas as redes</option>
+            {filters.network && !networks.some(option => option.id === filters.network) && <option value={filters.network}>{filters.network}</option>}
+            {networks.map(option => <option key={option.id} value={option.id}>{option.name}</option>)}
           </select>
         </div>
         <div className="border-t pt-6">

@@ -351,3 +351,31 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Reserved art area: no substituted imagery while original Figma assets are pending. */
+.nft-art-placeholder {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  color: var(--muted-foreground);
+  background: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
+.skeleton-shimmer { position: relative; overflow: hidden; }
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 15%, color-mix(in srgb, var(--foreground) 12%, transparent) 50%, transparent 85%);
+  transform: translateX(-100%);
+  animation: skeleton-shimmer 1.4s linear infinite;
+}
+@keyframes skeleton-shimmer { to { transform: translateX(100%); } }
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer::after { animation: none; transform: none; }
+}
