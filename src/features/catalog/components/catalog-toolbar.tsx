@@ -1,4 +1,5 @@
 import { useDesktop } from '@/lib/use-desktop'
+import { CatalogSort } from './catalog-sort'
 import { CatalogSearch } from './catalog-search'
 import type { CatalogControls } from '../types'
 
@@ -19,18 +20,7 @@ export function CatalogToolbar({ total, filters, onFiltersChange, disabled }: Pr
         <h2 id="catalog-title" className="text-2xl font-bold">Explore os NFTs</h2>
         <p className="text-xs text-muted-foreground">{total !== undefined ? `${total} NFTs encontrados` : 'Catálogo indisponível'}</p>
       </div>
-      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        {desktop && <CatalogSearch filters={filters} onFiltersChange={onFiltersChange} disabled={disabled} />}
-        <div className="flex items-center gap-3">
-          <label htmlFor="nft-sort" className="shrink-0 text-xs text-muted-foreground">Ordenar por</label>
-          <select id="nft-sort" className="kurio-select min-w-0 flex-1 sm:w-40" disabled={disabled} value={filters.sort}
-            onChange={event => onFiltersChange({ ...filters, sort: event.target.value as typeof filters.sort })}>
-            <option value="recent">Mais recentes</option>
-            <option value="price-asc">Menor preço</option>
-            <option value="price-desc">Maior preço</option>
-          </select>
-        </div>
-      </div>
+      {desktop && <div className="mt-6 flex flex-col gap-3 sm:flex-row"><CatalogSearch filters={filters} onFiltersChange={onFiltersChange} disabled={disabled} /><CatalogSort filters={filters} onFiltersChange={onFiltersChange} disabled={disabled} /></div>}
     </div>
   )
 }

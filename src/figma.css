@@ -622,3 +622,11 @@ body:has(.receipt-dialog) .mobile-bottom-nav,body:has(.receipt-dialog) .mobile-p
 }
 @media(min-width:1024px) and (max-width:1200px) { .cart-line { grid-template-columns:60px minmax(0,1fr) 85px 96px 120px; } .cart-table-header { grid-template-columns:minmax(0,1fr) 85px 96px 120px; } }
 @media(max-width:1023px) { .commerce-breadcrumb,.cart-summary > a.cart-continue { display:none; } }
+@media(max-width:1023px) {
+ .mobile-hero-banner { padding-bottom:22px; }
+ .mobile-hero-banner > div:first-child > p:first-child { margin-top:0; }
+ .catalog-refresh { position:static; min-height:0; height:auto; }
+ .catalog-refresh > p:empty { display:none; }
+ .catalog-refresh > p:not(:empty) { position:static; min-width:0; text-align:left; }
+ .catalog-toolbar > .catalog-heading { padding:0; margin:0; }
+}

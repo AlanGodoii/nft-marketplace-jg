@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { SlidersHorizontal } from 'lucide-react'
+import { CatalogSort } from './components/catalog-sort'
 import { CatalogSearch } from './components/catalog-search'
 import { useDesktop } from '@/lib/use-desktop'
 import { HomeEditorial, HomeSpotlight } from './components/home-editorial'
@@ -48,12 +49,12 @@ export function HomePage({
         <div className="min-w-0">
           <details id="mobile-catalog-filters" open={filtersOpen} onToggle={event=>setFiltersOpen(event.currentTarget.open)} className="mobile-filters mb-6 rounded-sm border p-4">
             <summary className="cursor-pointer text-sm font-medium">Filtrar NFTs</summary>
-            <div className="pt-5"><CatalogFilters {...filterProps} /></div>
+            <div className="pt-5 space-y-5"><CatalogFilters {...filterProps} />{!desktop && <><CatalogSort id="mobile-nft-sort" filters={filters} onFiltersChange={onFiltersChange} disabled={disabled} />{onRefresh && <Button variant="outline" disabled={updating} onClick={onRefresh}>Atualizar catálogo</Button>}</>}</div>
           </details>
           <CatalogToolbar total={data?.total} filters={filters} onFiltersChange={onFiltersChange} disabled={disabled} />
           <div className="catalog-refresh mt-4 flex min-h-9 items-center justify-between gap-4">
             <p role="status" aria-live="polite" className="text-xs text-muted-foreground">{updating ? 'Atualizando catálogo…' : ''}</p>
-            {onRefresh && <Button variant="link" disabled={updating} onClick={onRefresh}>Atualizar catálogo</Button>}
+            {desktop && onRefresh && <Button variant="link" disabled={updating} onClick={onRefresh}>Atualizar catálogo</Button>}
           </div>
           <div className="catalog-results py-8" aria-busy={updating}><CatalogGrid catalog={catalog} onRetry={onRetry} /></div>
           <CatalogPagination page={data?.page} pageCount={data?.pageCount} disabled={updating}
