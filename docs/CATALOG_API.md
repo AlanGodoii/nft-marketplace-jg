@@ -149,3 +149,10 @@ Comandos e resultados finais estão em docs/REQUIREMENTS_CHECKLIST.md. Nenhum re
 - `tests/home.spec.ts`
 - `docs/REQUIREMENTS_CHECKLIST.md` — documento da auditoria anterior, atualizado nesta etapa.
 - `docs/IMPLEMENTATION_PLAN.md` — documento da auditoria anterior, atualizado nesta etapa.
+
+
+## Extensão de apresentação — Home desktop
+
+Contratos anteriores preservados; defaults página1/tamanho6/recent e36NFTs. `tab` opcional na requisição, normalizado para all: all mantém catálogo completo; new usa createdAt >=2026-11-01; trending seleciona edições disponíveis (seleção demonstrativa, não ranking real de vendas). Combina com busca/coleção/rede/preço/disponibilidade/sort e compõe URL/query key. Troca de aba reinicia página; reset conhecido fornece5novos e28disponíveis.
+
+Resposta de listagem acrescenta facets opcionais `{collections:Record<id,integer>,networks:Record<id,integer>}`: totais globais do snapshot, antes dos filtros (12por opção no reset). Isso conserva clientes anteriores e evita copiar contagens do Figma. NFT.image pode incluir desktopSrc opcional: URL local de arte original recortada. src e galerias anteriores permanecem inalterados; componentes não importam fixtures. Leituras de estado antigo recebem o enriquecimento visual sem resetar contas/carrinhos/pedidos/estoques. Mapa/procedência em public/assets/figma/home/manifest.json.

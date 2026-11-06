@@ -1,0 +1,1096 @@
+{
+  "startTime": 1793944936246,
+  "duration": 93043.76,
+  "stats": {
+    "total": 45,
+    "expected": 45,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "ok": true
+  },
+  "projectNames": [
+    "desktop",
+    "mobile"
+  ],
+  "applicationCommit": "1867f433ce4dc7fc315564947ad0b0b23c3150ff",
+  "files": [
+    {
+      "fileId": "30aa42b97d8966d0c2dc",
+      "fileName": "catalog.spec.ts",
+      "tests": [
+        {
+          "testId": "30aa42b97d8966d0c2dc-58f563ea49fb1c2344d8",
+          "title": "carrega catálogo por Axios e handlers MSW com contratos completos",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 33,
+            "column": 1
+          },
+          "duration": 3206,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:16.868Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-7942de52e75b1b15aade",
+          "title": "busca e reinicia paginação",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 52,
+            "column": 1
+          },
+          "duration": 3766,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:20.493Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-8898a8b05dea2bdbe8b9",
+          "title": "combina coleção, rede, disponibilidade e intervalo ETH",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 65,
+            "column": 1
+          },
+          "duration": 4183,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:24.279Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-0a53756688f953f8204d",
+          "title": "ordena preço crescente e decrescente com precisão decimal",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 85,
+            "column": 1
+          },
+          "duration": 3306,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:28.489Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-3c2d0cc9cc7c3ba05c3a",
+          "title": "filtra e ordena diferenças além da precisão de number",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 100,
+            "column": 1
+          },
+          "duration": 2609,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:31.831Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-5369866149cab55c60c5",
+          "title": "paginação respeita limites e preserva parâmetros",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 108,
+            "column": 1
+          },
+          "duration": 3303,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:34.495Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-105faecebaa690e1a28d",
+          "title": "refresh e histórico restauram os filtros da URL",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 124,
+            "column": 1
+          },
+          "duration": 3462,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:37.819Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-f25c1f8cd7676e817721",
+          "title": "resultado vazio por busca e por cenário configurável",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 150,
+            "column": 1
+          },
+          "duration": 2685,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:41.300Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-fd91fa6dcdef3068de6a",
+          "title": "erro HTTP e recuperação pelo botão de nova tentativa",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 162,
+            "column": 1
+          },
+          "duration": 3477,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:44.004Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-002292e418d3825810e0",
+          "title": "shimmer na rede lenta e preferência por movimento reduzido",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 173,
+            "column": 1
+          },
+          "duration": 3855,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:47.505Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-aeb18117a079174485ea",
+          "title": "atualização em segundo plano mantém conteúdo e anuncia progresso",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 185,
+            "column": 1
+          },
+          "duration": 4480,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:51.386Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-86c9582f903bf87d6dde",
+          "title": "respostas fora de ordem não substituem a busca mais recente",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 197,
+            "column": 1
+          },
+          "duration": 4676,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:55.898Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-48968e15049c6fffa07e",
+          "title": "contratos de detalhe, 404, validação e barra final passam pelo MSW",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 216,
+            "column": 1
+          },
+          "duration": 1805,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:00.585Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-8947a8fa4fc58db3ba4f",
+          "title": "filtros inválidos exibem erro corrigível e URL inválida é normalizada",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 233,
+            "column": 1
+          },
+          "duration": 2855,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:02.420Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-03b29d5590b2e14bc46c",
+          "title": "reset restaura cenário normal e descarta diagnósticos anteriores",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 245,
+            "column": 1
+          },
+          "duration": 3312,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:05.293Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-07f229d85c6c9b79e834",
+          "title": "falha de conexão é recuperável sem dados fictícios",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 257,
+            "column": 1
+          },
+          "duration": 4049,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:08.620Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-3e6ee1d1fa5e174a44f6",
+          "title": "retry recupera falha transitória e reset rejeita JSON inválido",
+          "projectName": "desktop",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 267,
+            "column": 1
+          },
+          "duration": 3638,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:12.682Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-3b4e642498adff8a6889",
+          "title": "carrega catálogo por Axios e handlers MSW com contratos completos",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 33,
+            "column": 1
+          },
+          "duration": 2516,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:05.807Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-1ed3b82ebe9caf2f6b70",
+          "title": "busca e reinicia paginação",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 52,
+            "column": 1
+          },
+          "duration": 2831,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:08.785Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-c5d0f162af79fa2ccbe5",
+          "title": "combina coleção, rede, disponibilidade e intervalo ETH",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 65,
+            "column": 1
+          },
+          "duration": 3325,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:11.673Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-01e0504a02fea465fa9c",
+          "title": "ordena preço crescente e decrescente com precisão decimal",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 85,
+            "column": 1
+          },
+          "duration": 1744,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:15.024Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-0defae3b19fcf888ecd6",
+          "title": "filtra e ordena diferenças além da precisão de number",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 100,
+            "column": 1
+          },
+          "duration": 2220,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:16.781Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-ac1d1f3c8ce5d42fef4b",
+          "title": "paginação respeita limites e preserva parâmetros",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 108,
+            "column": 1
+          },
+          "duration": 3328,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:19.022Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-34073a4e78f744e5fe5d",
+          "title": "refresh e histórico restauram os filtros da URL",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 124,
+            "column": 1
+          },
+          "duration": 3888,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:22.375Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-2ad14173eb04745bfb9f",
+          "title": "resultado vazio por busca e por cenário configurável",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 150,
+            "column": 1
+          },
+          "duration": 3124,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:26.285Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-cbe0a1bfd446fdf76bc5",
+          "title": "erro HTTP e recuperação pelo botão de nova tentativa",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 162,
+            "column": 1
+          },
+          "duration": 3457,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:29.426Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-1e017b2842cf9c0461cc",
+          "title": "shimmer na rede lenta e preferência por movimento reduzido",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 173,
+            "column": 1
+          },
+          "duration": 2875,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:32.958Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-b1eb6843d061d08c89d6",
+          "title": "atualização em segundo plano mantém conteúdo e anuncia progresso",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 185,
+            "column": 1
+          },
+          "duration": 2559,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:35.842Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-2c6926060293dffeb5fc",
+          "title": "respostas fora de ordem não substituem a busca mais recente",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 197,
+            "column": 1
+          },
+          "duration": 2230,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:38.415Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-7bc4d5d0a61d7928a099",
+          "title": "contratos de detalhe, 404, validação e barra final passam pelo MSW",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 216,
+            "column": 1
+          },
+          "duration": 996,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:40.662Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-0f8de33095e2e9b0d329",
+          "title": "filtros inválidos exibem erro corrigível e URL inválida é normalizada",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 233,
+            "column": 1
+          },
+          "duration": 1428,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:41.675Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-15a586610e06ffe5623a",
+          "title": "reset restaura cenário normal e descarta diagnósticos anteriores",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 245,
+            "column": 1
+          },
+          "duration": 1525,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:43.118Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-e78ebb0547792d8f5f47",
+          "title": "falha de conexão é recuperável sem dados fictícios",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 257,
+            "column": 1
+          },
+          "duration": 2337,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:44.655Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "30aa42b97d8966d0c2dc-260e9d626be755ac1bf5",
+          "title": "retry recupera falha transitória e reset rejeita JSON inválido",
+          "projectName": "mobile",
+          "location": {
+            "file": "catalog.spec.ts",
+            "line": 267,
+            "column": 1
+          },
+          "duration": 2182,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:47.005Z",
+              "workerIndex": 2
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "total": 34,
+        "expected": 34,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    },
+    {
+      "fileId": "f3e554c6199c48d65fc5",
+      "fileName": "deployment.spec.ts",
+      "tests": [
+        {
+          "testId": "f3e554c6199c48d65fc5-23f998b6cedb1cbec154",
+          "title": "SPA: acesso direto e refresh das rotas públicas",
+          "projectName": "desktop",
+          "location": {
+            "file": "deployment.spec.ts",
+            "line": 12,
+            "column": 29
+          },
+          "duration": 7753,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:16.874Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "f3e554c6199c48d65fc5-a8be1cab28c9ce998fbe",
+          "title": "SPA: acesso direto e refresh das rotas privadas",
+          "projectName": "desktop",
+          "location": {
+            "file": "deployment.spec.ts",
+            "line": 12,
+            "column": 29
+          },
+          "duration": 8295,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:25.069Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "f3e554c6199c48d65fc5-405953adaee94cdf440b",
+          "title": "SPA: acesso direto e refresh das rotas públicas",
+          "projectName": "mobile",
+          "location": {
+            "file": "deployment.spec.ts",
+            "line": 12,
+            "column": 29
+          },
+          "duration": 7107,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:17.014Z",
+              "workerIndex": 3
+            }
+          ]
+        },
+        {
+          "testId": "f3e554c6199c48d65fc5-ba751633b36fea078829",
+          "title": "SPA: acesso direto e refresh das rotas privadas",
+          "projectName": "mobile",
+          "location": {
+            "file": "deployment.spec.ts",
+            "line": 12,
+            "column": 29
+          },
+          "duration": 7096,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:24.602Z",
+              "workerIndex": 3
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "total": 4,
+        "expected": 4,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    },
+    {
+      "fileId": "4d1817502f970cf1ca3b",
+      "fileName": "desktop-home.spec.ts",
+      "tests": [
+        {
+          "testId": "4d1817502f970cf1ca3b-6c2619c8beeac3e0eaf5",
+          "title": "Home original desktop: composição, imagens e acessibilidade em 1280px",
+          "projectName": "desktop",
+          "location": {
+            "file": "desktop-home.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          "duration": 6260,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:33.565Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "4d1817502f970cf1ca3b-abeabaeff781fe9e71e9",
+          "title": "Home original desktop: composição, imagens e acessibilidade em 1440px",
+          "projectName": "desktop",
+          "location": {
+            "file": "desktop-home.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          "duration": 6019,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:39.834Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "4d1817502f970cf1ca3b-909c6c6f2f57d3623484",
+          "title": "Home original desktop: composição, imagens e acessibilidade em 1920px",
+          "projectName": "desktop",
+          "location": {
+            "file": "desktop-home.spec.ts",
+            "line": 7,
+            "column": 3
+          },
+          "duration": 4474,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:45.910Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "4d1817502f970cf1ca3b-6825c9be1da0b5bbf7fc",
+          "title": "header: busca, destino editorial e conta com carrinho real",
+          "projectName": "desktop",
+          "location": {
+            "file": "desktop-home.spec.ts",
+            "line": 33,
+            "column": 1
+          },
+          "duration": 5394,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:50.403Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "4d1817502f970cf1ca3b-5038355c0347f32f1d15",
+          "title": "abas, contagens reais, combinações, histórico e refresh",
+          "projectName": "desktop",
+          "location": {
+            "file": "desktop-home.spec.ts",
+            "line": 58,
+            "column": 1
+          },
+          "duration": 4216,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:02:55.812Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "4d1817502f970cf1ca3b-465af10492cfe4cb56fb",
+          "title": "editorial e newsletter informam limites, sem sucesso fictício",
+          "projectName": "desktop",
+          "location": {
+            "file": "desktop-home.spec.ts",
+            "line": 82,
+            "column": 1
+          },
+          "duration": 3035,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:00.053Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "4d1817502f970cf1ca3b-8a524e6bcea1b1323b68",
+          "title": "assets enriquecem persistência antiga sem alterar identidade, preço ou estoque",
+          "projectName": "desktop",
+          "location": {
+            "file": "desktop-home.spec.ts",
+            "line": 93,
+            "column": 1
+          },
+          "duration": 1649,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:03:03.110Z",
+              "workerIndex": 1
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "total": 7,
+        "expected": 7,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    }
+  ]
+}

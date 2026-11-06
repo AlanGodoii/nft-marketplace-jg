@@ -1,0 +1,56 @@
+
+> jungle-nft-marketplace@0.0.0 build
+> tsc -b && vite build
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:50:25). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 2735 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              2.35 kB │ gzip:   0.90 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/assets/index-CH7smavV.css                              77.52 kB │ gzip:  15.10 kB
+dist/assets/cadastro-BQ32wH-M.js                             0.07 kB │ gzip:   0.09 kB
+dist/assets/login-CtxRRXzi.js                                0.07 kB │ gzip:   0.08 kB
+dist/assets/skeleton-E6PNth-b.js                             0.24 kB │ gzip:   0.19 kB
+dist/assets/useMatch-C6z0cXu_.js                             0.77 kB │ gzip:   0.47 kB
+dist/assets/cart-BRXTX_xo.js                                 0.80 kB │ gzip:   0.44 kB
+dist/assets/favoritos-BHeIk8vT.js                            0.82 kB │ gzip:   0.46 kB
+dist/assets/nft-CLY6TWlp.js                                  1.11 kB │ gzip:   0.55 kB
+dist/assets/wallet-DU5zrmde.js                               1.27 kB │ gzip:   0.74 kB
+dist/assets/profile-xmwr-Xfa.js                              1.36 kB │ gzip:   0.68 kB
+dist/assets/queries-DVd5LBHm.js                              1.75 kB │ gzip:   0.87 kB
+dist/assets/x-C42z4ksR.js                                    1.80 kB │ gzip:   0.83 kB
+dist/assets/favorite-button-DJbEb5Ck.js                      2.06 kB │ gzip:   1.08 kB
+dist/assets/quote-values-BP_rsQ3S.js                         2.19 kB │ gzip:   0.94 kB
+dist/assets/catalog-CHRUzsDM.js                              2.57 kB │ gzip:   1.24 kB
+dist/assets/createLucideIcon-DjhP_TYa.js                     3.08 kB │ gzip:   1.47 kB
+dist/assets/nft-card-DJKk1E3Q.js                             3.74 kB │ gzip:   1.47 kB
+dist/assets/react-dom-BsNPtk5D.js                            3.85 kB │ gzip:   1.39 kB
+dist/assets/auth-page-BIsiNTGb.js                            4.35 kB │ gzip:   1.65 kB
+dist/assets/carteiras-CW_DuYDH.js                            4.74 kB │ gzip:   1.62 kB
+dist/assets/pedido.confirmacao-DjQyrlQG.js                   4.98 kB │ gzip:   1.73 kB
+dist/assets/carrinho-DwXN5coQ.js                             6.19 kB │ gzip:   2.18 kB
+dist/assets/api-Cbu13DgG.js                                  6.31 kB │ gzip:   2.08 kB
+dist/assets/nfts._nftId-BsSMafvG.js                          6.96 kB │ gzip:   2.31 kB
+dist/assets/perfil-BvY-XzNl.js                               7.41 kB │ gzip:   2.80 kB
+dist/assets/index-DuikU81N.js                               12.51 kB │ gzip:   4.97 kB
+dist/assets/checkout-Coes2o6y.js                            14.57 kB │ gzip:   5.06 kB
+dist/assets/routes-Cx4plDuS.js                              20.00 kB │ gzip:   6.11 kB
+dist/assets/zod-ChkJJJpJ.js                                 36.97 kB │ gzip:  12.96 kB
+dist/assets/dialog-D71ASrUy.js                              48.63 kB │ gzip:  16.43 kB
+dist/assets/link-Ck9I6suZ.js                                59.40 kB │ gzip:  21.39 kB
+dist/assets/iso-Cke6WVYj.js                                 92.18 kB │ gzip:  26.05 kB
+dist/assets/App-BMjXW6qZ.js                                 93.71 kB │ gzip:  30.63 kB
+dist/assets/button-DuUgIIzK.js                             120.33 kB │ gzip:  44.23 kB
+dist/assets/client-BFJAOU2M.js                             207.33 kB │ gzip:  64.96 kB
+dist/assets/browser-B-6NBcwC.js                            478.08 kB │ gzip: 182.55 kB
+
+✓ built in 697ms

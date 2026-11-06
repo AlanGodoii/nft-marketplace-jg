@@ -77,7 +77,7 @@ Detalhes REST/eventos/cenários em docs/STAGE4_CHECKOUT_SOCKET.md. Fixtures e ha
 
 Frames consultados: Pagamento desktop11:2862/mobile16:748, Confirmação11:4385 e Carteiras9:1670. Tokens/componentes/tipografia locais preservados; formulário em duas colunas e resumo lateral no desktop, superfícies empilhadas mobile. Estado de revisão/recibo em diálogo com foco inicial/retorno explícitos; erro associado aos campos, feedback acessível e redução de movimento também nos portais. Estados de conexão/cotação não desenhados seguem o padrão Kurio.
 
-Downloads dos assets originais seguem bloqueados403. Não há arte arbitrária, SVG redesenhado ou screenshot usado como asset. Slots dinâmicos identificam a ausência. Cabeçalho/rodapé anteriores foram mantidos, com correção de quebra em zoom. Perfil e baselines foram concluídos na etapa5; Lighthouse foi executado, com Performance84 no detalhe mobile ainda abaixo de90. Fidelidade integral/assets e deploy público continuam pendentes.
+Histórico da Etapa5: downloads de assets bloqueados403 e slots identificados, sem arte arbitrária ou tela rasterizada como interface. Nesta revisão, quatro artes recortadas dos exports do proprietário foram integradas apenas à Home desktop; os demais slots continuam preservados. Header/footer desktop da Home foram atualizados, com variantes anteriores mantidas nas demais telas/mobile. Perfil e baselines foram concluídos na etapa5; Lighthouse foi executado, com Performance84 no detalhe mobile ainda abaixo de90. Fidelidade integral e assets das demais telas continuam pendentes; a publicação anterior foi validada no PR7, e esta revisão requer novo deploy.
 
 Resultados reais, falhas intermediárias e inventário no checklist e docs/STAGE5_DELIVERY.md; resultados da etapa4 são históricos. Teste funcional aprovado não equivale a nota, baseline visual, Lighthouse ou deploy validado.
 
@@ -94,8 +94,19 @@ Perfil usa chave ['private',userId,'profile'], staleTime15s, cancelamento AbortS
 
 ## Publicação, visual e medições
 
-Vercel: vercel.json, npm run build:demo, dist, worker sem cache e fallback SPA. Netlify: public/_redirects. Flags explícitas em .env.production/.env.demo. URLs de aplicação são relativas à origem, não localhost; scripts de QA aceitam TEST_BASE_URL/LIGHTHOUSE_BASE_URL. Nenhuma URL pública foi fornecida/validada; instruções da branch ainda não integrada em docs/DEPLOYMENT.md.
+Vercel: vercel.json, npm run build:demo, dist, worker sem cache e fallback SPA. Netlify: public/_redirects. Flags explícitas em .env.production/.env.demo. URLs de aplicação são relativas à origem, não localhost; scripts de QA aceitam TEST_BASE_URL/LIGHTHOUSE_BASE_URL. URL anterior https://nft-marketplace-jg-psi.vercel.app validada em mainad6dfbc conforme PR7. Esta revisão desktop requer implantação própria e nova validação; instruções em docs/DESKTOP_HOME_FIDELITY.md.
 
 Baselines: playwright.visual.config.ts,12PNGs das quatro telas em390/768/1440, dados/relógio/visitante estáveis, comparação sem máscaras e zero pixels diferentes. Axe verifica nove telas/recibo e teclado/foco/zoom/reduced-motion. Diferenças conhecidas dos nove frames e exports manuais em docs/VISUAL_REVIEW.md. Limite do Figma e assets403 impedem afirmar fidelidade visual integral.
 
 Lighthouse: lighthouse.config.mjs utiliza os perfis oficiais da versão instalada, com simulate e armazenamento resetado. scripts/lighthouse.mjs executa3medições ×2páginas ×2perfis sequencialmente, entrega HTML/JSON, medianas, LCP/CLS/TBT e condições. Relatórios finais em reports/lighthouse. Otimização medida mantém Engine.IO após worker.start, paraleliza React DOM, antecipa Query no loader e reserva geometria no skeleton. Não há mudanças exclusivas para ferramentas de pontuação; funcionalidades/mocks/transporte permanecem ativos. Assets ausentes limitam representatividade e exigirão nova medição após inclusão.
+
+
+## Home desktop — exports fornecidos em06/11/2026
+
+A Home recebeu variante desktop a partir de1024px, preservando a renderização mobile e as demais telas. `useDesktop` assina matchMedia com liberação do listener. Header/hero/footer/editorial desktop montam somente nessa variante; alterações CSS ficam sob `.home-desktop`. AuthActions mantém comportamento anterior e apenas permite omitir o nome duplicado na apresentação do menu de conta.
+
+`image.desktopSrc` opcional é enriquecimento de apresentação na API MSW, inclusive ao ler persistência antiga; não reseta o banco nem altera preço/edição/estoque. `src`/galerias anteriores continuam preservados. Quatro WebPs recortados dos exports autorizados são reutilizados, sem duplicação por NFT e sem imagens externas. PNGs de telas completas são referências em reports, nunca interface rasterizada.
+
+Listagem inclui facets opcionais globais por coleção/rede; contagens reais,12por opção no reset. `tab=all|new|trending` compõe a mesma URL/query key e filtros: new desde01/11/2026, trending seleção demonstrativa disponível, não métrica inventada de vendas. Ambos respeitam sort/paginação/cancelamento existentes.36NFTs e página padrão6 preservados.
+
+Header consulta useCart/useSession existentes, usa links reais/âncoras e abre busca com foco/Escape. Destaque recebe NFT disponível da resposta API. Editorial, suporte e newsletter informam limites da demonstração, sem envio fictício. Detalhes, procedência dos recortes, desvios e validações: docs/DESKTOP_HOME_FIDELITY.md. O acesso ao Figma original continua indisponível; os exports removem parcialmente a ausência de arte da Home, sem resolver os assets e frames restantes.

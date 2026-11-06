@@ -6,7 +6,21 @@ Data: **05/11/2026**, America/Sao_Paulo. Prazo informado: **06/11/2026**, sem ho
 
 Base da auditoria inicial: `a99d26c769240a0e9f2e19cb53b09978a06b9917` de `origin/main`. Enunciado `docs/DESAFIO.md` lido integralmente. Evidências, comandos e 344 itens estão em `docs/REQUIREMENTS_CHECKLIST.md`. A auditoria inicial não modificou funcionalidades. O progresso atual da implementação está descrito abaixo.
 
-## Plano corrente — etapa 5
+## Prioridade atual — Home desktop
+
+Branch feat/fidelidade-home-desktop a partir de mainad6dfbc (Etapas1–5). Exports PNG recebidos e inspecionados; quatro recortes originais integrados. Mobile não redesenhado. Progresso e resultados efetivos em [DESKTOP_HOME_FIDELITY.md](DESKTOP_HOME_FIDELITY.md); o plano histórico abaixo não representa pendências ainda abertas de perfil/compra.
+
+| Prioridade | Trabalho / dependência | Estimativa restante | Validação |
+|---|---|---|---|
+| P0 | Revisar PR visual e publicar a branch/novo main pela Vercel |15–30min revisão/publicação +20–40min QA |Confirmar Source/SHA, Home desktop, refresh, sessão, compra e Socket.IO na nova URL HTTPS; não presumir publicação deste código. |
+| P1 | Exportar layers individuais2× e vetores originais da marca/redes/decoração |30–60min exportação +1–2h ajustes |Manifest/procedência/enquadramentos; comparar1280/1440/1920 e repetir Lighthouse com imagens reais. |
+| P1 | Perfil visual das demais telas e mobile, em tarefa separada |3–6h conforme assets |Não redesenhar nesta fatia; conservar baselines mobile, checkout/pedidos/realtime. |
+| P1 | Performance do detalhe mobile84 anterior |2–4h investigação |Três medições por cenário; resultado anterior não é medição desta Home desktop. |
+| P2 | Auditoria humana ampliada e artefatos CI |1–2h |Leitor de tela/zoom nativo, distribuição dos traces e relatórios. |
+
+PR7 de validação pública é independente e não foi mesclado automaticamente. O deploy anterior ad6dfbc foi testado naquele PR; esta revisão visual requer implantação/validação próprias.
+
+## Plano etapa 5 — histórico
 
 Base main eb156f5 confirmada, PR5 integrado, branch feat/etapa5-finalizacao. Perfil/avatar/senha concluídos,12baselines estritas e auditoria axe das nove telas aprovadas; configuração/relatórios Lighthouse entregues. Tipos/lint/build/demo e instalação limpa aprovados. Regressão integral da etapa5 tem resultado real no fechamento da entrega; números anteriores não substituem esta execução.
 

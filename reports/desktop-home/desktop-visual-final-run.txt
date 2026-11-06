@@ -1,0 +1,18 @@
+
+> jungle-nft-marketplace@0.0.0 test:desktop
+> playwright test --config=playwright.desktop.config.ts --workers=1 --output=work/desktop/desktop-visual-final-results
+
+
+Running 3 tests using 1 worker
+
+(node:175131) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [1280px] › tests/desktop-visual.spec.ts:3:1 › Home desktop revisada contra os exports fornecidos (2.2s)
+(node:175266) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [1440px] › tests/desktop-visual.spec.ts:3:1 › Home desktop revisada contra os exports fornecidos (2.2s)
+(node:175394) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [1920px] › tests/desktop-visual.spec.ts:3:1 › Home desktop revisada contra os exports fornecidos (2.5s)
+
+  3 passed (8.8s)

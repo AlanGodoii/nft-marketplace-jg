@@ -1,0 +1,55 @@
+{
+  "unchangedFromMain": [
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/cart-1440px-linux.png",
+      "sha256": "0c8c12799757120535d42c0725e45b22e36942703a37b01cb9e9fc949f67111a"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/cart-390px-linux.png",
+      "sha256": "265574fb4ebe379f1ebf2d1b7a25285b864e3223b4691197629bab2915ae3ea4"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/cart-768px-linux.png",
+      "sha256": "5cfc89dfc00b13267bf2cc1b3cb67b05333820fd6c7fbfb00159d07a5681ee2d"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/checkout-1440px-linux.png",
+      "sha256": "e9aa2152a37b4064823f463675d7bb05879cf8c2b680cebba0f3f41de371b97e"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/checkout-390px-linux.png",
+      "sha256": "3e36de9cce99f0813fbeb459fc55aee125cd69064a68573d95f1a74759a74b6a"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/checkout-768px-linux.png",
+      "sha256": "f01239b3f01d79b04273429e09d18cb9cf9273604a05bb122ddcde79fc5e68a1"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/detail-1440px-linux.png",
+      "sha256": "a843747dd47f5fc2d503cb8ab2e336ad650bf7b9b04c2832cd02e5e3222b4cd9"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/detail-390px-linux.png",
+      "sha256": "934e107cf4125273f7669c50f013141136854aee80dd0dd559f2fd892f0a1d3f"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/detail-768px-linux.png",
+      "sha256": "766723fc12535d9207e135ec179f00457b19fb23576caf47e7e8731fbfa8d0a2"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/home-390px-linux.png",
+      "sha256": "404d6e2fbc8fe91b36782d558693142a2c890c98ec89f87d7eab645caafbdef0"
+    },
+    {
+      "file": "tests/__screenshots__/visual.spec.ts/home-768px-linux.png",
+      "sha256": "22311e4d3dc0c51c404fc0ed60c225311c2341d7eae2678bec5927a57e63d4e1"
+    }
+  ],
+  "count": 11,
+  "intentionallyUpdated": "tests/__screenshots__/visual.spec.ts/home-1440px-linux.png",
+  "newWidths": [
+    1280,
+    1440,
+    1920
+  ]
+}

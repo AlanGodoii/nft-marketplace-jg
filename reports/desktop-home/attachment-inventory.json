@@ -1,0 +1,191 @@
+[
+  {
+    "path": "cadastro/Marketplace Page.png",
+    "dimensions": [
+      1206,
+      1957
+    ],
+    "bytes": 1389260,
+    "sha256": "c9796a909702d8242a786f0e7f968716430b8ed704b550a75c714e2a27a281ff"
+  },
+  {
+    "path": "cadastro/Sign Up Modal.png",
+    "dimensions": [
+      500,
+      656
+    ],
+    "bytes": 24558,
+    "sha256": "6741006785b639de27b1c8a2ac9f702aaeadb446878ecdb0951e071fc563e2fd"
+  },
+  {
+    "path": "carrinhonft/Footer.png",
+    "dimensions": [
+      1200,
+      610
+    ],
+    "bytes": 96424,
+    "sha256": "08b5c17dcc7a9bc9f4fc99edab54a714566c5cb1981999f36263afa11bdeb803"
+  },
+  {
+    "path": "carrinhonft/Related Products.png",
+    "dimensions": [
+      1200,
+      411
+    ],
+    "bytes": 381238,
+    "sha256": "5f18c45364281444d91c37476b4b475c9a535b12152f8daa4ea3bff3af0684db"
+  },
+  {
+    "path": "carrinhonft/Top.png",
+    "dimensions": [
+      1200,
+      493
+    ],
+    "bytes": 108137,
+    "sha256": "2c33ee0e83e36b0960f659cccfbe0fabec76263b9b52fc72116699abb77c8071"
+  },
+  {
+    "path": "carteiras/Top.png",
+    "dimensions": [
+      1200,
+      716
+    ],
+    "bytes": 76676,
+    "sha256": "7c753bed58306e3e68b09b985f1d56bd8c073802cb3ff0304c11900c4afe6ac3"
+  },
+  {
+    "path": "confirmação do pedido/Order Confirmation Modal.png",
+    "dimensions": [
+      578,
+      821
+    ],
+    "bytes": 88581,
+    "sha256": "f06c88c23b3ade61010ff4ace3b8ca464975e546f4dbfb57604b0d2f83ed518f"
+  },
+  {
+    "path": "home/Blog.png",
+    "dimensions": [
+      1200,
+      476
+    ],
+    "bytes": 399954,
+    "sha256": "442b684f9661766be3fcc583972a465aa562abca7e37dc0a6c4affc45c942e0a"
+  },
+  {
+    "path": "home/Footer.png",
+    "dimensions": [
+      1200,
+      610
+    ],
+    "bytes": 96417,
+    "sha256": "c52002923c51b131ec5094f23245befdc6474b0a5286fea63c9687575ea5e102"
+  },
+  {
+    "path": "home/Frame 137.png",
+    "dimensions": [
+      1160,
+      450
+    ],
+    "bytes": 404663,
+    "sha256": "abc12d882ccf70e9ee0c26378dc2a0aca9c2249c4fcfa8211cb1b7f9fc6c09bf"
+  },
+  {
+    "path": "home/Products.png",
+    "dimensions": [
+      1200,
+      1373
+    ],
+    "bytes": 1274627,
+    "sha256": "210b167f538f24f167144da3c3bdd612110f48924b24484b2afe9305dfa01d17"
+  },
+  {
+    "path": "home/Promos.png",
+    "dimensions": [
+      1200,
+      250
+    ],
+    "bytes": 267963,
+    "sha256": "6ccc19fcac52896245d6457ecc093c0fb7a31ff3d4af4f6a21d90d11803bcf02"
+  },
+  {
+    "path": "login/Marketplace Page.png",
+    "dimensions": [
+      1206,
+      1957
+    ],
+    "bytes": 1389260,
+    "sha256": "c9796a909702d8242a786f0e7f968716430b8ed704b550a75c714e2a27a281ff"
+  },
+  {
+    "path": "login/Sign In Modal.png",
+    "dimensions": [
+      500,
+      600
+    ],
+    "bytes": 22502,
+    "sha256": "f2ce88e77ac83f761dd8aa61ff61cfcf8b46436bc4797adcffd5543571afa126"
+  },
+  {
+    "path": "mercado/Description.png",
+    "dimensions": [
+      1200,
+      340
+    ],
+    "bytes": 63943,
+    "sha256": "fe71e662418936204d1a563c908d66fc7d4361f389eb86c4bcb7f1e942822b2a"
+  },
+  {
+    "path": "mercado/Footer.png",
+    "dimensions": [
+      1200,
+      610
+    ],
+    "bytes": 96424,
+    "sha256": "08b5c17dcc7a9bc9f4fc99edab54a714566c5cb1981999f36263afa11bdeb803"
+  },
+  {
+    "path": "mercado/Related Products.png",
+    "dimensions": [
+      1200,
+      407
+    ],
+    "bytes": 380849,
+    "sha256": "8512b08422ad99ec45bb1fe998ca765f1872584b86c79bdbbaa18813f63c2e74"
+  },
+  {
+    "path": "mercado/Top.png",
+    "dimensions": [
+      1200,
+      553
+    ],
+    "bytes": 420931,
+    "sha256": "6309f98375ba998301ee9ae4fba087bf7981902b767a67766367ca1f725f3038"
+  },
+  {
+    "path": "pagamentos/Checkout Page.png",
+    "dimensions": [
+      1200,
+      903
+    ],
+    "bytes": 133752,
+    "sha256": "d2fa63cf893c0acce6b58592bef4146d2b6d355d38f4a5e9ec6382af75f0639a"
+  },
+  {
+    "path": "pagamentos/Footer.png",
+    "dimensions": [
+      1200,
+      610
+    ],
+    "bytes": 96426,
+    "sha256": "ee3c229c36c7e1cddd288c93428b95b7ada5d661ebd504b5e69809bd36e9718c"
+  },
+  {
+    "path": "perfildocolecionador/Top.png",
+    "dimensions": [
+      1200,
+      803
+    ],
+    "bytes": 55005,
+    "sha256": "c1d578eea25a5d11175970e75e4a606ba6c9e6a64428b881317d661ebe027be9"
+  }
+]

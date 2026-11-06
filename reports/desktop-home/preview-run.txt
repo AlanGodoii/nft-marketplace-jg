@@ -1,0 +1,62 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/desktop-home.spec.ts tests/catalog.spec.ts tests/deployment.spec.ts --workers=2 --output=work/desktop/preview-results
+
+
+Running 45 tests using 2 workers
+
+(node:168798) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:168799) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop] › tests/catalog.spec.ts:33:1 › carrega catálogo por Axios e handlers MSW com contratos completos (3.2s)
+  ✓   3 [desktop] › tests/catalog.spec.ts:52:1 › busca e reinicia paginação (3.8s)
+  ✓   2 [desktop] › tests/deployment.spec.ts:12:29 › SPA: acesso direto e refresh das rotas públicas (7.8s)
+  ✓   4 [desktop] › tests/catalog.spec.ts:65:1 › combina coleção, rede, disponibilidade e intervalo ETH (4.2s)
+  ✓   6 [desktop] › tests/catalog.spec.ts:85:1 › ordena preço crescente e decrescente com precisão decimal (3.3s)
+  ✓   5 [desktop] › tests/deployment.spec.ts:12:29 › SPA: acesso direto e refresh das rotas privadas (8.3s)
+  ✓   7 [desktop] › tests/catalog.spec.ts:100:1 › filtra e ordena diferenças além da precisão de number (2.6s)
+  ✓   9 [desktop] › tests/catalog.spec.ts:108:1 › paginação respeita limites e preserva parâmetros (3.3s)
+  ✓   8 [desktop] › tests/desktop-home.spec.ts:7:3 › Home original desktop: composição, imagens e acessibilidade em 1280px (6.3s)
+  ✓  10 [desktop] › tests/catalog.spec.ts:124:1 › refresh e histórico restauram os filtros da URL (3.5s)
+  ✓  12 [desktop] › tests/catalog.spec.ts:150:1 › resultado vazio por busca e por cenário configurável (2.7s)
+  ✓  11 [desktop] › tests/desktop-home.spec.ts:7:3 › Home original desktop: composição, imagens e acessibilidade em 1440px (6.0s)
+  ✓  13 [desktop] › tests/catalog.spec.ts:162:1 › erro HTTP e recuperação pelo botão de nova tentativa (3.5s)
+  ✓  14 [desktop] › tests/desktop-home.spec.ts:7:3 › Home original desktop: composição, imagens e acessibilidade em 1920px (4.5s)
+  ✓  15 [desktop] › tests/catalog.spec.ts:173:1 › shimmer na rede lenta e preferência por movimento reduzido (3.9s)
+  ✓  16 [desktop] › tests/desktop-home.spec.ts:33:1 › header: busca, destino editorial e conta com carrinho real (5.4s)
+  ✓  17 [desktop] › tests/catalog.spec.ts:185:1 › atualização em segundo plano mantém conteúdo e anuncia progresso (4.5s)
+  ✓  18 [desktop] › tests/desktop-home.spec.ts:58:1 › abas, contagens reais, combinações, histórico e refresh (4.2s)
+  ✓  19 [desktop] › tests/catalog.spec.ts:197:1 › respostas fora de ordem não substituem a busca mais recente (4.7s)
+  ✓  21 [desktop] › tests/catalog.spec.ts:216:1 › contratos de detalhe, 404, validação e barra final passam pelo MSW (1.8s)
+  ✓  20 [desktop] › tests/desktop-home.spec.ts:82:1 › editorial e newsletter informam limites, sem sucesso fictício (3.0s)
+  ✓  23 [desktop] › tests/desktop-home.spec.ts:93:1 › assets enriquecem persistência antiga sem alterar identidade, preço ou estoque (1.6s)
+  ✓  22 [desktop] › tests/catalog.spec.ts:233:1 › filtros inválidos exibem erro corrigível e URL inválida é normalizada (2.9s)
+(node:169973) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  24 [desktop] › tests/catalog.spec.ts:245:1 › reset restaura cenário normal e descarta diagnósticos anteriores (3.3s)
+  ✓  25 [mobile] › tests/catalog.spec.ts:33:1 › carrega catálogo por Axios e handlers MSW com contratos completos (2.5s)
+  ✓  27 [mobile] › tests/catalog.spec.ts:52:1 › busca e reinicia paginação (2.8s)
+  ✓  26 [desktop] › tests/catalog.spec.ts:257:1 › falha de conexão é recuperável sem dados fictícios (4.0s)
+  ✓  28 [mobile] › tests/catalog.spec.ts:65:1 › combina coleção, rede, disponibilidade e intervalo ETH (3.3s)
+  ✓  29 [desktop] › tests/catalog.spec.ts:267:1 › retry recupera falha transitória e reset rejeita JSON inválido (3.6s)
+  ✓  30 [mobile] › tests/catalog.spec.ts:85:1 › ordena preço crescente e decrescente com precisão decimal (1.7s)
+(node:170334) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  31 [mobile] › tests/catalog.spec.ts:100:1 › filtra e ordena diferenças além da precisão de number (2.2s)
+  ✓  33 [mobile] › tests/catalog.spec.ts:108:1 › paginação respeita limites e preserva parâmetros (3.3s)
+  ✓  32 [mobile] › tests/deployment.spec.ts:12:29 › SPA: acesso direto e refresh das rotas públicas (7.1s)
+  ✓  34 [mobile] › tests/catalog.spec.ts:124:1 › refresh e histórico restauram os filtros da URL (3.9s)
+  ✓  36 [mobile] › tests/catalog.spec.ts:150:1 › resultado vazio por busca e por cenário configurável (3.1s)
+  ✓  35 [mobile] › tests/deployment.spec.ts:12:29 › SPA: acesso direto e refresh das rotas privadas (7.1s)
+  ✓  37 [mobile] › tests/catalog.spec.ts:162:1 › erro HTTP e recuperação pelo botão de nova tentativa (3.5s)
+  ✓  38 [mobile] › tests/catalog.spec.ts:173:1 › shimmer na rede lenta e preferência por movimento reduzido (2.9s)
+  ✓  39 [mobile] › tests/catalog.spec.ts:185:1 › atualização em segundo plano mantém conteúdo e anuncia progresso (2.6s)
+  ✓  40 [mobile] › tests/catalog.spec.ts:197:1 › respostas fora de ordem não substituem a busca mais recente (2.2s)
+  ✓  41 [mobile] › tests/catalog.spec.ts:216:1 › contratos de detalhe, 404, validação e barra final passam pelo MSW (996ms)
+  ✓  42 [mobile] › tests/catalog.spec.ts:233:1 › filtros inválidos exibem erro corrigível e URL inválida é normalizada (1.4s)
+  ✓  43 [mobile] › tests/catalog.spec.ts:245:1 › reset restaura cenário normal e descarta diagnósticos anteriores (1.5s)
+  ✓  44 [mobile] › tests/catalog.spec.ts:257:1 › falha de conexão é recuperável sem dados fictícios (2.3s)
+  ✓  45 [mobile] › tests/catalog.spec.ts:267:1 › retry recupera falha transitória e reset rejeita JSON inválido (2.2s)
+
+  45 passed (1.6m)

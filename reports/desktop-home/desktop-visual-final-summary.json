@@ -1,0 +1,102 @@
+{
+  "startTime": 1793945615213,
+  "duration": 8767.655,
+  "stats": {
+    "total": 3,
+    "expected": 3,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "ok": true
+  },
+  "projectNames": [
+    "1280px",
+    "1440px",
+    "1920px"
+  ],
+  "files": [
+    {
+      "fileId": "9512cc6f63135e467161",
+      "fileName": "desktop-visual.spec.ts",
+      "tests": [
+        {
+          "testId": "9512cc6f63135e467161-ce2597ebef895d741f9b",
+          "title": "Home desktop revisada contra os exports fornecidos",
+          "projectName": "1280px",
+          "location": {
+            "file": "desktop-visual.spec.ts",
+            "line": 3,
+            "column": 1
+          },
+          "duration": 2212,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:35.576Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "9512cc6f63135e467161-0a0917e4445151d55028",
+          "title": "Home desktop revisada contra os exports fornecidos",
+          "projectName": "1440px",
+          "location": {
+            "file": "desktop-visual.spec.ts",
+            "line": 3,
+            "column": 1
+          },
+          "duration": 2171,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:38.394Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "9512cc6f63135e467161-e08e5ac404be15b4fd06",
+          "title": "Home desktop revisada contra os exports fornecidos",
+          "projectName": "1920px",
+          "location": {
+            "file": "desktop-visual.spec.ts",
+            "line": 3,
+            "column": 1
+          },
+          "duration": 2483,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:41.181Z",
+              "workerIndex": 2
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "total": 3,
+        "expected": 3,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    }
+  ]
+}

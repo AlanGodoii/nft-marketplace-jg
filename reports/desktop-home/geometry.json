@@ -1,0 +1,131 @@
+[
+  {
+    "width": 1280,
+    "errors": [],
+    "overflow": false,
+    "sections": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1280,
+        "height": 69
+      },
+      "hero": {
+        "x": 80,
+        "y": 101,
+        "width": 1160,
+        "height": 450
+      },
+      "catalog": {
+        "x": 40,
+        "y": 615,
+        "width": 1200,
+        "height": 1347.609375
+      },
+      "promos": {
+        "x": 40,
+        "y": 2042.609375,
+        "width": 1200,
+        "height": 250
+      },
+      "blog": {
+        "x": 40,
+        "y": 2292.609375,
+        "width": 1200,
+        "height": 546
+      },
+      "footer": {
+        "x": 0,
+        "y": 2902.609375,
+        "width": 1280,
+        "height": 669
+      }
+    }
+  },
+  {
+    "width": 1440,
+    "errors": [],
+    "overflow": false,
+    "sections": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1440,
+        "height": 69
+      },
+      "hero": {
+        "x": 160,
+        "y": 101,
+        "width": 1160,
+        "height": 450
+      },
+      "catalog": {
+        "x": 120,
+        "y": 615,
+        "width": 1200,
+        "height": 1347.609375
+      },
+      "promos": {
+        "x": 120,
+        "y": 2042.609375,
+        "width": 1200,
+        "height": 250
+      },
+      "blog": {
+        "x": 120,
+        "y": 2292.609375,
+        "width": 1200,
+        "height": 546
+      },
+      "footer": {
+        "x": 0,
+        "y": 2902.609375,
+        "width": 1440,
+        "height": 669
+      }
+    }
+  },
+  {
+    "width": 1920,
+    "errors": [],
+    "overflow": false,
+    "sections": {
+      "header": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 69
+      },
+      "hero": {
+        "x": 400,
+        "y": 101,
+        "width": 1160,
+        "height": 450
+      },
+      "catalog": {
+        "x": 360,
+        "y": 615,
+        "width": 1200,
+        "height": 1347.609375
+      },
+      "promos": {
+        "x": 360,
+        "y": 2042.609375,
+        "width": 1200,
+        "height": 250
+      },
+      "blog": {
+        "x": 360,
+        "y": 2292.609375,
+        "width": 1200,
+        "height": 546
+      },
+      "footer": {
+        "x": 0,
+        "y": 2902.609375,
+        "width": 1920,
+        "height": 669
+      }
+    }
+  }
+]

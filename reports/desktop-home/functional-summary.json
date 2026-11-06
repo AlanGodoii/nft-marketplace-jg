@@ -1,0 +1,1514 @@
+{
+  "sourceBase": "ad6dfbc1141fa27aa41b2ec69632d49aea8ddc8c",
+  "environment": {
+    "node": "v24.22.1",
+    "browser": "Chromium 155.0.8059.79 built on Debian GNU/Linux 13 (trixie)",
+    "platform": "linux"
+  },
+  "startTime": 1793943753596,
+  "durationMs": 1084213.047,
+  "stats": {
+    "total": 213,
+    "expected": 212,
+    "unexpected": 1,
+    "flaky": 0,
+    "skipped": 0,
+    "ok": false
+  },
+  "conditions": "Suíte integral dev com2workers; a comparação visual1worker se sobrepôs parcialmente à rodada, total3processos de teste emCPUlimitada a2cores. Um teste de navegação privada excedeu30s; não foi ampliado o timeout. A correção final do prefill da busca é validada na suíte de preview separada. Resultado não é213/213aprovados numa única rodada.",
+  "cases": [
+    {
+      "title": "SPA: acesso direto e refresh das rotas privadas",
+      "path": [],
+      "project": "desktop",
+      "outcome": "unexpected",
+      "duration": 31694
+    },
+    {
+      "title": "SPA: acesso direto e refresh das rotas públicas",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 28476
+    },
+    {
+      "title": "SPA: acesso direto e refresh das rotas públicas",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 19776
+    },
+    {
+      "title": "SPA: acesso direto e refresh das rotas privadas",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 22847
+    },
+    {
+      "title": "acessibilidade das nove telas em 390px grupo1",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17947
+    },
+    {
+      "title": "acessibilidade das nove telas em 390px grupo2",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17103
+    },
+    {
+      "title": "acessibilidade das nove telas em 390px grupo3",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17105
+    },
+    {
+      "title": "acessibilidade das nove telas em 768px grupo1",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 15420
+    },
+    {
+      "title": "acessibilidade das nove telas em 768px grupo2",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 15192
+    },
+    {
+      "title": "acessibilidade das nove telas em 768px grupo3",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17500
+    },
+    {
+      "title": "acessibilidade das nove telas em 1440px grupo1",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17989
+    },
+    {
+      "title": "acessibilidade das nove telas em 1440px grupo2",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 16539
+    },
+    {
+      "title": "acessibilidade das nove telas em 1440px grupo3",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17452
+    },
+    {
+      "title": "perfil: teclado, foco, zoom200% e movimento reduzido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6767
+    },
+    {
+      "title": "carrega catálogo por Axios e handlers MSW com contratos completos",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6610
+    },
+    {
+      "title": "busca e reinicia paginação",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 5832
+    },
+    {
+      "title": "combina coleção, rede, disponibilidade e intervalo ETH",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6523
+    },
+    {
+      "title": "ordena preço crescente e decrescente com precisão decimal",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6026
+    },
+    {
+      "title": "filtra e ordena diferenças além da precisão de number",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 5066
+    },
+    {
+      "title": "paginação respeita limites e preserva parâmetros",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7372
+    },
+    {
+      "title": "refresh e histórico restauram os filtros da URL",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7461
+    },
+    {
+      "title": "resultado vazio por busca e por cenário configurável",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8172
+    },
+    {
+      "title": "erro HTTP e recuperação pelo botão de nova tentativa",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7210
+    },
+    {
+      "title": "shimmer na rede lenta e preferência por movimento reduzido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6897
+    },
+    {
+      "title": "atualização em segundo plano mantém conteúdo e anuncia progresso",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7317
+    },
+    {
+      "title": "respostas fora de ordem não substituem a busca mais recente",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6618
+    },
+    {
+      "title": "contratos de detalhe, 404, validação e barra final passam pelo MSW",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 3317
+    },
+    {
+      "title": "filtros inválidos exibem erro corrigível e URL inválida é normalizada",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6609
+    },
+    {
+      "title": "reset restaura cenário normal e descarta diagnósticos anteriores",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6204
+    },
+    {
+      "title": "falha de conexão é recuperável sem dados fictícios",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6726
+    },
+    {
+      "title": "retry recupera falha transitória e reset rejeita JSON inválido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6191
+    },
+    {
+      "title": "carrega catálogo por Axios e handlers MSW com contratos completos",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 5459
+    },
+    {
+      "title": "busca e reinicia paginação",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6668
+    },
+    {
+      "title": "combina coleção, rede, disponibilidade e intervalo ETH",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6384
+    },
+    {
+      "title": "ordena preço crescente e decrescente com precisão decimal",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6002
+    },
+    {
+      "title": "filtra e ordena diferenças além da precisão de number",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 5084
+    },
+    {
+      "title": "paginação respeita limites e preserva parâmetros",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7921
+    },
+    {
+      "title": "refresh e histórico restauram os filtros da URL",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6941
+    },
+    {
+      "title": "resultado vazio por busca e por cenário configurável",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8217
+    },
+    {
+      "title": "erro HTTP e recuperação pelo botão de nova tentativa",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6290
+    },
+    {
+      "title": "shimmer na rede lenta e preferência por movimento reduzido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7075
+    },
+    {
+      "title": "atualização em segundo plano mantém conteúdo e anuncia progresso",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6533
+    },
+    {
+      "title": "respostas fora de ordem não substituem a busca mais recente",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7262
+    },
+    {
+      "title": "contratos de detalhe, 404, validação e barra final passam pelo MSW",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 3187
+    },
+    {
+      "title": "filtros inválidos exibem erro corrigível e URL inválida é normalizada",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6196
+    },
+    {
+      "title": "reset restaura cenário normal e descarta diagnósticos anteriores",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7400
+    },
+    {
+      "title": "falha de conexão é recuperável sem dados fictícios",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7082
+    },
+    {
+      "title": "retry recupera falha transitória e reset rejeita JSON inválido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6617
+    },
+    {
+      "title": "A: cadastra carteira secundária, valida endereço e persiste edição",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8116
+    },
+    {
+      "title": "A: carteiras isoladas e API retorna 400,401,404,409",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9555
+    },
+    {
+      "title": "A: falha de carteira500 tem recuperação e conexão simulada pode recusar",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7726
+    },
+    {
+      "title": "B: visitante retorna ao checkout, conecta carteira e revisa cotação com cupom",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11373
+    },
+    {
+      "title": "B: valida campos do colecionador, rede compatível, recusa e desconexão",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8471
+    },
+    {
+      "title": "B: preço alterado invalida aceite anterior e exige nova revisão",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9575
+    },
+    {
+      "title": "B: edição esgotada e falha de cotação preservam itens e permitem recuperação",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9481
+    },
+    {
+      "title": "C: compra completa do catálogo ao recibo confirmado pela API",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 16301
+    },
+    {
+      "title": "C: pagamento recusado preserva carrinho e não apresenta recibo",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 14488
+    },
+    {
+      "title": "C: mesma chave recupera pedido, conteúdo diferente409 e tentativas concorrentes não duplicam",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7933
+    },
+    {
+      "title": "C: clique repetido de finalizar cria somente um pedido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12962
+    },
+    {
+      "title": "C: timeout após criação e refresh recuperam a mesma chave e o mesmo pedido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 23671
+    },
+    {
+      "title": "C: refresh de pendente recupera estado real e recibo histórico é imutável",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 15299
+    },
+    {
+      "title": "C: confirmação remove somente quantidades compradas, preserva extras e não repete efeitos",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9842
+    },
+    {
+      "title": "C: backend bloqueia cotação alterada ou expirada e pedido privado de outra conta",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10353
+    },
+    {
+      "title": "E: expiração no checkout preserva formulário, seleção e retorno após autenticação",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12498
+    },
+    {
+      "title": "E: API revalida taxa e cupom e rejeita quantidades inválidas ou rede incompatível",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7269
+    },
+    {
+      "title": "E: estoque perdido durante processamento recusa pedido e preserva carrinho",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12270
+    },
+    {
+      "title": "E: linha removida e readicionada durante processamento não é removida pela compra antiga",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8943
+    },
+    {
+      "title": "E: erro500 de criação preserva tentativa e recuperação não duplica",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11913
+    },
+    {
+      "title": "E: falha de consulta do pedido oferece retry sem perder o pedido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9676
+    },
+    {
+      "title": "E: revisão por teclado contém foco, exige aceite e retorna foco ao fechar",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11995
+    },
+    {
+      "title": "E: checkout, carteiras e recibo sem overflow em 390px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12777
+    },
+    {
+      "title": "E: checkout, carteiras e recibo sem overflow em 768px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11833
+    },
+    {
+      "title": "E: checkout, carteiras e recibo sem overflow em 1440px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12692
+    },
+    {
+      "title": "E: quantidades fracionárias e seleção vazia têm erros associados antes da cotação",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10099
+    },
+    {
+      "title": "E: confirmação durante resposta atrasada permite recuperar pedido com carrinho vazio",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 14595
+    },
+    {
+      "title": "A: cadastra carteira secundária, valida endereço e persiste edição",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8244
+    },
+    {
+      "title": "A: carteiras isoladas e API retorna 400,401,404,409",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7059
+    },
+    {
+      "title": "A: falha de carteira500 tem recuperação e conexão simulada pode recusar",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8519
+    },
+    {
+      "title": "B: visitante retorna ao checkout, conecta carteira e revisa cotação com cupom",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 10113
+    },
+    {
+      "title": "B: valida campos do colecionador, rede compatível, recusa e desconexão",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8427
+    },
+    {
+      "title": "B: preço alterado invalida aceite anterior e exige nova revisão",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7760
+    },
+    {
+      "title": "B: edição esgotada e falha de cotação preservam itens e permitem recuperação",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7783
+    },
+    {
+      "title": "C: compra completa do catálogo ao recibo confirmado pela API",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 15000
+    },
+    {
+      "title": "C: pagamento recusado preserva carrinho e não apresenta recibo",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11643
+    },
+    {
+      "title": "C: mesma chave recupera pedido, conteúdo diferente409 e tentativas concorrentes não duplicam",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8093
+    },
+    {
+      "title": "C: clique repetido de finalizar cria somente um pedido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11264
+    },
+    {
+      "title": "C: timeout após criação e refresh recuperam a mesma chave e o mesmo pedido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 24368
+    },
+    {
+      "title": "C: refresh de pendente recupera estado real e recibo histórico é imutável",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 14268
+    },
+    {
+      "title": "C: confirmação remove somente quantidades compradas, preserva extras e não repete efeitos",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8952
+    },
+    {
+      "title": "C: backend bloqueia cotação alterada ou expirada e pedido privado de outra conta",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7509
+    },
+    {
+      "title": "E: expiração no checkout preserva formulário, seleção e retorno após autenticação",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11623
+    },
+    {
+      "title": "E: API revalida taxa e cupom e rejeita quantidades inválidas ou rede incompatível",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8002
+    },
+    {
+      "title": "E: estoque perdido durante processamento recusa pedido e preserva carrinho",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11925
+    },
+    {
+      "title": "E: linha removida e readicionada durante processamento não é removida pela compra antiga",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 10054
+    },
+    {
+      "title": "E: erro500 de criação preserva tentativa e recuperação não duplica",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 12434
+    },
+    {
+      "title": "E: falha de consulta do pedido oferece retry sem perder o pedido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9388
+    },
+    {
+      "title": "E: revisão por teclado contém foco, exige aceite e retorna foco ao fechar",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11110
+    },
+    {
+      "title": "E: checkout, carteiras e recibo sem overflow em 390px",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 12519
+    },
+    {
+      "title": "E: checkout, carteiras e recibo sem overflow em 768px",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 13602
+    },
+    {
+      "title": "E: checkout, carteiras e recibo sem overflow em 1440px",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 12932
+    },
+    {
+      "title": "E: quantidades fracionárias e seleção vazia têm erros associados antes da cotação",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9111
+    },
+    {
+      "title": "E: confirmação durante resposta atrasada permite recuperar pedido com carrinho vazio",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 14461
+    },
+    {
+      "title": "cadastro válido retorna ao destino e não persiste senha em texto puro",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8353
+    },
+    {
+      "title": "cadastro duplicado exibe conflito 409 associado ao e-mail",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 5491
+    },
+    {
+      "title": "login válido, inválido e sessão persistente após refresh",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7074
+    },
+    {
+      "title": "protege todas as rotas privadas e preserva retorno com parâmetros",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11394
+    },
+    {
+      "title": "logout revoga sessão e protege novo acesso",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8910
+    },
+    {
+      "title": "expiração durante navegação exige login e retorna à rota original",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7213
+    },
+    {
+      "title": "expiração durante mutation privada limpa contexto e exige autenticação",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8675
+    },
+    {
+      "title": "tempo de sessão controlado revalida pela API e recebe 401",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6278
+    },
+    {
+      "title": "troca de usuário mantém favoritos e carrinhos isolados",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17046
+    },
+    {
+      "title": "acesso direto ao detalhe, galeria, edição e limite de quantidade",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 2928
+    },
+    {
+      "title": "NFT inexistente e edição esgotada",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 4197
+    },
+    {
+      "title": "favoritos persistem após refresh e permitem remoção",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10294
+    },
+    {
+      "title": "atualização otimista e rollback real com erro 500",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10218
+    },
+    {
+      "title": "mutation pendente é encerrada ao trocar a sessão sem vazar favorito",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11189
+    },
+    {
+      "title": "adiciona, combina mesma edição, altera quantidade, persiste e remove",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10064
+    },
+    {
+      "title": "mescla carrinho visitante e usuário sem duplicar edição",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 17464
+    },
+    {
+      "title": "cupons válido, inválido, expirado e remoção usam cotação da API",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9738
+    },
+    {
+      "title": "cálculos preservam ETH com 18 casas e múltiplas quantidades",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9519
+    },
+    {
+      "title": "API rejeita quantidades negativas, fracionárias, acima do estoque e campos de proprietário",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 7875
+    },
+    {
+      "title": "estoque alterado bloqueia adição sem perder itens existentes",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9256
+    },
+    {
+      "title": "falha transitória de carrinho preserva dados e permite tentar novamente",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6768
+    },
+    {
+      "title": "erro de detalhe e recuperação real pela API",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6635
+    },
+    {
+      "title": "login trata erro 500 e falha de conexão com nova tentativa",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 4451
+    },
+    {
+      "title": "formulários por teclado, erros associados e controle de foco da galeria",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6420
+    },
+    {
+      "title": "telas integradas sem overflow em 390px e skeletons sob latência",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8888
+    },
+    {
+      "title": "telas integradas sem overflow em 768px e skeletons sob latência",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10667
+    },
+    {
+      "title": "telas integradas sem overflow em 1440px e skeletons sob latência",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10389
+    },
+    {
+      "title": "API impede acesso de outra conta e revoga o token no logout",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11756
+    },
+    {
+      "title": "login encerra identidade visitante e rejeita escrita antiga após mesclagem",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6885
+    },
+    {
+      "title": "cotação rejeita estoque desatualizado e recupera após correção da quantidade",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6835
+    },
+    {
+      "title": "falha ao verificar sessão oferece recuperação sem descartar credenciais",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10223
+    },
+    {
+      "title": "retorno de login não permite redirecionar para domínio externo",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8894
+    },
+    {
+      "title": "cadastro válido retorna ao destino e não persiste senha em texto puro",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6127
+    },
+    {
+      "title": "cadastro duplicado exibe conflito 409 associado ao e-mail",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 3832
+    },
+    {
+      "title": "login válido, inválido e sessão persistente após refresh",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6336
+    },
+    {
+      "title": "protege todas as rotas privadas e preserva retorno com parâmetros",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11207
+    },
+    {
+      "title": "logout revoga sessão e protege novo acesso",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7590
+    },
+    {
+      "title": "expiração durante navegação exige login e retorna à rota original",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7189
+    },
+    {
+      "title": "expiração durante mutation privada limpa contexto e exige autenticação",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7316
+    },
+    {
+      "title": "tempo de sessão controlado revalida pela API e recebe 401",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 4803
+    },
+    {
+      "title": "troca de usuário mantém favoritos e carrinhos isolados",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9458
+    },
+    {
+      "title": "acesso direto ao detalhe, galeria, edição e limite de quantidade",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 5710
+    },
+    {
+      "title": "NFT inexistente e edição esgotada",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6622
+    },
+    {
+      "title": "favoritos persistem após refresh e permitem remoção",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9440
+    },
+    {
+      "title": "atualização otimista e rollback real com erro 500",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 10393
+    },
+    {
+      "title": "mutation pendente é encerrada ao trocar a sessão sem vazar favorito",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 10815
+    },
+    {
+      "title": "adiciona, combina mesma edição, altera quantidade, persiste e remove",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9816
+    },
+    {
+      "title": "mescla carrinho visitante e usuário sem duplicar edição",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 19698
+    },
+    {
+      "title": "cupons válido, inválido, expirado e remoção usam cotação da API",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9488
+    },
+    {
+      "title": "cálculos preservam ETH com 18 casas e múltiplas quantidades",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 10741
+    },
+    {
+      "title": "API rejeita quantidades negativas, fracionárias, acima do estoque e campos de proprietário",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7140
+    },
+    {
+      "title": "estoque alterado bloqueia adição sem perder itens existentes",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 10662
+    },
+    {
+      "title": "falha transitória de carrinho preserva dados e permite tentar novamente",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7441
+    },
+    {
+      "title": "erro de detalhe e recuperação real pela API",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7077
+    },
+    {
+      "title": "login trata erro 500 e falha de conexão com nova tentativa",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 4480
+    },
+    {
+      "title": "formulários por teclado, erros associados e controle de foco da galeria",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 5429
+    },
+    {
+      "title": "telas integradas sem overflow em 390px e skeletons sob latência",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9772
+    },
+    {
+      "title": "telas integradas sem overflow em 768px e skeletons sob latência",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9477
+    },
+    {
+      "title": "telas integradas sem overflow em 1440px e skeletons sob latência",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 10407
+    },
+    {
+      "title": "API impede acesso de outra conta e revoga o token no logout",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9364
+    },
+    {
+      "title": "login encerra identidade visitante e rejeita escrita antiga após mesclagem",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 5978
+    },
+    {
+      "title": "cotação rejeita estoque desatualizado e recupera após correção da quantidade",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7469
+    },
+    {
+      "title": "falha ao verificar sessão oferece recuperação sem descartar credenciais",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9033
+    },
+    {
+      "title": "retorno de login não permite redirecionar para domínio externo",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 4880
+    },
+    {
+      "title": "Home original desktop: composição, imagens e acessibilidade em 1280px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 14188
+    },
+    {
+      "title": "Home original desktop: composição, imagens e acessibilidade em 1440px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12725
+    },
+    {
+      "title": "Home original desktop: composição, imagens e acessibilidade em 1920px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12812
+    },
+    {
+      "title": "header: busca, destino editorial e conta com carrinho real",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 21473
+    },
+    {
+      "title": "abas, contagens reais, combinações, histórico e refresh",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 15112
+    },
+    {
+      "title": "editorial e newsletter informam limites, sem sucesso fictício",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8756
+    },
+    {
+      "title": "assets enriquecem persistência antiga sem alterar identidade, preço ou estoque",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 4881
+    },
+    {
+      "title": "início responsivo em 390px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6117
+    },
+    {
+      "title": "início responsivo em 768px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 5686
+    },
+    {
+      "title": "início responsivo em 1440px",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 6735
+    },
+    {
+      "title": "preserva as outras oito rotas e a página não encontrada",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 29479
+    },
+    {
+      "title": "catálogo: estado loading",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 4574
+    },
+    {
+      "title": "catálogo: estado success",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 5243
+    },
+    {
+      "title": "catálogo: estado empty",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 5603
+    },
+    {
+      "title": "catálogo: estado error",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 4965
+    },
+    {
+      "title": "perfil: edição persiste, atualiza sessão e preserva coleção/carteiras",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 11005
+    },
+    {
+      "title": "perfil: validação, conflito409 e versão obsoleta não sobrescrevem dados",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10975
+    },
+    {
+      "title": "perfil: avatar válido persiste e pode ser removido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 15110
+    },
+    {
+      "title": "perfil: avatar recusa SVG, tamanho excessivo e conteúdo corrompido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9297
+    },
+    {
+      "title": "perfil: senha atual incorreta, nova senha, revogação e login real",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10499
+    },
+    {
+      "title": "perfil: troca de usuário mantém dados e avatar privados",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9297
+    },
+    {
+      "title": "perfil: erro de leitura e mutation permitem recuperação sem perder formulário",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 9233
+    },
+    {
+      "title": "perfil: expiração durante edição exige novo login e não grava dados",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 8587
+    },
+    {
+      "title": "perfil: edição persiste, atualiza sessão e preserva coleção/carteiras",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7138
+    },
+    {
+      "title": "perfil: validação, conflito409 e versão obsoleta não sobrescrevem dados",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 5709
+    },
+    {
+      "title": "perfil: avatar válido persiste e pode ser removido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9538
+    },
+    {
+      "title": "perfil: avatar recusa SVG, tamanho excessivo e conteúdo corrompido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6388
+    },
+    {
+      "title": "perfil: senha atual incorreta, nova senha, revogação e login real",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7720
+    },
+    {
+      "title": "perfil: troca de usuário mantém dados e avatar privados",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8263
+    },
+    {
+      "title": "perfil: erro de leitura e mutation permitem recuperação sem perder formulário",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9623
+    },
+    {
+      "title": "perfil: expiração durante edição exige novo login e não grava dados",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8908
+    },
+    {
+      "title": "D: handshake e nft.updated passam pelo cliente real e invalidam cotação",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 16684
+    },
+    {
+      "title": "D: order.updated confirma pelo socket sem polling de pedido",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 15406
+    },
+    {
+      "title": "D: catálogo, detalhe e carrinho atualizam por eventos, duplicatas e versões antigas são ignoradas",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 14712
+    },
+    {
+      "title": "D: estoque esgotado via socket bloqueia revisão de checkout",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 10442
+    },
+    {
+      "title": "D: pedido muda offline e reconexão reconcilia o mesmo pedido por REST",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12046
+    },
+    {
+      "title": "D: refresh offline de pedido pendente recupera confirmação persistida sem duplicar",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 13441
+    },
+    {
+      "title": "D: eventos antigos e duplicados não regridem pedido terminal ou limpam carrinho novamente",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 12340
+    },
+    {
+      "title": "D: troca de usuário encerra socket anterior e rejeita evento privado de outra sessão",
+      "path": [],
+      "project": "desktop",
+      "outcome": "expected",
+      "duration": 15166
+    },
+    {
+      "title": "D: handshake e nft.updated passam pelo cliente real e invalidam cotação",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9998
+    },
+    {
+      "title": "D: order.updated confirma pelo socket sem polling de pedido",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11093
+    },
+    {
+      "title": "D: catálogo, detalhe e carrinho atualizam por eventos, duplicatas e versões antigas são ignoradas",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 11979
+    },
+    {
+      "title": "D: estoque esgotado via socket bloqueia revisão de checkout",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9678
+    },
+    {
+      "title": "D: pedido muda offline e reconexão reconcilia o mesmo pedido por REST",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 9730
+    },
+    {
+      "title": "D: refresh offline de pedido pendente recupera confirmação persistida sem duplicar",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 7698
+    },
+    {
+      "title": "D: eventos antigos e duplicados não regridem pedido terminal ou limpam carrinho novamente",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 6275
+    },
+    {
+      "title": "D: troca de usuário encerra socket anterior e rejeita evento privado de outra sessão",
+      "path": [],
+      "project": "mobile",
+      "outcome": "expected",
+      "duration": 8090
+    }
+  ],
+  "sourceNote": "Rodada integral durante os ajustes CSS da branch. Prefill novo e calibração final do hero são posteriores e foram validados nos relatórios preview45/45 e home-final7/7. Não representa213/213 aprovados de um único SHA final.",
+  "finalApplicationCommit": "f1cb94587daf65ccd73d2f855da4bd7a75373702"
+}
