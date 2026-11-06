@@ -103,3 +103,31 @@ test('assets enriquecem persistência antiga sem alterar identidade, preço ou e
   expect(after.id).toBe(before.id); expect(after.name).toBe(before.name)
   expect(after.price).toEqual(before.price); expect(after.editions).toEqual(before.editions); expect(after.availability).toEqual(before.availability)
 })
+
+
+test('header: seções rolam, indicam seleção e preservam URL, refresh e histórico', async ({ page }) => {
+  await page.goto('/?search=Sage&sort=price-asc&page=2&pageSize=2')
+  await expect(page.locator('.nft-card h3')).toHaveCount(2)
+  const nav = page.locator('.desktop-primary-nav')
+  for (const [label, id] of [['Mercado', 'catalogo'], ['Criadores', 'criadores'], ['Aprenda', 'diario']]) {
+    await nav.getByRole('link', { name: label, exact: true }).click()
+    await expect(page).toHaveURL(new RegExp('#' + id + '$'))
+    await expect(nav.getByRole('link', { name: label, exact: true })).toHaveAttribute('aria-current', 'page')
+    await expect(nav.locator('.is-active')).toHaveCount(1)
+    await expect.poll(() => page.locator('#' + id).evaluate(node => { const box = node.getBoundingClientRect(); return box.top >= -1 && box.top < innerHeight })).toBe(true)
+    const params = new URL(page.url()).searchParams
+    expect(params.get('search')).toBe('Sage'); expect(params.get('sort')).toBe('price-asc')
+    expect(params.get('page')).toBe('2'); expect(params.get('pageSize')).toBe('2')
+  }
+  await page.reload()
+  await expect(nav.getByRole('link', { name: 'Aprenda', exact: true })).toHaveAttribute('aria-current', 'page')
+  await page.goBack()
+  await expect(nav.getByRole('link', { name: 'Criadores', exact: true })).toHaveAttribute('aria-current', 'page')
+  await nav.getByRole('link', { name: 'Mercado', exact: true }).click()
+  await page.evaluate(() => window.scrollTo(0, 0))
+  await nav.getByRole('link', { name: 'Mercado', exact: true }).click()
+  await expect.poll(() => page.locator('#catalogo').evaluate(node => Math.round(node.getBoundingClientRect().top))).toBe(24)
+  await nav.getByRole('link', { name: 'Início', exact: true }).click()
+  await expect.poll(() => page.evaluate(() => scrollY)).toBe(0)
+  await expect(nav.getByRole('link', { name: 'Início', exact: true })).toHaveAttribute('aria-current', 'page')
+})

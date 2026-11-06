@@ -152,3 +152,6 @@ TEST_BASE_URL=https://nft-marketplace-jg-psi.vercel.app/ npm run test:published 
 ```
 
 Suíte própria com32casos, contextos isolados e TLS ativo. Setup PowerShell, ambiente proxy opcional, relatório HTML/JSON/capturas e SHA confirmado em docs/PUBLISHED_VALIDATION.md. A suíte local agora mantém213testes; os32públicos são separados e não são somados à execução local. A janela comprovada foi06/11/2026 01:45–01:47 America/Sao_Paulo; manter a URL ativa durante a avaliação continua sendo uma responsabilidade operacional.
+
+
+Navegação superior da Home: **Mercado** rola ao catálogo, **Criadores** ao bloco informativo no rodapé e **Aprenda** ao Diário da Cunhagem. Não são páginas adicionais. O destaque laranja acompanha a seção selecionada, preservando os filtros. Perfil/carteiras/favoritos/pedidos ficam no menu do nome do usuário. Detalhes e testes: [HEADER_NAVIGATION.md](docs/HEADER_NAVIGATION.md).
