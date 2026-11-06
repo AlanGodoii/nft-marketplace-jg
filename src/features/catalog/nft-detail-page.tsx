@@ -55,7 +55,7 @@ function Detail({ nft }: { nft: Nft }) {
         <div className="detail-about border-t pt-5"><h2 className="font-bold">Sobre este NFT</h2><p className="mt-3 text-sm leading-7 text-muted-foreground">{nft.description}</p></div>
         <form noValidate className="detail-purchase-form space-y-4" onSubmit={form.handleSubmit(values => add.mutate({ type: 'add', item: { nftId: nft.id, editionId: edition.id, quantity: values.quantity } }))}>
           <label htmlFor="nft-edition" className="block">Edição</label>
-          <div className="edition-pills" role="group" aria-label="Edições disponíveis">{nft.editions.map(option => <button type="button" key={option.id} aria-label={`Selecionar ${option.name}`} aria-pressed={edition.id === option.id} onClick={() => changeEdition(option.id)}>1/{option.supply}</button>)}</div>
+          <div className="edition-pills" role="group" aria-label="Edições disponíveis">{nft.editions.map(option => <button type="button" key={option.id} aria-label={`Selecionar ${option.name}`} aria-pressed={edition.id === option.id} onClick={() => changeEdition(option.id)}>1/{option.supply}</button>)}<span className="edition-availability-badge">{available ? 'Disponível' : 'Esgotada'}</span></div>
           <select id="nft-edition" className="kurio-select w-full" value={edition.id} onChange={event => changeEdition(event.target.value)}>
             {nft.editions.map(edition => <option key={edition.id} value={edition.id}>{edition.name}{edition.availability.remaining === 0 ? ' — esgotada' : ''}</option>)}
           </select>
