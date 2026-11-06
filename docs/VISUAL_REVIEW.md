@@ -1,3 +1,5 @@
+> **Histórico anterior ao recebimento dos exports.** A revisão atual utiliza21PNGs desktop e22mobile fornecidos pelo proprietário, com artes compartilhadas em todas as telas e nova composição responsiva. Consulte [RESPONSIVE_FIDELITY.md](RESPONSIVE_FIDELITY.md) para o estado atual. A ausência geral de imagens e a descrição de mobile em uma coluna abaixo não representam mais a implementação atual; faltam apenas vetores/ângulos individuais explicitados no novo relatório.
+
 # Revisão visual — Etapa 5
 
 ## Referência e limite de evidência

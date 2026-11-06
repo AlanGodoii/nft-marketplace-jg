@@ -7,6 +7,7 @@ test.beforeEach(async ({ page }) => { await reset(page); await login(page, 'alic
 test('perfil: edição persiste, atualiza sessão e preserva coleção/carteiras', async ({ page }) => {
   await page.getByLabel('Nome de exibição', { exact: true }).fill('Alice Colecionadora')
   await page.getByLabel('Nome de usuário', { exact: true }).fill('alice_nft')
+  await page.locator('.profile-additional').evaluate(node => (node as HTMLDetailsElement).open = true)
   await page.getByLabel('Biografia').fill('Coleciono NFTs na Kurio.')
   await page.getByLabel('Website').fill('https://example.org/alice')
   await page.getByRole('button', { name: 'Salvar perfil', exact: true }).click()
@@ -67,7 +68,7 @@ test('perfil: senha atual incorreta, nova senha, revogação e login real', asyn
   await expect(page.locator('#currentPassword-error')).toContainText('Senha atual incorreta')
   await page.getByLabel('Senha atual', { exact: true }).fill('Kurio123!')
   await page.getByRole('button', { name: 'Alterar senha e sair' }).click()
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   expect((await request(page, '/api/profile', 'GET', undefined, { Authorization: `Bearer ${oldToken}` })).status).toBe(401)
   await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
   await page.getByLabel('Senha', { exact: true }).fill('Kurio123!')
@@ -75,19 +76,21 @@ test('perfil: senha atual incorreta, nova senha, revogação e login real', asyn
   await expect(page.getByRole('alert')).toContainText('E-mail ou senha incorretos')
   await page.getByLabel('Senha', { exact: true }).fill('NovaKurio456!')
   await page.getByRole('button', { name: 'Entrar', exact: true }).click()
-  await expect(page.getByRole('heading', { name: 'Perfil', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Perfil do colecionador', exact: true })).toBeVisible()
   expect(await page.evaluate(() => JSON.stringify(localStorage) + JSON.stringify(sessionStorage))).not.toContain('NovaKurio456!')
 })
 
 test('perfil: troca de usuário mantém dados e avatar privados', async ({ page }) => {
+  await page.locator('.profile-additional').evaluate(node => (node as HTMLDetailsElement).open = true)
   await page.getByLabel('Biografia').fill('Privado da Alice')
   await page.getByRole('button', { name: 'Salvar perfil', exact: true }).click()
   await expect(page.getByText('Perfil atualizado.', { exact: true })).toBeVisible()
   const p = (await request(page, '/api/profile', 'GET')).body
   const avatar = `data:image/png;base64,${readFileSync('tests/fixtures/avatar.png').toString('base64')}`
   expect((await request(page, '/api/profile/avatar', 'PUT', { version: p.version, avatar })).status).toBe(200)
+  if (!await page.getByRole('button', { name: 'Sair', exact: true }).isVisible()) await page.getByRole('button', { name: 'Abrir menu' }).click()
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
   await login(page, 'bob', '/perfil')
   await expect(page.getByLabel('Nome de exibição', { exact: true })).toHaveValue('Bob')
   await expect(page.getByLabel('Biografia')).toHaveValue('')
@@ -101,7 +104,9 @@ test('perfil: erro de leitura e mutation permitem recuperação sem perder formu
   await expect(page.getByRole('button', { name: 'Tentar novamente' })).toBeVisible()
   await configure(page, { name: 'normal', latencyMs: 10 })
   await page.getByRole('button', { name: 'Tentar novamente' }).click()
+  await page.getByText('Informações adicionais', { exact: true }).click()
   await expect(page.getByLabel('Biografia')).toBeVisible()
+  await page.locator('.profile-additional').evaluate(node => (node as HTMLDetailsElement).open = true)
   await page.getByLabel('Biografia').fill('Não perder')
   await configure(page, { name: 'normal', latencyMs: 10, faults: { 'profile.update': { status: 500 } } })
   await page.getByRole('button', { name: 'Salvar perfil', exact: true }).click()
@@ -113,13 +118,14 @@ test('perfil: erro de leitura e mutation permitem recuperação sem perder formu
 })
 
 test('perfil: expiração durante edição exige novo login e não grava dados', async ({ page }) => {
+  await page.locator('.profile-additional').evaluate(node => (node as HTMLDetailsElement).open = true)
   await page.getByLabel('Biografia').fill('Não autorizado')
   await configure(page, { name: 'normal', latencyMs: 10, faults: { 'profile.update': { latencyMs: 800 } } })
   const sent = page.waitForRequest(r => r.url().endsWith('/api/profile') && r.method() === 'PATCH')
   await page.getByRole('button', { name: 'Salvar perfil', exact: true }).click()
   await sent
   await request(page, '/api/__mock/session/expire')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   await login(page, 'alice', '/perfil')
   await expect(page.getByLabel('Biografia')).toHaveValue('')
 })

@@ -1,0 +1,164 @@
+[
+  {
+    "file": "tests/__screenshots__/desktop-visual.spec.ts/home-desktop-1280px-linux.png",
+    "before": "6bff9951421c003f69c4df1ab3ffa940d4b873a71f5c3f47ce8006a3a1e1ab13",
+    "after": "4a8ddb39ad95a74f0220f73e819caa736370c3b84453aacafe4371dc30679064",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/desktop-visual.spec.ts/home-desktop-1440px-linux.png",
+    "before": "c98c724198b758de6621454aeeef710c7ffcd74b782a8f34732058aac80a69e5",
+    "after": "87ea19c0134169c1ec0033875939eb57652237ca5f92f9fe182e74d09ec2401f",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/desktop-visual.spec.ts/home-desktop-1920px-linux.png",
+    "before": "af79a6e10717a8b1f04dbfdc78197b49f9ec1b5fc00ad0c164f28717a5daf3f4",
+    "after": "d906491fa1381c8073e55e21926b30e059d38ad7bd3e9401d94085a956a11578",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/cart-1440px-linux.png",
+    "before": "0c8c12799757120535d42c0725e45b22e36942703a37b01cb9e9fc949f67111a",
+    "after": "5965fe2d8bdb6a95bee986a22ac8bf4dce4f0f7c77d3896f02e1d225a3e2e6b4",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/cart-390px-linux.png",
+    "before": "265574fb4ebe379f1ebf2d1b7a25285b864e3223b4691197629bab2915ae3ea4",
+    "after": "d249363f7a21d2fdc0a7c14aa6e2a752149ca3e66d9c95d8041ebdb8f7bca431",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/cart-768px-linux.png",
+    "before": "5cfc89dfc00b13267bf2cc1b3cb67b05333820fd6c7fbfb00159d07a5681ee2d",
+    "after": "0ed8dfd103a4eb2548c85f247544e6307b7cf4beb21576daffe62136ece10b82",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/checkout-1440px-linux.png",
+    "before": "e9aa2152a37b4064823f463675d7bb05879cf8c2b680cebba0f3f41de371b97e",
+    "after": "aa15aa9185b045e987c50b126faf7ef76ea7b3f7b201db2e7611ff0959563afe",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/checkout-390px-linux.png",
+    "before": "3e36de9cce99f0813fbeb459fc55aee125cd69064a68573d95f1a74759a74b6a",
+    "after": "af4e1a7046e88cda03500e09af34f7808fa87d647d22f51bb32093b0914994b0",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/checkout-768px-linux.png",
+    "before": "f01239b3f01d79b04273429e09d18cb9cf9273604a05bb122ddcde79fc5e68a1",
+    "after": "849cedde75b5d44a32a5222b2f41a46165c02f542d0c0eec23de260d00cc2320",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/detail-1440px-linux.png",
+    "before": "a843747dd47f5fc2d503cb8ab2e336ad650bf7b9b04c2832cd02e5e3222b4cd9",
+    "after": "bb67236b7de3f301a8361a04a8e24667e7247191798fbfe875a82251021476fa",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/detail-390px-linux.png",
+    "before": "934e107cf4125273f7669c50f013141136854aee80dd0dd559f2fd892f0a1d3f",
+    "after": "52ecb2601e85258d097acb8f4870c5f34fe601cb501384202b620115c97ae3bf",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/detail-768px-linux.png",
+    "before": "766723fc12535d9207e135ec179f00457b19fb23576caf47e7e8731fbfa8d0a2",
+    "after": "c1b06164f366ea9d98c04dfaaa49bf481cc582703152774757bce2f30c0e6876",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/home-1440px-linux.png",
+    "before": "c98c724198b758de6621454aeeef710c7ffcd74b782a8f34732058aac80a69e5",
+    "after": "87ea19c0134169c1ec0033875939eb57652237ca5f92f9fe182e74d09ec2401f",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/home-390px-linux.png",
+    "before": "404d6e2fbc8fe91b36782d558693142a2c890c98ec89f87d7eab645caafbdef0",
+    "after": "94876421aa86c7d03cd217102e5655c879cf3bdc148451b01a837a0f575e34ee",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/home-768px-linux.png",
+    "before": "22311e4d3dc0c51c404fc0ed60c225311c2341d7eae2678bec5927a57e63d4e1",
+    "after": "aa1b3fc0163842d9903d501719e525262b08d745ef9451b4abed2f8228590f13",
+    "action": "updated"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/login-1440px-linux.png",
+    "before": null,
+    "after": "190b087b291bb12757b60e801bc9746acf39e224e0a66e05bae03e8d83079cc9",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/login-390px-linux.png",
+    "before": null,
+    "after": "0271e9311240e2fe037b21a88ac6282df7723326593deadbef63858a7cec7dbe",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/login-768px-linux.png",
+    "before": null,
+    "after": "cbbc46120c657aadba311aa578c275a3f100420c746bbfd7d51f842a56bdfad6",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/profile-1440px-linux.png",
+    "before": null,
+    "after": "1915d8cd110cb14fa5390fc0aac22417edfe241ced58e9a6bfcd5c5add7ca827",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/profile-390px-linux.png",
+    "before": null,
+    "after": "1d7191ee9b24aaa244ef6ee6388867bf944ff7571c35e7a6d116ab0551d59ae0",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/profile-768px-linux.png",
+    "before": null,
+    "after": "f0c84604021fcb973fe5b2024eb64023e0057f0cd3db26708819417d64861534",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/register-1440px-linux.png",
+    "before": null,
+    "after": "93db4671bc0eb81becef275fe4341e33e5da097a08c2d2f55b4176f66213350d",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/register-390px-linux.png",
+    "before": null,
+    "after": "3740cb7f2170392cdc1286ee595d15d418085ab7cbf72e6980bdca335f590940",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/register-768px-linux.png",
+    "before": null,
+    "after": "f7d84a0d7d08e4b31b4852f163fd160fb2c2e68306c815fc70466065e285fd8a",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/wallets-1440px-linux.png",
+    "before": null,
+    "after": "9f47d54c99b376ea0ee6a6e5153ab7f870836270d8126a6de9a38c334c140c98",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/wallets-390px-linux.png",
+    "before": null,
+    "after": "dbef79115ba9db8aba23bf3e3376676cbdd0d78ab05ee446d831a48521ed46aa",
+    "action": "created"
+  },
+  {
+    "file": "tests/__screenshots__/visual.spec.ts/wallets-768px-linux.png",
+    "before": null,
+    "after": "8dbf7f4122cb4cc12bbe74526b2428a9c74e62695f3a2dc0fc0273224829bea3",
+    "action": "created"
+  }
+]

@@ -53,7 +53,7 @@ test('header: busca, destino editorial e conta com carrinho real', async ({ page
   await login(page, 'alice', '/')
   await page.locator('.desktop-account summary').click()
   await page.locator('.desktop-account').getByRole('link', { name: 'Perfil', exact: true }).click()
-  await expect(page.getByRole('heading', { name: 'Perfil', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Perfil do colecionador', exact: true })).toBeVisible()
 })
 test('abas, contagens reais, combinações, histórico e refresh', async ({ page }) => {
   await page.goto('/')

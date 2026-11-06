@@ -1,0 +1,20 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/fidelity.spec.ts tests/accessibility.spec.ts --workers=2 --grep grupo3|login usa --reporter=list,html,json --output=work/full-fidelity/auth-final-results
+
+
+Running 5 tests using 2 workers
+
+(node:233782) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:233776) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop] › tests/fidelity.spec.ts:32:1 › login usa composição desktop ou mobile sem fingir OAuth (2.4s)
+(node:234031) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [mobile] › tests/fidelity.spec.ts:32:1 › login usa composição desktop ou mobile sem fingir OAuth (1.3s)
+  ✓  2 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 390px grupo3 (7.7s)
+  ✓  4 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 768px grupo3 (6.1s)
+  ✓  5 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 1440px grupo3 (7.5s)
+
+  5 passed (22.3s)

@@ -1,5 +1,7 @@
 # Auditoria técnica — matriz de requisitos Jungle Gaming
 
+> Revisão desktop/mobile atual: [RESPONSIVE_FIDELITY.md](RESPONSIVE_FIDELITY.md). Imagens e composição compartilhadas além da Home; evidências atuais prevalecem sobre afirmações históricas de Home-only. Fidelidade absoluta e publicação desta branch não são presumidas.
+
 > Validação pública posterior à Etapa5: [PUBLISHED_VALIDATION.md](PUBLISHED_VALIDATION.md),32/32 testes HTTPS em06/11/2026. Referências históricas a URL não fornecida estão superadas por PUB-01.
 
 > Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
@@ -16,7 +18,7 @@ Na auditoria inicial, nenhuma funcionalidade foi alterada. **A etapa P0 posterio
 
 O documento oficial aponta para o Figma `Ff0SksUi7UFtPWUO8kyNtw`; o solicitante forneceu a cópia `Th45nisl2USULS1r8msoYo`. A comparação visual utilizou a **cópia indicada pelo solicitante**, cuja página contém os nove frames desktop e seis mobile. Não foi presumida equivalência pixel a pixel com o arquivo original. Foram inspecionados o panorama, metadados dos frames e capturas de Desktop/Início (`2:2`) e Mobile/Início (`14:5226`); nas demais oito telas, o próprio código e execução comprovam placeholders, impedindo comparação visual de conteúdo inexistente. Não foi realizada regressão visual automatizada contra o Figma.
 
-## Progresso atual — Home desktop com exports fornecidos
+## Progresso anterior — Home desktop com exports fornecidos
 
 Base mainad6dfbc (Etapas1–5, PR6), branch feat/fidelidade-home-desktop.21PNGs anexados acessíveis/inspecionados; quatro recortes originais otimizados na Home. Header/hero/sidebar/grid/banners/Diário/footer desktop revisados. Mobile não redesenhado. Evidências DESK em [DESKTOP_HOME_FIDELITY.md](DESKTOP_HOME_FIDELITY.md) e reports/desktop-home; resultados finais são registrados somente após execução.
 
@@ -654,3 +656,20 @@ Fidelidade integral permanecePARCIAL: seis itens/página e3coleções reais dife
 ## PUB-01 — validação da implantação real
 
 URL https://nft-marketplace-jg-psi.vercel.app; SHA Source ad6dfbc1141fa27aa41b2ec69632d49aea8ddc8c confirmado por evidência do proprietário e GitHub/Git.32/32 testes públicos em2.2m, desktop/mobile; acesso/refresh de10rotas, MSW/APIs, sessão, compra, recibo, eventos/reconexão e A/B aprovados. Relatório/JSON/capturas versionados em reports/published-validation; escopo e condições em docs/PUBLISHED_VALIDATION.md. A aplicação não precisou de correção funcional nesta rodada. Disponibilidade futura permanece parcial; assets/performance não são aprovados por esses testes.
+
+
+## RESP-01 — revisão desktop/mobile com os exports recebidos
+
+| ID | Requisito / critério | Arquivos responsáveis | Estado | Evidência real | Falta / prioridade |
+|---|---|---|---|---|---|
+| RESP-A | Artes originais em catálogo, detalhe, favoritos, carrinho, checkout e recibo; visual20 | lib/artwork.ts, components/nft-image.tsx, mocks/fixtures.ts, assets/figma | VALIDADO | fidelity.spec; manifest43PNGs, hashes36fixtures preservados; imagens decodificadas e snapshots do recibo | Ângulos individuais e vetores não presentes nos ZIPs;P2. |
+| RESP-B | Header, navegação, footer e conta compartilhados; visual20/fluxos20 | components/layout, features/auth | VALIDADO | navegação/hash/URL, acesso às rotas, grupo desktop amplo e login/retorno | Nenhum fluxo principal ausente nesta revisão;P1comparação humana complementar. |
+| RESP-C | Home mobile do export com busca, filtros, ordenação, abas e paginação; visual20/estado15 | catalog/home-page, hero, catalog-sort, grid, figma.css | VALIDADO |46/46catálogo/Home,4/4estados dev; hero366×190, duas colunas e navegação inferior; URL preservada | Conteúdo de6itens/página e3coleções reais difere dos9itens/contagens ilustrativos;P2. |
+| RESP-D | Detalhe, carrinho, pagamento e confirmação responsivos; fluxos20 | features/catalog/cart/checkout/orders | VALIDADO |224/224regressão, retestes34+13+7; API compra/recibo, estoque e teclado; sem confirmação fictícia | Fluxos de conexão/revisão e controles contratuais extras explicitados;P1revisão visual. |
+| RESP-E | Perfil, carteiras e acesso adaptados aos frames; visual20/fluxos20 | profile-page,wallets-page,auth-page,account-layout | VALIDADO |80/80retestes e5/5acesso/axe; ENS/apelido persistidos, avatar/senha e isolamento | Salvamentos de recursos distintos e campos adicionais do contrato mantidos;P2microajustes. |
+| RESP-F | Regressão visual e responsividade; testes10/visual20 | Playwright configs, visual.spec, fidelity-desktop.spec | VALIDADO |24/24estritos+3/3Home ampla,2/2todas as telas1280/1920;390/768/1440com axe/overflow | Baselines comprovam estabilidade da aplicação; não igualdade automática ao Figma. |
+| RESP-G | Fidelidade absoluta a todos os pixels/conteúdos dos frames; visual20 | componentes e exports | PARCIAL | Comparações reais no relatório; layout/artes aplicados | Dados ilustrativos, ângulos/vetores ausentes e controles técnicos obrigatórios impedem afirmar equivalência integral;P2. |
+| RESP-H | Metas Lighthouse; performance5 | Lighthouse config/script/relatórios | PARCIAL |12medições finais: desktop99/100/96/92; mobile81/100/96/92 | Pmobile<90; LCP~4.1s/TBT278–288ms;P1. Não é ausência da ferramenta. |
+| RESP-I | Implantação pública correspondente à revisão; entrega | vercel.json/env/DEPLOYMENT | IMPLEMENTADO NÃO TESTADO | Configuração preservada, build/demo e SPA locais aprovados | Aguardar revisão/merge manual/deploy e validar SHA+compraHTTPS;P0 operacional. PUB-01continua evidência da versão antiga. |
+
+Resultados e limitações completos em RESPONSIVE_FIDELITY.md; relatórios em reports/responsive-fidelity. Não se declara aprovação global ou nota. Os eliminatórios funcionais continuam exercitados pelos testes reais (stack, confirmação pela API, isolamento, Socket.IO e E2E); a publicação do novo SHA permanece uma pendência de entrega.

@@ -1,0 +1,346 @@
+[
+  {
+    "kind": "desktop",
+    "path": "cadastro/Marketplace Page.png",
+    "width": 1206,
+    "height": 1957,
+    "bytes": 1389260,
+    "sha256": "c9796a909702d8242a786f0e7f968716430b8ed704b550a75c714e2a27a281ff"
+  },
+  {
+    "kind": "desktop",
+    "path": "cadastro/Sign Up Modal.png",
+    "width": 500,
+    "height": 656,
+    "bytes": 24558,
+    "sha256": "6741006785b639de27b1c8a2ac9f702aaeadb446878ecdb0951e071fc563e2fd"
+  },
+  {
+    "kind": "desktop",
+    "path": "carrinhonft/Footer.png",
+    "width": 1200,
+    "height": 610,
+    "bytes": 96424,
+    "sha256": "08b5c17dcc7a9bc9f4fc99edab54a714566c5cb1981999f36263afa11bdeb803"
+  },
+  {
+    "kind": "desktop",
+    "path": "carrinhonft/Related Products.png",
+    "width": 1200,
+    "height": 411,
+    "bytes": 381238,
+    "sha256": "5f18c45364281444d91c37476b4b475c9a535b12152f8daa4ea3bff3af0684db"
+  },
+  {
+    "kind": "desktop",
+    "path": "carrinhonft/Top.png",
+    "width": 1200,
+    "height": 493,
+    "bytes": 108137,
+    "sha256": "2c33ee0e83e36b0960f659cccfbe0fabec76263b9b52fc72116699abb77c8071"
+  },
+  {
+    "kind": "desktop",
+    "path": "carteiras/Top.png",
+    "width": 1200,
+    "height": 716,
+    "bytes": 76676,
+    "sha256": "7c753bed58306e3e68b09b985f1d56bd8c073802cb3ff0304c11900c4afe6ac3"
+  },
+  {
+    "kind": "desktop",
+    "path": "confirmação do pedido/Order Confirmation Modal.png",
+    "width": 578,
+    "height": 821,
+    "bytes": 88581,
+    "sha256": "f06c88c23b3ade61010ff4ace3b8ca464975e546f4dbfb57604b0d2f83ed518f"
+  },
+  {
+    "kind": "desktop",
+    "path": "home/Blog.png",
+    "width": 1200,
+    "height": 476,
+    "bytes": 399954,
+    "sha256": "442b684f9661766be3fcc583972a465aa562abca7e37dc0a6c4affc45c942e0a"
+  },
+  {
+    "kind": "desktop",
+    "path": "home/Footer.png",
+    "width": 1200,
+    "height": 610,
+    "bytes": 96417,
+    "sha256": "c52002923c51b131ec5094f23245befdc6474b0a5286fea63c9687575ea5e102"
+  },
+  {
+    "kind": "desktop",
+    "path": "home/Frame 137.png",
+    "width": 1160,
+    "height": 450,
+    "bytes": 404663,
+    "sha256": "abc12d882ccf70e9ee0c26378dc2a0aca9c2249c4fcfa8211cb1b7f9fc6c09bf"
+  },
+  {
+    "kind": "desktop",
+    "path": "home/Products.png",
+    "width": 1200,
+    "height": 1373,
+    "bytes": 1274627,
+    "sha256": "210b167f538f24f167144da3c3bdd612110f48924b24484b2afe9305dfa01d17"
+  },
+  {
+    "kind": "desktop",
+    "path": "home/Promos.png",
+    "width": 1200,
+    "height": 250,
+    "bytes": 267963,
+    "sha256": "6ccc19fcac52896245d6457ecc093c0fb7a31ff3d4af4f6a21d90d11803bcf02"
+  },
+  {
+    "kind": "desktop",
+    "path": "login/Marketplace Page.png",
+    "width": 1206,
+    "height": 1957,
+    "bytes": 1389260,
+    "sha256": "c9796a909702d8242a786f0e7f968716430b8ed704b550a75c714e2a27a281ff"
+  },
+  {
+    "kind": "desktop",
+    "path": "login/Sign In Modal.png",
+    "width": 500,
+    "height": 600,
+    "bytes": 22502,
+    "sha256": "f2ce88e77ac83f761dd8aa61ff61cfcf8b46436bc4797adcffd5543571afa126"
+  },
+  {
+    "kind": "desktop",
+    "path": "mercado/Description.png",
+    "width": 1200,
+    "height": 340,
+    "bytes": 63943,
+    "sha256": "fe71e662418936204d1a563c908d66fc7d4361f389eb86c4bcb7f1e942822b2a"
+  },
+  {
+    "kind": "desktop",
+    "path": "mercado/Footer.png",
+    "width": 1200,
+    "height": 610,
+    "bytes": 96424,
+    "sha256": "08b5c17dcc7a9bc9f4fc99edab54a714566c5cb1981999f36263afa11bdeb803"
+  },
+  {
+    "kind": "desktop",
+    "path": "mercado/Related Products.png",
+    "width": 1200,
+    "height": 407,
+    "bytes": 380849,
+    "sha256": "8512b08422ad99ec45bb1fe998ca765f1872584b86c79bdbbaa18813f63c2e74"
+  },
+  {
+    "kind": "desktop",
+    "path": "mercado/Top.png",
+    "width": 1200,
+    "height": 553,
+    "bytes": 420931,
+    "sha256": "6309f98375ba998301ee9ae4fba087bf7981902b767a67766367ca1f725f3038"
+  },
+  {
+    "kind": "desktop",
+    "path": "pagamentos/Checkout Page.png",
+    "width": 1200,
+    "height": 903,
+    "bytes": 133752,
+    "sha256": "d2fa63cf893c0acce6b58592bef4146d2b6d355d38f4a5e9ec6382af75f0639a"
+  },
+  {
+    "kind": "desktop",
+    "path": "pagamentos/Footer.png",
+    "width": 1200,
+    "height": 610,
+    "bytes": 96426,
+    "sha256": "ee3c229c36c7e1cddd288c93428b95b7ada5d661ebd504b5e69809bd36e9718c"
+  },
+  {
+    "kind": "desktop",
+    "path": "perfildocolecionador/Top.png",
+    "width": 1200,
+    "height": 803,
+    "bytes": 55005,
+    "sha256": "c1d578eea25a5d11175970e75e4a606ba6c9e6a64428b881317d661ebe027be9"
+  },
+  {
+    "kind": "mobile",
+    "path": "cadastro/Create Profile Button.png",
+    "width": 358,
+    "height": 60,
+    "bytes": 2125,
+    "sha256": "3138f24189955686a714947d4350106241248f78e01863fbcb93d6300b9b7b27"
+  },
+  {
+    "kind": "mobile",
+    "path": "cadastro/Form.png",
+    "width": 358,
+    "height": 236,
+    "bytes": 9384,
+    "sha256": "92c972a8257f814a7648040628aacb6546bf35071d71d7ed2cd40ffa4e5434b2"
+  },
+  {
+    "kind": "mobile",
+    "path": "cadastro/Login Link.png",
+    "width": 358,
+    "height": 20,
+    "bytes": 2081,
+    "sha256": "afa39950fbf62f929f4ee1bc0ceb72c7df25278c39d7571b3ede5f925590a6df"
+  },
+  {
+    "kind": "mobile",
+    "path": "cadastro/Logo.png",
+    "width": 358,
+    "height": 136,
+    "bytes": 1970,
+    "sha256": "ee63227d297cb0377844ece7be0cf61b678a11efba22544ec15efeea2f6d1927"
+  },
+  {
+    "kind": "mobile",
+    "path": "cadastro/Mobile Social Block.png",
+    "width": 358,
+    "height": 124,
+    "bytes": 7080,
+    "sha256": "c69b94f6703395bf4559b9d4f1365813179a56cde4f0948cec18b55801338063"
+  },
+  {
+    "kind": "mobile",
+    "path": "cadastro/Title.png",
+    "width": 358,
+    "height": 16,
+    "bytes": 3202,
+    "sha256": "d04ab32f868fd5b62f5de43a4a8f0accf0d37b671605dc0d932e3c50a05dfdd2"
+  },
+  {
+    "kind": "mobile",
+    "path": "carrinhonft/Content.png",
+    "width": 414,
+    "height": 518,
+    "bytes": 141702,
+    "sha256": "40ece495322b167833c2a9512de3de7ca23ba60b3b54f6fc32bc639b53f4b2b8"
+  },
+  {
+    "kind": "mobile",
+    "path": "carrinhonft/Payment Summary.png",
+    "width": 414,
+    "height": 342,
+    "bytes": 48358,
+    "sha256": "88aac57e5f48ec1b5fdd8c04927aae21aed02e79ef46e36143d49eb4cffc2a0e"
+  },
+  {
+    "kind": "mobile",
+    "path": "detalhesnft/Details Sheet.png",
+    "width": 414,
+    "height": 504,
+    "bytes": 25685,
+    "sha256": "4376cc7449630dde0aa7058fc454faad7c65be7abb20d11fad5be110a183cec7"
+  },
+  {
+    "kind": "mobile",
+    "path": "detalhesnft/Hero.png",
+    "width": 414,
+    "height": 506,
+    "bytes": 293979,
+    "sha256": "148a390ef146e43912893feb6158e31198e4f7516b33f3b1cbbf7422ded238f2"
+  },
+  {
+    "kind": "mobile",
+    "path": "home/Hero Banner.png",
+    "width": 366,
+    "height": 190,
+    "bytes": 128897,
+    "sha256": "c0bea854935718a00341070d9a4cabd4778e1feccfcd1cb77651139db015695f"
+  },
+  {
+    "kind": "mobile",
+    "path": "home/Product Grid.png",
+    "width": 366,
+    "height": 544,
+    "bytes": 252615,
+    "sha256": "d3acfc0386fb91673f3cd4de5da39d764d75b46d5f54ba084e49e345d9aae06f"
+  },
+  {
+    "kind": "mobile",
+    "path": "home/Search Bar.png",
+    "width": 366,
+    "height": 45,
+    "bytes": 6278,
+    "sha256": "40ddf23bc8583a8ed0740cc2339863b3a155ba913af85e5ab92ac46c2f7c69d2"
+  },
+  {
+    "kind": "mobile",
+    "path": "home/Tab Bar.png",
+    "width": 414,
+    "height": 135,
+    "bytes": 25252,
+    "sha256": "20b63f2a6d7ad8f16a2f0c5ab4f1898b2935df284e4a4f4aa74b632a63107df0"
+  },
+  {
+    "kind": "mobile",
+    "path": "home/Tabs.png",
+    "width": 366,
+    "height": 20,
+    "bytes": 3687,
+    "sha256": "dbe4c48b70d3ae0aa938970ffcc26d169355bc8b0722b0b14b11c6decd0cdef9"
+  },
+  {
+    "kind": "mobile",
+    "path": "login/Form.png",
+    "width": 358,
+    "height": 140,
+    "bytes": 7136,
+    "sha256": "a9e557ec2da8a300fc2ffdf89765f67138c6bac98ad5b8c1dc8e6867fd121437"
+  },
+  {
+    "kind": "mobile",
+    "path": "login/Logo.png",
+    "width": 358,
+    "height": 136,
+    "bytes": 1970,
+    "sha256": "ee63227d297cb0377844ece7be0cf61b678a11efba22544ec15efeea2f6d1927"
+  },
+  {
+    "kind": "mobile",
+    "path": "login/Mobile Social Block.png",
+    "width": 358,
+    "height": 124,
+    "bytes": 7080,
+    "sha256": "c69b94f6703395bf4559b9d4f1365813179a56cde4f0948cec18b55801338063"
+  },
+  {
+    "kind": "mobile",
+    "path": "login/Sign In Button.png",
+    "width": 358,
+    "height": 60,
+    "bytes": 1463,
+    "sha256": "595082f3b1afd7c56e0c357cfe14f2f35a60d45e32f022c167b08184ecdd33db"
+  },
+  {
+    "kind": "mobile",
+    "path": "login/Signup Link.png",
+    "width": 358,
+    "height": 20,
+    "bytes": 2624,
+    "sha256": "aaf5d19390ad546c8254a5916945de0536ffc4c3e4782b55341c144413dcd8a0"
+  },
+  {
+    "kind": "mobile",
+    "path": "login/Title.png",
+    "width": 358,
+    "height": 16,
+    "bytes": 1051,
+    "sha256": "adbf8fbcd0049388e4c57e516ec79a67fa2ff2c3ce0d0267603ed618e8f2cfdd"
+  },
+  {
+    "kind": "mobile",
+    "path": "pagamento com carrteira/Content.png",
+    "width": 414,
+    "height": 518,
+    "bytes": 141702,
+    "sha256": "40ece495322b167833c2a9512de3de7ca23ba60b3b54f6fc32bc639b53f4b2b8"
+  }
+]

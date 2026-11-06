@@ -1,0 +1,28 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/commerce.spec.ts tests/fidelity.spec.ts tests/accessibility.spec.ts --workers=2 --grep acesso direto ao detalhe|NFT inexistente e edição esgotada|formulários por teclado|artes originais|stepper respeita|grupo1 --reporter=list,html,json --output=work/full-fidelity/detail-final-results
+
+
+Running 13 tests using 2 workers
+
+(node:234829) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:234828) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop] › tests/commerce.spec.ts:160:1 › acesso direto ao detalhe, galeria, edição e limite de quantidade (3.2s)
+  ✓   3 [desktop] › tests/commerce.spec.ts:173:1 › NFT inexistente e edição esgotada (2.6s)
+  ✓   4 [desktop] › tests/commerce.spec.ts:334:1 › formulários por teclado, erros associados e controle de foco da galeria (3.4s)
+  ✓   2 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 390px grupo1 (10.5s)
+  ✓   5 [desktop] › tests/fidelity.spec.ts:4:1 › artes originais acompanham detalhe, favoritos, carrinho e checkout pela API (6.6s)
+  ✓   7 [desktop] › tests/fidelity.spec.ts:15:1 › stepper respeita estoque e atualiza cotação real sem cálculo local (4.3s)
+  ✓   6 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 768px grupo1 (10.1s)
+(node:235386) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   9 [mobile] › tests/commerce.spec.ts:160:1 › acesso direto ao detalhe, galeria, edição e limite de quantidade (2.8s)
+  ✓  10 [mobile] › tests/commerce.spec.ts:173:1 › NFT inexistente e edição esgotada (2.3s)
+  ✓  11 [mobile] › tests/commerce.spec.ts:334:1 › formulários por teclado, erros associados e controle de foco da galeria (2.3s)
+  ✓  12 [mobile] › tests/fidelity.spec.ts:4:1 › artes originais acompanham detalhe, favoritos, carrinho e checkout pela API (4.7s)
+  ✓   8 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 1440px grupo1 (13.2s)
+  ✓  13 [mobile] › tests/fidelity.spec.ts:15:1 › stepper respeita estoque e atualiza cotação real sem cálculo local (2.1s)
+
+  13 passed (36.8s)

@@ -1,3 +1,4 @@
+import { useDesktop } from '@/lib/use-desktop'
 import { PackageOpen } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import type { CatalogPage, RemoteData } from '../types'
@@ -7,6 +8,7 @@ export function CatalogGrid({ catalog, onRetry }: {
   catalog: RemoteData<CatalogPage>
   onRetry?: () => void
 }) {
+  const desktop = useDesktop()
   if (catalog.status === 'loading') {
     return (
       <div role="status" aria-busy="true">
@@ -16,7 +18,7 @@ export function CatalogGrid({ catalog, onRetry }: {
     )
   }
   if (catalog.status === 'success' && catalog.data.items.length > 0) {
-    return <div className="nft-grid">{catalog.data.items.map(nft => <NftCard nft={nft} key={nft.id} />)}</div>
+    return <div className="nft-grid">{catalog.data.items.map((nft,index) => <NftCard nft={nft} showFavorite={!desktop} priority={index < (desktop ? 3 : 2)} key={nft.id} />)}</div>
   }
   const isError = catalog.status === 'error'
   return (

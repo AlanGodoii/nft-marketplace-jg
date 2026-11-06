@@ -4,7 +4,7 @@ import { add, apiQuote, configure, login, request, reset, review } from './helpe
 test.beforeEach(async ({ page }) => reset(page))
 
 const routes = [
-  ['/', /Descubra o seu|SEJA DONO DO FUTURO/, false], ['/nfts/nft-002', 'Sage Nomad #002', false],
+  ['/', /SEJA DONO D[OA]/, false], ['/nfts/nft-002', 'Sage Nomad #002', false],
   ['/carrinho', 'Carrinho', false], ['/login', 'Login', false], ['/cadastro', 'Cadastro', false],
   ['/checkout', 'Checkout', true], ['/perfil', 'Perfil', true], ['/carteiras', 'Carteiras', true],
   ['/pedido/confirmacao', 'Confirmação do pedido', true], ['/favoritos', 'Favoritos', true],
@@ -43,22 +43,23 @@ test('publicado: login inválido/válido, refresh da sessão e logout', async ({
   await expect(page.getByLabel('Usuário conectado')).toHaveText('Alice')
   await page.reload()
   await expect(page.getByLabel('Usuário conectado')).toHaveText('Alice')
+  if (!await page.getByRole('button', { name: 'Sair', exact: true }).isVisible()) await page.getByRole('button', { name: 'Abrir menu' }).click()
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
   await page.goto('/perfil')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
 })
 
 test('publicado: catálogo → carrinho visitante → login → checkout → recibo confirmado', async ({ page }, testInfo) => {
   await page.goto('/?search=Sage%20Nomad%20%23002')
   await page.locator('a.nft-card-link').click()
-  await page.getByRole('button', { name: 'Adicionar ao carrinho', exact: true }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByText('NFT adicionado ao carrinho.', { exact: false })).toBeVisible()
   await page.goto('/carrinho')
   await expect(page.getByTestId('total')).toHaveText('0.306 ETH')
   await page.reload()
   await expect(page.getByTestId('cart-item')).toHaveCount(1)
-  await page.getByRole('link', { name: 'Revisar no checkout' }).click()
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await page.getByRole('link', { name: 'Conectar e finalizar' }).click()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
   await page.getByLabel('Senha', { exact: true }).fill('Kurio123!')
   await page.getByRole('button', { name: 'Entrar', exact: true }).click()
@@ -131,8 +132,9 @@ test('publicado: Alice/Bob isolam dados privados, pedidos e eventos', async ({ p
   expect(created.status).toBe(201)
   const order = created.body
   const sessionId = (await request(page, '/api/__mock/socket/stats', 'GET')).body.sessionId
+  if (!await page.getByRole('button', { name: 'Sair', exact: true }).isVisible()) await page.getByRole('button', { name: 'Abrir menu' }).click()
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
   await login(page, 'bob', '/pedido/confirmacao')
   await expect(page.getByText('Nenhum pedido selecionado. Você ainda não tem pedidos.')).toBeVisible()
   expect((await request(page, `/api/orders/${order.id}`, 'GET')).status).toBe(404)

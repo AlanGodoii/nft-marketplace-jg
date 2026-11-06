@@ -1,3 +1,5 @@
+> Revisão responsiva atual: [RESPONSIVE_FIDELITY.md](RESPONSIVE_FIDELITY.md). Prioridade de entrega: concluir regressão do código atual, revisar PR, implantar SHA aprovado e repetir compra pública; não refazer os domínios funcionais. A pendência de imagens deixou de ser geral: artes anexadas estão compartilhadas em todas as telas; ângulos/vetores individuais continuam explicitados.
+
 # Plano de implementação — Jungle Gaming NFT Marketplace
 
 > Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
@@ -222,3 +224,13 @@ Executar `npm run build`, `npm run lint`, verificação de tipos e os testes afe
 
 
 Fechamento Etapa5:206/206 dev16.4m,38/38 selecionados no build1.9m,12/12 visualestrito21.7s, tipos/lint/build/demo/instalaçãolimpa aprovados. Prioridades restantes: manter a URL pública validada ativa, Performance mobile, assets/fidelidade e revisão humana.
+
+
+## Fechamento da revisão responsiva —06/11/2026
+
+- P0 operacional: revisar o novo PR e integrar manualmente; Vercel deve publicar o SHA aprovado. Conferir Source e repetir32cenáriosHTTPS, incluindo compra e reconexão. Sem publicação validada desta branch.
+- P1 performance: Home/detalhe mobile81<90com artes reais, LCP~4.1s/TBT278–288ms. Investigar caminho crítico de JS/MSW/CPU sem remover mocks, imagens ou transporte. Prioridade eager/high aplicada, sem ganho mensurável. Reservar2–4h de investigação, sem garantia de pontuação.
+- P1 revisão humana: conferir as comparações das nove telas, foco/zoom/leitor de tela e estados não desenhados. Funcionalidade e baselines aprovados não equivalem a igualdade pixel a pixel.
+- P2: vetores/ângulos individuais e imagens em maior resolução quando existirem; microajustes visuais preservando contratos, quantidades e controles acessíveis. Não reenviar toda a arte:43PNGs recebidos e artes principais já integradas.
+
+Não recriar autenticação, perfil, carteiras, carrinho, checkout, pedidos ou Socket.IO. A próxima ação de entrega é revisão/implantação da branch; a próxima mudança de código recomendada é investigação de performance mobile orientada pelos relatórios.

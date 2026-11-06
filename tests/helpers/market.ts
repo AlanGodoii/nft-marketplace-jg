@@ -10,7 +10,7 @@ export async function request(page: Page, path: string, method = 'POST', data?: 
   }, { path, method, data, extra })
 }
 export async function reset(page: Page) {
-  await page.goto('/login'); await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await page.goto('/login'); await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   expect((await request(page, '/api/__mock/reset', 'POST', { name: 'normal', latencyMs: 10 })).status).toBe(200)
 }
 export async function login(page: Page, who = 'alice', destination = '/carteiras') {
@@ -23,7 +23,7 @@ export async function login(page: Page, who = 'alice', destination = '/carteiras
 export async function add(page: Page, id = 'nft-002', quantity = 1) {
   await page.goto(`/nfts/${id}`)
   await page.getByLabel('Quantidade', { exact: true }).fill(String(quantity))
-  await page.getByRole('button', { name: 'Adicionar ao carrinho', exact: true }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByText('NFT adicionado ao carrinho.', { exact: false })).toBeVisible()
 }
 export async function configure(page: Page, config: unknown) {
@@ -44,4 +44,15 @@ export async function apiQuote(page: Page) {
   const response = await request(page, '/api/checkout/quote', 'POST', { walletId: wallet.id, network: wallet.network, collector: wallet.collector, items: cart.items.map((item: { id: string; quantity: number }) => ({ itemId: item.id, quantity: item.quantity })) })
   expect(response.status).toBe(200)
   return { quote: response.body, input: { quoteId: response.body.id, connectionId: connection.body.connectionId } }
+}
+
+export async function openCollector(page: Page) {
+ const panel=page.locator('.checkout-collector-details')
+ await panel.waitFor({state:'attached'})
+ if(await panel.getAttribute('open')===null) await panel.locator('summary').click()
+}
+export async function openCheckoutItems(page: Page) {
+ const panel=page.locator('.checkout-items-details')
+ await panel.waitFor({state:'attached'})
+ if(await panel.getAttribute('open')===null) await panel.locator('summary').click()
 }

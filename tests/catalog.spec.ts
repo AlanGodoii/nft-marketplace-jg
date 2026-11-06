@@ -19,19 +19,19 @@ async function loaded(page: Page, count = 6) {
 async function filters(page: Page) {
   if (await page.locator('.desktop-filters').isVisible()) return page.locator('.desktop-filters')
   const panel = page.locator('.mobile-filters')
-  if (await panel.getAttribute('open') === null) await panel.locator('summary').click()
+  if (await panel.getAttribute('open') === null) await page.getByRole('button', { name: 'Abrir filtros do catálogo' }).click()
   return panel
 }
 
 // Scenario selection itself crosses MSW. Never page.route/route.fulfill or set React state.
 test.beforeEach(async ({ page }) => {
   await page.goto('/login')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   await reset(page)
 })
 
 test('carrega catálogo por Axios e handlers MSW com contratos completos', async ({ page }) => {
-  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts')
+  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts' && new URL(response.url()).searchParams.get('pageSize') === '6')
   await page.goto('/')
   const response = await responsePromise
   expect(response.fromServiceWorker()).toBe(true)
@@ -85,11 +85,13 @@ test('combina coleção, rede, disponibilidade e intervalo ETH', async ({ page }
 test('ordena preço crescente e decrescente com precisão decimal', async ({ page }) => {
   await page.goto('/')
   await loaded(page)
+  if(!await page.locator('.desktop-filters').isVisible()) await filters(page)
   await page.getByLabel('Ordenar por', { exact: true }).selectOption('price-asc')
   await loaded(page)
   let amounts = await page.locator('.nft-card .font-bold.text-primary').allTextContents()
   expect(amounts[0]).toBe('0.19 ETH')
   expect(amounts.every((amount, index) => index === 0 || new Decimal(amount.split(' ')[0]).gte(amounts[index - 1].split(' ')[0]))).toBe(true)
+  if(!await page.locator('.desktop-filters').isVisible()) await filters(page)
   await page.getByLabel('Ordenar por', { exact: true }).selectOption('price-desc')
   await loaded(page)
   amounts = await page.locator('.nft-card .font-bold.text-primary').allTextContents()
@@ -98,7 +100,7 @@ test('ordena preço crescente e decrescente com precisão decimal', async ({ pag
 })
 
 test('filtra e ordena diferenças além da precisão de number', async ({ page }) => {
-  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts')
+  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts' && new URL(response.url()).searchParams.get('pageSize') === '6')
   await page.goto('/?minPrice=0.390000000000000001&maxPrice=0.390000000000000002&sort=price-asc')
   expect(new URL((await responsePromise).url()).searchParams.get('minPrice')).toBe('0.390000000000000001')
   await loaded(page)
@@ -133,6 +135,7 @@ test('refresh e histórico restauram os filtros da URL', async ({ page }) => {
   const panel = await filters(page)
   await expect(panel.getByLabel('Coleção', { exact: true })).toHaveValue('nomads')
   await expect(panel.getByLabel('Rede', { exact: true })).toHaveValue('polygon')
+  if(!await page.locator('.desktop-filters').isVisible()) await filters(page)
   await page.getByLabel('Ordenar por', { exact: true }).selectOption('price-desc')
   await loaded(page, 2)
   expect(new URL(page.url()).searchParams.get('page')).toBe('1')
@@ -187,6 +190,7 @@ test('atualização em segundo plano mantém conteúdo e anuncia progresso', asy
   await loaded(page)
   const original = await page.locator('.nft-card h3').allTextContents()
   await reset(page, { name: 'slow', latencyMs: 1100 })
+  if(!await page.locator('.desktop-filters').isVisible()) await filters(page)
   await page.getByRole('button', { name: 'Atualizar catálogo' }).click()
   await expect(page.getByText('Atualizando catálogo…', { exact: true })).toBeVisible()
   await expect(page.locator('.nft-card h3')).toHaveText(original)

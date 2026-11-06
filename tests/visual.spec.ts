@@ -15,7 +15,7 @@ for (const screen of ['home', 'detail', 'cart', 'checkout'] as const) {
     await page.goto({ home: '/', detail: '/nfts/nft-002', cart: '/carrinho', checkout: '/checkout' }[screen])
     await expect(page.getByTestId('realtime-status')).toHaveAttribute('data-transport', 'websocket')
     if (screen === 'home') await expect(page.locator('.nft-card')).toHaveCount(6)
-    if (screen === 'detail') await expect(page.getByRole('button', { name: 'Adicionar ao carrinho', exact: true })).toBeEnabled()
+    if (screen === 'detail') await expect(page.getByRole('button', { name: 'Comprar', exact: true })).toBeEnabled()
     if (screen === 'cart') await expect(page.getByTestId('total')).toHaveText('0.306 ETH')
     if (screen === 'checkout') await expect(page.getByLabel('Nome de exibição', { exact: true })).toHaveValue('Alice')
     await page.evaluate(() => document.fonts.ready)
@@ -29,4 +29,17 @@ for (const screen of ['home', 'detail', 'cart', 'checkout'] as const) {
     }
     await expect(page).toHaveScreenshot(`${screen}.png`, { fullPage: true })
   })
+}
+
+// Additional supplied frames, stable API data and real controls (no screenshot UI).
+for (const screen of ['login','register','profile','wallets'] as const) {
+ test(`baseline ${screen}`,async({page})=>{
+  if(screen==='profile'||screen==='wallets') await login(page,'alice',screen==='profile'?'/perfil':'/carteiras')
+  else await page.goto(screen==='login'?'/login':'/cadastro')
+  await expect(page.locator('h1,h2').filter({hasText:screen==='profile'?'Perfil do colecionador':screen==='wallets'?'Carteiras':screen==='login'?'Entrar':/Criar conta|Criar perfil de colecionador/}).first()).toBeVisible()
+  await expect(page.locator('[aria-busy="true"]')).toHaveCount(0)
+  if((screen==='login'||screen==='register')&&(page.viewportSize()?.width??0)>=1024) await expect(page.locator('.auth-backdrop .nft-card')).toHaveCount(9)
+  await page.evaluate(async()=>{await document.fonts.ready;await Promise.all([...document.images].filter(image=>image.getBoundingClientRect().width>0 && image.loading!=='lazy').map(image=>image.decode()))})
+  await expect(page).toHaveScreenshot(`${screen}.png`,{fullPage:true})
+ })
 }

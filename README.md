@@ -1,5 +1,7 @@
 # Kurio — Jungle Gaming NFT Marketplace
 
+> Revisão desktop/mobile com exports originais: [entrega, capturas e resultados](docs/RESPONSIVE_FIDELITY.md). As imagens enviadas estão compartilhadas nas páginas internas; a versão desta branch requer revisão e novo deploy antes de ser considerada publicada.
+
 Etapas1–5 integradas à main pelo PR6, commit `ad6dfbc`. Aplicação publicada: https://nft-marketplace-jg-psi.vercel.app/. A validação HTTPS anterior (32/32desktop/mobile, compra/Socket.IO) e a associação do SHA estão no [PR7](https://github.com/AlanGodoii/nft-marketplace-jg/pull/7), já integrado à main pelo commit1b2edee e incorporado nesta branch.
 
 **Prioridade atual: fidelidade da Home desktop**, branch `feat/fidelidade-home-desktop`. Quatro artes originais fornecidas pelo proprietário foram integradas; mobile e fluxos preservados. Esta revisão visual ainda não está publicada: publicar Preview/revisar o PR antes de atualizar produção. Veja [DESKTOP_HOME_FIDELITY.md](docs/DESKTOP_HOME_FIDELITY.md).
@@ -155,3 +157,8 @@ Suíte própria com32casos, contextos isolados e TLS ativo. Setup PowerShell, am
 
 
 Navegação superior da Home: **Mercado** rola ao catálogo, **Criadores** ao bloco informativo no rodapé e **Aprenda** ao Diário da Cunhagem. Não são páginas adicionais. O destaque laranja acompanha a seção selecionada, preservando os filtros. Perfil/carteiras/favoritos/pedidos ficam no menu do nome do usuário. Detalhes e testes: [HEADER_NAVIGATION.md](docs/HEADER_NAVIGATION.md).
+
+
+### Revisão visual desktop e mobile
+
+A composição dos exports originais agora inclui páginas internas e mobile, com imagens compartilhadas em catálogo, detalhe, favoritos, carrinho, checkout e recibo. Consulte [escopo, referências, diferenças e validação](docs/RESPONSIVE_FIDELITY.md). Credenciais/API/regras de compra permanecem as documentadas; botões Google/Facebook e recuperação informam indisponibilidade. A versão só estará em produção após revisão/integração e deploy do SHA correspondente.

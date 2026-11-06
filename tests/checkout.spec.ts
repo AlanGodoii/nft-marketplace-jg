@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { add, apiQuote, configure, login, request, reset, review } from './helpers/market'
+import { add, apiQuote, configure, login, request, reset, review, openCollector, openCheckoutItems } from './helpers/market'
 test.beforeEach(async ({ page }) => reset(page))
 
 test('A: cadastra carteira secundária, valida endereço e persiste edição', async ({ page }) => {
@@ -32,8 +32,9 @@ test('A: carteiras isoladas e API retorna 400,401,404,409', async ({ page }) => 
   expect((await request(page, '/api/wallets', 'POST', {})).status).toBe(400)
   const { id: _id, version: _version, ...input } = wallet
   expect((await request(page, '/api/wallets', 'POST', input)).status).toBe(409)
+  if (!await page.getByRole('button', { name: 'Sair', exact: true }).isVisible()) await page.getByRole('button', { name: 'Abrir menu' }).click()
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
   await login(page, 'bob')
   await expect(page.getByText(`0x${'2'.repeat(40)}`, { exact: true })).toBeVisible()
   await expect(page.getByText(wallet.address, { exact: true })).toHaveCount(0)
@@ -56,12 +57,13 @@ test('A: falha de carteira500 tem recuperação e conexão simulada pode recusar
 
 test('B: visitante retorna ao checkout, conecta carteira e revisa cotação com cupom', async ({ page }) => {
   await page.goto('/checkout')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   expect(new URL(page.url()).searchParams.get('redirect')).toBe('/checkout')
   await login(page, 'alice', '/checkout')
   await expect(page.getByText('Seu carrinho está vazio.', { exact: true })).toBeVisible()
   expect((await request(page, '/api/cart/items', 'POST', { nftId: 'nft-002', editionId: 'edition-002', quantity: 2 })).status).toBe(200)
   await page.reload()
+  await openCheckoutItems(page)
   await page.getByLabel('Cupom', { exact: true }).fill('KURIO10')
   await page.getByRole('button', { name: 'Aplicar cupom', exact: true }).click()
   await expect(page.getByText('KURIO10', { exact: false })).toBeVisible()
@@ -88,9 +90,11 @@ test('B: valida campos do colecionador, rede compatível, recusa e desconexão',
   await expect(page.getByText('Conexão recusada. Tente novamente.')).toBeVisible()
   await configure(page, { name: 'normal', latencyMs: 10 })
   await page.getByRole('button', { name: 'Conectar carteira', exact: true }).click()
+  await openCollector(page)
   await page.getByLabel('Nome de exibição', { exact: true }).fill('')
   await page.getByRole('button', { name: 'Revalidar e revisar compra' }).click()
   await expect(page.getByText('Informe o nome de exibição.')).toBeVisible()
+  await openCollector(page)
   await page.getByLabel('Nome de exibição', { exact: true }).fill('Alice')
   await page.getByLabel('Rede de pagamento').selectOption('polygon')
   await expect(page.getByRole('button', { name: 'Revalidar e revisar compra' })).toBeDisabled()
@@ -137,11 +141,11 @@ test('B: edição esgotada e falha de cotação preservam itens e permitem recup
 test('C: compra completa do catálogo ao recibo confirmado pela API', async ({ page }) => {
   await page.goto('/?search=Sage%20Nomad%20%23002')
   await page.locator('a.nft-card-link').click()
-  await page.getByRole('button', { name: 'Adicionar ao carrinho', exact: true }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByText('NFT adicionado ao carrinho.', { exact: false })).toBeVisible()
   await page.goto('/carrinho')
-  await page.getByRole('link', { name: 'Revisar no checkout' }).click()
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await page.getByRole('link', { name: 'Conectar e finalizar' }).click()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
   await page.getByLabel('Senha', { exact: true }).fill('Kurio123!')
   await page.getByRole('button', { name: 'Entrar', exact: true }).click()
@@ -237,6 +241,7 @@ test('C: confirmação remove somente quantidades compradas, preserva extras e n
   await request(page, '/api/cart/items', 'POST', { nftId: 'nft-003', editionId: 'edition-003', quantity: 1 })
   await configure(page, { name: 'normal', latencyMs: 10, orderOutcome: 'pending' })
   await page.goto('/checkout')
+  await openCheckoutItems(page)
   await page.getByRole('checkbox', { name: 'Comprar Neon Vessel #003', exact: true }).uncheck()
   await page.getByLabel('Quantidade a comprar de Sage Nomad #002', { exact: true }).fill('1')
   await page.getByRole('button', { name: 'Conectar carteira', exact: true }).click()
@@ -269,8 +274,9 @@ test('C: backend bloqueia cotação alterada ou expirada e pedido privado de out
   const second = await apiQuote(page)
   const created = await request(page, '/api/orders', 'POST', second.input, { 'Idempotency-Key': 'private-order-alice' })
   expect(created.status).toBe(201)
+  if (!await page.getByRole('button', { name: 'Sair', exact: true }).isVisible()) await page.getByRole('button', { name: 'Abrir menu' }).click()
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
   await login(page, 'bob')
   expect((await request(page, `/api/orders/${created.body.id}`, 'GET')).status).toBe(404)
   expect((await request(page, `/api/__mock/orders/${created.body.id}/settle`, 'POST', { status: 'confirmed' })).status).toBe(404)
@@ -280,6 +286,7 @@ test('C: backend bloqueia cotação alterada ou expirada e pedido privado de out
 test('E: expiração no checkout preserva formulário, seleção e retorno após autenticação', async ({ page }) => {
   await login(page); await add(page)
   await page.goto('/checkout')
+  await openCollector(page)
   await page.getByLabel('Nome de exibição', { exact: true }).fill('Alice pagamento')
   await page.getByLabel('Observação do colecionador (opcional)').fill('Preservar contexto da revisão')
   await page.getByRole('button', { name: 'Conectar carteira', exact: true }).click()
@@ -290,7 +297,7 @@ test('E: expiração no checkout preserva formulário, seleção e retorno após
   await page.getByRole('button', { name: 'Revalidar e revisar compra' }).click()
   await started
   await request(page, '/api/__mock/session/expire', 'POST', {})
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   expect(new URL(page.url()).searchParams.get('redirect')).toBe('/checkout')
   await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
   await page.getByLabel('Senha', { exact: true }).fill('Kurio123!')
@@ -417,6 +424,7 @@ test('E: quantidades fracionárias e seleção vazia têm erros associados antes
   await login(page); await add(page)
   await page.goto('/checkout')
   await page.getByRole('button', { name: 'Conectar carteira', exact: true }).click()
+  await openCheckoutItems(page)
   const quantity = page.getByLabel('Quantidade a comprar de Sage Nomad #002', { exact: true })
   await quantity.fill('0.5')
   await expect(quantity).toHaveAttribute('aria-invalid', 'true')

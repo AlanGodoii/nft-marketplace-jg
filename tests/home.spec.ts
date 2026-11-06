@@ -8,7 +8,7 @@ for (const width of [390, 768, 1440]) {
     page.on('pageerror', error => errors.push(error.message))
     await page.setViewportSize({ width, height: 1000 })
     await page.goto(baseURL)
-    await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
     await expect(page.locator('.nft-grid .nft-card h3')).toHaveCount(6)
     await expect(page.getByLabel('Buscar NFTs')).toBeEnabled()
     await expect(page.getByRole('button', { name: 'Próxima página' })).toBeEnabled()
@@ -24,7 +24,7 @@ for (const width of [390, 768, 1440]) {
       expect(await page.locator('.desktop-filters').evaluate(node => node.getBoundingClientRect().width)).toBe(310)
       expect(await page.locator('.catalog-toolbar').evaluate(node => node.getBoundingClientRect().width)).toBe(842)
     } else {
-      await page.getByText('Filtrar NFTs', { exact: true }).click()
+      await page.getByRole('button', { name: 'Abrir filtros' }).click()
       await expect(page.locator('.mobile-filters').getByLabel('Mínimo')).toBeVisible()
     }
     if (width === 390) {
@@ -32,10 +32,10 @@ for (const width of [390, 768, 1440]) {
       await page.keyboard.press('Enter')
       await expect(page.getByRole('navigation', { name: 'Navegação principal' })).toBeVisible()
       await page.getByRole('link', { name: 'Perfil', exact: true }).click()
-      await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
-      await expect(page.locator('.mobile-menu-toggle')).toHaveAttribute('aria-expanded', 'false')
+      await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
+      await expect(page.locator('.mobile-account-panel')).toHaveCount(0)
       await page.goBack()
-      await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+      await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
     }
     await page.screenshot({ path: testInfo.outputPath(`kurio-home-${width}.png`), fullPage: true })
     expect(errors).toEqual([])
@@ -51,7 +51,7 @@ test('preserva as outras oito rotas e a página não encontrada', async ({ page 
   const routes = [
     ['/nfts/exemplo', 'NFT não encontrado'], ['/carrinho', 'Carrinho'],
     ['/checkout', 'Checkout'], ['/pedido/confirmacao', 'Confirmação do pedido'],
-    ['/login', 'Login'], ['/cadastro', 'Cadastro'], ['/perfil', 'Perfil'],
+    ['/login', 'Entrar'], ['/cadastro', /Criar conta|Criar perfil de colecionador/], ['/perfil', 'Perfil do colecionador'],
     ['/carteiras', 'Carteiras'], ['/nao-existe', 'Página não encontrada'],
   ]
   for (const [path, title] of routes) {
@@ -64,7 +64,7 @@ for (const status of ['loading', 'success', 'empty', 'error'] as const) {
   test(`catálogo: estado ${status}`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 1000 })
     await page.goto(baseURL)
-    await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
     await page.evaluate(async variant => {
       const fixturePath = '/tests/fixtures/catalog-preview.tsx'
       const { mountCatalogPreview } = await import(/* @vite-ignore */ fixturePath)
