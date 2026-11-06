@@ -59,7 +59,7 @@ function Detail({ nft }: { nft: Nft }) {
           <select id="nft-edition" className="kurio-select w-full" value={edition.id} onChange={event => changeEdition(event.target.value)}>
             {nft.editions.map(edition => <option key={edition.id} value={edition.id}>{edition.name}{edition.availability.remaining === 0 ? ' — esgotada' : ''}</option>)}
           </select>
-          <p role="status" className="text-sm">{available ? `${edition.availability.remaining} unidades disponíveis` : 'Edição esgotada ou indisponível'}</p>
+          <p role="status" className={`edition-availability text-sm ${available ? 'is-available' : ''}`}>{available ? `${edition.availability.remaining} unidades disponíveis` : 'Edição esgotada ou indisponível'}</p>
           <label htmlFor="nft-quantity" className="block">Quantidade</label>
           <div className="purchase-actions"><div className="quantity-stepper"><Button variant="ghost" type="button" aria-label="Diminuir quantidade" disabled={!available || busy || quantity <= 1} onClick={() => stepQuantity(-1)}><Minus aria-hidden="true" /></Button>
           <Input className="max-w-32" id="nft-quantity" type="number" min="1" max={edition.availability.remaining} step="1" {...form.register('quantity', { valueAsNumber: true })} disabled={!available || busy} aria-invalid={!!form.formState.errors.quantity} aria-describedby="nft-quantity-error" />

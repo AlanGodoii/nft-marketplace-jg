@@ -631,3 +631,14 @@ body:has(.receipt-dialog) .mobile-bottom-nav,body:has(.receipt-dialog) .mobile-p
  .catalog-toolbar > .catalog-heading { padding:0; margin:0; }
 }
 .social-options button { font-size:14px; }
+@media(max-width:1023px) {
+ .page-detail .mobile-page-bar { padding-bottom:6px; min-height:66px; background:#2b1b13; }
+ .detail-info { margin-top:-40px; }
+ .detail-thumbnails { position:absolute; left:24px; right:24px; bottom:48px; z-index:2; padding:0; height:30px; }
+ .detail-mobile-favorite { top:-42px; }
+ .gallery-zoom-icon { display:none; }
+ .detail-purchase-form select:not(:focus),.edition-availability.is-available { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); padding:0; }
+ .detail-metadata { display:flex; flex-wrap:wrap; gap:8px 16px; }
+ .detail-metadata > div { width:100%; margin:0; }
+ .detail-metadata > div:nth-last-child(-n+2) { width:auto; }
+}
