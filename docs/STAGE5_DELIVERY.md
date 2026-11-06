@@ -1,5 +1,7 @@
 # Etapa 5 — publicação, perfil e finalização
 
+> Atualização posterior à entrega: o usuário publicou a versão main ad6dfbc (PR6/head Etapa5 36bd750).32/32 testes reais na URL HTTPS passaram em06/11/2026; ver [PUBLISHED_VALIDATION.md](PUBLISHED_VALIDATION.md). Referências abaixo a URL não publicada são históricas. A performance/fidelidade pendentes não foram aprovadas por essa validação.
+
 Base: `origin/main` **eb156f5fd10f949539824e4818ccdaddc6dc855a**, já contendo PR5 e commits c52f872/e43d35d/9ca6d4c. Branch: `feat/etapa5-finalizacao`. Enunciado lido integralmente; matriz, plano, arquitetura e contratos E3/E4 consultados antes das alterações.
 
 ## Baseline

@@ -77,7 +77,7 @@ Detalhes REST/eventos/cenários em docs/STAGE4_CHECKOUT_SOCKET.md. Fixtures e ha
 
 Frames consultados: Pagamento desktop11:2862/mobile16:748, Confirmação11:4385 e Carteiras9:1670. Tokens/componentes/tipografia locais preservados; formulário em duas colunas e resumo lateral no desktop, superfícies empilhadas mobile. Estado de revisão/recibo em diálogo com foco inicial/retorno explícitos; erro associado aos campos, feedback acessível e redução de movimento também nos portais. Estados de conexão/cotação não desenhados seguem o padrão Kurio.
 
-Downloads dos assets originais seguem bloqueados403. Não há arte arbitrária, SVG redesenhado ou screenshot usado como asset. Slots dinâmicos identificam a ausência. Cabeçalho/rodapé anteriores foram mantidos, com correção de quebra em zoom. Perfil e baselines foram concluídos na etapa5; Lighthouse foi executado, com Performance84 no detalhe mobile ainda abaixo de90. Fidelidade integral/assets e deploy público continuam pendentes.
+Downloads dos assets originais seguem bloqueados403. Não há arte arbitrária, SVG redesenhado ou screenshot usado como asset. Slots dinâmicos identificam a ausência. Cabeçalho/rodapé anteriores foram mantidos, com correção de quebra em zoom. Perfil e baselines foram concluídos na etapa5; Lighthouse foi executado, com Performance84 no detalhe mobile ainda abaixo de90. Fidelidade integral/assets continuam pendentes. Publicação posteriormente validada, conforme docs/PUBLISHED_VALIDATION.md.
 
 Resultados reais, falhas intermediárias e inventário no checklist e docs/STAGE5_DELIVERY.md; resultados da etapa4 são históricos. Teste funcional aprovado não equivale a nota, baseline visual, Lighthouse ou deploy validado.
 
@@ -94,8 +94,15 @@ Perfil usa chave ['private',userId,'profile'], staleTime15s, cancelamento AbortS
 
 ## Publicação, visual e medições
 
-Vercel: vercel.json, npm run build:demo, dist, worker sem cache e fallback SPA. Netlify: public/_redirects. Flags explícitas em .env.production/.env.demo. URLs de aplicação são relativas à origem, não localhost; scripts de QA aceitam TEST_BASE_URL/LIGHTHOUSE_BASE_URL. Nenhuma URL pública foi fornecida/validada; instruções da branch ainda não integrada em docs/DEPLOYMENT.md.
+Vercel: vercel.json, npm run build:demo, dist, worker sem cache e fallback SPA. Netlify: public/_redirects. Flags explícitas em .env.production/.env.demo. URLs de aplicação são relativas à origem, não localhost; scripts de QA aceitam TEST_BASE_URL/LIGHTHOUSE_BASE_URL. A URL https://nft-marketplace-jg-psi.vercel.app foi posteriormente validada com32/32 testes reais, Source main ad6dfbc(PR6). Instruções e evidências em docs/DEPLOYMENT.md e docs/PUBLISHED_VALIDATION.md.
 
 Baselines: playwright.visual.config.ts,12PNGs das quatro telas em390/768/1440, dados/relógio/visitante estáveis, comparação sem máscaras e zero pixels diferentes. Axe verifica nove telas/recibo e teclado/foco/zoom/reduced-motion. Diferenças conhecidas dos nove frames e exports manuais em docs/VISUAL_REVIEW.md. Limite do Figma e assets403 impedem afirmar fidelidade visual integral.
 
 Lighthouse: lighthouse.config.mjs utiliza os perfis oficiais da versão instalada, com simulate e armazenamento resetado. scripts/lighthouse.mjs executa3medições ×2páginas ×2perfis sequencialmente, entrega HTML/JSON, medianas, LCP/CLS/TBT e condições. Relatórios finais em reports/lighthouse. Otimização medida mantém Engine.IO após worker.start, paraleliza React DOM, antecipa Query no loader e reserva geometria no skeleton. Não há mudanças exclusivas para ferramentas de pontuação; funcionalidades/mocks/transporte permanecem ativos. Assets ausentes limitam representatividade e exigirão nova medição após inclusão.
+
+
+## Verificação HTTPS pública
+
+playwright.published.config.ts e tests/published.spec.ts exercitam a URL real em duas larguras, independentemente da suíte local. Perfil Chrome exclusivo por teste, reset de cenário pela API MSW, verificação fromServiceWorker/handshake/ACK/reconciliaçãoREST e isolamento Alice/Bob. Não há caminho de dados fictícios alternativo no cliente. A configuração local ignora somente o novo arquivo público, preservando os206casos anteriores.
+
+O fixture publicado suporta opcionalmente a CA autorizada de um proxy corporativo no banco de certificados de um perfil descartável, com restrição DNS ao destino. Mantém TLS e não altera NSS/globalstore. O suporte foi necessário no executor, não no site Vercel. Registros/protocolo e condições em docs/PUBLISHED_VALIDATION.md. A aplicação em src não foi modificada por essa verificação.

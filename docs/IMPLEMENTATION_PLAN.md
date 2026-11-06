@@ -10,11 +10,11 @@ Base da auditoria inicial: `a99d26c769240a0e9f2e19cb53b09978a06b9917` de `origin
 
 Base main eb156f5 confirmada, PR5 integrado, branch feat/etapa5-finalizacao. Perfil/avatar/senha concluídos,12baselines estritas e auditoria axe das nove telas aprovadas; configuração/relatórios Lighthouse entregues. Tipos/lint/build/demo e instalação limpa aprovados. Regressão integral da etapa5 tem resultado real no fechamento da entrega; números anteriores não substituem esta execução.
 
-**Não há URL pública validada.** O usuário confirmou não possuir URL e pediu configuração/instruções Vercel para a branch não integrada; docs/DEPLOYMENT.md fornece fluxo Git/CLI sem merge. Não insistir no Figma MCP bloqueado pelo plano Starter. Exports manuais detalhados em docs/VISUAL_REVIEW.md, sem arte aleatória.
+**Atualização: URL pública validada**, https://nft-marketplace-jg-psi.vercel.app/, Source main ad6dfbc(PR6),32/32 casos HTTPS em06/11/2026. A informação anterior de URL ausente é histórica; docs/PUBLISHED_VALIDATION.md registra resultados e escopo. Não insistir no Figma MCP bloqueado pelo plano Starter. Exports manuais detalhados em docs/VISUAL_REVIEW.md, sem arte aleatória.
 
 | Prioridade | Próximo trabalho / dependência | Estimativa aproximada | Validação |
 |---|---|---|---|
-| P0 | Usuário publicar feat/etapa5-finalizacao na Vercel, sem proteção de acesso, enviar URL HTTPS/SHA; depois revalidar |15–30min publicação +30–60min validação |Rotas/refresh, compra até recibo, MSW/Socket.IO e reconexão na URL real. Não aprovar deploy por preview local. |
+| P0 operacional | Manter domínio/implantação públicos durante a avaliação; revalidar futuras revisões aprovadas |15–30min por revisão |Publicação ad6dfbc validada32/32 na URL real. Repetir npm run test:published após novo deploy; não inferir disponibilidade futura. |
 | P1 | Performance do detalhe mobile: mediana84<90; investigar custo inicial JS/MSW e cadeia de carregamento |2–4h |Lighthouse3execuções por cenário, mesmo perfil Slow4G/CPU4 e funcionalidades; comparar LCP/TBT sem esconder dados ou suprimir401 obrigatório. |
 | P1 | Receber exports originais e concluir comparação visual dos nove frames |3–6h + acesso externo |Mapa de assets, logo/hero/NFTs/galeria/ícones/avatares, cores/fontes/proporções; corrigir grid mobile/navegação conhecidos após conferência. Atualizar somente baselines intencionalmente alteradas. |
 | P1 | Auditoria humana complementar, zoom nativo e leitor de tela nas nove telas |1–2h |Foco/erros, reflow e navegação sem perda de conteúdo; axe/Lighthouse não cobrem tudo. |
@@ -207,4 +207,4 @@ Depois, conforme dependências: rotas e features de autenticação, detalhe, car
 Executar `npm run build`, `npm run lint`, verificação de tipos e os testes afetados; registrar resultados reais e limites. Demonstração manual deve observar a UI e respostas/operações da simulação. Testes REST devem passar pelos handlers MSW; tempo real pelo cliente Socket.IO; nunca validar apenas que uma página ou título existe. Ao finalizar, atualizar o checklist requisito a requisito, promovendo a VALIDADO somente o comportamento efetivamente comprovado.
 
 
-Fechamento Etapa5:206/206 dev16.4m,38/38 selecionados no build1.9m,12/12 visualestrito21.7s, tipos/lint/build/demo/instalaçãolimpa aprovados. Prioridades restantes permanecem as do plano corrente: URL pública, Performance mobile, assets/fidelidade e revisão humana.
+Fechamento Etapa5:206/206 dev16.4m,38/38 selecionados no build1.9m,12/12 visualestrito21.7s, tipos/lint/build/demo/instalaçãolimpa aprovados. Prioridades restantes: manter a URL pública validada ativa, Performance mobile, assets/fidelidade e revisão humana.
