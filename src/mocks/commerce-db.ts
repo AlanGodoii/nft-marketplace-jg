@@ -5,6 +5,7 @@ import { walletSchema, connectionSchema } from '@/contracts/wallet'
 import { orderSchema } from '@/contracts/order'
 import { checkoutQuoteSchema } from '@/contracts/checkout'
 import { seedWallets } from './wallet-seeds'
+import { profileSchema } from '@/contracts/profile'
 
 const storedCartSchema = z.object({
   version: z.number().int().nonnegative(), couponCode: z.string().nullable(), notices: z.array(z.string()),
@@ -13,6 +14,7 @@ const storedCartSchema = z.object({
 const stateSchema = z.object({
   version: z.literal(1),
   retiredGuests: z.array(z.string()).default([]),
+  profiles: z.record(z.string(), profileSchema).default({}),
   accounts: z.array(userSchema.extend({ salt: z.string(), passwordHash: z.string() })),
   sessions: z.array(z.object({ tokenHash: z.string(), userId: z.string(), expiresAt: z.number() })),
   orders: z.record(z.string(), orderSchema.extend({ settleAt: z.number().nullable(), outcome: z.enum(['confirmed', 'rejected']), purchasedLines: z.array(z.object({ id: z.string(), generation: z.string().optional(), quantity: z.number().int().positive() })) })).default({}),
@@ -25,7 +27,7 @@ const stateSchema = z.object({
 export type CommerceState = z.infer<typeof stateSchema>
 export type StoredCart = z.infer<typeof storedCartSchema>
 export const commerceStorageKey = 'kurio.mock.commerce.v1'
-const seed = (): CommerceState => ({ version: 1, retiredGuests: [], accounts: structuredClone(seededAccounts), sessions: [], favorites: {}, carts: {}, wallets: seedWallets(), connections: {}, quotes: {}, orders: {}, idempotency: {} })
+const seed = (): CommerceState => ({ version: 1, retiredGuests: [], profiles: {}, accounts: structuredClone(seededAccounts), sessions: [], favorites: {}, carts: {}, wallets: seedWallets(), connections: {}, quotes: {}, orders: {}, idempotency: {} })
 let memory = seed()
 function read(): CommerceState {
   try {
