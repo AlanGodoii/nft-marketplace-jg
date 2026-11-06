@@ -22,7 +22,8 @@ function CartLine({ item }: { item: Cart['items'][number] }) {
   const fieldId = `quantity-${item.nftId}-${item.editionId}`
   return <article className="cart-line" data-testid="cart-item">
     <div className="cart-art"><NftImage nft={item.nft} /></div>
-    <div className="min-w-0 space-y-2"><Link to="/nfts/$nftId" params={{ nftId: item.nftId }} className="font-bold break-words">{item.nft.name}</Link><p className="text-xs text-muted-foreground">{item.edition.name} · {item.edition.price.amount} ETH</p><p className="cart-stock text-xs">Estoque: {item.edition.availability.remaining}</p></div>
+    <div className="min-w-0 space-y-2"><Link to="/nfts/$nftId" params={{ nftId: item.nftId }} className="font-bold break-words">{item.nft.name}</Link><p className="cart-edition text-xs text-muted-foreground">Edição: 1/{item.edition.supply}</p><p className="cart-token text-xs text-muted-foreground">ID do token: {item.nftId}</p><p className="cart-stock text-xs">Estoque: {item.edition.availability.remaining}</p></div>
+    <p className="cart-unit-price text-muted-foreground break-all">{item.edition.price.amount} ETH</p>
     <form className={`cart-quantity ${form.formState.isDirty ? 'quantity-dirty' : ''}`} noValidate onSubmit={form.handleSubmit(values => mutation.mutate({ type: 'update', id: item.id, quantity: values.quantity }))}>
       <label htmlFor={fieldId} className="text-xs">Quantidade</label>
       <div className="cart-quantity-stepper"><Button type="button" variant="ghost" aria-label={`Diminuir quantidade de ${item.nft.name}`} disabled={busy || item.quantity <= 1} onClick={()=>mutation.mutate({type:'update',id:item.id,quantity:item.quantity-1})}><Minus aria-hidden="true" /></Button><Input id={fieldId} type="number" min="1" max={item.edition.availability.remaining} step="1" {...form.register('quantity', { valueAsNumber: true })} aria-invalid={!!form.formState.errors.quantity} aria-describedby={`${fieldId}-error`} disabled={busy} /><Button type="button" variant="ghost" aria-label={`Aumentar quantidade de ${item.nft.name}`} disabled={busy || item.quantity >= item.edition.availability.remaining} onClick={()=>mutation.mutate({type:'update',id:item.id,quantity:item.quantity+1})}><Plus aria-hidden="true" /></Button></div>
@@ -41,7 +42,7 @@ function CartSummary({ cart }: { cart: Cart }) {
   const form = useForm<{ code: string }>({ resolver: zodResolver(couponSchema), defaultValues: { code: '' } })
   const totals = quote.snapshotCurrent && quote.data?.cartVersion === cart.version ? quote.data : undefined
   return <aside className="cart-summary space-y-6" aria-labelledby="summary-title">
-    <h2 id="summary-title" className="text-xl font-bold">Resumo do carrinho</h2>
+    <h2 id="summary-title" className="text-xl font-bold">Resumo da carteira</h2>
     <form noValidate className="space-y-3" onSubmit={form.handleSubmit(async values => {
       try { await mutation.mutateAsync({ type: 'coupon', code: values.code }); form.reset() }
       catch (error) { if (error instanceof ApiRequestError) form.setError('code', { message: error.fields?.code?.[0] ?? error.message }) }
@@ -59,9 +60,8 @@ function CartSummary({ cart }: { cart: Cart }) {
         <div><dt>Taxa de rede</dt><dd data-testid="network-fee">{totals.networkFee} ETH</dd></div>
         <div className="border-t pt-4 font-bold text-primary"><dt>Total</dt><dd data-testid="total">{totals.total} ETH</dd></div>
       </dl>
-      <p className="text-xs break-all text-muted-foreground">Referência: {totals.reference}</p>
-      <p className="text-xs text-muted-foreground">Cotação estimada. Preço, estoque e taxas serão revalidados no checkout.</p>
-      <Link to="/checkout" className={buttonVariants({ className: 'w-full', variant: 'outline' })}>Conectar e finalizar</Link>
+      <details className="quote-explanation"><summary>Taxa estimada</summary><p>Referência: {totals.reference}</p><p>Preço, estoque e taxas serão revalidados no checkout.</p></details>
+      <Link to="/checkout" className={buttonVariants({ className: 'w-full', variant: 'outline' })}>Conectar e finalizar</Link><Link to="/" className="cart-continue">Continuar explorando</Link>
 
     </>}
     {quote.isFetching && totals && <p role="status">Atualizando cotação…</p>}
@@ -70,11 +70,10 @@ function CartSummary({ cart }: { cart: Cart }) {
 export function CartPage() {
   const query = useCart()
   const desktop = useDesktop()
-  return <section className="cart-page space-y-8"><h1 className="text-3xl font-bold">Carrinho</h1>
+  return <section className="cart-page space-y-8"><h1 className="text-3xl font-bold">Carrinho</h1><nav className="commerce-breadcrumb" aria-label="Localização"><Link to="/">Início</Link> / <Link to="/" hash="catalogo">Mercado</Link> / Carrinho</nav>
     {query.isPending ? <LoadingState label="Carregando carrinho" /> : query.isError ? <ErrorState message={apiErrorMessage(query.error)} retry={() => void query.refetch()} /> : <>
       {query.data.notices.map((notice, index) => <p role="status" key={index}>{notice}</p>)}
-      <div className="cart-layout"><div className="min-w-0 space-y-4"><div className="cart-table-header" aria-hidden="true"><span>NFTs</span><span>Edições</span><span>Total</span></div>{query.data.items.length ? query.data.items.map(item => <CartLine item={item} key={`${item.id}:${item.quantity}:${item.edition.availability.remaining}`} />) : <p role="status">Seu carrinho está vazio.</p>}
-        <Link to="/" className="inline-block pt-6 text-primary">Continuar explorando</Link>
+      <div className="cart-layout"><div className="min-w-0 space-y-4"><div className="cart-table-header" aria-hidden="true"><span>NFTs</span><span>Preço</span><span>Edições</span><span>Total</span></div>{query.data.items.length ? query.data.items.map(item => <CartLine item={item} key={`${item.id}:${item.quantity}:${item.edition.availability.remaining}`} />) : <p role="status">Seu carrinho está vazio.</p>}
         {query.isFetching && <p role="status">Atualizando carrinho…</p>}
       </div><CartSummary cart={query.data} /></div>
     </>}

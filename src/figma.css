@@ -592,3 +592,33 @@ body:has(.receipt-dialog) .mobile-bottom-nav,body:has(.receipt-dialog) .mobile-p
  .payment-wallet-options strong { line-height:20px; }
  .payment-provider-options > button { padding:12px; min-height:64px; line-height:20px; }
 }
+.quote-explanation { font-size:10px; color:var(--muted-foreground); text-align:right; margin-top:8px; overflow-wrap:anywhere; }
+.quote-explanation summary { cursor:pointer; color:var(--primary); }
+.quote-explanation p { margin-top:8px; text-align:left; }
+.cart-unit-price { display:none; }
+.cart-token { display:none; }
+.cart-quantity > label,.cart-stock { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+.cart-quantity:not(.quantity-dirty) > button[type="submit"] { display:none; }
+.cart-quantity > .field-error:empty { display:none; }
+@media(min-width:1024px) {
+ .cart-page { display:grid; gap:8px; }
+ .cart-page > * { margin:0; }
+ .cart-page > h1,.page-checkout main > section > h1 { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .commerce-breadcrumb { font-size:14px; line-height:20px; }
+ .cart-layout > div:first-child { display:flex; flex-direction:column; gap:12px; }
+ .cart-layout > div:first-child > * { margin:0; }
+ .cart-line { grid-template-columns:70px minmax(0,1fr) 122px 120px 197px; padding:0; min-height:70px; }
+ .cart-table-header { grid-template-columns:minmax(0,1fr) 122px 120px 197px; gap:16px; padding-bottom:8px; }
+ .cart-unit-price { display:block; font-size:14px; }
+ .cart-token { display:block; }
+ .cart-edition { display:none; }
+ .cart-summary h2 { line-height:24px; padding-bottom:8px; }
+ .cart-summary form > * { margin:0; }
+ .cart-summary label { margin-bottom:0; line-height:20px; }
+ .cart-summary > a.cart-continue { background:transparent; color:var(--primary); height:auto; min-height:0; font-size:12px; margin-top:12px; }
+ .page-checkout main > section { display:grid; gap:16px; }
+ .page-checkout main > section > * { margin:0; }
+ .page-checkout main > section > a[href="/carrinho"] { display:none; }
+}
+@media(min-width:1024px) and (max-width:1200px) { .cart-line { grid-template-columns:60px minmax(0,1fr) 85px 96px 120px; } .cart-table-header { grid-template-columns:minmax(0,1fr) 85px 96px 120px; } }
+@media(max-width:1023px) { .commerce-breadcrumb,.cart-summary > a.cart-continue { display:none; } }

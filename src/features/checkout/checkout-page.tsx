@@ -1,7 +1,7 @@
 import { useDesktop } from '@/lib/use-desktop'
 import { Circle, CircleDot, Wallet as WalletIcon } from 'lucide-react'
 import { NftImage } from '@/components/nft-image'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link, useRouter } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -37,7 +37,7 @@ function PreviousAttempt({ attempt, clear, recover, pending }: { attempt: Purcha
   const previous = useOrder(attempt.orderId)
   return <section className="commerce-panel space-y-4"><h2 className="font-bold">Tentativa anterior</h2><p>Consulte a mesma tentativa para recuperar seu pedido, inclusive após timeout ou refresh.</p><Button disabled={pending} onClick={recover}>Recuperar tentativa anterior</Button><Link to="/pedido/confirmacao" search={{ orderId: attempt.orderId }} className="text-primary">Ver meus pedidos</Link>{previous.data && previous.data.status !== 'pending' && <Button variant="outline" onClick={clear}>Começar outra compra</Button>}</section>
 }
-function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
+function CheckoutForm({ cart, wallet, walletPicker }: { cart: Cart; wallet: Wallet; walletPicker?: ReactNode }) {
   const desktop = useDesktop(); const [collectorExpanded,setCollectorExpanded] = useState(false)
   const estimate = useQuote(cart)
   const connection = useWalletConnection(); const quoteMutation = useCheckoutQuote(); const live = useRealtime()
@@ -115,7 +115,7 @@ function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
   return <div className="checkout-layout"><div className="space-y-6 min-w-0">
     {liveChanges.length > 0 && <p role="status" className="commerce-panel">Atualização ao vivo: {liveChanges.join(' ')} A cotação anterior foi invalidada. Revalide e confirme os valores atualizados.</p>}
     {attempt && <PreviousAttempt attempt={attempt} clear={() => saveAttempt(null)} recover={() => void sendAttempt(attempt)} pending={createOrder.isPending} />}
-    <section className="commerce-panel connection-panel space-y-4"><h2 className="text-xl font-bold">Carteira e rede</h2><p className="break-all">{wallet.label} · {wallet.provider} · {wallet.address}</p>
+    <section className="commerce-panel connection-panel space-y-4"><h2 className="text-xl font-bold">Carteira e rede</h2>{walletPicker}<p className="break-all">{wallet.label} · {wallet.provider} · {wallet.address}</p>
       <label htmlFor="checkout-network">Rede de pagamento</label><select id="checkout-network" className="commerce-select" value={network} onChange={event => { setNetwork(event.target.value as Wallet['network']); persistDraft({ network: event.target.value as Wallet['network'] }); setReview(null); setAccepted(false) }}><option value="ethereum">Ethereum</option><option value="polygon">Polygon</option><option value="solana">Solana</option></select>
       <div className="flex flex-wrap gap-3"><Button disabled={connection.isPending} onClick={() => { setReview(null); connection.mutate({ walletId: wallet.id, action: 'connect' }) }}>Conectar carteira</Button><Button variant="outline" disabled={connection.isPending} onClick={() => { setReview(null); setAccepted(false); connection.mutate({ walletId: wallet.id, action: 'disconnect' }) }}>Desconectar carteira</Button></div>
       <p role="status">{connection.isPending ? 'Conectando…' : connected ? 'Carteira conectada (simulação).' : connection.data?.status === 'refused' ? 'Conexão recusada. Tente novamente.' : 'Carteira desconectada.'}</p>
@@ -162,15 +162,15 @@ export function CheckoutPage() {
   if (cart.isPending || wallets.isPending) return <LoadingState label="Carregando checkout" />
   if (cart.isError || wallets.isError) return <ErrorState message={apiErrorMessage(cart.error ?? wallets.error)} retry={() => { void cart.refetch(); void wallets.refetch() }} />
   const wallet = wallets.data.items.find(wallet => wallet.id === selected) ?? wallets.data.items[0]
-  return <section className="space-y-8"><h1 className="text-3xl font-bold">Checkout</h1><Link to="/carrinho" className="text-primary">Voltar ao carrinho</Link>
+  return <section className="space-y-8"><h1 className="text-3xl font-bold">Checkout</h1><nav className="commerce-breadcrumb" aria-label="Localização"><Link to="/">Início</Link> / <Link to="/" hash="catalogo">Mercado</Link> / Pagamento</nav><Link to="/carrinho" className="text-primary">Voltar ao carrinho</Link>
     {!cart.data.items.length ? <><p role="status">Seu carrinho está vazio.</p><EmptyCheckoutRecovery /></> : !wallet ? <p role="status">Cadastre uma carteira para continuar. <Link to="/carteiras" className="text-primary">Gerenciar carteiras</Link></p> : <>
       {!desktop && <section className="mobile-payment-picker" aria-label="Seleção de carteira"><div className="payment-picker-title"><h2>Carteira cadastrada</h2><Link to="/carteiras">Trocar carteira</Link></div>
         <div className="payment-wallet-options">{wallets.data.items.map(option=><button type="button" key={option.id} aria-pressed={wallet.id === option.id} onClick={()=>setSelected(option.id)}>{wallet.id === option.id ? <CircleDot aria-hidden="true" /> : <Circle aria-hidden="true" />}<span><strong>{option.label}</strong><span>{option.collector.ensName || option.address}</span><span>Rede {option.network}</span></span></button>)}</div>
-        <h2>Carteira e rede</h2><div className="payment-provider-options">{(['walletconnect','metamask','coinbase'] as const).map(provider=><button key={provider} type="button" aria-pressed={wallet.provider === provider} disabled={saveWallet.isPending} onClick={()=>{const {id:_id,version:_version,...input}=wallet;saveWallet.mutate({id:wallet.id,input:{...input,provider}})}}><span className="provider-emblem"><WalletIcon aria-hidden="true" /></span>{{walletconnect:'WalletConnect',metamask:'MetaMask',coinbase:'Coinbase Wallet'}[provider]}{wallet.provider===provider?<CircleDot aria-hidden="true" />:<Circle aria-hidden="true" />}</button>)}</div>
+        <h2>Carteira e rede</h2><div className="payment-provider-options">{(['walletconnect','metamask','coinbase'] as const).map(provider=><button key={provider} type="button" aria-pressed={wallet.provider === provider} disabled={saveWallet.isPending} onClick={()=>{const {id:_id,version:_version,...input}=wallet;saveWallet.mutate({id:wallet.id,input:{...input,provider}})}}><span className="provider-emblem" aria-hidden="true">{provider === 'coinbase' ? <WalletIcon /> : provider === 'metamask' ? 'M' : 'W'}</span>{{walletconnect:'WalletConnect',metamask:'MetaMask',coinbase:'Coinbase Wallet'}[provider]}{wallet.provider===provider?<CircleDot aria-hidden="true" />:<Circle aria-hidden="true" />}</button>)}</div>
         {saveWallet.isError && <p role="alert">{apiErrorMessage(saveWallet.error)}</p>}
       </section>}
-      {desktop && <div className="checkout-wallet-select max-w-lg space-y-2"><label htmlFor="checkout-wallet">Carteira cadastrada</label><select id="checkout-wallet" className="commerce-select" value={wallet.id} onChange={event => setSelected(event.target.value)}>{wallets.data.items.map(wallet => <option value={wallet.id} key={wallet.id}>{wallet.label} · {wallet.network}</option>)}</select></div>}
-      <CheckoutForm wallet={wallet} cart={cart.data} key={`${wallet.id}:${wallet.version}`} />
+
+      <CheckoutForm wallet={wallet} cart={cart.data} walletPicker={desktop ? <div className="checkout-wallet-select max-w-lg space-y-2"><label htmlFor="checkout-wallet">Carteira cadastrada</label><select id="checkout-wallet" className="commerce-select" value={wallet.id} onChange={event => setSelected(event.target.value)}>{wallets.data.items.map(wallet => <option value={wallet.id} key={wallet.id}>{wallet.label} · {wallet.network}</option>)}</select></div> : undefined} key={`${wallet.id}:${wallet.version}`} />
     </>}
   </section>
 }
