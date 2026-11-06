@@ -7,7 +7,8 @@ import type { Nft } from '@/contracts/nft'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
-import { LoadingState, ErrorState } from '@/components/async-state'
+import { ErrorState } from '@/components/async-state'
+import { DetailSkeleton } from './detail-skeleton'
 import { ApiRequestError, apiErrorMessage } from '@/lib/api'
 import { useCartBusy, useCartMutation } from '@/features/cart/queries'
 import { useSession } from '@/features/auth/api'
@@ -65,7 +66,7 @@ function Detail({ nft }: { nft: Nft }) {
 export function NftDetailPage() {
   const { nftId } = useParams({ from: '/nfts/$nftId' })
   const query = useNft(nftId)
-  if (query.isPending) return <LoadingState label="Carregando detalhes do NFT" />
+  if (query.isPending) return <DetailSkeleton />
   if (query.isError) return query.error instanceof ApiRequestError && query.error.status === 404 ? <section className="space-y-6"><h1 className="text-3xl">NFT não encontrado</h1><Link to="/">Voltar ao catálogo</Link></section> : <ErrorState message={apiErrorMessage(query.error)} retry={() => void query.refetch()} />
   return <Detail nft={query.data} key={query.data.id} />
 }

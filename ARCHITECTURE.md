@@ -1,4 +1,4 @@
-# Arquitetura — Kurio, etapa 4
+# Arquitetura — Kurio, etapa 5
 
 ## Responsabilidades e inicialização
 
@@ -6,7 +6,7 @@ Router → TanStack Query → Axios → REST/MSW. Schemas Zod em src/contracts s
 
 A ativação dos mocks é aguardada antes de importar App. Isso também assegura que engine.io-client capture o construtor WebSocket já interceptado pelo MSW. Sem mocks, o mesmo cliente utiliza REST e Socket.IO da origem configurada, sem respostas alternativas nos componentes. A demonstração utiliza VITE_ENABLE_MOCKS=true, inclusive no build.
 
-As dez rotas da etapa3 permanecem: as nove originais e favoritos. Carteiras, checkout e confirmação agora são funcionais; somente perfil continua com conteúdo futuro protegido. orderId pertence aos parâmetros da URL de confirmação; ausência de ID consulta o histórico privado, sem inventar sucesso.
+As dez rotas permanecem: as nove originais e favoritos. Perfil, carteiras, checkout e confirmação são funcionais. orderId pertence aos parâmetros da URL de confirmação; ausência de ID consulta o histórico privado, sem inventar sucesso.
 
 ## Estado persistido e contratos
 
@@ -77,6 +77,25 @@ Detalhes REST/eventos/cenários em docs/STAGE4_CHECKOUT_SOCKET.md. Fixtures e ha
 
 Frames consultados: Pagamento desktop11:2862/mobile16:748, Confirmação11:4385 e Carteiras9:1670. Tokens/componentes/tipografia locais preservados; formulário em duas colunas e resumo lateral no desktop, superfícies empilhadas mobile. Estado de revisão/recibo em diálogo com foco inicial/retorno explícitos; erro associado aos campos, feedback acessível e redução de movimento também nos portais. Estados de conexão/cotação não desenhados seguem o padrão Kurio.
 
-Downloads dos assets originais seguem bloqueados403. Não há arte arbitrária, SVG redesenhado ou screenshot usado como asset. Slots dinâmicos identificam a ausência. Cabeçalho/rodapé anteriores foram mantidos; fidelidade integral/baselines ainda pendentes. Perfil completo, Lighthouse e deploy público não foram concluídos nesta etapa.
+Downloads dos assets originais seguem bloqueados403. Não há arte arbitrária, SVG redesenhado ou screenshot usado como asset. Slots dinâmicos identificam a ausência. Cabeçalho/rodapé anteriores foram mantidos, com correção de quebra em zoom. Perfil e baselines foram concluídos na etapa5; Lighthouse foi executado, com Performance84 no detalhe mobile ainda abaixo de90. Fidelidade integral/assets e deploy público continuam pendentes.
 
-Resultados reais, falhas intermediárias e inventário no checklist e documento da etapa4. Teste funcional aprovado não equivale a nota, baseline visual, Lighthouse ou deploy validado.
+Resultados reais, falhas intermediárias e inventário no checklist e docs/STAGE5_DELIVERY.md; resultados da etapa4 são históricos. Teste funcional aprovado não equivale a nota, baseline visual, Lighthouse ou deploy validado.
+
+
+## Perfil, avatar e senha — etapa 5
+
+GET/PATCH /api/profile usa proprietário da sessão, versão otimista e conflito409 para e-mail/username duplicado ou gravação obsoleta. Os campos name/email são atualizados atomicamente em conta e perfil; a consulta de sessão é invalidada após sucesso. Bio/website/username pertencem ao perfil. Dados do colecionador nas carteiras e snapshots de pedidos são registros próprios e não são reescritos retroativamente.
+
+PUT /api/profile/avatar aceita JSON {avatar,version}; avatar é null(remover) ou dataURL PNG/JPEG/WebP. Limites:256KiB/4096×4096px. Schema limita o corpo, valida MIME/base64, assinatura binária e decodificação createImageBitmap; a sessão é conferida novamente após decodificar. SVG, arquivo vazio/corrompido, formato divergente, tamanho/dimensões excessivos são rejeitados400. Imagem do usuário é persistida somente no perfil da conta; o PNG2×2 em tests/fixtures é entrada de teste, não asset original do produto.
+
+POST /api/profile/password recebe {currentPassword,newPassword}; senha atual incorreta retorna400 com erro associado ao campo, sem fingir expiração. Nova senha exige8–128caracteres e deve diferir da atual. Confirmação adicional é validada no formulário. A API verifica hash atual, gera salt e PBKDF2 novos, confere corrida concorrente e revoga todas as sessões/conexões da conta;204 somente após persistir. O cliente limpa caches/Manager via adoptSession e volta ao login com retorno/perfil. Nenhuma senha é colocada em storage ou query keys.
+
+Perfil usa chave ['private',userId,'profile'], staleTime15s, cancelamento AbortSignal para consultas, mutations sem retry e callbacks protegidos por identityEpoch. Falhas conservam formulário/estado anterior; não há otimismo para senha/avatar. Cenários profile.read/update/avatar/password reutilizam faults/latência/rede/401/500 e reset do banco existente. profiles possui default aditivo, preservando dados E3/E4.
+
+## Publicação, visual e medições
+
+Vercel: vercel.json, npm run build:demo, dist, worker sem cache e fallback SPA. Netlify: public/_redirects. Flags explícitas em .env.production/.env.demo. URLs de aplicação são relativas à origem, não localhost; scripts de QA aceitam TEST_BASE_URL/LIGHTHOUSE_BASE_URL. Nenhuma URL pública foi fornecida/validada; instruções da branch ainda não integrada em docs/DEPLOYMENT.md.
+
+Baselines: playwright.visual.config.ts,12PNGs das quatro telas em390/768/1440, dados/relógio/visitante estáveis, comparação sem máscaras e zero pixels diferentes. Axe verifica nove telas/recibo e teclado/foco/zoom/reduced-motion. Diferenças conhecidas dos nove frames e exports manuais em docs/VISUAL_REVIEW.md. Limite do Figma e assets403 impedem afirmar fidelidade visual integral.
+
+Lighthouse: lighthouse.config.mjs utiliza os perfis oficiais da versão instalada, com simulate e armazenamento resetado. scripts/lighthouse.mjs executa3medições ×2páginas ×2perfis sequencialmente, entrega HTML/JSON, medianas, LCP/CLS/TBT e condições. Relatórios finais em reports/lighthouse. Otimização medida mantém Engine.IO após worker.start, paraleliza React DOM, antecipa Query no loader e reserva geometria no skeleton. Não há mudanças exclusivas para ferramentas de pontuação; funcionalidades/mocks/transporte permanecem ativos. Assets ausentes limitam representatividade e exigirão nova medição após inclusão.
