@@ -25,6 +25,10 @@ for (const [name, path] of [['home', '/'], ['detail', '/nfts/nft-002']]) {
       if (code !== 0) throw new Error(`Lighthouse ${name}/${profile}/${run}: código ${code}`)
       const lhr = JSON.parse(await readFile(`${prefix}.report.json`, 'utf8'))
       if (lhr.runtimeError) throw new Error(JSON.stringify(lhr.runtimeError))
+      // Normalize whitespace-only lines in generated markup, retaining all
+      // embedded report data and the original JSON results unchanged.
+      const htmlPath = `${prefix}.report.html`
+      await writeFile(htmlPath, (await readFile(htmlPath, 'utf8')).replace(/^[\t ]+$/gm, ''))
       const sample = { page: name, profile, run, url: lhr.finalDisplayedUrl ?? lhr.finalUrl,
         lighthouseVersion: lhr.lighthouseVersion, userAgent: lhr.userAgent,
         categories: Object.fromEntries(Object.entries(lhr.categories).map(([key, value]) => [key, Math.round(value.score * 100)])),

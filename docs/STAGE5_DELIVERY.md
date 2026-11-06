@@ -151,3 +151,5 @@ Arquivos de código/configuração/documentação (artefatos de auditoria e PNGs
 - `tsconfig.e2e.json`
 - `vercel.json`
 - `vite.config.ts`
+
+Revisão final dos artefatos: normalizadas somente linhas vazias com espaços nos12HTMLs gerados. JSONs/medianas/métricas permaneceram byte a byte idênticos, conferidos por SHA-256. Runner aplica a mesma normalização de markup nas próximas execuções. git diff --check da diferença completa com a main passou após correção, sem suprimir verificações.
