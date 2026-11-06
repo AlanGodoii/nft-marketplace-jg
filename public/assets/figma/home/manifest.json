@@ -1,0 +1,66 @@
+[
+  {
+    "file": "emerald-ape.webp",
+    "source": "junglegaming/home/Frame 137.png",
+    "sourceSha256": "abc12d882ccf70e9ee0c26378dc2a0aca9c2249c4fcfa8211cb1b7f9fc6c09bf",
+    "crop": [
+      710,
+      0,
+      1160,
+      450
+    ],
+    "dimensions": [
+      450,
+      450
+    ],
+    "bytes": 40174
+  },
+  {
+    "file": "sage-nomad.webp",
+    "source": "junglegaming/home/Products.png",
+    "sourceSha256": "210b167f538f24f167144da3c3bdd612110f48924b24484b2afe9305dfa01d17",
+    "crop": [
+      654,
+      75,
+      904,
+      325
+    ],
+    "dimensions": [
+      250,
+      250
+    ],
+    "bytes": 14840
+  },
+  {
+    "file": "neon-vessel.webp",
+    "source": "junglegaming/home/Products.png",
+    "sourceSha256": "210b167f538f24f167144da3c3bdd612110f48924b24484b2afe9305dfa01d17",
+    "crop": [
+      946,
+      75,
+      1196,
+      325
+    ],
+    "dimensions": [
+      250,
+      250
+    ],
+    "bytes": 13632
+  },
+  {
+    "file": "golden-beat.webp",
+    "source": "junglegaming/home/Products.png",
+    "sourceSha256": "210b167f538f24f167144da3c3bdd612110f48924b24484b2afe9305dfa01d17",
+    "crop": [
+      362,
+      920,
+      612,
+      1170
+    ],
+    "dimensions": [
+      250,
+      250
+    ],
+    "bytes": 16340
+  }
+]

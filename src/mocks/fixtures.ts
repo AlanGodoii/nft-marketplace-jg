@@ -32,3 +32,13 @@ export function createNftFixtures(): Nft[] {
     }
   })
 }
+
+// Original art cropped from the owner's Figma exports; presentation only.
+// These six existing series retain their IDs, names, stock and decimal prices.
+export function withDesktopArtwork(nft: Nft): Nft {
+  const asset = nft.name.startsWith('Emerald Ape') ? 'emerald-ape'
+    : /^(Sage Nomad|Cosmic Bloom|Violet Nomad)/.test(nft.name) ? 'sage-nomad'
+      : /^(Neon Vessel|Ivory Baron)/.test(nft.name) ? 'neon-vessel' : undefined
+  return asset && !nft.image.src && !nft.image.desktopSrc
+    ? { ...nft, image: { ...nft.image, desktopSrc: `/assets/figma/home/${asset}.webp` } } : nft
+}

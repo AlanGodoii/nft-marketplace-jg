@@ -30,6 +30,8 @@ async function list({ request }: { request: Request }) {
   }
   const term = q.search.trim().toLocaleLowerCase('pt-BR')
   let items = run.config.name === 'empty' ? [] : snapshot.nfts.filter(nft =>
+    (q.tab !== 'new' || nft.createdAt >= '2026-11-01T00:00:00.000Z') &&
+    (q.tab !== 'trending' || nft.availability.status === 'available') &&
     (!term || `${nft.name} ${nft.collection.name}`.toLocaleLowerCase('pt-BR').includes(term)) &&
     (!q.collection || nft.collection.id === q.collection) && (!q.network || nft.network.id === q.network) &&
     (!q.availableOnly || nft.availability.status === 'available') &&
@@ -42,7 +44,10 @@ async function list({ request }: { request: Request }) {
   const total = items.length
   items = items.slice((q.page - 1) * q.pageSize, q.page * q.pageSize)
   run.finish('200')
-  return HttpResponse.json<CatalogPage>({ items, total, page: q.page, pageSize: q.pageSize, pageCount: Math.ceil(total / q.pageSize), collections, networks })
+  return HttpResponse.json<CatalogPage>({ items, total, page: q.page, pageSize: q.pageSize, pageCount: Math.ceil(total / q.pageSize), collections, networks, facets: {
+    collections: Object.fromEntries(collections.map(option => [option.id, snapshot.nfts.filter(nft => nft.collection.id === option.id).length])),
+    networks: Object.fromEntries(networks.map(option => [option.id, snapshot.nfts.filter(nft => nft.network.id === option.id).length])),
+  } })
 }
 
 export const nftHandlers = [

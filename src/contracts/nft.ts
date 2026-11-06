@@ -13,7 +13,7 @@ export const editionSchema = z.object({
   price: z.object({ amount: ethSchema, currency: z.literal('ETH') }),
   availability: availabilitySchema,
 })
-export const imageSchema = z.object({ src: z.string().nullable(), alt: z.string() })
+export const imageSchema = z.object({ src: z.string().nullable(), alt: z.string(), desktopSrc: z.string().optional() })
 export const nftSchema = z.object({
   id: z.string(), name: z.string(), description: z.string(),
   collection: collectionSchema, network: networkSchema,
@@ -30,6 +30,7 @@ export const paginationSchema = z.object({
 })
 export const catalogPageSchema = paginationSchema.extend({
   items: z.array(nftSchema), collections: z.array(collectionSchema), networks: z.array(networkSchema),
+  facets: z.object({ collections: z.record(z.string(), z.number().int().nonnegative()), networks: z.record(z.string(), z.number().int().nonnegative()) }).optional(),
 })
 export const nftResponseSchema = z.object({ item: nftSchema })
 export type Eth = z.infer<typeof ethSchema>
