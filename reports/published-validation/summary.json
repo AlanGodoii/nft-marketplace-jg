@@ -1,0 +1,267 @@
+{
+  "url": "https://nft-marketplace-jg-psi.vercel.app/",
+  "deploymentCommit": "ad6dfbc1141fa27aa41b2ec69632d49aea8ddc8c",
+  "stage5Commit": "36bd750f6714152cff53989be33daf54004bfb4a",
+  "branch": "main",
+  "provenance": "Source da Vercel fornecido em duas capturas e SHA completo confirmado pelo proprietário; merge/ancestralidade/árvore corroborados no GitHub/Git. Sem endpoint público de SHA no runtime.",
+  "startedAt": "2026-11-06T04:45:04.446000+00:00",
+  "finishedAt": "2026-11-06T04:47:17.268955+00:00",
+  "startedAtSaoPaulo": "2026-11-06T01:45:04.446000-03:00",
+  "finishedAtSaoPaulo": "2026-11-06T01:47:17.268955-03:00",
+  "durationMs": 132822.955,
+  "stats": {
+    "total": 32,
+    "expected": 32,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "ok": true
+  },
+  "environment": {
+    "node": "24.22.1",
+    "chromium": "155.0.8059.79",
+    "viewports": [
+      {
+        "width": 1440,
+        "height": 1000
+      },
+      {
+        "width": 390,
+        "height": 844
+      }
+    ],
+    "workers": 2,
+    "httpsProxy": true,
+    "tlsVerificationEnabled": true,
+    "proxyTrust": "CA do proxy configurado, isolada no perfil descartável Chrome e limitada ao DNS da implantação; nenhum ignoreHTTPSErrors."
+  },
+  "htmlSha256Before": "4a9860f8ce0511ff71916ce3db8bc7825ddbb5fa3f5cc1ff86a0413e4733c083",
+  "htmlSha256After": "4a9860f8ce0511ff71916ce3db8bc7825ddbb5fa3f5cc1ff86a0413e4733c083",
+  "runnerErrors": [],
+  "tests": [
+    {
+      "name": "publicado: acesso direto e refresh /",
+      "project": "public-desktop",
+      "durationMs": 6597,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /nfts/nft-002",
+      "project": "public-desktop",
+      "durationMs": 6093,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /carrinho",
+      "project": "public-desktop",
+      "durationMs": 6747,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /login",
+      "project": "public-desktop",
+      "durationMs": 5915,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /cadastro",
+      "project": "public-desktop",
+      "durationMs": 7312,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /checkout",
+      "project": "public-desktop",
+      "durationMs": 7495,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /perfil",
+      "project": "public-desktop",
+      "durationMs": 7200,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /carteiras",
+      "project": "public-desktop",
+      "durationMs": 7031,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /pedido/confirmacao",
+      "project": "public-desktop",
+      "durationMs": 8140,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /favoritos",
+      "project": "public-desktop",
+      "durationMs": 7230,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: MSW controla APIs e cliente Socket.IO conecta na origem HTTPS",
+      "project": "public-desktop",
+      "durationMs": 4377,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: login inválido/válido, refresh da sessão e logout",
+      "project": "public-desktop",
+      "durationMs": 7202,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: catálogo → carrinho visitante → login → checkout → recibo confirmado",
+      "project": "public-desktop",
+      "durationMs": 14655,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: nft.updated invalida cotação e exige novo aceite",
+      "project": "public-desktop",
+      "durationMs": 10081,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: pedido confirma offline e reconexão recupera o mesmo pedido",
+      "project": "public-desktop",
+      "durationMs": 9896,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: Alice/Bob isolam dados privados, pedidos e eventos",
+      "project": "public-desktop",
+      "durationMs": 10505,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /",
+      "project": "public-mobile",
+      "durationMs": 7504,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /nfts/nft-002",
+      "project": "public-mobile",
+      "durationMs": 6650,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /carrinho",
+      "project": "public-mobile",
+      "durationMs": 6312,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /login",
+      "project": "public-mobile",
+      "durationMs": 6150,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /cadastro",
+      "project": "public-mobile",
+      "durationMs": 5432,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /checkout",
+      "project": "public-mobile",
+      "durationMs": 7435,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /perfil",
+      "project": "public-mobile",
+      "durationMs": 8492,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /carteiras",
+      "project": "public-mobile",
+      "durationMs": 10940,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /pedido/confirmacao",
+      "project": "public-mobile",
+      "durationMs": 9843,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: acesso direto e refresh /favoritos",
+      "project": "public-mobile",
+      "durationMs": 7179,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: MSW controla APIs e cliente Socket.IO conecta na origem HTTPS",
+      "project": "public-mobile",
+      "durationMs": 4324,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: login inválido/válido, refresh da sessão e logout",
+      "project": "public-mobile",
+      "durationMs": 7076,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: catálogo → carrinho visitante → login → checkout → recibo confirmado",
+      "project": "public-mobile",
+      "durationMs": 16922,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: nft.updated invalida cotação e exige novo aceite",
+      "project": "public-mobile",
+      "durationMs": 9077,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: pedido confirma offline e reconexão recupera o mesmo pedido",
+      "project": "public-mobile",
+      "durationMs": 10125,
+      "outcome": "expected",
+      "ok": true
+    },
+    {
+      "name": "publicado: Alice/Bob isolam dados privados, pedidos e eventos",
+      "project": "public-mobile",
+      "durationMs": 8569,
+      "outcome": "expected",
+      "ok": true
+    }
+  ]
+}

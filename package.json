@@ -13,7 +13,8 @@
     "build:demo": "tsc -b && vite build --mode demo",
     "test:visual": "playwright test --config=playwright.visual.config.ts",
     "test:a11y": "playwright test tests/accessibility.spec.ts",
-    "lighthouse": "node scripts/lighthouse.mjs"
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "test:published": "playwright test --config=playwright.published.config.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

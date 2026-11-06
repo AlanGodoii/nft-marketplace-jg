@@ -27,3 +27,6 @@ dist-ssr
 work/
 playwright-report/
 test-results/
+
+# Published validation evidence (contains only fixture data).
+!reports/published-validation/playwright.log
