@@ -86,8 +86,10 @@ test('D: pedido muda offline e reconexão reconcilia o mesmo pedido por REST', a
   await page.getByRole('button', { name: 'Finalizar compra', exact: true }).click()
   await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
   const id = new URL(page.url()).searchParams.get('orderId')!
+  const openedBefore = (await request(page, '/api/__mock/socket/stats', 'GET')).body.engineOpens
   await request(page, '/api/__mock/socket', 'POST', { action: 'disconnect' })
   await expect(page.getByTestId('realtime-status')).toContainText('Reconectando')
+  await expect.poll(async () => (await request(page, '/api/__mock/socket/stats', 'GET')).body.engineOpens).toBeGreaterThan(openedBefore)
   await request(page, `/api/__mock/orders/${id}/settle`, 'POST', { status: 'confirmed' })
   await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
   await expect(page.getByTestId('order-receipt')).toHaveCount(0)

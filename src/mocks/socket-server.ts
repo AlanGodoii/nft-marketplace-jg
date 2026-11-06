@@ -23,7 +23,6 @@ export const socketHandlers = [link.addEventListener('connection', ({ client }) 
   let heartbeat: ReturnType<typeof setInterval> | undefined
   const cleanup = () => { peer.closed = true; peer.ready = false; if (heartbeat) clearInterval(heartbeat); peers.delete(id) }
   client.addEventListener('close', cleanup)
-  if (paused) { peer.close(); return }
   engineOpens += 1
   client.send(`0${JSON.stringify({ sid: id, upgrades: [], pingInterval: 10000, pingTimeout: 20000, maxPayload: 1000000 })}`)
   let lastPong = Date.now()
@@ -36,6 +35,9 @@ export const socketHandlers = [link.addEventListener('connection', ({ client }) 
     if (data === '3') { lastPong = Date.now(); pongs += 1; return }
     if (data === '1' || data === '41') { peer.close(); return }
     if (data.startsWith('40')) {
+      // Close only after Engine.IO has opened the transport. Closing a mocked
+      // CONNECTING socket may strand the client's handshake until its timeout.
+      if (paused) { peer.close(); return }
       try {
         const auth: unknown = data.length > 2 ? JSON.parse(data.slice(2)) : {}
         const token = auth && typeof auth === 'object' && 'token' in auth && typeof auth.token === 'string' ? auth.token : undefined

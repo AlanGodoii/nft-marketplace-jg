@@ -1,5 +1,8 @@
 import { expect, type Page } from '@playwright/test'
 export async function request(page: Page, path: string, method = 'POST', data?: unknown, extra: Record<string, string> = {}) {
+  // App mounts only after worker.start resolves. A previous service-worker
+  // registration alone does not mean the new document has activated its mocks.
+  await page.getByTestId('realtime-status').waitFor({ state: 'attached' })
   return page.evaluate(async ({ path, method, data, extra }) => {
     const token = sessionStorage.getItem('kurio.auth.token')
     const response = await fetch(path, { method, headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: `Bearer ${token}` } : {}), 'X-Guest-ID': localStorage.getItem('kurio.guest.id') ?? '', ...extra }, ...(data === undefined ? {} : { body: JSON.stringify(data) }) })
