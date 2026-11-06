@@ -1,5 +1,7 @@
 # Plano de implementação — Jungle Gaming NFT Marketplace
 
+> Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
+
 Data: **05/11/2026**, America/Sao_Paulo. Prazo informado: **06/11/2026**, sem horário de corte conhecido.
 
 Base da auditoria inicial: `a99d26c769240a0e9f2e19cb53b09978a06b9917` de `origin/main`. Enunciado `docs/DESAFIO.md` lido integralmente. Evidências, comandos e 344 itens estão em `docs/REQUIREMENTS_CHECKLIST.md`. A auditoria inicial não modificou funcionalidades. O progresso atual da implementação está descrito abaixo.

@@ -1,5 +1,7 @@
 # Auditoria técnica — matriz de requisitos Jungle Gaming
 
+> Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
+
 Data: **05/11/2026**, America/Sao_Paulo. Prazo informado: **06/11/2026**, sem horário definido.
 
 ## Base da auditoria inicial e método (histórico)

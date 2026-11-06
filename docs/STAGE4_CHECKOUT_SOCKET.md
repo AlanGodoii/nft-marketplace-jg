@@ -1,5 +1,7 @@
 # Etapa 4 — checkout, pedidos, carteiras e Socket.IO
 
+> Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
+
 ## Base e dependência do PR
 
 Branch `feat/etapa4-checkout-pedidos-socket`, criada diretamente de `c52f87233b061714adecbf448e6007481e6a2a04` (etapa3). O commit foi confirmado no histórico com git merge-base. Main estava em2593a26 e PR3 ainda aberto: este trabalho depende do PR3, sem merge automático e sem alterações diretas na main.

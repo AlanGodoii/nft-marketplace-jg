@@ -1,5 +1,7 @@
 # Kurio — Jungle Gaming NFT Marketplace
 
+> Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](docs/STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
+
 React/TypeScript, TanStack Router/Query, Axios, Tailwindv4/shadcn/ui, RHF/Zod, MSW e Socket.IO. A etapa4 integra **carteiras, checkout, pedidos idempotentes e recibos com tempo real**, preservando catálogo36NFTs, autenticação, favoritos e carrinho das etapas anteriores.
 
 Enunciado: docs/DESAFIO.md. Evidências: docs/REQUIREMENTS_CHECKLIST.md. Plano: docs/IMPLEMENTATION_PLAN.md. Arquitetura: ARCHITECTURE.md. Contratos/cenários: docs/CATALOG_API.md, docs/STAGE3_API.md e **docs/STAGE4_CHECKOUT_SOCKET.md**. As seções das etapas anteriores são históricas quando contradizem o progresso atual.

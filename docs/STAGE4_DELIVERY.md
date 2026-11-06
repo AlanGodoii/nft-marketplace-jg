@@ -1,5 +1,7 @@
 # Entrega etapa 4 — inventário e evidências
 
+> Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
+
 Base confirmada: c52f87233b061714adecbf448e6007481e6a2a04 (etapa3). Branch: feat/etapa4-checkout-pedidos-socket. Checkpoints A/B/C/D em commits próprios; E fecha regressão, acessibilidade e documentação. PR depende do PR3 enquanto não integrado à main; nenhum merge automático.
 
 Carteiras, checkout/cotação privada, pedidos idempotentes, recibo histórico e Socket.IO via transporte WebSocket MSW3 implementados. Catálogo36NFTs e dez rotas anteriores preservados. Métodos/payloads, cenários, políticas e falhas intermediárias em [STAGE4_CHECKOUT_SOCKET.md](STAGE4_CHECKOUT_SOCKET.md). Critérios oficiais individuais no checklist; plano restante atualizado.
