@@ -110,3 +110,9 @@ A Home recebeu variante desktop a partir de1024px, preservando a renderização 
 Listagem inclui facets opcionais globais por coleção/rede; contagens reais,12por opção no reset. `tab=all|new|trending` compõe a mesma URL/query key e filtros: new desde01/11/2026, trending seleção demonstrativa disponível, não métrica inventada de vendas. Ambos respeitam sort/paginação/cancelamento existentes.36NFTs e página padrão6 preservados.
 
 Header consulta useCart/useSession existentes, usa links reais/âncoras e abre busca com foco/Escape. Destaque recebe NFT disponível da resposta API. Editorial, suporte e newsletter informam limites da demonstração, sem envio fictício. Detalhes, procedência dos recortes, desvios e validações: docs/DESKTOP_HOME_FIDELITY.md. O acesso ao Figma original continua indisponível; os exports removem parcialmente a ausência de arte da Home, sem resolver os assets e frames restantes.
+
+## Verificação HTTPS pública
+
+playwright.published.config.ts e tests/published.spec.ts exercitam a URL real em duas larguras, independentemente da suíte local. Perfil Chrome exclusivo por teste, reset de cenário pela API MSW, verificação fromServiceWorker/handshake/ACK/reconciliaçãoREST e isolamento Alice/Bob. Não há caminho de dados fictícios alternativo no cliente. A configuração local separa os arquivos visual, desktop-visual e published, mantendo213casos funcionais; os32públicos usam configuração própria.
+
+O fixture publicado suporta opcionalmente a CA autorizada de um proxy corporativo no banco de certificados de um perfil descartável, com restrição DNS ao destino. Mantém TLS e não altera NSS/globalstore. O suporte foi necessário no executor, não no site Vercel. Registros/protocolo e condições em docs/PUBLISHED_VALIDATION.md. A aplicação em src não foi modificada por essa verificação.

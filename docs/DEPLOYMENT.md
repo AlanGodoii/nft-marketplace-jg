@@ -54,8 +54,12 @@ TEST_BASE_URL=https://SUA-URL-PUBLICA npx playwright test tests/deployment.spec.
 
 No PowerShell, defina primeiro `$env:TEST_BASE_URL="https://SUA-URL-PUBLICA"` e execute o comando `npx playwright test ...` sem o prefixo de variável. Remova a variável após a validação (`Remove-Item Env:TEST_BASE_URL`).
 
-## Estado desta execução
+## Estado atual — publicação validada
 
-Não há integração Vercel conectada. O plugin Sites foi inspecionado, porém seus auxiliares obrigatórios de sincronização/empacotamento não estão instalados neste executor e o recurso `scripts/site-workflow.mjs` não pôde ser lido. Não foi criado um Site órfão nem utilizada uma rota alternativa sem proveniência. **Deploy público permanece pendente de execução e validação pelo usuário.** Os testes locais não substituem a compra na URL publicada.
+O usuário publicou https://nft-marketplace-jg-psi.vercel.app/ na Vercel. Source confirmado: **main ad6dfbc1141fa27aa41b2ec69632d49aea8ddc8c**, merge PR6/head Etapa5 36bd750. Em06/11/2026,01:45–01:47 America/Sao_Paulo,32/32 testes HTTPS passaram em desktop/mobile: rotas/refresh, MSW/APIs, sessão, carrinho/checkout, pedido/recibo, eventos/reconexão e isolamento. Evidências completas em [PUBLISHED_VALIDATION.md](PUBLISHED_VALIDATION.md).
 
-O usuário confirmou nesta etapa que ainda não possui URL pública e solicitou a preparação da Vercel/instruções para a branch não integrada. Não se declara publicação validada antes do fornecimento e teste da URL HTTPS.
+Para repetir, use npm run test:published com TEST_BASE_URL. Manter o host público ativo e validar mudanças futuras continua necessário. Não há garantia de disponibilidade futura ou aprovação das pendências de assets/performance por esses testes.
+
+## Histórico da preparação Etapa5
+
+Na entrega anterior ainda não havia URL pública. A integração Vercel não estava conectada ao executor, e os auxiliares do plugin Sites estavam indisponíveis. Foram preparados arquivos/instruções para o usuário publicar a branch. Essa limitação de publicação automática não impede a validação posterior da URL fornecida; a referência anterior a publicação pendente está superada pela evidência pública acima.

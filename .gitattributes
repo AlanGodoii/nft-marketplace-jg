@@ -5,3 +5,4 @@ reports/lighthouse/*.report.json linguist-generated=true
 reports/desktop-home/lighthouse/*.report.html linguist-generated=true
 reports/desktop-home/lighthouse/*.report.json linguist-generated=true
 reports/desktop-home/playwright-*/** linguist-generated=true
+reports/published-validation/html/** linguist-generated=true

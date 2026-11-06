@@ -1,6 +1,6 @@
 # Home desktop — fidelidade visual Kurio
 
-Data:06/11/2026. Branch `feat/fidelidade-home-desktop`, criada da `origin/main` atualizada `ad6dfbc1141fa27aa41b2ec69632d49aea8ddc8c` (mergePR6, headEtapa5 `36bd750`). Etapas1–5 presentes; nenhuma rota removida. PR7 de validação publicada é separado e ainda não faz parte da main usada nesta fatia.
+Data:06/11/2026. Branch `feat/fidelidade-home-desktop`, criada da `origin/main` atualizada `ad6dfbc1141fa27aa41b2ec69632d49aea8ddc8c` (mergePR6, headEtapa5 `36bd750`). Etapas1–5 presentes; nenhuma rota removida. A base original era ad6dfbc; a main1b2edee, com PR7 integrado pelo proprietário, foi incorporada na resolução posterior dos conflitos.
 
 ## Referência e procedência
 

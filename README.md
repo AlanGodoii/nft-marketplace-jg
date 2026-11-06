@@ -1,6 +1,6 @@
 # Kurio — Jungle Gaming NFT Marketplace
 
-Etapas1–5 integradas à main pelo PR6, commit `ad6dfbc`. Aplicação publicada: https://nft-marketplace-jg-psi.vercel.app/. A validação HTTPS anterior (32/32desktop/mobile, compra/Socket.IO) e a associação do SHA estão no [PR7](https://github.com/AlanGodoii/nft-marketplace-jg/pull/7), separado desta revisão.
+Etapas1–5 integradas à main pelo PR6, commit `ad6dfbc`. Aplicação publicada: https://nft-marketplace-jg-psi.vercel.app/. A validação HTTPS anterior (32/32desktop/mobile, compra/Socket.IO) e a associação do SHA estão no [PR7](https://github.com/AlanGodoii/nft-marketplace-jg/pull/7), já integrado à main pelo commit1b2edee e incorporado nesta branch.
 
 **Prioridade atual: fidelidade da Home desktop**, branch `feat/fidelidade-home-desktop`. Quatro artes originais fornecidas pelo proprietário foram integradas; mobile e fluxos preservados. Esta revisão visual ainda não está publicada: publicar Preview/revisar o PR antes de atualizar produção. Veja [DESKTOP_HOME_FIDELITY.md](docs/DESKTOP_HOME_FIDELITY.md).
 
@@ -111,7 +111,7 @@ Chromium já instalado pode ser selecionado com PLAYWRIGHT_CHROMIUM_EXECUTABLE. 
 
 Quatro artes dos exports fornecidos foram integradas à Home desktop, com procedência e recortes documentados. Acesso ao Figma/layers individuais continua indisponível; slots das demais telas foram preservados, sem imagens arbitrárias. Perfil completo e baselines estão implementados; Lighthouse possui configuração e relatórios reais em reports/lighthouse. **Fidelidade integral/assets restantes e publicação desta revisão continuam pendentes. O deploy anterior ad6dfbc foi validado separadamente. Performance do detalhe mobile anterior:84, abaixo da meta90; não foi reavaliado nesta fatia.** Não há integração real com blockchain/extensões/gateways, conforme o desafio.
 
-A etapa5 parte de main eb156f5, na branch feat/etapa5-finalizacao. Os PRs3–5 já estão integrados; a nova etapa requer revisão própria. Commits estão organizados por checkpoint, sem merge automático. A aprovação técnica/nota da Jungle Gaming não é inferida pelos testes locais.
+Histórico: a Etapa5 partiu de main eb156f5 na branch feat/etapa5-finalizacao e foi integrada pelo PR6 em ad6dfbc. O PR7 de validação pública partiu dessa base e não alterou a aplicação; o PR8 atualiza a Home desktop e preserva aqueles testes. A aprovação técnica/nota da Jungle Gaming não é inferida pelos testes locais.
 
 
 ## Perfil e verificações da etapa5
@@ -141,3 +141,14 @@ Branch `feat/fidelidade-home-desktop`: nova composição desktop da Home, quatro
 `npm run test:desktop -- --workers=1` compara baselines em1280/1440/1920; `npm run test:visual` mantém as quatro telas em390/768/1440. As capturas da implementação não são baselines do Figma. Não execute update-snapshots como validação.
 
 Os36NFTs, três coleções e preços/estoques anteriores foram mantidos; não copie os números ilustrativos dos screenshots para o banco. As novas abas são parâmetros reais da API/URL. Newsletter/artigos/redes de demonstração não enviam dados ou aparentam integração externa real. Esta branch exige nova implantação para aparecer na Vercel; o deploy anterior não incorpora automaticamente um PR aberto.
+
+Validação final desta etapa: **206/206 testes em desenvolvimento (16.4m)**, **38/38 selecionados no build otimizado (1.9m)** e **12/12 comparações visuais estritas (21.7s)**. Tipos/lint/build/demo e instalação limpa aprovados. Falhas intermediárias, agrupamento sem ampliar timeout, relatórios e limitações estão em STAGE5_DELIVERY.md. Lighthouse completo foi executado, mas **Performance do detalhe mobile84 permanece abaixo de90**; não se declara aprovação integral. A publicação foi validada posteriormente em PUBLISHED_VALIDATION.md, sem nova medição Lighthouse.
+
+
+## Validar a implantação publicada
+
+```sh
+TEST_BASE_URL=https://nft-marketplace-jg-psi.vercel.app/ npm run test:published -- --workers=2
+```
+
+Suíte própria com32casos, contextos isolados e TLS ativo. Setup PowerShell, ambiente proxy opcional, relatório HTML/JSON/capturas e SHA confirmado em docs/PUBLISHED_VALIDATION.md. A suíte local agora mantém213testes; os32públicos são separados e não são somados à execução local. A janela comprovada foi06/11/2026 01:45–01:47 America/Sao_Paulo; manter a URL ativa durante a avaliação continua sendo uma responsabilidade operacional.
