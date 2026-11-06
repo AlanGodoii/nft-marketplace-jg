@@ -61,3 +61,10 @@ A auditoria inclui funções/mocks/Socket.IO/fontes da entrega; os assets origin
 Arquivo85dd22e extraído com git archive para work/stage5/clean-checkout. npm ci instalou445pacotes em6s; typecheck e build:demo passaram(código0). Nenhuma versão de pacote preexistente foi alterada pelo acréscimo Lighthouse/axe; somente dependências adicionais/metadados de lockfile. Build isolado registrou aviso informativo de duração de callbacks Rolldown, sem falha.
 
 npm run typecheck, npm run lint, npm run build e npm run build:demo: código0. Lint mantém dois avisos FastRefresh preexistentes em button.tsx/badge.tsx. Aviso futuro __dirname do Vite permanece visível. Logs e códigos em work/stage5/final-checks.json e final-*.log; resultados da regressão completa serão registrados ao terminar.
+
+
+### Ajuste de granularidade encontrado na regressão integral
+
+A primeira regressão foi interrompida após97aprovados,4falhas,2interrompidos e95nãoexecutados(8.4m, código130). As quatro falhas eram exclusivamente os testes novos de axe/navegação que acumulavam9ou10rotas, incluindo refreshs, no mesmo teste: timeout global30s em desenvolvimento, confirmado pelos traces. Esses mesmos cenários haviam passado no build otimizado; não são usados como aprovação da suíte integral.
+
+Os testes foram divididos em grupos independentes, preservando todas as rotas/refreshs/asserções: navegação pública/privada e três grupos de três telas por largura na auditoria axe. Nenhum timeout foi ampliado e nenhum teste anterior foi alterado. Repetição específica em desenvolvimento: **14/14 aprovados (2.1m)**. A nova suíte integral contém206casos (176anteriores +16perfil +4rotas +10acessibilidade). Resultados finais abaixo, após execução. Traces originais preservados em work/stage5/final-results.

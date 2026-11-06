@@ -2,13 +2,18 @@ import { expect, test } from '@playwright/test'
 import AxeBuilder from '@axe-core/playwright'
 import { add, apiQuote, login, request, reset } from './helpers/market'
 
-for (const width of [390, 768, 1440]) {
-  test(`acessibilidade das nove telas em ${width}px`, async ({ page }, testInfo) => {
+const groups = [
+  ['/', '/nfts/nft-002', '/carrinho'],
+  ['/checkout', '/perfil', '/carteiras'],
+  ['/pedido/confirmacao', '/login', '/cadastro'],
+]
+for (const width of [390, 768, 1440]) for (const [index, paths] of groups.entries()) {
+  test(`acessibilidade das nove telas em ${width}px grupo${index + 1}`, async ({ page }, testInfo) => {
     await page.setViewportSize({ width, height: 1000 })
     await reset(page)
     await login(page, 'alice', '/perfil')
     await add(page)
-    for (const path of ['/', '/nfts/nft-002', '/carrinho', '/checkout', '/perfil', '/carteiras', '/pedido/confirmacao', '/login', '/cadastro']) {
+    for (const path of paths) {
       if (path === '/pedido/confirmacao') {
         const { input } = await apiQuote(page)
         const created = await request(page, '/api/orders', 'POST', input, { 'Idempotency-Key': `a11y-confirmed-${width}` })
