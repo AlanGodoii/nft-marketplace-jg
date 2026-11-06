@@ -21,3 +21,13 @@ Validação A no build otimizado local: **5/5 aprovados (26.3s)** — acesso dir
 GET/PATCH /api/profile, PUT /api/profile/avatar e POST /api/profile/password implementados via Axios/Query/MSW. Dados versionados e conflitos409; perfil/avatar privados, migração aditiva do banco, erros400/401/409/500 e cenários profile.read/update/avatar/password. Avatar PNG/JPEG/WebP até256KiB/4096px, assinatura e decodificação real verificadas; SVG e conteúdo inválido rejeitados. Senha PBKDF2 com salt novo; sucesso revoga todas as sessões/conexões da conta e exige login, preservando os demais recursos.
 
 **16/16 testes de perfil aprovados (1.2m)**, desktop/mobile; tipos aprovados e lint sem erros, dois avisos Fast Refresh preexistentes restantes. Edição/refresh, sessão atualizada,409/versão, avatar válido/inválido/remoção, senha incorreta/nova/login/revogação, ausência de senha em storage, A/B,500/retry e expiração durante edição. Logs work/stage5/B-*.
+
+## Checkpoints C/D — visual e acessibilidade
+
+Fidelidade integral continua PARCIAL/BLOQUEADA pelos assets403 e limite do Figma MCP. [VISUAL_REVIEW.md](VISUAL_REVIEW.md) discrimina nove telas, diferenças conhecidas e exports manuais necessários. Nenhuma chamada adicional ao Figma será repetida após o bloqueio. Capturas locais das nove telas, inclusive recibo confirmado, em390/768/1440; inspeção visual amostral realizada.
+
+12 baselines versionadas de Home/detalhe/carrinho/checkout em390/768/1440, dados MSW reais, fontes locais e relógio/visitante estáveis, sem esconder assets ausentes. Comparação estrita final: **12/12 aprovados (23.4s)**, zero pixels diferentes e sem update-snapshots. Comandos npm run test:visual e npm run test:a11y.
+
+Axe/WCAG2A/AA/2.1AA nas nove telas e três larguras, incluindo recibo efetivamente confirmado, mais teclado/foco/zoom200%/movimento reduzido: **4/4 aprovados (37.4s)**. Não substitui auditoria humana integral de acessibilidade.
+
+Falhas intermediárias: criação inicial9aprovados/3falhas por seletor inexistente quote-total, corrigido para total. Primeiro comparativo estrito9/3 mostrou exclusivamente UUID variável na referência do carrinho; visitante foi fixado no teste, sem máscara, e somente os três baselines do carrinho foram atualizados após inspeção do diff. Os outros nove permaneceram inalterados. Axe inicial3/1 encontrou overflow real do cabeçalho em zoom200%; corrigido com flex-wrap, sem diferenças nas capturas normais. Repetição4/4(31.5s), depois expandida para recibo confirmado4/4(37.4s). Traces/diffs locais em work/stage5/D-*.

@@ -4,6 +4,7 @@ const baseURL = process.env.TEST_BASE_URL ?? 'http://127.0.0.1:5173'
 
 export default defineConfig({
   testDir: './tests',
+  testIgnore: '**/visual.spec.ts',
   reporter: [['list'], ['html', { open: 'never' }]],
   projects: [
     { name: 'desktop', use: { viewport: { width: 1440, height: 1000 } } },
