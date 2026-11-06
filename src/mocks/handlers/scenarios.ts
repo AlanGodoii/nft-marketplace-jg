@@ -1,3 +1,4 @@
+import { clearOrderTimers } from '../order-domain'
 import { http, HttpResponse } from 'msw'
 import { z } from 'zod'
 import { resetCommerce, transact } from '../commerce-db'
@@ -38,6 +39,7 @@ export const scenarioHandlers = [
     const parsed = scenarioSchema.safeParse(body)
     if (!parsed.success) return HttpResponse.json({ error: { code: 'VALIDATION_ERROR', message: 'Cenário inválido.' } }, { status: 400 })
     getMockDatabase().reset()
+    clearOrderTimers()
     resetCommerce()
     return HttpResponse.json({ config: configureScenario(parsed.data) })
   }),

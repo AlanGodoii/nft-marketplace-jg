@@ -26,3 +26,19 @@ export async function add(page: Page, id = 'nft-002', quantity = 1) {
 export async function configure(page: Page, config: unknown) {
   expect((await request(page, '/api/__mock/configure', 'POST', config)).status).toBe(200)
 }
+export async function review(page: Page) {
+  await page.goto('/checkout')
+  await page.getByRole('button', { name: 'Conectar carteira', exact: true }).click()
+  await expect(page.getByText('Carteira conectada (simulação).')).toBeVisible()
+  await page.getByRole('button', { name: 'Revalidar e revisar compra' }).click()
+  await expect(page.getByRole('dialog')).toBeVisible()
+  await page.getByRole('dialog').getByRole('checkbox').check()
+}
+export async function apiQuote(page: Page) {
+  const wallet = (await request(page, '/api/wallets', 'GET')).body.items[0]
+  const connection = await request(page, `/api/wallets/${wallet.id}/connection`, 'POST', { action: 'connect' })
+  const cart = (await request(page, '/api/cart', 'GET')).body
+  const response = await request(page, '/api/checkout/quote', 'POST', { walletId: wallet.id, network: wallet.network, collector: wallet.collector, items: cart.items.map((item: { id: string; quantity: number }) => ({ itemId: item.id, quantity: item.quantity })) })
+  expect(response.status).toBe(200)
+  return { quote: response.body, input: { quoteId: response.body.id, connectionId: connection.body.connectionId } }
+}

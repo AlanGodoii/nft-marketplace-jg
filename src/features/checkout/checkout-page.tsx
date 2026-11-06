@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { Link } from '@tanstack/react-router'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useRouter } from '@tanstack/react-router'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import type { Cart } from '@/contracts/cart'
@@ -12,8 +12,13 @@ import { LoadingState, ErrorState } from '@/components/async-state'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog'
-import { apiErrorMessage } from '@/lib/api'
+import { usePurchaseAttempt } from '@/features/orders/attempt'
+import { identityEpoch } from '@/lib/identity'
+import { useCreateOrder, useOrder } from '@/features/orders/queries'
+import type { PurchaseAttempt } from '@/contracts/order'
+import { apiErrorMessage, ApiRequestError } from '@/lib/api'
 import { useCheckoutQuote } from './queries'
+import { quoteDifferences } from './quote-differences'
 import { QuoteValues } from './quote-values'
 function CheckoutCoupon({ cart }: { cart: Cart }) {
   const mutation = useCartMutation(); const [code, setCode] = useState('')
@@ -22,8 +27,14 @@ function CheckoutCoupon({ cart }: { cart: Cart }) {
     <p id="checkout-coupon-error" role={mutation.isError ? 'alert' : undefined}>{mutation.isError ? apiErrorMessage(mutation.error) : ''}</p>
   </div>
 }
+function PreviousAttempt({ attempt, clear, recover, pending }: { attempt: PurchaseAttempt; clear: () => void; recover: () => void; pending: boolean }) {
+  const previous = useOrder(attempt.orderId)
+  return <section className="commerce-panel space-y-4"><h2 className="font-bold">Tentativa anterior</h2><p>Consulte a mesma tentativa para recuperar seu pedido, inclusive após timeout ou refresh.</p><Button disabled={pending} onClick={recover}>Recuperar tentativa anterior</Button><Link to="/pedido/confirmacao" search={{ orderId: attempt.orderId }} className="text-primary">Ver meus pedidos</Link>{previous.data && previous.data.status !== 'pending' && <Button variant="outline" onClick={clear}>Começar outra compra</Button>}</section>
+}
 function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
   const connection = useWalletConnection(); const quoteMutation = useCheckoutQuote()
+  const createOrder = useCreateOrder(); const { attempt, saveAttempt } = usePurchaseAttempt(); const router = useRouter()
+  const submitLock = useRef(false); const sendLock = useRef(false); const renderedEpoch = identityEpoch()
   const [quantities, setQuantities] = useState<Record<string, number>>({})
   const [excluded, setExcluded] = useState<string[]>([])
   const [network, setNetwork] = useState(wallet.network)
@@ -47,19 +58,39 @@ function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
     try { setReview(await quoteMutation.mutateAsync(inputFor(values))) }
     catch (error) { setReview(null); setError(apiErrorMessage(error)) }
   }
+  async function sendAttempt(purchase: PurchaseAttempt) {
+    if (sendLock.current) return
+    sendLock.current = true
+    saveAttempt(purchase)
+    try {
+      const order = await createOrder.mutateAsync(purchase)
+      if (renderedEpoch !== identityEpoch()) return
+      saveAttempt({ ...purchase, orderId: order.id })
+      await router.navigate({ to: '/pedido/confirmacao', search: { orderId: order.id } })
+    } catch (error) {
+      if (renderedEpoch !== identityEpoch()) return
+      if (error instanceof ApiRequestError && error.fields?.attempt?.includes('not-created')) saveAttempt(null)
+      setReview(null); setAccepted(false)
+      setError(`${apiErrorMessage(error)}${error instanceof ApiRequestError && error.fields?.attempt ? '' : ' O resultado do envio pode ser desconhecido. Recupere a mesma tentativa; não inicie outra compra.'}`)
+    } finally { sendLock.current = false }
+  }
   async function validateConfirmedQuote() {
+    if (submitLock.current || createOrder.isPending || quoteMutation.isPending) return
     if (!review || !accepted || !connected) return
+    submitLock.current = true
     setError('')
     try {
       const next = await quoteMutation.mutateAsync(inputFor(form.getValues()))
       if (next.fingerprint !== review.fingerprint || Date.parse(review.expiresAt) <= Date.now()) {
-        setNotice(`A cotação mudou: total anterior ${review.total} ETH; total atualizado ${next.total} ETH. Revise os itens, preço, estoque, desconto e taxas e confirme novamente.`)
+        setNotice(`A cotação mudou: total anterior ${review.total} ETH; total atualizado ${next.total} ETH. ${quoteDifferences(review, next)} Revise e confirme novamente.`)
         setReview(next); setAccepted(false); return
       }
-      setReview(next); setNotice('Cotação revalidada pela API. Nenhum pedido foi enviado neste checkpoint.')
-    } catch (error) { setReview(null); setAccepted(false); setError(apiErrorMessage(error)) }
+      const purchase = attempt ?? { key: crypto.randomUUID(), input: { quoteId: next.id, connectionId: connection.data!.connectionId! } }
+      await sendAttempt(purchase)
+    } catch (error) { setReview(null); setAccepted(false); setError(apiErrorMessage(error)) } finally { submitLock.current = false }
   }
   return <div className="checkout-layout"><div className="space-y-6 min-w-0">
+    {attempt && <PreviousAttempt attempt={attempt} clear={() => saveAttempt(null)} recover={() => void sendAttempt(attempt)} pending={createOrder.isPending} />}
     <section className="commerce-panel space-y-4"><h2 className="text-xl font-bold">Carteira e rede</h2><p className="break-all">{wallet.label} · {wallet.provider} · {wallet.address}</p>
       <label htmlFor="checkout-network">Rede de pagamento</label><select id="checkout-network" className="commerce-select" value={network} onChange={event => { setNetwork(event.target.value as Wallet['network']); setReview(null); setAccepted(false) }}><option value="ethereum">Ethereum</option><option value="polygon">Polygon</option><option value="solana">Solana</option></select>
       <div className="flex flex-wrap gap-3"><Button disabled={connection.isPending} onClick={() => { setReview(null); connection.mutate({ walletId: wallet.id, action: 'connect' }) }}>Conectar carteira</Button><Button variant="outline" disabled={connection.isPending} onClick={() => { setReview(null); setAccepted(false); connection.mutate({ walletId: wallet.id, action: 'disconnect' }) }}>Desconectar carteira</Button></div>
@@ -68,7 +99,7 @@ function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
     </section>
     <form noValidate className="commerce-panel space-y-6" aria-label="Dados do pagamento" onChange={() => { setReview(null); setAccepted(false) }} onSubmit={form.handleSubmit(reviewInput)}><h2 className="text-xl font-bold">Perfil do colecionador</h2><CollectorFields form={form} prefix="checkout" />
       <label htmlFor="checkout-notes">Observação do colecionador (opcional)</label><textarea id="checkout-notes" {...form.register('collector.notes')} className="commerce-select min-h-24" aria-describedby="checkout-notes-error" /><p id="checkout-notes-error" className="field-error">{form.formState.errors.collector?.notes?.message}</p>
-      <Button type="submit" disabled={!connected || quoteMutation.isPending}>{quoteMutation.isPending ? 'Revalidando cotação…' : 'Revalidar e revisar compra'}</Button>
+      <Button type="submit" disabled={!connected || quoteMutation.isPending || createOrder.isPending || !!attempt}>{quoteMutation.isPending ? 'Revalidando cotação…' : 'Revalidar e revisar compra'}</Button>
     </form>
     {error && <p role="alert">{error}</p>}{notice && <p role="status">{notice}</p>}
   </div><aside className="commerce-panel space-y-6"><h2 className="text-xl font-bold">Seus NFTs</h2><p>Escolha as edições e quantidades desta compra. Itens não selecionados ficam no carrinho.</p>
@@ -81,7 +112,7 @@ function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
   <Dialog open={!!review} onOpenChange={open => { if (!open) { setReview(null); setAccepted(false) } }}><DialogContent className="kurio-theme review-dialog"><DialogTitle>Revisar compra</DialogTitle><DialogDescription>Confira os valores e a carteira antes de autorizar o envio.</DialogDescription>
     {review && <><p className="break-all">{review.wallet.label} · {review.network} · {review.wallet.address}</p>{review.items.map(item => <p key={item.id}>{item.nft.name} · {item.edition.name} · {item.quantity} × {item.edition.price.amount} ETH = {item.lineTotal} ETH</p>)}<QuoteValues quote={review} />
       <label className="flex gap-3"><input type="checkbox" checked={accepted} onChange={event => setAccepted(event.target.checked)} />Confirmo os itens, a carteira e os valores desta cotação.</label>
-      <Button disabled={!accepted || quoteMutation.isPending || !connected} onClick={() => void validateConfirmedQuote()}>Validar cotação confirmada</Button>
+      <Button disabled={!accepted || quoteMutation.isPending || createOrder.isPending || !connected} onClick={() => void validateConfirmedQuote()}>{createOrder.isPending ? 'Enviando pedido…' : 'Finalizar compra'}</Button>
       {notice && <p role="status">{notice}</p>}
     </>}
   </DialogContent></Dialog>

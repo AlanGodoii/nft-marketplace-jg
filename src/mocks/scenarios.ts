@@ -4,6 +4,9 @@ const faultSchema = z.object({ status: z.number().int().min(400).max(599).option
 export const scenarioSchema = z.object({
   name: z.enum(['normal', 'empty', 'server-error', 'transient-error', 'slow', 'out-of-order', 'network-error']).default('normal'),
   faults: z.record(z.string(), faultSchema).optional(),
+  orderOutcome: z.enum(['pending', 'confirmed', 'rejected']).optional(),
+  orderDelayMs: z.number().int().min(0).max(3600000).optional(),
+  orderResponseDelayMs: z.number().int().min(0).max(30000).optional(),
   networkFeeEth: z.string().regex(/^(0|[1-9]\d*)(\.\d{1,18})?$/).optional(),
   expireCoupon: z.boolean().optional(),
   quoteTtlMs: z.number().int().min(100).max(600000).optional(),
@@ -67,3 +70,5 @@ export function quoteTtl() { return config.quoteTtlMs ?? 60000 }
 
 export function networkFee() { return config.networkFeeEth ?? '0.016' }
 export function couponExpired() { return config.expireCoupon ?? false }
+
+export function orderScenario() { return { outcome: config.orderOutcome ?? 'confirmed', delay: config.orderDelayMs ?? 1500, responseDelay: config.orderResponseDelayMs ?? 0 } }

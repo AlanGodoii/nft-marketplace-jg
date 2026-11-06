@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test'
-import { configure, login, request, reset } from './helpers/market'
+import { add, apiQuote, configure, login, request, reset, review } from './helpers/market'
 test.beforeEach(async ({ page }) => reset(page))
 
 test('A: cadastra carteira secundária, valida endereço e persiste edição', async ({ page }) => {
@@ -70,10 +70,13 @@ test('B: visitante retorna ao checkout, conecta carteira e revisa cotação com 
   await page.getByRole('button', { name: 'Revalidar e revisar compra' }).click()
   const dialog = page.getByRole('dialog')
   await expect(dialog.getByTestId('checkout-total')).toHaveText('0.538 ETH')
-  await expect(dialog.getByRole('button', { name: 'Validar cotação confirmada' })).toBeDisabled()
+  await expect(dialog.getByRole('button', { name: 'Finalizar compra' })).toBeDisabled()
   await dialog.getByRole('checkbox').check()
-  await dialog.getByRole('button', { name: 'Validar cotação confirmada' }).click()
-  await expect(dialog.getByRole('status')).toContainText('Cotação revalidada pela API')
+  await dialog.getByRole('button', { name: 'Finalizar compra' }).click()
+  await expect(page.getByTestId('order-status')).toHaveText(/Pedido pendente|Compra confirmada/)
+  const orders = (await request(page, '/api/orders', 'GET')).body.items
+  expect(orders).toHaveLength(1)
+  expect(orders[0].snapshot.total).toBe('0.538')
 })
 
 test('B: valida campos do colecionador, rede compatível, recusa e desconexão', async ({ page }) => {
@@ -107,10 +110,10 @@ test('B: preço alterado invalida aceite anterior e exige nova revisão', async 
   await expect(dialog.getByTestId('checkout-total')).toHaveText('0.306 ETH')
   await request(page, '/api/__mock/nft', 'POST', { nftId: 'nft-002', editionId: 'edition-002', price: '0.49' })
   await dialog.getByRole('checkbox').check()
-  await dialog.getByRole('button', { name: 'Validar cotação confirmada' }).click()
+  await dialog.getByRole('button', { name: 'Finalizar compra' }).click()
   await expect(dialog.getByRole('status')).toContainText('total anterior 0.306 ETH; total atualizado 0.506 ETH')
   await expect(dialog.getByRole('checkbox')).not.toBeChecked()
-  await expect(dialog.getByRole('button', { name: 'Validar cotação confirmada' })).toBeDisabled()
+  await expect(dialog.getByRole('button', { name: 'Finalizar compra' })).toBeDisabled()
 })
 
 test('B: edição esgotada e falha de cotação preservam itens e permitem recuperação', async ({ page }) => {
@@ -128,4 +131,148 @@ test('B: edição esgotada e falha de cotação preservam itens e permitem recup
   await expect(page.getByRole('alert')).toContainText('Não foi possível acessar o serviço')
   await page.getByRole('button', { name: 'Revalidar e revisar compra' }).click()
   await expect(page.getByRole('dialog')).toBeVisible()
+})
+
+test('C: compra completa do catálogo ao recibo confirmado pela API', async ({ page }) => {
+  await page.goto('/?search=Sage%20Nomad%20%23002')
+  await page.locator('a.nft-card-link').click()
+  await page.getByRole('button', { name: 'Adicionar ao carrinho', exact: true }).click()
+  await expect(page.getByText('NFT adicionado ao carrinho.', { exact: false })).toBeVisible()
+  await page.goto('/carrinho')
+  await page.getByRole('link', { name: 'Revisar no checkout' }).click()
+  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
+  await page.getByLabel('Senha', { exact: true }).fill('Kurio123!')
+  await page.getByRole('button', { name: 'Entrar', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Checkout', exact: true })).toBeVisible()
+  await configure(page, { name: 'normal', latencyMs: 10, orderDelayMs: 1800 })
+  await review(page)
+  await page.getByRole('button', { name: 'Finalizar compra', exact: true }).click()
+  await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
+  await expect(page.getByTestId('order-receipt')).toHaveCount(0)
+  await expect(page.getByRole('dialog').getByRole('heading', { name: 'Compra confirmada', exact: true })).toBeVisible()
+  await expect(page.getByTestId('order-receipt').getByTestId('checkout-total')).toHaveText('0.306 ETH')
+  expect((await request(page, '/api/orders', 'GET')).body.items).toHaveLength(1)
+  expect((await request(page, '/api/cart', 'GET')).body.items).toHaveLength(0)
+  await page.reload()
+  await expect(page.getByTestId('order-receipt')).toBeVisible()
+})
+
+test('C: pagamento recusado preserva carrinho e não apresenta recibo', async ({ page }) => {
+  await login(page)
+  await add(page)
+  await configure(page, { name: 'normal', latencyMs: 10, orderOutcome: 'rejected', orderDelayMs: 1200 })
+  await review(page)
+  await page.getByRole('button', { name: 'Finalizar compra', exact: true }).click()
+  await expect(page.getByTestId('order-status')).toHaveText('Pagamento recusado')
+  await expect(page.getByRole('alert')).toContainText('carrinho foi preservado')
+  await expect(page.getByTestId('order-receipt')).toHaveCount(0)
+  expect((await request(page, '/api/cart', 'GET')).body.items[0].quantity).toBe(1)
+})
+
+test('C: mesma chave recupera pedido, conteúdo diferente409 e tentativas concorrentes não duplicam', async ({ page }) => {
+  await login(page)
+  await request(page, '/api/cart/items', 'POST', { nftId: 'nft-002', editionId: 'edition-002', quantity: 1 })
+  await configure(page, { name: 'normal', latencyMs: 10, orderOutcome: 'pending' })
+  const { input } = await apiQuote(page)
+  const key = 'idempotency-concurrent-001'
+  const results = await Promise.all([request(page, '/api/orders', 'POST', input, { 'Idempotency-Key': key }), request(page, '/api/orders', 'POST', input, { 'Idempotency-Key': key })])
+  expect(results.map(result => result.status).sort()).toEqual([200, 201])
+  expect(results[0].body.id).toBe(results[1].body.id)
+  expect((await request(page, '/api/orders', 'POST', { ...input, quoteId: 'different' }, { 'Idempotency-Key': key })).status).toBe(409)
+  expect((await request(page, '/api/orders', 'GET')).body.items).toHaveLength(1)
+  await page.goto(`/pedido/confirmacao?orderId=${results[0].body.id}`)
+  await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
+})
+
+test('C: clique repetido de finalizar cria somente um pedido', async ({ page }) => {
+  await login(page); await add(page)
+  await configure(page, { name: 'normal', latencyMs: 100, orderOutcome: 'pending' })
+  await review(page)
+  await page.getByRole('button', { name: 'Finalizar compra', exact: true }).evaluate((button: HTMLButtonElement) => { button.click(); button.click() })
+  await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
+  expect((await request(page, '/api/orders', 'GET')).body.items).toHaveLength(1)
+})
+
+test('C: timeout após criação e refresh recuperam a mesma chave e o mesmo pedido', async ({ page }) => {
+  await login(page); await add(page)
+  await configure(page, { name: 'normal', latencyMs: 10, orderOutcome: 'pending', orderResponseDelayMs: 11000 })
+  await review(page)
+  await page.getByRole('button', { name: 'Finalizar compra', exact: true }).click()
+  await expect(page.getByRole('alert')).toContainText('demorou demais', { timeout: 12000 })
+  const before = (await request(page, '/api/orders', 'GET')).body.items
+  expect(before).toHaveLength(1)
+  const attempt = await page.evaluate(() => sessionStorage.getItem('kurio.checkout.attempt:alice'))
+  expect((await request(page, '/api/cart', 'GET')).body.items).toHaveLength(1)
+  await page.reload()
+  await page.getByRole('button', { name: 'Recuperar tentativa anterior' }).click()
+  await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
+  expect(new URL(page.url()).searchParams.get('orderId')).toBe(before[0].id)
+  expect(JSON.parse((await page.evaluate(() => sessionStorage.getItem('kurio.checkout.attempt:alice')))!).key).toBe(JSON.parse(attempt!).key)
+  expect((await request(page, '/api/orders', 'GET')).body.items).toHaveLength(1)
+})
+
+test('C: refresh de pendente recupera estado real e recibo histórico é imutável', async ({ page }) => {
+  await login(page); await add(page)
+  await configure(page, { name: 'normal', latencyMs: 10, orderOutcome: 'pending' })
+  await review(page)
+  await page.getByRole('button', { name: 'Finalizar compra', exact: true }).click()
+  await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
+  const id = new URL(page.url()).searchParams.get('orderId')!
+  await page.reload(); await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
+  await request(page, `/api/__mock/orders/${id}/settle`, 'POST', { status: 'confirmed' })
+  await page.getByRole('button', { name: 'Consultar estado do pedido' }).click()
+  await expect(page.getByTestId('order-receipt')).toBeVisible()
+  await request(page, '/api/__mock/nft', 'POST', { nftId: 'nft-002', editionId: 'edition-002', price: '9.123456789123456789' })
+  await page.reload()
+  await expect(page.getByTestId('order-receipt').getByTestId('checkout-total')).toHaveText('0.306 ETH')
+  const order = (await request(page, `/api/orders/${id}`, 'GET')).body
+  expect(order.snapshot.items[0].edition.price.amount).toBe('0.29')
+  expect((await request(page, `/api/__mock/orders/${id}/settle`, 'POST', { status: 'rejected' })).status).toBe(409)
+})
+
+test('C: confirmação remove somente quantidades compradas, preserva extras e não repete efeitos', async ({ page }) => {
+  await login(page)
+  await request(page, '/api/cart/items', 'POST', { nftId: 'nft-002', editionId: 'edition-002', quantity: 2 })
+  await request(page, '/api/cart/items', 'POST', { nftId: 'nft-003', editionId: 'edition-003', quantity: 1 })
+  await configure(page, { name: 'normal', latencyMs: 10, orderOutcome: 'pending' })
+  await page.goto('/checkout')
+  await page.getByRole('checkbox', { name: 'Comprar Neon Vessel #003', exact: true }).uncheck()
+  await page.getByLabel('Quantidade a comprar de Sage Nomad #002', { exact: true }).fill('1')
+  await page.getByRole('button', { name: 'Conectar carteira', exact: true }).click()
+  await page.getByRole('button', { name: 'Revalidar e revisar compra' }).click()
+  await page.getByRole('dialog').getByRole('checkbox').check()
+  await page.getByRole('button', { name: 'Finalizar compra', exact: true }).click()
+  await expect(page.getByTestId('order-status')).toHaveText('Pedido pendente')
+  const id = new URL(page.url()).searchParams.get('orderId')!
+  await request(page, '/api/cart/items', 'POST', { nftId: 'nft-002', editionId: 'edition-002', quantity: 1 })
+  for (let i = 0; i < 2; i++) expect((await request(page, `/api/__mock/orders/${id}/settle`, 'POST', { status: 'confirmed' })).status).toBe(200)
+  const cart = (await request(page, '/api/cart', 'GET')).body
+  expect(cart.items.find((item: { nftId: string }) => item.nftId === 'nft-002').quantity).toBe(2)
+  expect(cart.items.find((item: { nftId: string }) => item.nftId === 'nft-003').quantity).toBe(1)
+  const nft = (await request(page, '/api/nfts/nft-002', 'GET')).body.item
+  expect(nft.editions[0].availability.remaining).toBe(2)
+  await page.getByRole('button', { name: 'Consultar estado do pedido' }).click()
+  await expect(page.getByTestId('order-receipt').getByTestId('checkout-total')).toHaveText('0.306 ETH')
+})
+
+test('C: backend bloqueia cotação alterada ou expirada e pedido privado de outra conta', async ({ page }) => {
+  await login(page)
+  await request(page, '/api/cart/items', 'POST', { nftId: 'nft-002', editionId: 'edition-002', quantity: 1 })
+  await configure(page, { name: 'normal', latencyMs: 10, orderOutcome: 'pending' })
+  const first = await apiQuote(page)
+  await request(page, '/api/__mock/nft', 'POST', { nftId: 'nft-002', editionId: 'edition-002', price: '0.39' })
+  expect((await request(page, '/api/orders', 'POST', first.input, { 'Idempotency-Key': 'stale-quote-price' })).status).toBe(409)
+  await page.clock.install()
+  const expired = await apiQuote(page)
+  await page.clock.fastForward(61000)
+  expect((await request(page, '/api/orders', 'POST', expired.input, { 'Idempotency-Key': 'expired-quote-001' })).status).toBe(409)
+  const second = await apiQuote(page)
+  const created = await request(page, '/api/orders', 'POST', second.input, { 'Idempotency-Key': 'private-order-alice' })
+  expect(created.status).toBe(201)
+  await page.getByRole('button', { name: 'Sair', exact: true }).click()
+  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await login(page, 'bob')
+  expect((await request(page, `/api/orders/${created.body.id}`, 'GET')).status).toBe(404)
+  expect((await request(page, '/api/orders', 'GET')).body.items).toHaveLength(0)
 })

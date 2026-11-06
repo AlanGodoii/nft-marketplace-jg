@@ -448,3 +448,8 @@ body:has(.auth-card) [data-slot="dialog-overlay"] { background: #140d0a99; }
 .checkout-item { border-bottom: 1px solid var(--border); padding-bottom: 20px; overflow-wrap: anywhere; }
 .review-dialog { width: min(620px,calc(100vw - 32px)); max-width: 620px; max-height: calc(100dvh - 32px); overflow-y: auto; border-bottom: 8px solid var(--primary); }
 @media (max-width: 1000px) { .checkout-layout { grid-template-columns: minmax(0,1fr); } }
+.receipt-meta { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 16px; font-size: 12px; }
+.receipt-meta dt { color: var(--muted-foreground); margin-bottom: 4px; }
+.receipt-meta dd { overflow-wrap: anywhere; }
+.receipt-line { display: grid; grid-template-columns: 60px minmax(0,1fr) minmax(80px,.7fr); gap: 12px; align-items: center; font-size: 12px; }
+@media (max-width: 767px) { .receipt-meta { grid-template-columns: minmax(0,1fr); } .receipt-line { grid-template-columns: 52px minmax(0,1fr); } .receipt-line > p { grid-column: 2; } }
