@@ -630,3 +630,4 @@ body:has(.receipt-dialog) .mobile-bottom-nav,body:has(.receipt-dialog) .mobile-p
  .catalog-refresh > p:not(:empty) { position:static; min-width:0; text-align:left; }
  .catalog-toolbar > .catalog-heading { padding:0; margin:0; }
 }
+.social-options button { font-size:14px; }

@@ -75,7 +75,7 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   if (!desktop) return <section className="mobile-auth-page"><Link className="auth-wordmark" to="/" aria-label="Kurio — início">KURIO</Link><h1>{title}</h1>{form}<SocialOptions /><div className="auth-switch">{switchLink}</div></section>
   return <><AuthBackdrop /><Dialog open onOpenChange={open => { if (!open) void router.navigate({ to: '/' }) }}>
       <DialogContent className="kurio-theme auth-card" initialFocus={()=>document.getElementById(mode === 'login' ? 'login-email' : 'register-name')}>
-        <div className="auth-title-tabs"><DialogTitle>{title}</DialogTitle><span aria-hidden="true">|</span><Link to={mode === 'login' ? '/cadastro' : '/login'} search={{ redirect: destination }}>{mode === 'login' ? 'Criar conta' : 'Entrar'}</Link></div>
+        <div className="auth-title-tabs">{mode === 'login' ? <DialogTitle>Entrar</DialogTitle> : <Link to="/login" search={{redirect:destination}}>Entrar</Link>}<span aria-hidden="true">|</span>{mode === 'register' ? <DialogTitle>Criar conta</DialogTitle> : <Link to="/cadastro" search={{redirect:destination}}>Criar conta</Link>}</div>
         <DialogDescription>{description}</DialogDescription>
         {form}<SocialOptions /><div className="auth-switch">{switchLink}</div>
       </DialogContent>
