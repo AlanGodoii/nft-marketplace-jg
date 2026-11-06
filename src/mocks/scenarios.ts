@@ -4,6 +4,9 @@ const faultSchema = z.object({ status: z.number().int().min(400).max(599).option
 export const scenarioSchema = z.object({
   name: z.enum(['normal', 'empty', 'server-error', 'transient-error', 'slow', 'out-of-order', 'network-error']).default('normal'),
   faults: z.record(z.string(), faultSchema).optional(),
+  networkFeeEth: z.string().regex(/^(0|[1-9]\d*)(\.\d{1,18})?$/).optional(),
+  expireCoupon: z.boolean().optional(),
+  quoteTtlMs: z.number().int().min(100).max(600000).optional(),
   walletConnection: z.enum(['connected', 'refused', 'disconnected']).optional(),
   sessionTtlMs: z.number().int().min(100).max(86400000).optional(),
   latencyMs: z.number().int().min(0).max(30000).optional(),
@@ -59,3 +62,8 @@ export function beginOperation(name: string) {
 export function sessionTtl() { return config.sessionTtlMs ?? 1800000 }
 
 export function walletConnectionOutcome() { return config.walletConnection ?? 'connected' }
+
+export function quoteTtl() { return config.quoteTtlMs ?? 60000 }
+
+export function networkFee() { return config.networkFeeEth ?? '0.016' }
+export function couponExpired() { return config.expireCoupon ?? false }

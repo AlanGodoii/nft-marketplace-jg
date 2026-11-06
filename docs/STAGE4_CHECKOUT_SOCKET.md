@@ -35,3 +35,13 @@ Consultados contexto e screenshots dos frames Pagamento desktop11:2862/mobile16:
 ### Verificação A
 
 Typecheck passou; lint passou com5avisos restantes (um placeholder substituído). Testes:6/6 aprovados, desktop/mobile,29.0s. Foram corrigidos o envio de id/version como defaults do formulário de edição (schema estrito rejeitava) e uma espera ausente no teste de logout. Rodadas intermediárias tiveram2falhas/4aprovados e1falha/5aprovados; resultados não foram ocultados. Casos incluem criação/edição/refresh, endereços inválidos,401/400/404/409, isolamento e500/retry, recusa/desconexão simuladas.
+
+## Checkpoint B — cotação e revisão
+
+POST /api/checkout/quote recebe walletId, network, collector e seleção items[{itemId,quantity}]. Valida sessão/conexão da sessão, versão da carteira, rede compatível de todos os itens, quantidades inteiras presentes no carrinho, estoque/edição e cupom. Responde snapshot imutável e privado de itens/carteira/colecionador, valores Decimal reutilizados da etapa3, fingerprint, id opaco e expiresAt. Quotes expiradas são descartadas; expiração/alterações relevantes exigem novo aceite.
+
+O checkout permite selecionar subconjunto e quantidades para preservar itens não comprados. Revisão em diálogo exige checkbox explícito. Antes do envio, uma nova consulta de cotação compara conteúdo/versões/valores; diferenças são informadas e o aceite é limpo. O pedido ainda não era enviado neste checkpoint isolado; o envio será adicionado em C. A apresentação monetária só utiliza strings retornadas pela API.
+
+Controles adicionais de cenário: POST /api/__mock/nft {nftId,editionId,price?,remaining?}; quoteTtlMs; networkFeeEth; expireCoupon. Valores monetários validam strings com até18casas. A alteração do NFT será integrada ao transporte em D.
+
+Verificação B: typecheck e lint aprovados (4avisos Fast Refresh preexistentes restantes).8/8 testes B aprovados em desktop/mobile(40.2s). A rodada inicial A+B teve12aprovados/2falhas devido ao botão de cupom sem type=submit; corrigido sem relaxar asserções. Testes cobrem retorno de login, cupom e valores exatos, campos/compatibilidade/conexão, alteração de preço exigindo novo aceite, estoque409 e falha de rede/retry preservando carrinho. Hooks de revisão foram ajustados para invalidação por eventos de formulário e versão do recurso, sem avisos novos de lint.

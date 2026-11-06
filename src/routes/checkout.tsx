@@ -1,19 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { requireSession } from '@/features/auth/guard'
-import { PagePlaceholder } from '@/components/page-placeholder'
-import { buttonVariants } from '@/components/ui/button'
-
-export const Route = createFileRoute('/checkout')({
-  beforeLoad: requireSession,
-  component: Page,
-})
-
-function Page() {
-  return (
-    <PagePlaceholder title="Checkout" description="Revise as informações da sua compra.">
-      <Link to="/pedido/confirmacao" className={buttonVariants({ variant: 'outline' })}>
-        Ver página de confirmação
-      </Link>
-    </PagePlaceholder>
-  )
-}
+import { CheckoutPage } from '@/features/checkout/checkout-page'
+export const Route = createFileRoute('/checkout')({ beforeLoad: requireSession, component: CheckoutPage })
