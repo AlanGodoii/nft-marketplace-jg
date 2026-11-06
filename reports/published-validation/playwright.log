@@ -1,0 +1,45 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test --config=playwright.published.config.ts --workers=2 --output=work/published-validation/full-results
+
+
+Running 32 tests using 2 workers
+
+(node:137303) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:137302) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh / (6.6s)
+  ✓   1 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh / (7.5s)
+  ✓   3 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /nfts/nft-002 (6.1s)
+  ✓   4 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /nfts/nft-002 (6.7s)
+  ✓   5 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /carrinho (6.7s)
+  ✓   6 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /carrinho (6.3s)
+  ✓   7 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /login (5.9s)
+  ✓   8 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /login (6.2s)
+  ✓  10 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /cadastro (5.4s)
+  ✓   9 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /cadastro (7.3s)
+  ✓  11 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /checkout (7.4s)
+  ✓  12 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /checkout (7.5s)
+  ✓  14 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /perfil (7.2s)
+  ✓  13 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /perfil (8.5s)
+  ✓  15 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /carteiras (7.0s)
+  ✓  16 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /carteiras (10.9s)
+  ✓  17 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /pedido/confirmacao (8.1s)
+  ✓  18 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /pedido/confirmacao (9.8s)
+  ✓  19 [public-desktop] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /favoritos (7.2s)
+  ✓  21 [public-desktop] › tests/published.spec.ts:21:1 › publicado: MSW controla APIs e cliente Socket.IO conecta na origem HTTPS (4.4s)
+  ✓  20 [public-mobile] › tests/published.spec.ts:12:51 › publicado: acesso direto e refresh /favoritos (7.2s)
+  ✓  23 [public-mobile] › tests/published.spec.ts:21:1 › publicado: MSW controla APIs e cliente Socket.IO conecta na origem HTTPS (4.3s)
+  ✓  22 [public-desktop] › tests/published.spec.ts:36:1 › publicado: login inválido/válido, refresh da sessão e logout (7.2s)
+  ✓  24 [public-mobile] › tests/published.spec.ts:36:1 › publicado: login inválido/válido, refresh da sessão e logout (7.1s)
+  ✓  25 [public-desktop] › tests/published.spec.ts:51:1 › publicado: catálogo → carrinho visitante → login → checkout → recibo confirmado (14.7s)
+  ✓  26 [public-mobile] › tests/published.spec.ts:51:1 › publicado: catálogo → carrinho visitante → login → checkout → recibo confirmado (16.9s)
+  ✓  27 [public-desktop] › tests/published.spec.ts:84:1 › publicado: nft.updated invalida cotação e exige novo aceite (10.1s)
+  ✓  28 [public-mobile] › tests/published.spec.ts:84:1 › publicado: nft.updated invalida cotação e exige novo aceite (9.1s)
+  ✓  29 [public-desktop] › tests/published.spec.ts:98:1 › publicado: pedido confirma offline e reconexão recupera o mesmo pedido (9.9s)
+  ✓  30 [public-mobile] › tests/published.spec.ts:98:1 › publicado: pedido confirma offline e reconexão recupera o mesmo pedido (10.1s)
+  ✓  31 [public-desktop] › tests/published.spec.ts:120:1 › publicado: Alice/Bob isolam dados privados, pedidos e eventos (10.5s)
+  ✓  32 [public-mobile] › tests/published.spec.ts:120:1 › publicado: Alice/Bob isolam dados privados, pedidos e eventos (8.6s)
+
+  32 passed (2.2m)

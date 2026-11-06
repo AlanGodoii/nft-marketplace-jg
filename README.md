@@ -1,8 +1,8 @@
 # Kurio — Jungle Gaming NFT Marketplace
 
-Etapa5: perfil/avatar/senha, configuração de publicação, baselines e auditorias. **Deploy público ainda não publicado/validado.** Publique a branch `feat/etapa5-finalizacao` antes do merge seguindo [DEPLOYMENT.md](docs/DEPLOYMENT.md) e envie a URL HTTPS para validar compra/Socket.IO. Entrega/resultados: [STAGE5_DELIVERY.md](docs/STAGE5_DELIVERY.md). A main de base eb156f5 já contém o PR5; referências antigas à integração são históricas.
+Etapa5: perfil/avatar/senha, configuração de publicação, baselines e auditorias. **Publicado e validado em https://nft-marketplace-jg-psi.vercel.app/**:32/32 testes HTTPS desktop/mobile, incluindo compra/recibo e Socket.IO. Source da Vercel: main ad6dfbc, merge PR6/head Etapa5 36bd750. Evidências e escopo: [PUBLISHED_VALIDATION.md](docs/PUBLISHED_VALIDATION.md). Instruções de publicação/revalidação em [DEPLOYMENT.md](docs/DEPLOYMENT.md). Entrega/resultados: [STAGE5_DELIVERY.md](docs/STAGE5_DELIVERY.md). A Etapa5 já está integrada à main pelo PR6; a origem publicada é ad6dfbc. A validação posterior está na branch fix/validacao-deploy-vercel. Referências anteriores à branch da Etapa5 não integrada são históricas.
 
-> A main de base já contém as Etapas1–4 pelo PR5. Histórico da correção anterior em [STAGE4_MAIN_INTEGRATION.md](docs/STAGE4_MAIN_INTEGRATION.md). A Etapa5 está em branch própria para revisão, sem merge automático.
+> A main contém as Etapas1–5, incluindo PR6. Histórico da integração anterior em [STAGE4_MAIN_INTEGRATION.md](docs/STAGE4_MAIN_INTEGRATION.md). Este novo trabalho registra a validação pública e prepara testes/documentação em PR próprio, sem merge automático.
 
 React/TypeScript, TanStack Router/Query, Axios, Tailwindv4/shadcn/ui, RHF/Zod, MSW e Socket.IO. A aplicação integra **perfil/avatar/senha, carteiras, checkout, pedidos idempotentes e recibos com tempo real**, preservando catálogo36NFTs, autenticação, favoritos e carrinho das etapas anteriores.
 
@@ -109,9 +109,9 @@ Chromium já instalado pode ser selecionado com PLAYWRIGHT_CHROMIUM_EXECUTABLE. 
 
 ## Pendências e revisão
 
-Assets originais do Figma continuam bloqueados403, sem substituição por imagens arbitrárias. Slots estão preparados. Perfil completo e baselines estão implementados; Lighthouse possui configuração e relatórios reais em reports/lighthouse. **Fidelidade integral/assets e deploy público continuam pendentes. Performance do detalhe mobile:84, abaixo da meta90.** Não há integração real com blockchain/extensões/gateways, conforme o desafio.
+Assets originais do Figma continuam bloqueados403, sem substituição por imagens arbitrárias. Slots estão preparados. Perfil completo e baselines estão implementados; Lighthouse possui configuração e relatórios reais em reports/lighthouse. **Fidelidade integral/assets continuam pendentes. Performance local anterior do detalhe mobile:84, abaixo da meta90; não reauditada no host público nesta rodada.** Não há integração real com blockchain/extensões/gateways, conforme o desafio.
 
-A etapa5 parte de main eb156f5, na branch feat/etapa5-finalizacao. Os PRs3–5 já estão integrados; a nova etapa requer revisão própria. Commits estão organizados por checkpoint, sem merge automático. A aprovação técnica/nota da Jungle Gaming não é inferida pelos testes locais.
+Histórico: a Etapa5 partiu de main eb156f5 na branch feat/etapa5-finalizacao e foi integrada pelo PR6 em ad6dfbc. Este PR de validação pública parte dessa main e não altera a aplicação. A aprovação técnica/nota da Jungle Gaming não é inferida pelos testes locais.
 
 
 ## Perfil e verificações da etapa5
@@ -131,4 +131,13 @@ Com preview rodando, em outro terminal execute `npm run lighthouse`. São12audit
 Baselines e regras de atualização: [BASELINES.md](docs/BASELINES.md). Exports manuais do Figma e diferenças conhecidas: [VISUAL_REVIEW.md](docs/VISUAL_REVIEW.md). Não trocar slots de arte por imagens aleatórias nem atualizar todos os snapshots sem revisão.
 
 
-Validação final desta etapa: **206/206 testes em desenvolvimento (16.4m)**, **38/38 selecionados no build otimizado (1.9m)** e **12/12 comparações visuais estritas (21.7s)**. Tipos/lint/build/demo e instalação limpa aprovados. Falhas intermediárias, agrupamento sem ampliar timeout, relatórios e limitações estão em STAGE5_DELIVERY.md. Lighthouse completo foi executado, mas **Performance do detalhe mobile84 permanece abaixo de90**; não se declara aprovação integral nem publicação validada.
+Validação final desta etapa: **206/206 testes em desenvolvimento (16.4m)**, **38/38 selecionados no build otimizado (1.9m)** e **12/12 comparações visuais estritas (21.7s)**. Tipos/lint/build/demo e instalação limpa aprovados. Falhas intermediárias, agrupamento sem ampliar timeout, relatórios e limitações estão em STAGE5_DELIVERY.md. Lighthouse completo foi executado, mas **Performance do detalhe mobile84 permanece abaixo de90**; não se declara aprovação integral. A publicação foi validada posteriormente em PUBLISHED_VALIDATION.md, sem nova medição Lighthouse.
+
+
+## Validar a implantação publicada
+
+```sh
+TEST_BASE_URL=https://nft-marketplace-jg-psi.vercel.app/ npm run test:published -- --workers=2
+```
+
+Suíte própria com32casos, contextos isolados e TLS ativo. Setup PowerShell, ambiente proxy opcional, relatório HTML/JSON/capturas e SHA confirmado em docs/PUBLISHED_VALIDATION.md. A suíte local anterior continua com206testes e não é confundida com esta execução pública. A janela comprovada foi06/11/2026 01:45–01:47 America/Sao_Paulo; manter a URL ativa durante a avaliação continua sendo uma responsabilidade operacional.

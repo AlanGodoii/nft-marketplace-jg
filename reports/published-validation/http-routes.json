@@ -1,0 +1,105 @@
+{
+  "url": "https://nft-marketplace-jg-psi.vercel.app",
+  "checkedAt": "2026-11-06T04:45:07.975231+00:00",
+  "results": [
+    {
+      "path": "/",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/login",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/cadastro",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/nfts/nft-002",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/carrinho",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/checkout",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/perfil",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/carteiras",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/pedido/confirmacao",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/favoritos",
+      "status": 200,
+      "contentType": "text/html; charset=utf-8",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "serviceWorkerAllowed": null,
+      "bytes": 2493,
+      "hasAppEntry": true
+    },
+    {
+      "path": "/mockServiceWorker.js",
+      "status": 200,
+      "contentType": "application/javascript; charset=utf-8",
+      "cacheControl": "no-cache, no-store, must-revalidate",
+      "serviceWorkerAllowed": "/",
+      "bytes": 12754,
+      "hasAppEntry": false
+    }
+  ]
+}
