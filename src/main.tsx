@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import './index.css'
+import './figma.css'
 
 async function bootstrap() {
   // Download/evaluate React DOM while the independent mock runtime starts.

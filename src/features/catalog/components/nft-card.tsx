@@ -1,10 +1,11 @@
+import { FavoriteButton } from '@/features/favorites/favorite-button'
 import { Link } from '@tanstack/react-router'
 import { ArrowUpRight, ImageOff } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import type { Nft } from '../types'
 
-export function NftCard({ nft }: { nft: Nft }) {
+export function NftCard({ nft, showFavorite = false }: { nft: Nft; showFavorite?: boolean }) {
   return (
     <Card className="nft-card">
       <Link to="/nfts/$nftId" params={{ nftId: nft.id }} className="nft-card-link">
@@ -26,6 +27,7 @@ export function NftCard({ nft }: { nft: Nft }) {
           </div>
         </CardContent>
       </Link>
+      {showFavorite && <div className="card-favorite"><FavoriteButton nft={nft} compact /></div>}
     </Card>
   )
 }

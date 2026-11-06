@@ -1,3 +1,5 @@
+import { useDesktop } from '@/lib/use-desktop'
+import { AccountLayout } from '@/components/layout/account-layout'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -15,8 +17,8 @@ function WalletForm({ wallet, close }: { wallet?: Wallet; close: () => void }) {
     label: '', role: 'secondary', network: 'ethereum', address: '', provider: 'metamask', secondaryAddress: '',
     collector: { displayName: session.data?.user.name ?? '', username: '', profileName: '', email: session.data?.user.email ?? '', referralCode: '', ensName: '', notes: '' },
   } })
-  return <form noValidate className="commerce-panel space-y-6" aria-label={wallet ? 'Editar carteira' : 'Cadastrar carteira'} onSubmit={form.handleSubmit(values => save.mutate({ id: wallet?.id, input: values }, { onSuccess: close }))}>
-    <h2 className="text-xl font-bold">{wallet ? 'Editar carteira' : 'Cadastrar carteira'}</h2>
+  return <form noValidate className="commerce-panel wallet-form space-y-6" aria-label={wallet ? 'Editar carteira' : 'Cadastrar carteira'} onSubmit={form.handleSubmit(values => save.mutate({ id: wallet?.id, input: values }, { onSuccess: close }))}>
+    <h2 className="text-xl font-bold">{wallet?.role === 'primary' ? 'Carteira principal' : wallet ? 'Carteira secundária' : 'Cadastrar carteira'}</h2><p className="wallet-form-description">Estas carteiras ficam disponíveis no pagamento e para receber NFTs comprados na simulação.</p>
     <CollectorFields form={form} prefix="wallet" />
     <div className="commerce-form-grid">
       <div><label htmlFor="wallet-label">Apelido da carteira</label><Input id="wallet-label" {...form.register('label')} aria-invalid={!!form.formState.errors.label} aria-describedby="wallet-label-error" /><p id="wallet-label-error" className="field-error">{form.formState.errors.label?.message}</p></div>
@@ -31,12 +33,15 @@ function WalletForm({ wallet, close }: { wallet?: Wallet; close: () => void }) {
   </form>
 }
 export function WalletsPage() {
+  const desktop = useDesktop()
   const query = useWallets(); const [editing, setEditing] = useState<Wallet | 'new' | null>(null)
-  return <section className="space-y-8"><h1 className="text-3xl font-bold">Carteiras</h1><p>Gerencie sua carteira principal e secundária. A conexão é simulada, sem extensões.</p>
+  const defaultWallet = query.data?.items.find(wallet=>wallet.role === 'primary')
+  const selectedWallet = editing === 'new' ? undefined : editing ?? (desktop ? defaultWallet : undefined)
+  return <AccountLayout><section className="wallets-page space-y-8"><h1 className="text-3xl font-bold">Carteiras</h1><p>Gerencie sua carteira principal e secundária. A conexão é simulada, sem extensões.</p>
     {query.isPending ? <LoadingState label="Carregando carteiras" /> : query.isError ? <ErrorState message={apiErrorMessage(query.error)} retry={() => void query.refetch()} /> : <>
-      <div className="wallet-list">{query.data.items.length ? query.data.items.map(wallet => <article className="commerce-panel space-y-3" data-testid="wallet-card" key={wallet.id}><h2 className="font-bold">{wallet.label} · {wallet.role === 'primary' ? 'Principal' : 'Secundária'}</h2><p>{wallet.network} · {wallet.provider}</p><p className="break-all">{wallet.address}</p><Button variant="outline" onClick={() => setEditing(wallet)}>Editar {wallet.label}</Button></article>) : <p role="status">Nenhuma carteira cadastrada.</p>}</div>
+      <div className="wallet-list">{query.data.items.length ? query.data.items.map(wallet => <article className="commerce-panel space-y-3" data-testid="wallet-card" data-wallet-role={wallet.role} key={wallet.id}><h2 className="font-bold">{wallet.label} · {wallet.role === 'primary' ? 'Principal' : 'Secundária'}</h2><p>{wallet.network} · {wallet.provider}</p><p className="break-all">{wallet.address}</p><Button variant="outline" onClick={() => setEditing(wallet)}>Editar {wallet.label}</Button></article>) : <p role="status">Nenhuma carteira cadastrada.</p>}</div>
       {!editing && <Button onClick={() => setEditing('new')}>Adicionar carteira</Button>}
-      {editing && <WalletForm wallet={editing === 'new' ? undefined : editing} close={() => setEditing(null)} key={editing === 'new' ? 'new' : `${editing.id}-${editing.version}`} />}
+      {(editing || desktop) && <WalletForm wallet={selectedWallet} close={() => setEditing(null)} key={editing === 'new' ? 'new' : `${selectedWallet?.id ?? 'new'}-${selectedWallet?.version ?? 0}`} />}
     </>}
-  </section>
+  </section></AccountLayout>
 }

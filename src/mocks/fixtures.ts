@@ -1,3 +1,4 @@
+import { originalArtwork } from '@/lib/artwork'
 import type { Collection, Network, Nft } from '@/contracts/nft'
 
 export const collections: Collection[] = [
@@ -20,7 +21,7 @@ export function createNftFixtures(): Nft[] {
       id: `nft-${number}`, name,
       description: 'Colecionável da simulação determinística do marketplace Kurio.',
       collection: { ...collections[index % 3] }, network: { ...networks[Math.floor(index / 3) % 3] },
-      // Original Figma art has not been imported. Do not substitute arbitrary imagery.
+      // Legacy persisted art slots are enriched at the API read boundary below.
       image: { src: null, alt: `Arte original de ${name} ainda não disponível` },
       creator: { id: 'kurio-studio', name: 'Estúdio Kurio' },
       gallery: Array.from({ length: 4 }, (_, view) => ({ src: null, alt: `Arte original de ${name} — vista ${view + 1} indisponível` })),
@@ -36,9 +37,9 @@ export function createNftFixtures(): Nft[] {
 // Original art cropped from the owner's Figma exports; presentation only.
 // These six existing series retain their IDs, names, stock and decimal prices.
 export function withDesktopArtwork(nft: Nft): Nft {
-  const asset = nft.name.startsWith('Emerald Ape') ? 'emerald-ape'
-    : /^(Sage Nomad|Cosmic Bloom|Violet Nomad)/.test(nft.name) ? 'sage-nomad'
-      : /^(Neon Vessel|Ivory Baron)/.test(nft.name) ? 'neon-vessel' : undefined
-  return asset && !nft.image.src && !nft.image.desktopSrc
-    ? { ...nft, image: { ...nft.image, desktopSrc: `/assets/figma/home/${asset}.webp` } } : nft
+  const src = nft.image.src ?? nft.image.desktopSrc ?? originalArtwork(nft.name)
+  if (!src) return nft
+  return { ...nft, image: { ...nft.image, src, desktopSrc: src, alt: `Arte original de ${nft.name}` },
+    gallery: nft.gallery.map(entry => entry.src ? entry : { ...entry, src, desktopSrc: src, alt: `Arte original de ${nft.name} (mesma obra)` }),
+  }
 }

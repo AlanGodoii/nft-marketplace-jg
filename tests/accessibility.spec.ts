@@ -37,7 +37,8 @@ test('perfil: teclado, foco, zoom200% e movimento reduzido', async ({ page }) =>
   await page.emulateMedia({ reducedMotion: 'reduce' })
   await page.getByLabel('Nome de exibição', { exact: true }).focus()
   await page.keyboard.press('Tab')
-  await expect(page.getByLabel('E-mail', { exact: true })).toBeFocused()
+  await expect(page.getByLabel('Nome de usuário', { exact: true })).toBeFocused()
+  await page.getByText('Informações adicionais', { exact: true }).click()
   await page.getByLabel('Biografia').focus()
   expect(await page.getByLabel('Biografia').evaluate(node => getComputedStyle(node).outlineStyle)).not.toBe('none')
   // CSS zoom doubles actual content size in a fixed viewport; check reflow and usable controls.

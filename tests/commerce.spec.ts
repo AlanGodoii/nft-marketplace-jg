@@ -17,19 +17,20 @@ async function login(page: Page, who: 'alice' | 'bob' = 'alice', destination = '
   await expect(page.getByLabel('Usuário conectado')).toHaveText(who === 'alice' ? 'Alice' : 'Bob')
 }
 async function logout(page: Page) {
+  if (!await page.getByRole('button', { name: 'Sair', exact: true }).isVisible()) await page.getByRole('button', { name: 'Abrir menu' }).click()
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
   await expect(page.getByLabel('Usuário conectado')).toHaveCount(0)
-  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
 }
 async function detail(page: Page, id = 'nft-002') {
   await page.goto(`/nfts/${id}`)
   await expect(page.locator('.detail-info h1')).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Adicionar ao carrinho', exact: true })).toBeEnabled()
+  await expect(page.getByRole('button', { name: 'Comprar', exact: true })).toBeEnabled()
 }
 async function add(page: Page, id = 'nft-002', quantity = 1) {
   await detail(page, id)
   await page.getByLabel('Quantidade', { exact: true }).fill(String(quantity))
-  await page.getByRole('button', { name: 'Adicionar ao carrinho', exact: true }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByText('NFT adicionado ao carrinho.', { exact: false })).toBeVisible()
 }
 async function cart(page: Page, count: number) {
@@ -40,7 +41,7 @@ async function cart(page: Page, count: number) {
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/login')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   expect((await mock(page, '/api/__mock/reset', { name: 'normal', latencyMs: 20 })).status).toBe(200)
 })
 
@@ -89,7 +90,7 @@ test('login válido, inválido e sessão persistente após refresh', async ({ pa
 test('protege todas as rotas privadas e preserva retorno com parâmetros', async ({ page }) => {
   for (const path of ['/checkout', '/perfil', '/carteiras', '/favoritos', '/pedido/confirmacao']) {
     await page.goto(`${path}?origem=teste`)
-    await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+    await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
     expect(new URL(page.url()).searchParams.get('redirect')).toBe(`${path}?origem=teste`)
   }
   await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
@@ -101,22 +102,22 @@ test('protege todas as rotas privadas e preserva retorno com parâmetros', async
 
 test('logout revoga sessão e protege novo acesso', async ({ page }) => {
   await login(page, 'alice', '/perfil')
-  await expect(page.getByRole('heading', { name: 'Perfil', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Perfil do colecionador', exact: true })).toBeVisible()
   await logout(page)
   await page.goto('/perfil')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
 })
 
 test('expiração durante navegação exige login e retorna à rota original', async ({ page }) => {
   await login(page)
   await mock(page, '/api/__mock/session/expire')
   await page.goto('/perfil')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   expect(new URL(page.url()).searchParams.get('redirect')).toBe('/perfil')
   await page.getByLabel('E-mail', { exact: true }).fill('alice@kurio.test')
   await page.getByLabel('Senha', { exact: true }).fill('Kurio123!')
   await page.getByRole('button', { name: 'Entrar', exact: true }).click()
-  await expect(page.getByRole('heading', { name: 'Perfil', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Perfil do colecionador', exact: true })).toBeVisible()
 })
 
 test('expiração durante mutation privada limpa contexto e exige autenticação', async ({ page }) => {
@@ -125,7 +126,7 @@ test('expiração durante mutation privada limpa contexto e exige autenticação
   await expect(page.getByRole('button', { name: 'Adicionar aos favoritos' })).toBeEnabled()
   await mock(page, '/api/__mock/session/expire')
   await page.getByRole('button', { name: 'Adicionar aos favoritos' }).click()
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   expect(new URL(page.url()).searchParams.get('redirect')).toBe('/nfts/nft-002')
   await expect(page.getByLabel('Usuário conectado')).toHaveCount(0)
 })
@@ -137,7 +138,7 @@ test('tempo de sessão controlado revalida pela API e recebe 401', async ({ page
   const expired = page.waitForResponse(r => r.url().endsWith('/api/auth/session') && r.status() === 401)
   await page.clock.fastForward(2200)
   expect((await expired).fromServiceWorker()).toBe(true)
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
 })
 
 test('troca de usuário mantém favoritos e carrinhos isolados', async ({ page }) => {
@@ -165,7 +166,7 @@ test('acesso direto ao detalhe, galeria, edição e limite de quantidade', async
   await page.getByLabel('Edição', { exact: true }).selectOption('edition-002-limited')
   await expect(page.getByLabel('Quantidade', { exact: true })).toHaveAttribute('max', '2')
   await page.getByLabel('Quantidade', { exact: true }).fill('3')
-  await page.getByRole('button', { name: 'Adicionar ao carrinho' }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByText('A quantidade excede o estoque da edição.', { exact: true })).toBeVisible()
 })
 
@@ -174,7 +175,7 @@ test('NFT inexistente e edição esgotada', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'NFT não encontrado' })).toBeVisible()
   await page.goto('/nfts/nft-001')
   await expect(page.getByRole('heading', { name: 'Emerald Ape #001' })).toBeVisible()
-  await expect(page.getByRole('button', { name: 'Adicionar ao carrinho' })).toBeDisabled()
+  await expect(page.getByRole('button', { name: 'Comprar', exact: true })).toBeDisabled()
   await expect(page.getByText('Edição esgotada ou indisponível', { exact: true })).toBeVisible()
 })
 
@@ -216,7 +217,7 @@ test('mutation pendente é encerrada ao trocar a sessão sem vazar favorito', as
 
 test('adiciona, combina mesma edição, altera quantidade, persiste e remove', async ({ page }) => {
   await add(page)
-  await page.getByRole('button', { name: 'Adicionar ao carrinho' }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByText('NFT adicionado ao carrinho.', { exact: false })).toBeVisible()
   await cart(page, 1)
   const row = page.getByTestId('cart-item')
@@ -292,7 +293,7 @@ test('estoque alterado bloqueia adição sem perder itens existentes', async ({ 
   // Preserve the REST stale-stock race even when live updates are available.
   await mock(page, '/api/__mock/socket', { action: 'disconnect' })
   await mock(page, '/api/__mock/stock', { nftId: 'nft-002', editionId: 'edition-002', remaining: 0 })
-  await page.getByRole('button', { name: 'Adicionar ao carrinho' }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('Quantidade indisponível')
   await cart(page, 1)
   await expect(page.getByTestId('cart-item')).toContainText('Neon Vessel #003')
@@ -301,9 +302,9 @@ test('estoque alterado bloqueia adição sem perder itens existentes', async ({ 
 test('falha transitória de carrinho preserva dados e permite tentar novamente', async ({ page }) => {
   await detail(page)
   await configure(page, { name: 'normal', latencyMs: 20, faults: { 'cart.add': { status: 500, times: 1 } } })
-  await page.getByRole('button', { name: 'Adicionar ao carrinho' }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByRole('alert')).toContainText('Tente novamente')
-  await page.getByRole('button', { name: 'Adicionar ao carrinho' }).click()
+  await page.getByRole('button', { name: 'Comprar', exact: true }).click()
   await expect(page.getByText('NFT adicionado ao carrinho.', { exact: false })).toBeVisible()
   await cart(page, 1)
 })
@@ -363,7 +364,8 @@ for (const width of [390, 768, 1440]) {
     await expect(page.getByText('Seu carrinho está vazio.', { exact: true })).toBeVisible()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
     await page.goto('/cadastro')
-    await expect(page.getByRole('dialog')).toBeVisible()
+    if(width>=1024) await expect(page.getByRole('dialog')).toBeVisible()
+    else await expect(page.getByRole('heading',{name:'Criar perfil de colecionador'})).toBeVisible()
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
   })
 }
@@ -424,12 +426,12 @@ test('falha ao verificar sessão oferece recuperação sem descartar credenciais
   await expect(page.getByRole('alert')).toContainText('verificar a sessão')
   await configure(page, { name: 'normal', latencyMs: 20 })
   await page.getByRole('button', { name: 'Tentar novamente' }).click()
-  await expect(page.getByRole('heading', { name: 'Perfil', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Perfil do colecionador', exact: true })).toBeVisible()
   await expect(page.getByLabel('Usuário conectado')).toHaveText('Alice')
 })
 
 test('retorno de login não permite redirecionar para domínio externo', async ({ page }) => {
   await login(page, 'alice', '//example.com')
   expect(new URL(page.url()).pathname).toBe('/')
-  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /SEJA DONO D[OA]/ })).toBeVisible()
 })

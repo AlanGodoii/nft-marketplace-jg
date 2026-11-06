@@ -19,19 +19,19 @@ async function loaded(page: Page, count = 6) {
 async function filters(page: Page) {
   if (await page.locator('.desktop-filters').isVisible()) return page.locator('.desktop-filters')
   const panel = page.locator('.mobile-filters')
-  if (await panel.getAttribute('open') === null) await panel.locator('summary').click()
+  if (await panel.getAttribute('open') === null) await page.getByRole('button', { name: 'Abrir filtros do catálogo' }).click()
   return panel
 }
 
 // Scenario selection itself crosses MSW. Never page.route/route.fulfill or set React state.
 test.beforeEach(async ({ page }) => {
   await page.goto('/login')
-  await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
+  await expect(page.getByRole('heading', { name: 'Entrar', exact: true })).toBeVisible()
   await reset(page)
 })
 
 test('carrega catálogo por Axios e handlers MSW com contratos completos', async ({ page }) => {
-  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts')
+  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts' && new URL(response.url()).searchParams.get('pageSize') === '6')
   await page.goto('/')
   const response = await responsePromise
   expect(response.fromServiceWorker()).toBe(true)
@@ -98,7 +98,7 @@ test('ordena preço crescente e decrescente com precisão decimal', async ({ pag
 })
 
 test('filtra e ordena diferenças além da precisão de number', async ({ page }) => {
-  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts')
+  const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === '/api/nfts' && new URL(response.url()).searchParams.get('pageSize') === '6')
   await page.goto('/?minPrice=0.390000000000000001&maxPrice=0.390000000000000002&sort=price-asc')
   expect(new URL((await responsePromise).url()).searchParams.get('minPrice')).toBe('0.390000000000000001')
   await loaded(page)

@@ -1,5 +1,5 @@
-import { Search } from 'lucide-react'
-import { Input } from '@/components/ui/input'
+import { useDesktop } from '@/lib/use-desktop'
+import { CatalogSearch } from './catalog-search'
 import type { CatalogControls } from '../types'
 
 interface Props extends Pick<CatalogControls, 'filters' | 'onFiltersChange'> {
@@ -8,6 +8,7 @@ interface Props extends Pick<CatalogControls, 'filters' | 'onFiltersChange'> {
 }
 
 export function CatalogToolbar({ total, filters, onFiltersChange, disabled }: Props) {
+  const desktop = useDesktop()
   return (
     <div className="catalog-toolbar">
       <div className="desktop-catalog-tabs desktop-home-only" role="group" aria-label="Categorias do catálogo" aria-describedby="catalog-tabs-policy">
@@ -19,13 +20,7 @@ export function CatalogToolbar({ total, filters, onFiltersChange, disabled }: Pr
         <p className="text-xs text-muted-foreground">{total !== undefined ? `${total} NFTs encontrados` : 'Catálogo indisponível'}</p>
       </div>
       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-        <div className="relative min-w-0 flex-1">
-          <label htmlFor="nft-search" className="sr-only">Buscar NFTs</label>
-          <Search aria-hidden="true" className="pointer-events-none absolute top-3.5 left-3 size-4 text-muted-foreground" />
-          <Input id="nft-search" type="search" placeholder="Buscar NFTs" value={filters.search} disabled={disabled}
-            onChange={event => onFiltersChange({ ...filters, search: event.target.value })}
-            className="h-11 rounded-sm pl-10" />
-        </div>
+        {desktop && <CatalogSearch filters={filters} onFiltersChange={onFiltersChange} disabled={disabled} />}
         <div className="flex items-center gap-3">
           <label htmlFor="nft-sort" className="shrink-0 text-xs text-muted-foreground">Ordenar por</label>
           <select id="nft-sort" className="kurio-select min-w-0 flex-1 sm:w-40" disabled={disabled} value={filters.sort}

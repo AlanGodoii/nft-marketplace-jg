@@ -3,10 +3,10 @@ import { login, reset } from './helpers/market'
 
 const groups = [
   { name: 'públicas', private: false, routes: [
-    ['/', /Descubra o seu|SEJA DONO DO FUTURO/], ['/nfts/nft-002', 'Sage Nomad #002'], ['/carrinho', 'Carrinho'], ['/login', 'Login'], ['/cadastro', 'Cadastro'],
+    ['/', /SEJA DONO D[OA]/], ['/nfts/nft-002', 'Sage Nomad #002'], ['/carrinho', 'Carrinho'], ['/login', 'Entrar'], ['/cadastro', /Criar conta|Criar perfil de colecionador/],
   ] as const },
   { name: 'privadas', private: true, routes: [
-    ['/checkout', 'Checkout'], ['/pedido/confirmacao', 'Confirmação do pedido'], ['/perfil', 'Perfil'], ['/carteiras', 'Carteiras'], ['/favoritos', 'Favoritos'],
+    ['/checkout', 'Checkout'], ['/pedido/confirmacao', 'Confirmação do pedido'], ['/perfil', 'Perfil do colecionador'], ['/carteiras', 'Carteiras'], ['/favoritos', 'Favoritos'],
   ] as const },
 ]
 for (const group of groups) test(`SPA: acesso direto e refresh das rotas ${group.name}`, async ({ page }) => {
