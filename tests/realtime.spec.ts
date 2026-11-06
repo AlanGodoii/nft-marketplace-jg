@@ -152,7 +152,7 @@ test('D: troca de usuário encerra socket anterior e rejeita evento privado de o
   const order = (await request(page, `/api/orders/${id}`, 'GET')).body
   const aliceSession = (await request(page, '/api/__mock/socket/stats', 'GET')).body.sessionId
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
   await login(page, 'bob', '/pedido/confirmacao')
   await expect(page.getByText('Nenhum pedido selecionado. Você ainda não tem pedidos.')).toBeVisible()
   await expect(page.getByTestId('realtime-status')).toHaveAttribute('data-transport', 'websocket')

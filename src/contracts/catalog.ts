@@ -3,6 +3,7 @@ import { ethSchema } from './nft'
 
 const priceFilter = z.union([z.literal(''), ethSchema]).default('')
 export const catalogFields = {
+  tab: z.enum(['all', 'new', 'trending']).default('all'),
   search: z.string().max(120).default(''),
   collection: z.string().max(80).default(''),
   network: z.string().max(80).default(''),

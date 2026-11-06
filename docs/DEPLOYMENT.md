@@ -1,6 +1,12 @@
 # Publicação da demonstração Kurio
 
-## Vercel
+## Atualizar a Home desktop
+
+Produção anterior: https://nft-marketplace-jg-psi.vercel.app/, Source mainad6dfbc. A revisão visual está na branch `feat/fidelidade-home-desktop` e ainda não está publicada. No projeto Vercel existente, abra **Deployments → Create Deployment**, selecione essa Git Reference e confira o SHA do PR. Build `npm run build:demo`, saída `dist`, flags públicas de mocks e regras de SPA/worker permanecem as mesmas.
+
+Valide o Preview em1280/1440/1920 e mobile390/768, acesso/refresh das rotas, login, compra/recibo e Socket.IO. Após revisão, o proprietário pode integrar o PR à main para acionar a publicação Git de produção. Não promover o Preview ou declarar o novo visual publicado sem conferir Source/SHA e a URL HTTPS. Procedência dos assets e resultados: [DESKTOP_HOME_FIDELITY.md](DESKTOP_HOME_FIDELITY.md).
+
+## Vercel — instruções originais da Etapa5 (histórico)
 
 1. Acesse https://vercel.com/new e importe `AlanGodoii/nft-marketplace-jg` pela sua conta GitHub.
 2. A importação pode usar `main` inicialmente. Para publicar esta etapa antes do merge, abra **Deployments → Create Deployment**, informe a Git Reference **feat/etapa5-finalizacao** e confirme o SHA mais recente dessa branch. Essa implantação terá sua própria URL HTTPS. Não avalie a Etapa5 usando uma implantação antiga da main.

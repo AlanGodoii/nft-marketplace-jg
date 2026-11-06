@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { apiErrorMessage } from '@/lib/api'
 import { logout, useSession } from './api'
 import { adoptSession } from './lifecycle'
-export function AuthActions() {
+export function AuthActions({ showName = true }: { showName?: boolean }) {
   const session = useSession()
   const router = useRouter()
   const mutation = useMutation({ mutationFn: logout, retry: false, onSuccess: async () => {
@@ -14,7 +14,7 @@ export function AuthActions() {
   } })
   if (!session.data) return null
   return <div className="session-actions">
-    <span className="text-xs" aria-label="Usuário conectado">{session.data.user.name}</span>
+    {showName && <span className="text-xs" aria-label="Usuário conectado">{session.data.user.name}</span>}
     <Button variant="outline" disabled={mutation.isPending} onClick={() => mutation.mutate()}>Sair</Button>
     {mutation.isError && <span role="alert" className="text-xs">{apiErrorMessage(mutation.error)}</span>}
   </div>

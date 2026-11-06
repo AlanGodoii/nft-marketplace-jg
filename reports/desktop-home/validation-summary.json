@@ -1,0 +1,67 @@
+{
+  "applicationCommit": "f1cb94587daf65ccd73d2f855da4bd7a75373702",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "work/desktop/typecheck-verified.txt"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": "work/desktop/lint-verified.txt"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": "work/desktop/build-verified.txt"
+    },
+    {
+      "command": "npm run build:demo",
+      "exitCode": 0,
+      "log": "work/desktop/build-demo-verified.txt"
+    }
+  ],
+  "functionalWholeRun": {
+    "passed": 212,
+    "failed": 1,
+    "exitCode": 1,
+    "duration": "18.1m",
+    "failure": "SPA rotas privadas:timeout30s durante sobreposição de suítes"
+  },
+  "previewRecovery": {
+    "passed": 45,
+    "failed": 0,
+    "exitCode": 0,
+    "duration": "1.6m",
+    "privateRoutesDesktopSeconds": 8.3,
+    "privateRoutesMobileSeconds": 7.1
+  },
+  "finalHome": {
+    "passed": 7,
+    "failed": 0,
+    "exitCode": 0,
+    "duration": "18.2s"
+  },
+  "visualPreservedAndHome": {
+    "passed": 12,
+    "failed": 0,
+    "exitCode": 0,
+    "duration": "22.2s",
+    "updateSnapshots": "none"
+  },
+  "desktopBaselines": {
+    "passed": 3,
+    "failed": 0,
+    "exitCode": 0,
+    "duration": "8.8s",
+    "updateSnapshots": "none"
+  },
+  "lighthouse": {
+    "performance": 99,
+    "accessibility": 100,
+    "best-practices": 96,
+    "seo": 92
+  },
+  "publicDeploymentOfThisBranch": "not performed or validated"
+}

@@ -4,7 +4,7 @@ import { add, apiQuote, configure, login, request, reset, review } from './helpe
 test.beforeEach(async ({ page }) => reset(page))
 
 const routes = [
-  ['/', /Descubra o seu/, false], ['/nfts/nft-002', 'Sage Nomad #002', false],
+  ['/', /Descubra o seu|SEJA DONO DO FUTURO/, false], ['/nfts/nft-002', 'Sage Nomad #002', false],
   ['/carrinho', 'Carrinho', false], ['/login', 'Login', false], ['/cadastro', 'Cadastro', false],
   ['/checkout', 'Checkout', true], ['/perfil', 'Perfil', true], ['/carteiras', 'Carteiras', true],
   ['/pedido/confirmacao', 'Confirmação do pedido', true], ['/favoritos', 'Favoritos', true],
@@ -132,7 +132,7 @@ test('publicado: Alice/Bob isolam dados privados, pedidos e eventos', async ({ p
   const order = created.body
   const sessionId = (await request(page, '/api/__mock/socket/stats', 'GET')).body.sessionId
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
   await login(page, 'bob', '/pedido/confirmacao')
   await expect(page.getByText('Nenhum pedido selecionado. Você ainda não tem pedidos.')).toBeVisible()
   expect((await request(page, `/api/orders/${order.id}`, 'GET')).status).toBe(404)

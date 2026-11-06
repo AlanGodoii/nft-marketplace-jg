@@ -3,7 +3,7 @@ import { login, reset } from './helpers/market'
 
 const groups = [
   { name: 'públicas', private: false, routes: [
-    ['/', /Descubra o seu/], ['/nfts/nft-002', 'Sage Nomad #002'], ['/carrinho', 'Carrinho'], ['/login', 'Login'], ['/cadastro', 'Cadastro'],
+    ['/', /Descubra o seu|SEJA DONO DO FUTURO/], ['/nfts/nft-002', 'Sage Nomad #002'], ['/carrinho', 'Carrinho'], ['/login', 'Login'], ['/cadastro', 'Cadastro'],
   ] as const },
   { name: 'privadas', private: true, routes: [
     ['/checkout', 'Checkout'], ['/pedido/confirmacao', 'Confirmação do pedido'], ['/perfil', 'Perfil'], ['/carteiras', 'Carteiras'], ['/favoritos', 'Favoritos'],

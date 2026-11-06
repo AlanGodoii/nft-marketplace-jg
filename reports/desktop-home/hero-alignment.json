@@ -1,0 +1,87 @@
+{
+  "method": "Bounding boxes de tinta por limiar RGBA nos recortes locais. Não é score de equivalência integral; antialiasing/compressão/fontes podem alterar pixels. Coordenadas locais ao hero1160x450.",
+  "results": [
+    {
+      "image": "reports/desktop-home/reference/hero.png",
+      "parts": [
+        {
+          "element": "title1",
+          "bbox": [
+            2,
+            88,
+            488,
+            118
+          ]
+        },
+        {
+          "element": "title2",
+          "bbox": [
+            3,
+            158,
+            384,
+            188
+          ]
+        },
+        {
+          "element": "description",
+          "bbox": [
+            1,
+            218,
+            542,
+            275
+          ]
+        },
+        {
+          "element": "button",
+          "bbox": [
+            0,
+            315,
+            139,
+            354
+          ]
+        }
+      ]
+    },
+    {
+      "image": "reports/desktop-home/screenshots/hero-1440.png",
+      "parts": [
+        {
+          "element": "title1",
+          "bbox": [
+            2,
+            88,
+            486,
+            119
+          ]
+        },
+        {
+          "element": "title2",
+          "bbox": [
+            3,
+            158,
+            382,
+            189
+          ]
+        },
+        {
+          "element": "description",
+          "bbox": [
+            1,
+            218,
+            542,
+            276
+          ]
+        },
+        {
+          "element": "button",
+          "bbox": [
+            0,
+            315,
+            139,
+            354
+          ]
+        }
+      ]
+    }
+  ]
+}

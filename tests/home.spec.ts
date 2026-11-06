@@ -8,7 +8,7 @@ for (const width of [390, 768, 1440]) {
     page.on('pageerror', error => errors.push(error.message))
     await page.setViewportSize({ width, height: 1000 })
     await page.goto(baseURL)
-    await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
     await expect(page.locator('.nft-grid .nft-card h3')).toHaveCount(6)
     await expect(page.getByLabel('Buscar NFTs')).toBeEnabled()
     await expect(page.getByRole('button', { name: 'Próxima página' })).toBeEnabled()
@@ -18,9 +18,9 @@ for (const width of [390, 768, 1440]) {
     expect(await page.evaluate(() => document.fonts.check('400 16px "Roboto Mono"'))).toBe(true)
     if (width === 1440) {
       expect(await page.locator('main').evaluate(node => node.getBoundingClientRect().width)).toBe(1200)
-      expect(await page.locator('.header-inner').evaluate(node => node.getBoundingClientRect().height)).toBe(45)
-      expect(await page.locator('.kurio-hero').evaluate(node => node.getBoundingClientRect().height)).toBe(450)
-      expect(await page.locator('.hero-art').evaluate(node => node.getBoundingClientRect().width)).toBe(450)
+      expect(await page.locator('.desktop-header-inner').evaluate(node => node.getBoundingClientRect().height)).toBe(45)
+      expect(await page.locator('.desktop-home-hero').evaluate(node => node.getBoundingClientRect().height)).toBe(450)
+      expect(await page.locator('.desktop-home-hero picture').evaluate(node => node.getBoundingClientRect().width)).toBe(450)
       expect(await page.locator('.desktop-filters').evaluate(node => node.getBoundingClientRect().width)).toBe(310)
       expect(await page.locator('.catalog-toolbar').evaluate(node => node.getBoundingClientRect().width)).toBe(842)
     } else {
@@ -35,7 +35,7 @@ for (const width of [390, 768, 1440]) {
       await expect(page.getByRole('heading', { name: 'Login', exact: true })).toBeVisible()
       await expect(page.locator('.mobile-menu-toggle')).toHaveAttribute('aria-expanded', 'false')
       await page.goBack()
-      await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+      await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
     }
     await page.screenshot({ path: testInfo.outputPath(`kurio-home-${width}.png`), fullPage: true })
     expect(errors).toEqual([])
@@ -64,7 +64,7 @@ for (const status of ['loading', 'success', 'empty', 'error'] as const) {
   test(`catálogo: estado ${status}`, async ({ page }) => {
     await page.setViewportSize({ width: 1440, height: 1000 })
     await page.goto(baseURL)
-    await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+    await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
     await page.evaluate(async variant => {
       const fixturePath = '/tests/fixtures/catalog-preview.tsx'
       const { mountCatalogPreview } = await import(/* @vite-ignore */ fixturePath)

@@ -1,0 +1,18 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/desktop-home.spec.ts --workers=1 --output=work/desktop/hero-verified-results
+
+
+Running 7 tests using 1 worker
+
+(node:172620) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop] › tests/desktop-home.spec.ts:7:3 › Home original desktop: composição, imagens e acessibilidade em 1280px (3.2s)
+  ✓  2 [desktop] › tests/desktop-home.spec.ts:7:3 › Home original desktop: composição, imagens e acessibilidade em 1440px (3.0s)
+  ✓  3 [desktop] › tests/desktop-home.spec.ts:7:3 › Home original desktop: composição, imagens e acessibilidade em 1920px (3.1s)
+  ✓  4 [desktop] › tests/desktop-home.spec.ts:33:1 › header: busca, destino editorial e conta com carrinho real (3.4s)
+  ✓  5 [desktop] › tests/desktop-home.spec.ts:58:1 › abas, contagens reais, combinações, histórico e refresh (2.3s)
+  ✓  6 [desktop] › tests/desktop-home.spec.ts:82:1 › editorial e newsletter informam limites, sem sucesso fictício (1.5s)
+  ✓  7 [desktop] › tests/desktop-home.spec.ts:93:1 › assets enriquecem persistência antiga sem alterar identidade, preço ou estoque (836ms)
+
+  7 passed (18.2s)

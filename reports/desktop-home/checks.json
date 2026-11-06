@@ -1,0 +1,26 @@
+{
+  "measuredAt": "2026-11-06T06:09:18.695526+00:00",
+  "sourceCommit": "f1cb94587daf65ccd73d2f855da4bd7a75373702",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": "work/desktop/typecheck-verified.txt"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": "work/desktop/lint-verified.txt"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": "work/desktop/build-verified.txt"
+    },
+    {
+      "command": "npm run build:demo",
+      "exitCode": 0,
+      "log": "work/desktop/build-demo-verified.txt"
+    }
+  ]
+}

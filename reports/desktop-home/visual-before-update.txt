@@ -1,0 +1,82 @@
+
+> jungle-nft-marketplace@0.0.0 test:visual
+> playwright test --config=playwright.visual.config.ts --workers=1 --output=work/desktop/visual-initial-results
+
+
+Running 12 tests using 1 worker
+
+(node:161137) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [390px] › tests/visual.spec.ts:12:3 › baseline home (9.6s)
+  ✓   2 [390px] › tests/visual.spec.ts:12:3 › baseline detail (8.5s)
+  ✓   3 [390px] › tests/visual.spec.ts:12:3 › baseline cart (12.2s)
+  ✓   4 [390px] › tests/visual.spec.ts:12:3 › baseline checkout (12.7s)
+(node:161689) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   5 [768px] › tests/visual.spec.ts:12:3 › baseline home (7.8s)
+  ✓   6 [768px] › tests/visual.spec.ts:12:3 › baseline detail (9.7s)
+  ✓   7 [768px] › tests/visual.spec.ts:12:3 › baseline cart (12.2s)
+  ✓   8 [768px] › tests/visual.spec.ts:12:3 › baseline checkout (17.0s)
+(node:162362) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘   9 [1440px] › tests/visual.spec.ts:12:3 › baseline home (15.6s)
+(node:162671) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [1440px] › tests/visual.spec.ts:12:3 › baseline detail (9.8s)
+  ✓  11 [1440px] › tests/visual.spec.ts:12:3 › baseline cart (11.5s)
+  ✓  12 [1440px] › tests/visual.spec.ts:12:3 › baseline checkout (18.7s)
+
+
+  1) [1440px] › tests/visual.spec.ts:12:3 › baseline home ──────────────────────────────────────────
+
+    Error: expect(page).toHaveScreenshot(expected) failed
+
+    Timeout: 5000ms
+      Timeout 5000ms exceeded.
+
+      Snapshot: home.png
+
+    Call log:
+      - Expect "toHaveScreenshot(home.png)" with timeout 5000ms
+        - verifying given screenshot expectation
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - Expected an image 1440px by 2087px, received 1440px by 3572px. 2529676 pixels (ratio 0.50 of all image pixels) are different.
+      - waiting 100ms before taking screenshot
+      - taking page screenshot
+        - disabled all CSS animations
+      - waiting for fonts to load...
+      - fonts loaded
+      - Timeout 5000ms exceeded.
+
+
+      20 |     if (screen === 'checkout') await expect(page.getByLabel('Nome de exibição', { exact: true })).toHaveValue('Alice')
+      21 |     await page.evaluate(() => document.fonts.ready)
+    > 22 |     await expect(page).toHaveScreenshot(`${screen}.png`, { fullPage: true })
+         |                        ^
+      23 |   })
+      24 | }
+      25 |
+        at /workspace/nft-marketplace-jg/tests/visual.spec.ts:22:24
+
+    attachment #1: home (image/png) ────────────────────────────────────────────────────────────────
+    Expected: tests/__screenshots__/visual.spec.ts/home-1440px-linux.png
+    Received: work/desktop/visual-initial-results/visual-baseline-home-1440px/home-actual.png
+    Diff:     work/desktop/visual-initial-results/visual-baseline-home-1440px/home-diff.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: work/desktop/visual-initial-results/visual-baseline-home-1440px/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    work/desktop/visual-initial-results/visual-baseline-home-1440px/trace.zip
+    Usage:
+
+        npx playwright show-trace work/desktop/visual-initial-results/visual-baseline-home-1440px/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [1440px] › tests/visual.spec.ts:12:3 › baseline home ───────────────────────────────────────────
+  11 passed (2.6m)

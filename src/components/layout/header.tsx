@@ -1,7 +1,9 @@
 import { AuthActions } from '@/features/auth/auth-actions'
 import { useState } from 'react'
-import { Link } from '@tanstack/react-router'
+import { useDesktop } from '@/lib/use-desktop'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { Menu, ShoppingBag, X } from 'lucide-react'
+import { DesktopHomeHeader } from './desktop-home-header'
 import { Button, buttonVariants } from '@/components/ui/button'
 
 const links = [
@@ -15,8 +17,12 @@ const links = [
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const desktop = useDesktop()
+  const isHome = useRouterState({ select: state => state.location.pathname === '/' })
+  if (desktop && isHome) return <DesktopHomeHeader />
   return (
-    <header className="kurio-header">
+    <>
+    <header className="kurio-header legacy-header">
       <div className="kurio-container header-inner">
         <Link to="/" aria-label="Kurio — início" className="kurio-wordmark" onClick={() => setMenuOpen(false)}>kurio<span aria-hidden="true">.</span></Link>
         <nav id="main-navigation" aria-label="Navegação principal" className={`header-links ${menuOpen ? 'is-open' : ''}`}>
@@ -37,5 +43,6 @@ export function Header() {
         </div>
       </div>
     </header>
+    </>
   )
 }

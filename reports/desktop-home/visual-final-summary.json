@@ -1,0 +1,309 @@
+{
+  "startTime": 1793945592503,
+  "duration": 22189.420000000002,
+  "stats": {
+    "total": 12,
+    "expected": 12,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0,
+    "ok": true
+  },
+  "projectNames": [
+    "390px",
+    "768px",
+    "1440px"
+  ],
+  "files": [
+    {
+      "fileId": "8324bb52c49185e48ff4",
+      "fileName": "visual.spec.ts",
+      "tests": [
+        {
+          "testId": "8324bb52c49185e48ff4-02f1cc861613c9e1ab93",
+          "title": "baseline home",
+          "projectName": "390px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1340,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:12.859Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-e4aafc738d8f3f6be6b4",
+          "title": "baseline detail",
+          "projectName": "390px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1194,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:14.381Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-edaad31b4b5681bf5e7e",
+          "title": "baseline cart",
+          "projectName": "390px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1641,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:15.589Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-db5646f65710a49565c8",
+          "title": "baseline checkout",
+          "projectName": "390px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 2115,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:17.240Z",
+              "workerIndex": 0
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-620cc7e2a8ae63f13dfd",
+          "title": "baseline home",
+          "projectName": "768px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1479,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:19.749Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-3cf0bb65fcae285cf873",
+          "title": "baseline detail",
+          "projectName": "768px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1185,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:21.414Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-4aec973b7f6605e8e32c",
+          "title": "baseline cart",
+          "projectName": "768px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1613,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:22.616Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-f01bb60bc012b50d7fa0",
+          "title": "baseline checkout",
+          "projectName": "768px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 2076,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:24.245Z",
+              "workerIndex": 1
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-b9d82f82ef1df8b0ee5a",
+          "title": "baseline home",
+          "projectName": "1440px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 2258,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:26.748Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-ef0fc5291a79992b04c7",
+          "title": "baseline detail",
+          "projectName": "1440px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1324,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:29.227Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-059eff3525d138efaf49",
+          "title": "baseline cart",
+          "projectName": "1440px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 1692,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:30.565Z",
+              "workerIndex": 2
+            }
+          ]
+        },
+        {
+          "testId": "8324bb52c49185e48ff4-d4605cd6795b097a7333",
+          "title": "baseline checkout",
+          "projectName": "1440px",
+          "location": {
+            "file": "visual.spec.ts",
+            "line": 12,
+            "column": 3
+          },
+          "duration": 2327,
+          "annotations": [],
+          "tags": [],
+          "outcome": "expected",
+          "path": [],
+          "ok": true,
+          "results": [
+            {
+              "attachments": [],
+              "startTime": "2026-11-06T06:13:32.268Z",
+              "workerIndex": 2
+            }
+          ]
+        }
+      ],
+      "stats": {
+        "total": 12,
+        "expected": 12,
+        "unexpected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "ok": true
+      }
+    }
+  ]
+}

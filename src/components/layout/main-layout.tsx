@@ -7,7 +7,7 @@ import { Footer } from './footer'
 export function MainLayout() {
   const isHome = useRouterState({ select: state => state.location.pathname === '/' })
   return (
-    <div className={`flex min-h-dvh flex-col kurio-theme`}>
+    <div className={`flex min-h-dvh flex-col kurio-theme ${isHome ? 'home-desktop' : ''}`}>
       <a href="#conteudo" className="sr-only focus:not-sr-only focus:p-4">Pular para o conteúdo</a>
       <Header />
       <main id="conteudo" className={isHome ? 'kurio-container flex-1 pt-10' : 'kurio-container flex-1 py-12'}>
