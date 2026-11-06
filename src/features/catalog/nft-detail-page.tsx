@@ -45,7 +45,7 @@ function Detail({ nft }: { nft: Nft }) {
           {entry.src ? <img src={entry.src} alt="" /> : <span>Vista {index + 1}</span>}
         </button>)}</div>
         <button type="button" className="detail-art" aria-label="Ampliar arte do NFT" onClick={() => setZoom(true)}>
-          {image.src ? <img src={image.src} alt={image.alt} /> : <span role="img" aria-label={image.alt}>Arte original indisponível</span>}
+          {image.src ? <img src={image.src} alt={image.alt} width="450" height="450" fetchPriority="high" decoding="async" /> : <span role="img" aria-label={image.alt}>Arte original indisponível</span>}
           <Search aria-hidden="true" className="gallery-zoom-icon" />
         </button>
       </div>

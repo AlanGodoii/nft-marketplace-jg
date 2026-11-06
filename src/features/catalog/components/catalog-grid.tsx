@@ -18,7 +18,7 @@ export function CatalogGrid({ catalog, onRetry }: {
     )
   }
   if (catalog.status === 'success' && catalog.data.items.length > 0) {
-    return <div className="nft-grid">{catalog.data.items.map(nft => <NftCard nft={nft} showFavorite={!desktop} key={nft.id} />)}</div>
+    return <div className="nft-grid">{catalog.data.items.map((nft,index) => <NftCard nft={nft} showFavorite={!desktop} priority={index < (desktop ? 3 : 2)} key={nft.id} />)}</div>
   }
   const isError = catalog.status === 'error'
   return (
