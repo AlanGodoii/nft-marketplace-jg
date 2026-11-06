@@ -1,0 +1,11 @@
+{
+  base: '19450010cec6a9b09e7bbc9963d36bb1a7aae780',
+  sourceCommit: '6841f29e6806aa05c093bb53eab51952cf864ff3',
+  nfts: 36,
+  allFixtureFieldsUnchanged: true,
+  beforeSha256: '2f2cd28397f444b6ef0980390d96eee981aa6f2eb886cc38a7fdadbd7a252687',
+  afterSha256: '2f2cd28397f444b6ef0980390d96eee981aa6f2eb886cc38a7fdadbd7a252687',
+  note: 'Comparação integral das fixtures geradas, antes do enriquecimento de apresentação na API; sem reescrever IDs, preços, estoques, edições ou demais campos.'
+}
+(node:249168) ExperimentalWarning: stripTypeScriptTypes is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)

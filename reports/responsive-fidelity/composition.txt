@@ -1,0 +1,51 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/commerce.spec.ts tests/checkout.spec.ts tests/fidelity.spec.ts tests/accessibility.spec.ts --workers=2 --grep adiciona, combina|cupons válido|cálculos preservam|cotação rejeita|compra completa|checkout, carteiras e recibo sem overflow|revisão por teclado|artes originais|stepper respeita|provedor selecionado|acessibilidade das nove|perfil: teclado --reporter=list,html,json --output=work/full-fidelity/composition-results
+
+
+Running 34 tests using 2 workers
+
+(node:224311) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:224312) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 390px grupo1 (8.4s)
+  ✓   2 [desktop] › tests/checkout.spec.ts:141:1 › C: compra completa do catálogo ao recibo confirmado pela API (10.4s)
+  ✓   3 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 390px grupo2 (8.1s)
+  ✓   4 [desktop] › tests/checkout.spec.ts:391:1 › E: revisão por teclado contém foco, exige aceite e retorna foco ao fechar (6.3s)
+  ✓   6 [desktop] › tests/checkout.spec.ts:408:39 › E: checkout, carteiras e recibo sem overflow em 390px (6.7s)
+  ✓   5 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 390px grupo3 (8.9s)
+  ✓   7 [desktop] › tests/checkout.spec.ts:408:39 › E: checkout, carteiras e recibo sem overflow em 768px (7.3s)
+  ✓   8 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 768px grupo1 (8.5s)
+  ✓   9 [desktop] › tests/checkout.spec.ts:408:39 › E: checkout, carteiras e recibo sem overflow em 1440px (8.0s)
+  ✓  10 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 768px grupo2 (8.0s)
+  ✓  11 [desktop] › tests/commerce.spec.ts:218:1 › adiciona, combina mesma edição, altera quantidade, persiste e remove (5.7s)
+  ✓  13 [desktop] › tests/commerce.spec.ts:249:1 › cupons válido, inválido, expirado e remoção usam cotação da API (4.8s)
+  ✓  12 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 768px grupo3 (10.6s)
+  ✓  14 [desktop] › tests/commerce.spec.ts:268:1 › cálculos preservam ETH com 18 casas e múltiplas quantidades (4.6s)
+  ✓  16 [desktop] › tests/commerce.spec.ts:410:1 › cotação rejeita estoque desatualizado e recupera após correção da quantidade (4.9s)
+  ✓  17 [desktop] › tests/fidelity.spec.ts:4:1 › artes originais acompanham detalhe, favoritos, carrinho e checkout pela API (6.2s)
+  ✓  15 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 1440px grupo1 (14.0s)
+  ✓  18 [desktop] › tests/fidelity.spec.ts:15:1 › stepper respeita estoque e atualiza cotação real sem cálculo local (5.2s)
+  ✓  20 [desktop] › tests/fidelity.spec.ts:39:1 › provedor selecionado usa a carteira persistida e não atravessa contas (6.3s)
+(node:225599) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  19 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 1440px grupo2 (11.1s)
+  ✓  21 [mobile] › tests/checkout.spec.ts:141:1 › C: compra completa do catálogo ao recibo confirmado pela API (9.0s)
+  ✓  22 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 1440px grupo3 (10.9s)
+  ✓  23 [mobile] › tests/checkout.spec.ts:391:1 › E: revisão por teclado contém foco, exige aceite e retorna foco ao fechar (5.3s)
+  ✓  24 [desktop] › tests/accessibility.spec.ts:35:1 › perfil: teclado, foco, zoom200% e movimento reduzido (3.6s)
+(node:225961) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  26 [mobile] › tests/commerce.spec.ts:218:1 › adiciona, combina mesma edição, altera quantidade, persiste e remove (4.0s)
+  ✓  25 [mobile] › tests/checkout.spec.ts:408:39 › E: checkout, carteiras e recibo sem overflow em 390px (6.6s)
+  ✓  27 [mobile] › tests/commerce.spec.ts:249:1 › cupons válido, inválido, expirado e remoção usam cotação da API (4.0s)
+  ✓  29 [mobile] › tests/commerce.spec.ts:268:1 › cálculos preservam ETH com 18 casas e múltiplas quantidades (3.3s)
+  ✓  28 [mobile] › tests/checkout.spec.ts:408:39 › E: checkout, carteiras e recibo sem overflow em 768px (7.2s)
+  ✓  30 [mobile] › tests/commerce.spec.ts:410:1 › cotação rejeita estoque desatualizado e recupera após correção da quantidade (3.5s)
+  ✓  32 [mobile] › tests/fidelity.spec.ts:4:1 › artes originais acompanham detalhe, favoritos, carrinho e checkout pela API (4.6s)
+  ✓  31 [mobile] › tests/checkout.spec.ts:408:39 › E: checkout, carteiras e recibo sem overflow em 1440px (8.0s)
+  ✓  33 [mobile] › tests/fidelity.spec.ts:15:1 › stepper respeita estoque e atualiza cotação real sem cálculo local (2.1s)
+  ✓  34 [mobile] › tests/fidelity.spec.ts:39:1 › provedor selecionado usa a carteira persistida e não atravessa contas (2.8s)
+
+  34 passed (2.0m)

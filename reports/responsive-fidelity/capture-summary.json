@@ -1,0 +1,42 @@
+[
+  {
+    "width": 1440,
+    "page": "home",
+    "overflow": false,
+    "hero": {
+      "width": 1160,
+      "height": 450
+    },
+    "errors": []
+  },
+  {
+    "width": 1440,
+    "page": "detail-nft-007",
+    "overflow": false,
+    "image": {
+      "src": "/assets/figma/home/emerald-ape.webp",
+      "naturalWidth": 450
+    },
+    "errors": []
+  },
+  {
+    "width": 414,
+    "page": "home",
+    "overflow": false,
+    "hero": {
+      "width": 366,
+      "height": 190
+    },
+    "errors": []
+  },
+  {
+    "width": 414,
+    "page": "detail-nft-007",
+    "overflow": false,
+    "image": {
+      "src": "/assets/figma/home/emerald-ape.webp",
+      "naturalWidth": 450
+    },
+    "errors": []
+  }
+]

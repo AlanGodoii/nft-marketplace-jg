@@ -1,0 +1,22 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/commerce.spec.ts tests/accessibility.spec.ts --workers=2 --grep acesso direto ao detalhe|NFT inexistente e edição esgotada|grupo1 --reporter=list,html,json --output=work/full-fidelity/edition-results
+
+
+Running 7 tests using 2 workers
+
+(node:246616) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:246615) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop] › tests/commerce.spec.ts:160:1 › acesso direto ao detalhe, galeria, edição e limite de quantidade (4.0s)
+  ✓  3 [desktop] › tests/commerce.spec.ts:173:1 › NFT inexistente e edição esgotada (2.5s)
+(node:246931) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [mobile] › tests/commerce.spec.ts:160:1 › acesso direto ao detalhe, galeria, edição e limite de quantidade (2.0s)
+  ✓  2 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 390px grupo1 (10.1s)
+  ✓  5 [mobile] › tests/commerce.spec.ts:173:1 › NFT inexistente e edição esgotada (2.5s)
+  ✓  6 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 768px grupo1 (5.6s)
+  ✓  7 [desktop] › tests/accessibility.spec.ts:11:3 › acessibilidade das nove telas em 1440px grupo1 (6.2s)
+
+  7 passed (23.1s)

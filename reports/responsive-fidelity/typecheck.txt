@@ -1,0 +1,3 @@
+
+> jungle-nft-marketplace@0.0.0 typecheck
+> tsc -b --pretty false && tsc -p tsconfig.e2e.json --pretty false

@@ -1,0 +1,85 @@
+{
+  "measuredAt": "2026-11-06T14:40:42.188Z",
+  "base": "http://127.0.0.1:4176",
+  "sourceCommit": "639b037159cb86d9c972bc9407461564f2a94eaf",
+  "environment": {
+    "node": "v24.22.1",
+    "platform": "linux",
+    "release": "6.18.57",
+    "cpu": "AMD EPYC 9V74 80-Core Processor",
+    "cpuCount": 3
+  },
+  "conditions": "Build otimizado com mocks padrão e todas as funcionalidades; processos de auditoria sequenciais, armazenamento resetado por medição; sem baselines/E2E simultâneos. Artes originais dos exports fornecidos carregadas nas variantes desktop e mobile.",
+  "targets": {
+    "performance": 90,
+    "accessibility": 95,
+    "best-practices": 95,
+    "seo": 90
+  },
+  "medians": [
+    {
+      "page": "home",
+      "profile": "mobile",
+      "categories": {
+        "performance": 82,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "largest-contentful-paint": 4082.585400000001,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 256.5
+      },
+      "meetsTargets": false
+    },
+    {
+      "page": "home",
+      "profile": "desktop",
+      "categories": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "largest-contentful-paint": 860.5695000000002,
+        "cumulative-layout-shift": 0.00017602667953606885,
+        "total-blocking-time": 0
+      },
+      "meetsTargets": true
+    },
+    {
+      "page": "detail",
+      "profile": "mobile",
+      "categories": {
+        "performance": 81,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "largest-contentful-paint": 4160.8904,
+        "cumulative-layout-shift": 0,
+        "total-blocking-time": 255.5
+      },
+      "meetsTargets": false
+    },
+    {
+      "page": "detail",
+      "profile": "desktop",
+      "categories": {
+        "performance": 99,
+        "accessibility": 100,
+        "best-practices": 96,
+        "seo": 92
+      },
+      "metrics": {
+        "largest-contentful-paint": 891.0646000000002,
+        "cumulative-layout-shift": 0.000940224432583822,
+        "total-blocking-time": 0
+      },
+      "meetsTargets": true
+    }
+  ]
+}

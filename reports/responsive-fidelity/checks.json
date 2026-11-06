@@ -1,0 +1,132 @@
+[
+  {
+    "run": "integral-build",
+    "sourceCommit": "f5bd309",
+    "startTime": "2026-11-06T13:52:16.648Z",
+    "duration": 594857.4789999999,
+    "expected": 224,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "polish",
+    "sourceCommit": "2085375",
+    "startTime": "2026-11-06T14:03:04.395Z",
+    "duration": 256345.16700000002,
+    "expected": 80,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "composicao",
+    "sourceCommit": "f1aea71",
+    "startTime": "2026-11-06T14:10:44.802Z",
+    "duration": 118986.977,
+    "expected": 34,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "catalogo-final",
+    "sourceCommit": "8811660",
+    "startTime": "2026-11-06T14:20:22.366Z",
+    "duration": 93065.755,
+    "expected": 46,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "estados-dev",
+    "sourceCommit": "8811660",
+    "startTime": "2026-11-06T14:21:55.963Z",
+    "duration": 8885.644,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "auth-final",
+    "sourceCommit": "d468bb4",
+    "startTime": "2026-11-06T14:23:49.748Z",
+    "duration": 22347.928,
+    "expected": 5,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "detalhe-mobile",
+    "sourceCommit": "806d4d4",
+    "startTime": "2026-11-06T14:28:24.761Z",
+    "duration": 36806.004,
+    "expected": 13,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "prioridade-imagens",
+    "sourceCommit": "639b037",
+    "startTime": "2026-11-06T14:36:04.616Z",
+    "duration": 28701.406000000003,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "edicoes-final",
+    "sourceCommit": "6841f29",
+    "startTime": "2026-11-06T14:43:33.702Z",
+    "duration": 23066.158,
+    "expected": 7,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "visual-final",
+    "sourceCommit": "6841f29",
+    "startTime": "2026-11-06T14:44:06.437Z",
+    "duration": 39962.092,
+    "expected": 24,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "desktop-visual",
+    "sourceCommit": "639b037",
+    "startTime": "2026-11-06T14:37:15.126Z",
+    "duration": 8779.708999999999,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "desktop-visual-final",
+    "sourceCommit": "6841f29",
+    "startTime": "2026-11-06T14:49:10.258Z",
+    "duration": 8719.930999999999,
+    "expected": 3,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  {
+    "run": "desktop-wide-final",
+    "sourceCommit": "6841f29",
+    "startTime": "2026-11-06T14:49:19.513Z",
+    "duration": 15284.533,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+]

@@ -1,0 +1,13 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/fidelity-desktop.spec.ts --workers=1 --reporter=list,html,json --output=work/full-fidelity/wide-delivery-results
+
+
+Running 2 tests using 1 worker
+
+(node:251852) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [desktop] › tests/fidelity-desktop.spec.ts:3:33 › todas as telas desktop sem overflow em 1280px (7.2s)
+  ✓  2 [desktop] › tests/fidelity-desktop.spec.ts:3:33 › todas as telas desktop sem overflow em 1920px (7.4s)
+
+  2 passed (15.3s)

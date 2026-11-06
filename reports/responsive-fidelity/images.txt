@@ -1,0 +1,25 @@
+
+> jungle-nft-marketplace@0.0.0 test:e2e
+> playwright test tests/fidelity.spec.ts --workers=2 --reporter=list,html,json --output=work/full-fidelity/images-results
+
+
+Running 12 tests using 2 workers
+
+(node:241821) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:241820) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [mobile] › tests/fidelity.spec.ts:4:1 › artes originais acompanham detalhe, favoritos, carrinho e checkout pela API (6.2s)
+  ✓   2 [desktop] › tests/fidelity.spec.ts:4:1 › artes originais acompanham detalhe, favoritos, carrinho e checkout pela API (7.6s)
+  ✓   3 [mobile] › tests/fidelity.spec.ts:15:1 › stepper respeita estoque e atualiza cotação real sem cálculo local (4.3s)
+  ✓   4 [desktop] › tests/fidelity.spec.ts:15:1 › stepper respeita estoque e atualiza cotação real sem cálculo local (5.2s)
+  ✓   5 [mobile] › tests/fidelity.spec.ts:21:1 › header e menu da conta permanecem disponíveis no detalhe, sem navegação antiga (2.6s)
+  ✓   7 [mobile] › tests/fidelity.spec.ts:32:1 › login usa composição desktop ou mobile sem fingir OAuth (1.6s)
+  ✓   6 [desktop] › tests/fidelity.spec.ts:21:1 › header e menu da conta permanecem disponíveis no detalhe, sem navegação antiga (4.0s)
+  ✓   9 [desktop] › tests/fidelity.spec.ts:32:1 › login usa composição desktop ou mobile sem fingir OAuth (1.8s)
+  ✓   8 [mobile] › tests/fidelity.spec.ts:39:1 › provedor selecionado usa a carteira persistida e não atravessa contas (6.3s)
+  ✓  11 [mobile] › tests/fidelity.spec.ts:53:1 › ENS e apelido do perfil gravam na carteira vinculada pela API (3.8s)
+  ✓  10 [desktop] › tests/fidelity.spec.ts:39:1 › provedor selecionado usa a carteira persistida e não atravessa contas (6.7s)
+  ✓  12 [desktop] › tests/fidelity.spec.ts:53:1 › ENS e apelido do perfil gravam na carteira vinculada pela API (2.2s)
+
+  12 passed (28.7s)
