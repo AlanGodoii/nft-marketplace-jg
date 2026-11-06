@@ -1,3 +1,4 @@
+import { publishNft, resetSocketDiagnostics } from '../socket-server'
 import { clearOrderTimers } from '../order-domain'
 import { http, HttpResponse } from 'msw'
 import { z } from 'zod'
@@ -31,6 +32,7 @@ export const scenarioHandlers = [
       nft.version += 1
       return nft
     })
+    if (updated) publishNft(updated)
     return HttpResponse.json({ item: updated })
   }),
   http.post('/api/__mock/reset', async ({ request }) => {
@@ -39,6 +41,7 @@ export const scenarioHandlers = [
     const parsed = scenarioSchema.safeParse(body)
     if (!parsed.success) return HttpResponse.json({ error: { code: 'VALIDATION_ERROR', message: 'Cenário inválido.' } }, { status: 400 })
     getMockDatabase().reset()
+    resetSocketDiagnostics()
     clearOrderTimers()
     resetCommerce()
     return HttpResponse.json({ config: configureScenario(parsed.data) })

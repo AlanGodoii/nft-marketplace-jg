@@ -35,7 +35,7 @@ function CartSummary({ cart }: { cart: Cart }) {
   const mutation = useCartMutation()
   const busy = useCartBusy()
   const form = useForm<{ code: string }>({ resolver: zodResolver(couponSchema), defaultValues: { code: '' } })
-  const totals = quote.data?.cartVersion === cart.version ? quote.data : undefined
+  const totals = quote.snapshotCurrent && quote.data?.cartVersion === cart.version ? quote.data : undefined
   return <aside className="cart-summary space-y-6" aria-labelledby="summary-title">
     <h2 id="summary-title" className="text-xl font-bold">Resumo do carrinho</h2>
     <form noValidate className="space-y-3" onSubmit={form.handleSubmit(async values => {

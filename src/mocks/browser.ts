@@ -1,3 +1,5 @@
+import { socketHandlers } from './socket-server'
+import { socketControlHandlers } from './handlers/socket'
 import { orderHandlers } from './handlers/orders'
 import { scheduleOrders } from './order-domain'
 import { checkoutHandlers } from './handlers/checkout'
@@ -11,7 +13,7 @@ import { nftHandlers } from './handlers/nfts'
 import { scenarioHandlers } from './handlers/scenarios'
 import { initializeScenario } from './scenarios'
 
-export const worker = setupWorker(...nftHandlers, ...scenarioHandlers, ...authHandlers, ...favoriteHandlers, ...cartHandlers, ...walletHandlers, ...checkoutHandlers, ...orderHandlers, http.all('/api/*', () => HttpResponse.json({ error: { code: 'NOT_FOUND', message: 'Endpoint não implementado na simulação.' } }, { status: 404 })))
+export const worker = setupWorker(...socketHandlers, ...socketControlHandlers, ...nftHandlers, ...scenarioHandlers, ...authHandlers, ...favoriteHandlers, ...cartHandlers, ...walletHandlers, ...checkoutHandlers, ...orderHandlers, http.all('/api/*', () => HttpResponse.json({ error: { code: 'NOT_FOUND', message: 'Endpoint não implementado na simulação.' } }, { status: 404 })))
 export async function startMocks() {
   initializeScenario()
   scheduleOrders()

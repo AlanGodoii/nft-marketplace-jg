@@ -453,3 +453,5 @@ body:has(.auth-card) [data-slot="dialog-overlay"] { background: #140d0a99; }
 .receipt-meta dd { overflow-wrap: anywhere; }
 .receipt-line { display: grid; grid-template-columns: 60px minmax(0,1fr) minmax(80px,.7fr); gap: 12px; align-items: center; font-size: 12px; }
 @media (max-width: 767px) { .receipt-meta { grid-template-columns: minmax(0,1fr); } .receipt-line { grid-template-columns: 52px minmax(0,1fr); } .receipt-line > p { grid-column: 2; } }
+.realtime-feedback { margin-bottom: 24px; color: var(--muted-foreground); font-size: 12px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+@media (prefers-reduced-motion: reduce) { .kurio-theme *, .kurio-theme *::before, .kurio-theme *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }

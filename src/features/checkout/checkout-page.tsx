@@ -12,6 +12,7 @@ import { LoadingState, ErrorState } from '@/components/async-state'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '@/components/ui/dialog'
+import { useRealtime } from '@/features/realtime/state'
 import { usePurchaseAttempt } from '@/features/orders/attempt'
 import { identityEpoch } from '@/lib/identity'
 import { useCreateOrder, useOrder } from '@/features/orders/queries'
@@ -32,7 +33,7 @@ function PreviousAttempt({ attempt, clear, recover, pending }: { attempt: Purcha
   return <section className="commerce-panel space-y-4"><h2 className="font-bold">Tentativa anterior</h2><p>Consulte a mesma tentativa para recuperar seu pedido, inclusive após timeout ou refresh.</p><Button disabled={pending} onClick={recover}>Recuperar tentativa anterior</Button><Link to="/pedido/confirmacao" search={{ orderId: attempt.orderId }} className="text-primary">Ver meus pedidos</Link>{previous.data && previous.data.status !== 'pending' && <Button variant="outline" onClick={clear}>Começar outra compra</Button>}</section>
 }
 function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
-  const connection = useWalletConnection(); const quoteMutation = useCheckoutQuote()
+  const connection = useWalletConnection(); const quoteMutation = useCheckoutQuote(); const live = useRealtime()
   const createOrder = useCreateOrder(); const { attempt, saveAttempt } = usePurchaseAttempt(); const router = useRouter()
   const submitLock = useRef(false); const sendLock = useRef(false); const renderedEpoch = identityEpoch()
   const [quantities, setQuantities] = useState<Record<string, number>>({})
@@ -43,7 +44,7 @@ function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
   const [notice, setNotice] = useState('')
   const [error, setError] = useState('')
   const form = useForm<WalletInput>({ resolver: zodResolver(walletInputSchema), defaultValues: { label: wallet.label, role: wallet.role, network: wallet.network, address: wallet.address, provider: wallet.provider, secondaryAddress: wallet.secondaryAddress, collector: wallet.collector } })
-  const revision = `${cart.version}:${cart.items.map(item => `${item.id}:${item.quantity}:${item.nft.version}`).join('|')}`
+  const revision = `${cart.items.map(item => live.nftVersions[item.nftId] ?? 0).join()}:${cart.version}:${cart.items.map(item => `${item.id}:${item.quantity}:${item.nft.version}`).join('|')}`
   const review = reviewState?.revision === revision ? reviewState.value : null
   const setReview = (value: CheckoutQuote | null) => setReviewState(value ? { value, revision } : null)
   useEffect(() => {
@@ -90,6 +91,7 @@ function CheckoutForm({ cart, wallet }: { cart: Cart; wallet: Wallet }) {
     } catch (error) { setReview(null); setAccepted(false); setError(apiErrorMessage(error)) } finally { submitLock.current = false }
   }
   return <div className="checkout-layout"><div className="space-y-6 min-w-0">
+    {live.lastNft && cart.items.some(item => item.nftId === live.lastNft!.id) && <p role="status" className="commerce-panel">{live.lastNft.name} foi atualizado ao vivo: preço {live.lastNft.price.amount} ETH, estoque {live.lastNft.availability.remaining}. A cotação anterior foi invalidada. Revalide e confirme os valores atualizados.</p>}
     {attempt && <PreviousAttempt attempt={attempt} clear={() => saveAttempt(null)} recover={() => void sendAttempt(attempt)} pending={createOrder.isPending} />}
     <section className="commerce-panel space-y-4"><h2 className="text-xl font-bold">Carteira e rede</h2><p className="break-all">{wallet.label} · {wallet.provider} · {wallet.address}</p>
       <label htmlFor="checkout-network">Rede de pagamento</label><select id="checkout-network" className="commerce-select" value={network} onChange={event => { setNetwork(event.target.value as Wallet['network']); setReview(null); setAccepted(false) }}><option value="ethereum">Ethereum</option><option value="polygon">Polygon</option><option value="solana">Solana</option></select>

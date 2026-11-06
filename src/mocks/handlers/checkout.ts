@@ -1,3 +1,4 @@
+import { publishNft } from '../socket-server'
 import { z } from 'zod'
 import { ethSchema } from '@/contracts/nft'
 import { getMockDatabase } from '../db'
@@ -18,7 +19,8 @@ export const checkoutHandlers = [http.post('/api/__mock/nft', async ({ request }
     if (input.remaining !== undefined) { edition.availability = { status: input.remaining ? 'available' : 'sold-out', remaining: input.remaining }; if (edition.id === nft.editions[0].id) nft.availability = { ...edition.availability } }
     nft.version += 1; return nft
   })
-  return HttpResponse.json({ item })
+  const event = item ? publishNft(item) : undefined
+  return HttpResponse.json({ item, event })
 }), http.post('/api/checkout/quote', async ({ request }) => {
   const failed = await operation(request, 'checkout.quote'); if (failed) return failed
   const current = await identity(request); if (!current?.user || !current.tokenHash) return unauthorized()

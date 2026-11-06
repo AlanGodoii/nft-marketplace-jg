@@ -65,3 +65,29 @@ Até a integração D, consultas periódicas acompanham pending; isso é somente
 ### Verificação C
 
 Typecheck e lint aprovados (3avisos preexistentes de Fast Refresh restantes). A+B+C:30/30 testes aprovados em desktop/mobile(3.4m). Inclui compra integral via UI, pending/confirmed/rejected, clique repetido, concorrência de mesma chave, conflito de conteúdo, timeout real após criação(17.9s no caso completo), refresh/mesma tentativa, histórico imutável, estoque e remoção parcial sem efeitos duplicados, preço/cotação expirada e isolamento. Rodada anterior C:14aprovados/2falhas pelo uso de q em vez de search no teste do catálogo; a URL foi corrigida para o contrato existente, sem mudar o catálogo.
+
+## Checkpoint D — transporte e sincronização
+
+Integração escolhida: ws.link do MSW3 com adaptador do protocolo Engine.IO4/Socket.IO5 (namespace padrão, JSON, WebSocket). O cliente é socket.io-client4.8.4 sem parser/manager modificados, usando path /kurio-live/. A integração @mswjs/socket.io-binding0.2.0 foi avaliada e não instalada por declarar peer MSW^2.10.2 incompatível com3.0.3. Não houve downgrade/forçamento de peers.
+
+O adaptador de rede em src/mocks/socket-server.ts implementa abertura Engine.IO, CONNECT Socket.IO com autenticação, eventos codificados42, ping/pong, fechamento e reconexão pelo Manager real. Não é EventEmitter ou callback local apresentado como transporte. App só é importada depois de worker.start, porque Engine.IO captura o construtor WebSocket ao avaliar o módulo. MSW3 normaliza o prefixo /socket.io/ ao comparar handlers; o path dedicado evita essa normalização e interferência com o WebSocket HMR do Vite.
+
+Eventos tipados: nft.updated {eventId,type,resourceId,version,payload:Nft}; order.updated acrescenta userId,sessionId e payload:Order. A sessão Socket.IO é validada contra o mesmo estado de autenticação REST. Emissões privadas são filtradas por usuário e sessão válida; cliente repete essa verificação e verifica a geração de identidade. Não há tokens nos diagnósticos.
+
+Cliente ignora IDs repetidos, versões anteriores e regressão de pedido terminal. Eventos efetivamente recebidos invalidam consultas Axios/Query (catálogo/detalhe/favoritos/carrinho/pedidos); nunca produzem um sucesso de compra no React. Checkout liga a revisão à versão recebida, invalida o aceite imediatamente e exige nova cotação. Resumo do carrinho também verifica a atualidade das versões dos NFTs antes de mostrar a cotação.
+
+O acompanhamento periódico REST de C foi removido. Após reconectar, a sessão é revalidada pela API e consultas ativas públicas/privadas são canceladas/reconciliadas via REST; pedidos perdidos durante interrupção são recuperados sem nova criação. Refresh inicia as mesmas consultas com o estado persistido. Logout/troca desmontam listeners, encerram Manager/transport, impedem reconexão da sessão antiga e limpam cache privado.
+
+Controles de rede: POST /api/__mock/socket {action:disconnect|resume}; GET /api/__mock/socket/stats retorna contagens de handshakes, frames/ACKs e somente recibos de eventos da sessão/usuário corrente. POST /api/__mock/socket/event injeta um evento tipado na camada de transporte, com audience:owner ou all para testar ataques/eventos de sessão errada. Nunca altera diretamente Query ou React. Controles só existem quando mocks estão habilitados; não são APIs de um backend de produção.
+
+O transporte simulado é local ao runtime do documento, sem servidor WebSocket externo: o browser WebSocket é interceptado pelo MSW, portanto a prova usa conexão do cliente real, handshake/frames e ACKs de volta ao handler. Não suporta upgrade de polling, binários, rooms ou namespaces personalizados. Isso não impede os dois eventos JSON obrigatórios nem a reconexão real do cliente. Persistência é no navegador; não se promete sincronização de broadcasts entre dispositivos. O banco público relê snapshots persistidos nas consultas para reconciliação após alterações em outra aba.
+
+O Vite agora ignora work/, relatórios e artefatos de teste no watcher. Foi observado page reload causado por HTML gerado no próprio Playwright; esse ajuste evita recarregamentos espúrios da aplicação e não remove testes nem altera seus limites.
+
+### Verificação D
+
+Typecheck/lint aprovados (3avisos preexistentes).16/16 testes de tempo real em desktop/mobile aprovados(1.9m), mais smoke de transporte4/4(28.7s). Provas observam data-transport=websocket no socket.io-client conectado, handshake Engine.IO/CONNECT e ACK codificado de volta ao handler; controles MSW somente emitem frames. O teste de pedido avança o relógio e verifica zero consultas periódicas antes de emitir order.updated; confirmação chega pelo evento seguido de consulta REST.
+
+Cobertura: alteração de preço/cotação; catálogo/detalhe/carrinho; estoque esgotado; eventos antigos/repetidos; transição terminal protegida; interrupção, liquidação offline e reconciliação do mesmo pedido; refresh; troca A/B com encerramento do socket antigo e rejeição explícita de evento de sessão incorreta. Carrinho não é limpo novamente em replay.
+
+Falhas intermediárias registradas:4/4 falharam antes da correção da inicialização,4/4 ainda falharam antes de corrigir o path normalizado; smoke após correção passou4/4. A primeira matriz ampliada teve13aprovados/3falhas; a seguinte14aprovados/2falhas. Foram corrigidas esperas por conexão pronta/ACK e verificação de diagnósticos antes de navegação completa (diagnósticos são por runtime). Um reload de fonte durante diagnóstico interferiu no teste desktop de reconexão; execução estável posterior passou. Limites e asserções de comportamento não foram relaxados.

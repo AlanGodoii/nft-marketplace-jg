@@ -1,13 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.tsx'
 
 async function bootstrap() {
   if (import.meta.env.VITE_ENABLE_MOCKS === 'true') {
     const { startMocks } = await import('./mocks/browser')
     await startMocks()
   }
+  // Engine.IO captures the WebSocket constructor at module evaluation time.
+  // Load the application only after MSW has installed its network interceptors.
+  const { default: App } = await import('./App.tsx')
   createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>)
 }
 

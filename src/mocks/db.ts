@@ -15,13 +15,17 @@ export function createMockDatabase(storage?: Pick<Storage, 'getItem' | 'setItem'
     const persisted = storage?.getItem(storageKey)
     if (persisted) state = stateSchema.parse(JSON.parse(persisted))
   } catch { state = seed() }
+  const reload = () => {
+    try { const persisted = storage?.getItem(storageKey); if (persisted) state = stateSchema.parse(JSON.parse(persisted)) } catch { /* Keep the last valid snapshot. */ }
+  }
   const save = () => {
     try { storage?.setItem(storageKey, JSON.stringify(state)) } catch { /* Storage unavailable: keep session state in memory. */ }
   }
   return {
-    snapshot: () => ({ ...structuredClone(state), nfts: state.nfts.map(inventoryView) }),
+    snapshot: () => { reload(); return { ...structuredClone(state), nfts: state.nfts.map(inventoryView) } },
     reset: () => { state = seed(); save() },
     updateNft: (id: string, update: (current: Nft) => Nft) => {
+      reload()
       const index = state.nfts.findIndex(nft => nft.id === id)
       if (index < 0) return undefined
       const next = nftSchema.parse(update(inventoryView(state.nfts[index])))

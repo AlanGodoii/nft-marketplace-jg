@@ -1,3 +1,4 @@
+import { publishOrder, publishNft } from './socket-server'
 import type { Order, OrderInput } from '@/contracts/order'
 import { commerceSnapshot, storedCart, transact, type CommerceState } from './commerce-db'
 import { prepareCheckout } from './checkout-domain'
@@ -37,7 +38,7 @@ export function createOrder(userId: string, tokenHash: string, key: string, inpu
   })
 }
 export async function settleOrder(id: string, outcome?: 'confirmed' | 'rejected') {
-  return withOrderLock(() => transact(state => {
+  const result = await withOrderLock(() => transact(state => {
     const order = state.orders[id]
     if (!order) return undefined
     if (order.status !== 'pending') return { order: publicOrder(order), changed: false }
@@ -63,6 +64,14 @@ export async function settleOrder(id: string, outcome?: 'confirmed' | 'rejected'
     }
     return { order: publicOrder(order), changed: true }
   }))
+  if (result?.changed) {
+    await publishOrder(result.order)
+    if (result.order.status === 'confirmed') for (const nftId of new Set(result.order.snapshot.items.map(item => item.nftId))) {
+      const nft = getMockDatabase().snapshot().nfts.find(nft => nft.id === nftId)
+      if (nft) publishNft(nft)
+    }
+  }
+  return result
 }
 const timers = new Map<string, ReturnType<typeof setTimeout>>()
 export function scheduleOrders() {
