@@ -91,3 +91,58 @@ Typecheck/lint aprovados (3avisos preexistentes).16/16 testes de tempo real em d
 Cobertura: alteração de preço/cotação; catálogo/detalhe/carrinho; estoque esgotado; eventos antigos/repetidos; transição terminal protegida; interrupção, liquidação offline e reconciliação do mesmo pedido; refresh; troca A/B com encerramento do socket antigo e rejeição explícita de evento de sessão incorreta. Carrinho não é limpo novamente em replay.
 
 Falhas intermediárias registradas:4/4 falharam antes da correção da inicialização,4/4 ainda falharam antes de corrigir o path normalizado; smoke após correção passou4/4. A primeira matriz ampliada teve13aprovados/3falhas; a seguinte14aprovados/2falhas. Foram corrigidas esperas por conexão pronta/ACK e verificação de diagnósticos antes de navegação completa (diagnósticos são por runtime). Um reload de fonte durante diagnóstico interferiu no teste desktop de reconexão; execução estável posterior passou. Limites e asserções de comportamento não foram relaxados.
+
+## Checkpoint E — regressão, acessibilidade e falhas adicionais
+
+Rascunhos válidos do checkout persistem por usuário/carteira/versão, com rede, seleção, quantidades e dados do colecionador. Não são cotações nem autorizam compra; após expiração/login, exigem reconexão/revisão. A seleção valida inteiros/limites pelo schema compartilhado e associa erros aos campos; seleção vazia não envia cotação.
+
+Foram incluídos casos de expiração *durante* uma requisição privada com latência controlada, preservação do rascunho após login, mudança de taxa/cupom, perda de estoque durante processamento, geração da linha readicionada, erro500 de criação/consulta e recuperação. Carteiras/checkout/recibo são verificados em390/768/1440; teclado testa contenção/retorno de foco e aceite obrigatório, e movimento reduzido também cobre diálogo/backdrop no portal.
+
+A precondição do teste legado de estoque defasado foi ampliada com interrupção explícita do socket. Isso preserva o teste original de rejeição REST quando um evento foi perdido. O novo teste conectado de estoque via Socket.IO cobre o comportamento atual de atualização imediata. Nenhum caso legado foi removido, desabilitado ou teve timeout aumentado; tests/catalog.spec.ts permanece sem alterações.
+
+A liquidação de pedidos pela API de controle também exige a sessão proprietária; outro usuário recebe404. O backend emite order.updated na criação pending e nas transições terminais; retries da mesma tentativa não reemitem efeitos de negócio. Avisos de atualização de checkout mostram a edição afetada, seu preço e estoque, em vez de confundir a disponibilidade da edição original com a selecionada.
+
+Falhas intermediárias E: primeira execução15aprovados/5falhas (foco/escopo de reduced-motion e uma precondição de expiração). Após correções,18aprovados/2falhas expunham a expiração antes da ação privada planejada no teste. O cenário passou a expirar a sessão enquanto checkout.quote está comprovadamente em voo, com latência800ms, garantindo a situação requerida. Repetição específica:10/10 aprovados(1.3m), incluindo os três tamanhos e ambos os projetos. Verificação final de tipos/lint passou;3avisos preexistentes restantes. Regressão integral/build/preview e inventário no fechamento final abaixo.
+
+### Correções encontradas na regressão integral
+
+Uma rodada foi interrompida para correção após137aprovados,5falhas,2interrompidos e30nãoexecutados. Traces preservados localmente em work/stage4/interrupted-regression. As falhas não foram descartadas: o recibo já abria automaticamente via socket quando dois testes C tentavam clicar atrás do modal; helpers REST precisavam aguardar a montagem da App após worker.start em uma navegação completa; e o transporte pausado precisava encerrar a tentativa depois da abertura Engine.IO, não enquanto CONNECTING. O teste de reconexão agora comprova que uma tentativa realmente ocorre durante a pausa antes de retomar.
+
+As correções passaram8/8 casos repetidos em desktop/mobile com2workers(47.2s), sem ampliar timeouts. Os testes C passaram a observar diretamente o recibo entregue via Socket.IO, em vez de solicitar uma atualização manual já desnecessária. A suíte integral é repetida no código corrigido; números finais no fechamento abaixo.
+
+### Recuperação com confirmação durante resposta atrasada
+
+A revisão encontrou o caso em que o backend já confirma por evento/REST enquanto a resposta original do POST ainda não chegou: o carrinho é corretamente esvaziado, mas o acesso à tentativa precisa continuar visível. O checkout vazio agora oferece recuperação da mesma chave e histórico privado. Falha de transporte por si não remove itens; uma confirmação efetiva da simulação pode ocorrer durante a falha e deve ser recuperada, não repetida.
+
+Foi acrescentado um caso específico em desktop/mobile, com orderDelayMs1200 e resposta11000ms, incluindo refresh com carrinho vazio e verificação de um único pedido confirmado. Repetição desse caso junto do timeout pending:4/4 aprovados(38.7s). Uma rodada integral sem falhas até então foi interrompida com78aprovados,2interrompidos e94nãoexecutados para incluir essa correção; não é contada como aprovação integral. A rodada definitiva contém176testes.
+
+
+## Fechamento E4 — resultados finais em 05/11/2026 (America/Sao_Paulo)
+
+Código funcional validado no commit **08484be**, sobre c52f872 (presente no histórico). Commits A b0d8ce5, B67a49cb, C8ddf9e9, D9a76769, E08484be. Documentação final em commit separado; main intacta. PR3 continua aberto/não integrado na conferência final, portanto o PR da etapa4 tem como base a branch da etapa3.
+
+| Comando / cenário | Resultado efetivo |
+|---|---|
+| `npm run typecheck` | Código0; inclui fontes, testes e configuração Playwright. |
+| `npm run lint` | Código0, sem erros; três avisos Fast Refresh preexistentes em perfil.tsx, button.tsx e badge.tsx. |
+| `npm run build` | Código0; build padrão otimizado, aproximadamente1.5s. |
+| `npm run build:demo` | Código0; mocks e transporte incluídos. Aviso futuro Vite configLoader/__dirname permanece visível. |
+| `TEST_BASE_URL=http://127.0.0.1:5175 PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm run test:e2e -- --workers=1` | **176 passed (16.2m)**;106 anteriores +70 novos, desktop/mobile. Relatório HTML gerado e failedTests vazio. |
+| `TEST_BASE_URL=http://127.0.0.1:4174 PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium PLAYWRIGHT_HTML_OUTPUT_DIR=work/stage4/preview-report npm run test:e2e -- tests/checkout.spec.ts tests/realtime.spec.ts --workers=2 --output=work/stage4/preview-results` | **70 passed (3.6m)** no build otimizado;54 checkout/carteiras/pedidos e16 tempo real. Bootstrap MSW e cliente Socket.IO empacotados efetivamente testados, sem servidor privado. |
+
+Falhas intermediárias e correções estão registradas nos checkpoints de docs/STAGE4_CHECKOUT_SOCKET.md, inclusive rodadas interrompidas137aprovados/5falhas/2interrompidos/30nãoexecutados e78aprovados/2interrompidos/94nãoexecutados. Somente a rodada definitiva176/176 é considerada regressão integral aprovada. Não foram ampliados timeouts ou removidos/desabilitados testes.
+
+Logs locais: work/stage4/{E-types-final,E-lint-final,build-final,build-demo-final,final-all,preview-final}.log. HTML dev em playwright-report/index.html; HTML preview em work/stage4/preview-report. Traces intermediários em work/stage4/interrupted-regression; testes preservam trace em falhas. Artefatos gerados são locais e ignorados pelo Git; não equivalem a CI/deploy público.
+
+O catálogo mantém36NFTs, filtros/ordenação/paginação/URL; tests/catalog.spec.ts e tests/home.spec.ts não foram alterados nesta etapa. O caso legado de estoque defasado explicita a interrupção do socket para continuar exercitando rejeição REST quando um evento é perdido. Os casos novos também exercitam estoque atualizado pelo socket conectado.
+
+
+### Conferência final complementar
+
+- `node work/stage4/visual-and-terminal.mjs`: código0. Jornada real no preview em390/768/1440, com12capturas de carteiras/checkout/revisão/recibo. Conferência visual amostral realizada; sem overflow indevido nos testes. Assets continuam como slots identificados, sem arte inventada; isso não é regressão visual com baseline ou fidelidade integral ao Figma.
+- Nas três larguras: transporte websocket conectado; compra confirmada pela API; exploração explicitamente simulada com feedback; rejeição terminal permaneceu rejected após tentativa de confirmed(409), carrinho recusado preservado; APIs privadas/controladores sem sessão retornaram401; recibo histórico manteve total0.306ETH. Evidência local: work/stage4/visual-and-terminal.json e visual-final.log.
+- Instalação isolada: `git archive 08484be` extraído em work/stage4/clean-checkout; `npm --cache /workspace/nft-marketplace-jg/work/npm-cache ci` passou,375pacotes em6s; `npm run typecheck` e `npm run build:demo` passaram, build2.52s. Logs: work/stage4/clean-{install,types,build-demo}.log. Não foram copiadas dependências da aplicação para essa pasta. Nenhuma atualização de dependência/script para contornar checks.
+
+**Critérios de aceite desta etapa comprovados:** carteiras privadas/persistentes; cotação atualizada com aceite explícito; pedido idempotente estável com recuperação após timeout/refresh; sucesso somente pelo estado confirmed da API; recibo imutável e remoção parcial; eventos nft.updated/order.updated pelo cliente Socket.IO real, descarte de versões/sessões impróprias e reconciliação REST. Regressão anterior preservada e executável.
+
+**Riscos eliminatórios globais restantes:** stack completa ainda parcial por Lighthouse e regressão visual com baselines; fluxos da conta incompletos por perfil/avatar/senha. Assets403 e ausência de deploy/medições públicas impedem validar a entrega integral. Não atribuir nota garantida nem afirmar conclusão global do desafio. Próxima implementação recomendada: perfil completo, seguida das validações públicas/visuais descritas no plano.

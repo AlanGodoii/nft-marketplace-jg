@@ -1,62 +1,82 @@
-# Arquitetura — Kurio, etapa 3
+# Arquitetura — Kurio, etapa 4
 
-## Responsabilidades
+## Responsabilidades e inicialização
 
-A aplicação mantém a arquitetura P0: Router → Query → serviços Axios → MSW. `src/contracts` contém schemas Zod e tipos compartilhados entre transporte, mocks e UI. Componentes não importam fixtures ou acessam o banco simulado. As nove rotas existentes permanecem; `/favoritos` foi acrescentada. Conta, detalhe, favoritos e carrinho são funcionais. Perfil, carteiras, checkout e confirmação continuam telas futuras, agora protegidas por sessão.
+Router → TanStack Query → Axios → REST/MSW. Schemas Zod em src/contracts são compartilhados pelo transporte, handlers e formulários. Componentes não importam fixtures nem acessam o banco da simulação. React Hook Form/Zod validam autenticação, carteiras e dados do checkout; componentes shadcn/ui/Tailwind mantêm a identidade Kurio.
 
-`src/features/auth` cuida de queries/mutations de conta, guards, retorno e ciclo de sessão. `features/catalog` conserva as consultas públicas e implementa o detalhe; `features/favorites` mantém consulta e escrita otimista; `features/cart` mantém carrinho e cotação autoritativos. Componentes shadcn/ui são reutilizados, inclusive diálogo acessível para login/cadastro e ampliação da galeria.
+A ativação dos mocks é aguardada antes de importar App. Isso também assegura que engine.io-client capture o construtor WebSocket já interceptado pelo MSW. Sem mocks, o mesmo cliente utiliza REST e Socket.IO da origem configurada, sem respostas alternativas nos componentes. A demonstração utiliza VITE_ENABLE_MOCKS=true, inclusive no build.
 
-## Mocking e estado
+As dez rotas da etapa3 permanecem: as nove originais e favoritos. Carteiras, checkout e confirmação agora são funcionais; somente perfil continua com conteúdo futuro protegido. orderId pertence aos parâmetros da URL de confirmação; ausência de ID consulta o histórico privado, sem inventar sucesso.
 
-MSW inicia antes de React, por `VITE_ENABLE_MOCKS`, em desenvolvimento e no build. Handlers desconhecidos de `/api/*` respondem 404; recursos estáticos podem seguir normalmente. O catálogo continua com 36 NFTs e os mesmos IDs, preços, datas e parâmetros. Galeria, criador e edições adicionais foram acrescentados. O banco público usa `kurio.mock.database.v2`; a v1 anterior não é apagada.
+## Estado persistido e contratos
 
-`commerce-db.ts` centraliza contas, hashes, sessões, favoritos e carrinhos em `kurio.mock.commerce.v1`. Transações síncronas relêem o storage antes da alteração, validam o estado e retornam cópias. Handlers de carrinho/cotação consultam o mesmo banco de NFTs, sem cópias divergentes de preços/estoque. Storage indisponível usa memória; não se promete persistência entre reloads nesse caso. Reset restaura integralmente os dois bancos e os cenários.
+- kurio.mock.database.v2: base dos36NFTs, metadados/edições e revisões públicas. IDs, preços iniciais, filtros e paginação preservados. Consultas relêem storage válido; mudanças em outra aba podem ser reconciliadas por REST.
+- kurio.mock.commerce.v1: contas com hashes, sessões com tokens hasheados, favoritos, carrinhos, carteiras, conexões, snapshots de cotação, pedidos e idempotência. Campos da etapa4 têm defaults aditivos para preservar dados existentes da etapa3.
+- kurio.guest.id: carrinho visitante; login/cadastro mesclam por NFT/edição e aposentam a identidade consumida.
+- kurio.mock.scenario: condições de rede na sessão da aba, incluindo latências, HTTP, erro de rede, resultados de conexão/pagamento e timeout pós-criação.
 
-Cenários de catálogo P0 permanecem iguais. Falhas dos novos recursos são configuradas por operação (`faults`), com HTTP, conexão, latência e contagem determinística. `/api/__mock/configure` preserva os dados, e `/api/__mock/reset` restaura tudo. Controles de expiração/estoque ficam exclusivamente na simulação; não disparam eventos falsos na UI.
+Respostas são cópias validadas; ETH sempre string e quantidades inteiras. Storage indisponível possui fallback em memória, sem promessa de refresh. Reset limpa timers de pedidos, dados e cenários, restaurando as fixtures; recarregar após reset reinicia clientes e gerações de eventos.
 
-## Autenticação, autorização e sessão
+## Autenticação, autorização e isolamento
 
-Contas fictícias usam PBKDF2-SHA256 com 120.000 iterações e salt; cadastro gera salt novo. Senhas em claro não são persistidas. O cliente mantém token opaco no sessionStorage; a simulação persiste apenas seu SHA-256, usuário e expiração. API nunca devolve hashes de senha. O token identifica o proprietário de favoritos/carrinho, sem aceitar userId enviado pelo componente como autorização.
+Contas fictícias utilizam PBKDF2-SHA256120.000iterações com salt. Cadastro gera salt aleatório; senhas em claro não são persistidas. O cliente mantém token opaco em sessionStorage. Handlers verificam hash SHA-256, usuário e prazo no banco; carteiras, favoritos, cotação privada e pedidos derivam o proprietário dessa sessão, nunca do userId enviado pelo componente.
 
-Sessão dura 30 minutos por padrão, configurável nos cenários. GET de sessão recupera a identidade após refresh. Guards forçam a verificação pela rede em checkout, perfil, carteiras, favoritos e confirmação. O destino local original, incluindo query/hash, vai ao login; destinos externos e loops de retorno a login/cadastro são rejeitados.
+Acesso a identificador de outra conta responde404 para ocultar sua existência. Ausência/expiração responde401. O controle de liquidação de pedidos da simulação também exige o proprietário autenticado. Checkout/perfil/carteiras/favoritos/pedidos têm guards que revalidam a API e preservam a URL de retorno local. Erro500/rede de sessão não é confundido com logout.
 
-Expiração produz 401; o interceptor só encerra a sessão se o token da requisição ainda for o token atual. Assim, resposta antiga não invalida outra conta. Antes de adotar nova identidade, consultas da sessão e dos recursos privados são canceladas; dados de carrinho/privados são removidos. Uma geração de identidade protege callbacks de mutations e rollbacks. Uma remoção final de cache cobre otimismos encerrados durante a espera de cancelamento.
+Troca/logout/401 cancelam/removem consultas privadas e carrinho; uma geração de identidade impede callbacks e rollbacks tardios de atualizar a conta nova. Resposta401 antiga compara o token da requisição ao token atual antes de encerrar sessão. Timers/listeners/AbortControllers e o Manager Socket.IO anterior são encerrados. A conta nova abre conexão e cache próprios; eventos privados verificam usuário e identidade da sessão nos dois lados do transporte.
 
-Timers de expiração, listeners de storage e AbortControllers de mutations são registrados e encerrados nas transições. Não existe socket nesta etapa. Erros 500/rede na verificação de sessão não viram logout silencioso; rotas e sessão têm recuperação explícita. Logout só indica sucesso após revogação da sessão; expiração também limpa o cliente. O timer revalida a API, em vez de inventar uma resposta de expiração.
+Rascunhos válidos do checkout ficam no sessionStorage por usuário e carteira, associados à versão da carteira: dados do colecionador, observações, rede, seleção/quantidades. Não guardam senhas. Dados da revisão são novamente validados e cotados; rascunho nunca autoriza compra. Tentativas de pedido também ficam por usuário, com chave/corpo estáveis antes do primeiro POST.
 
-Esta é uma implementação de autenticação **simulada no navegador**, sem backend de produção. A autorização e o isolamento são exercitados pelos handlers e pelos testes, sem alegar segurança de servidor para código client-side.
+Esta é uma simulação no navegador, não segurança de um backend de produção: armazenamento local é inspecionável pelo dono do navegador. Autorização e isolamento são exercitados na camada MSW/Query e em testes A/B.
 
-## Visitante, mesclagem e isolamento
+## Carteiras, cotação e ETH
 
-Visitante usa identificador opaco em localStorage, distinto de token de conta. Carrinhos são armazenados por `guest:id` ou `user:id`. Login/cadastro mesclam as linhas por NFT/edição em uma transação, consumindo o carrinho do visitante. Quantidades que ultrapassaram o estoque são ajustadas com aviso; edição esgotada permanece visível para resolução, com cotação bloqueada.
+Carteiras principal/secundária têm papel e endereço/rede únicos por usuário. Endereços Ethereum/Polygon validam0x+40hex; Solana valida base58 com32–44caracteres. A conexão simulada pertence à sessão e à versão da carteira; edição, desconexão ou sessão nova exige reconectar. Nenhuma extensão/blockchain é acessada.
 
-A identidade visitante consumida é aposentada na simulação, impedindo que uma escrita antiga reabra esse carrinho após o login. O cliente gera outra identidade visitante ao adotar a sessão. Logout não copia itens privados para o visitante; outra conta consulta somente seu próprio carrinho/favoritos. Dados da conta anterior continuam no banco para o próximo login dela, mas são removidos do cache ativo.
+O checkout seleciona itens/quantidades do carrinho, carteira cadastrada e rede compatível. A API valida dados do colecionador, conexão, seleção sem duplicatas, limites do carrinho/estoque, edição, cupom e taxas. Retorna snapshot privado com ID/fingerprint/prazo, reutilizando createQuote e decimal.js da etapa3.
 
-## Cache, concorrência e falhas
+Dinheiro usa Decimal com precisão80 e ROUND_HALF_UP para18casas. API calcula lineTotal/subtotal/desconto/taxa/total; React compara ou apresenta strings, sem cálculos monetários próprios. KURIO10 aplica10%; EXPIRADO e códigos inválidos são recusados. Taxa padrão0.016ETH, configurável para simular revalidação; quantidades usam somente inteiros.
 
-- Catálogo: chaves P0 por parâmetros completos, staleTime 60s e gcTime 5min; refresh/histórico na URL preservados. Parser conserva strings ETH de links diretos. Consulta obsoleta é cancelada até Axios; dados anteriores só são usados como placeholder público identificado como atualização.
-- Sessão: `['auth','session']`, staleTime 15s e verificação forçada nos guards. Ausência/expiração retorna null somente após 401; demais falhas permanecem erros recuperáveis.
-- Favoritos: `['private',userId,'favorites']`, staleTime 30s, sem keepPreviousData entre usuários. Mutation guarda snapshot, aplica otimismo, faz rollback em falha e invalida a consulta. Resultados tardios verificam a geração de identidade antes de tocar o cache.
-- Carrinho: `['cart',scope,'data']`; cotação: `['cart',scope,'quote',cartVersion]`. staleTime zero para revalidação em navegação/foco; mutations devolvem carrinho confirmado e invalidam as consultas do proprietário. Totais de outra versão não são exibidos.
+A revisão exige aceite explícito. Antes do POST de pedido, o cliente recota; diferenças de preço/estoque/quantidade/subtotal/desconto/taxa são apresentadas e o aceite é limpo. Eventos de NFT invalidam a revisão imediatamente. A API de pedido revalida tudo novamente e recusa cotação expirada/desatualizada; uma UI antiga não pode autorizar valores novos.
 
-Todas as leituras recebem AbortSignal. Há um retry para rede/5xx e nenhum para 4xx; mutations não têm retry automático. Falha preserva itens/estado confirmado. Escritas não são usadas para apresentar compras como bem-sucedidas.
+## Pedidos, idempotência e ledger
 
-## ETH e preparação do checkout
+POST/orders associa usuário+Idempotency-Key ao corpo normalizado e ao pedido na mesma transação. Mesma chave/corpo recupera o pedido, mesmo após expiração da cotação; conteúdo diferente409. O cliente salva a tentativa antes do envio, bloqueia cliques concorrentes por refs e não faz retry automático. Timeout após criação preserva a chave/corpo, permitindo recuperar exatamente o mesmo pedido após refresh. Nova tentativa exige erro definitivo de não criação ou estado terminal consultado e ação explícita. A recuperação também é renderizada no checkout vazio: confirmação recebida durante resposta HTTP atrasada não pode ocultar o acesso à mesma tentativa/recibo.
 
-Somente o domínio simulado calcula valores, usando decimal.js com precisão 80 e ROUND_HALF_UP para até 18 casas. ETH trafega como string; quantidades são inteiras. A API fornece lineTotal, subtotal, desconto, taxa e total. Cupom KURIO10 dá 10%; EXPIRADO e códigos desconhecidos são recusados sem substituir o cupom anterior.
+Máquina de estados: pending → confirmed ou rejected. Estados terminais não mudam. Resultado desconhecido/timeout/rede são falhas de transporte, não rejected. O backend simulado persiste resultado programado/due time e restaura timers ao iniciar; GET também reconcilia liquidações vencidas. Processamento continua independente da conexão do usuário.
 
-A referência da cotação inclui proprietário, versão do carrinho e versões dos NFTs, com validade de 60s. O estoque e o cupom são revalidados a cada cotação. Isso prepara a próxima fase; ainda não existe criação de pedidos, idempotência de compra, conexão de carteira, checkout final ou Socket.IO. A próxima etapa deve persistir/revalidar a cotação de confirmação e representar pedidos pendentes/confirmados/recusados.
+Vendas confirmadas são o ledger de estoque. O snapshot público deriva disponibilidade/revisão da base e das vendas confirmadas. A confirmação e a remoção de quantidades do carrinho são persistidas juntas; não há débito de estoque separado que um reload possa aplicar duas vezes. Na liquidação, estoque é novamente verificado; perda de estoque recusa o pedido e preserva carrinho. Itens não selecionados e extras permanecem. Geração da linha impede remover um item novo readicionado durante processamento.
 
-## Interface, Figma e limites
+O recibo é o snapshot do pedido confirmed, nunca uma consulta ao preço atual: ID, referência simulada, itens/edições/quantidades/preços, totais, rede e carteira. Pendente/recusado não exibem recibo confirmado. Exploração de transação é explicitamente fictícia.
 
-Foram obtidos contexto e screenshots dos frames de detalhe desktop/mobile, carrinho e autenticação pelo MCP. Os downloads dos PNG/SVG originais retornaram HTTP 403. Não há imagem arbitrária ou captura de tela usada como arte. A galeria expõe seleção de vistas e ampliação, com slots tipados e ausência explícita até os assets serem disponibilizados.
+## Socket.IO e reconciliação
 
-Detalhe segue galeria lateral/informações no desktop e composição empilhada mobile; carrinho organiza itens e resumo lateral com adaptação para telas menores. Login/cadastro usam um diálogo com contenção/retorno de foco, formulários reais, labels e erros associados. O catálogo não é recriado como fundo estático dos diálogos, preservando sua arquitetura. A ação “Adicionar ao carrinho” substitui uma promessa de compra final; login social e recuperação de senha são indicados como indisponíveis.
+socket.io-client4.8.4 real, transport WebSocket, path/kurio-live/, namespace padrão. MSW3 ws.link intercepta o transporte; um adaptador de rede implementa Engine.IO4/Socket.IO5, abertura/CONNECT, JSON42, ping/pong e fechamento. @mswjs/socket.io-binding0.2.0 foi avaliado, mas seu peer exige MSW2; não foi instalada combinação incompatível. Não há EventEmitter ou callback no lugar do transporte.
 
-Shimmer e dimensões reservadas são reutilizados; prefers-reduced-motion desativa animações. Cabeçalho/rodapé pré-existentes foram mantidos, acrescentando controles de sessão e favoritos. Fidelidade pixel a pixel, assets e regressão visual com baselines continuam pendentes. Contratos e cenários completos: `docs/STAGE3_API.md`.
+nft.updated traz eventId/resourceId/version/payload. order.updated também traz userId/sessionId. IDs estáveis, versões monotônicas e schemas validam coerência entre envelope/payload. Emissões privadas são filtradas por sessão válida. Cliente ignora IDs repetidos, versões antigas, sessão incorreta e regressão de terminal, e envia ACK pela própria conexão para a verificação dos cenários.
 
-## Verificação
+Eventos cancelam leituras obsoletas e invalidam consultas REST relevantes. Estado confirmado vem da API, mesmo após evento; nenhum callback de UI decide que uma compra foi concluída. Resumo do carrinho é ocultado enquanto versões dos NFTs não correspondem à cotação. Checkout exige novo aceite após mudança relevante.
 
-Playwright mantém os testes do catálogo e acrescenta fluxos e falhas de conta, detalhe, favoritos, carrinho e cotação em desktop/mobile, incluindo larguras 390/768/1440. Testes usam handlers MSW no navegador; o caso de tempo de sessão controla o relógio. Testes anteriores de navegação foram atualizados apenas para os novos comportamentos reais (guards e 404), mantendo os caminhos existentes.
+Na reconexão, o cliente revalida a sessão e reconcilia recursos ativos pela API, incluindo pedido pendente. Não há polling de pedido substituindo Socket.IO. Refresh recupera os recursos persistidos sem recriar pedido. Encerramento de sessão desliga Manager/listeners/reconexão anterior.
 
-Typecheck cobre fontes e testes/config Playwright. Relatório HTML e traces de falhas são configurados. Resultados efetivos estão no checklist e na descrição do PR. Lighthouse e regressão visual com baselines não fazem parte desta etapa e não recebem pontuação inferida por testes verdes.
+Limites: transporte interceptado no runtime do documento, sem servidor externo; JSON/namespace padrão/WebSocket, sem polling upgrade, binários, rooms ou namespaces customizados. Persistência local sustenta refresh; não se promete broadcast entre dispositivos. Diagnósticos contam handshakes/frames/ACKs sem expor tokens brutos ou recibos de outras contas.
+
+## Cache e retries
+
+- Catálogo: chaves completas por parâmetros, stale60s/gc5min, placeholder público durante atualização e AbortSignal ao Axios.
+- Sessão: auth/session, stale15s; guard força revalidação e timer consulta API ao expirar.
+- Favoritos: private/userId/favorites, stale30s, snapshot otimista e rollback; nenhum placeholder privado entre contas.
+- Carrinho: cart/scope/data. Cotação inclui escopo, versão do carrinho e versões dos NFTs; stale0 e só exibe snapshot atual.
+- Carteiras: private/userId/wallets, stale0, invalidação após escrita.
+- Pedidos: private/userId/orders[/orderId], stale0, atualização por evento/REST; nenhum refetchInterval periódico.
+- Mutations privadas carregam geração de identidade, AbortController e retry:false. Leituras têm até um retry de rede/5xx;4xx não repetem automaticamente.
+
+Detalhes REST/eventos/cenários em docs/STAGE4_CHECKOUT_SOCKET.md. Fixtures e handlers são compartilhados por dev, build/demo e testes. Vite ignora relatórios/work/ no watcher para não recarregar a aplicação ao gerar artefatos de teste.
+
+## Visual, acessibilidade e pendências
+
+Frames consultados: Pagamento desktop11:2862/mobile16:748, Confirmação11:4385 e Carteiras9:1670. Tokens/componentes/tipografia locais preservados; formulário em duas colunas e resumo lateral no desktop, superfícies empilhadas mobile. Estado de revisão/recibo em diálogo com foco inicial/retorno explícitos; erro associado aos campos, feedback acessível e redução de movimento também nos portais. Estados de conexão/cotação não desenhados seguem o padrão Kurio.
+
+Downloads dos assets originais seguem bloqueados403. Não há arte arbitrária, SVG redesenhado ou screenshot usado como asset. Slots dinâmicos identificam a ausência. Cabeçalho/rodapé anteriores foram mantidos; fidelidade integral/baselines ainda pendentes. Perfil completo, Lighthouse e deploy público não foram concluídos nesta etapa.
+
+Resultados reais, falhas intermediárias e inventário no checklist e documento da etapa4. Teste funcional aprovado não equivale a nota, baseline visual, Lighthouse ou deploy validado.
