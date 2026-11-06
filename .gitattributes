@@ -1,0 +1,3 @@
+# Raw audit artifacts remain downloadable; collapse generated content in PR diffs.
+reports/lighthouse/*.report.html linguist-generated=true
+reports/lighthouse/*.report.json linguist-generated=true

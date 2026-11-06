@@ -1,0 +1,8 @@
+work/
+reports/
+playwright-report/
+test-results/
+node_modules/
+dist/
+.git/
+*.log

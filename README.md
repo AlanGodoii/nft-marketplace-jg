@@ -1,8 +1,10 @@
 # Kurio — Jungle Gaming NFT Marketplace
 
-> Atualização de integração: PR3 já integrado à main; PR4 foi integrado à branch da etapa3. A correção está na branch fix/integrar-etapa4-main, com novo PR para main. Histórico, preservação do código e verificações em [STAGE4_MAIN_INTEGRATION.md](docs/STAGE4_MAIN_INTEGRATION.md). As referências anteriores a PRs abertos são históricas.
+Etapa5: perfil/avatar/senha, configuração de publicação, baselines e auditorias. **Deploy público ainda não publicado/validado.** Publique a branch `feat/etapa5-finalizacao` antes do merge seguindo [DEPLOYMENT.md](docs/DEPLOYMENT.md) e envie a URL HTTPS para validar compra/Socket.IO. Entrega/resultados: [STAGE5_DELIVERY.md](docs/STAGE5_DELIVERY.md). A main de base eb156f5 já contém o PR5; referências antigas à integração são históricas.
 
-React/TypeScript, TanStack Router/Query, Axios, Tailwindv4/shadcn/ui, RHF/Zod, MSW e Socket.IO. A etapa4 integra **carteiras, checkout, pedidos idempotentes e recibos com tempo real**, preservando catálogo36NFTs, autenticação, favoritos e carrinho das etapas anteriores.
+> A main de base já contém as Etapas1–4 pelo PR5. Histórico da correção anterior em [STAGE4_MAIN_INTEGRATION.md](docs/STAGE4_MAIN_INTEGRATION.md). A Etapa5 está em branch própria para revisão, sem merge automático.
+
+React/TypeScript, TanStack Router/Query, Axios, Tailwindv4/shadcn/ui, RHF/Zod, MSW e Socket.IO. A aplicação integra **perfil/avatar/senha, carteiras, checkout, pedidos idempotentes e recibos com tempo real**, preservando catálogo36NFTs, autenticação, favoritos e carrinho das etapas anteriores.
 
 Enunciado: docs/DESAFIO.md. Evidências: docs/REQUIREMENTS_CHECKLIST.md. Plano: docs/IMPLEMENTATION_PLAN.md. Arquitetura: ARCHITECTURE.md. Contratos/cenários: docs/CATALOG_API.md, docs/STAGE3_API.md e **docs/STAGE4_CHECKOUT_SOCKET.md**. As seções das etapas anteriores são históricas quando contradizem o progresso atual.
 
@@ -103,10 +105,30 @@ npx playwright install chromium
 npm run test:e2e -- --workers=1
 ```
 
-Chromium já instalado pode ser selecionado com PLAYWRIGHT_CHROMIUM_EXECUTABLE. TEST_BASE_URL permite testar servidor existente/preview. Suítes de catálogo/conta/compra/Socket.IO executam em desktop/mobile; casos adicionais verificam390/768/1440, teclado/foco e movimento reduzido. Cada teste usa contexto isolado e reset dos handlers MSW. Relatório: playwright-report/index.html. Traces de falhas: node_modules/.cache/playwright-results. Resultados reais e falhas intermediárias estão no fechamento da etapa4; não confundir relatórios locais com CI/deploy.
+Chromium já instalado pode ser selecionado com PLAYWRIGHT_CHROMIUM_EXECUTABLE. TEST_BASE_URL permite testar servidor existente/preview. Suítes de catálogo/conta/compra/Socket.IO executam em desktop/mobile; casos adicionais verificam390/768/1440, teclado/foco e movimento reduzido. Cada teste usa contexto isolado e reset dos handlers MSW. Relatório: playwright-report/index.html. Traces de falhas: node_modules/.cache/playwright-results. Resultados reais e falhas intermediárias estão em docs/STAGE5_DELIVERY.md; não confundir relatórios locais com CI/deploy.
 
 ## Pendências e revisão
 
-Assets originais do Figma continuam bloqueados403, sem substituição por imagens arbitrárias. Slots estão preparados. **Perfil completo, baselines de regressão visual, Lighthouse e deploy público continuam pendentes.** Não há integração real com blockchain/extensões/gateways, conforme o desafio.
+Assets originais do Figma continuam bloqueados403, sem substituição por imagens arbitrárias. Slots estão preparados. Perfil completo e baselines estão implementados; Lighthouse possui configuração e relatórios reais em reports/lighthouse. **Fidelidade integral/assets e deploy público continuam pendentes. Performance do detalhe mobile:84, abaixo da meta90.** Não há integração real com blockchain/extensões/gateways, conforme o desafio.
 
-A etapa4 parte de c52f872, na branch feat/etapa4-checkout-pedidos-socket, e depende do PR3 enquanto ele não estiver integrado à main. Commits estão organizados por checkpoint; entrega em PR para revisão, sem merge automático. A aprovação técnica/nota da Jungle Gaming não é inferida pelos testes locais.
+A etapa5 parte de main eb156f5, na branch feat/etapa5-finalizacao. Os PRs3–5 já estão integrados; a nova etapa requer revisão própria. Commits estão organizados por checkpoint, sem merge automático. A aprovação técnica/nota da Jungle Gaming não é inferida pelos testes locais.
+
+
+## Perfil e verificações da etapa5
+
+Em /perfil, edite dados, carregue PNG/JPEG/WebP de até256KiB/4096px ou remova o avatar. Mudar senha revoga sessões e exige novo login; senhas não ficam em texto puro no armazenamento. Dados são privados por conta. GET/PATCH /api/profile, PUT /api/profile/avatar e POST /api/profile/password passam por Axios/Query/MSW. Contratos e falhas: [PROFILE_API.md](docs/PROFILE_API.md). Cenários profile.read/update/avatar/password usam os mesmos faults documentados; reset restaura Alice/Bob e as senhas fictícias.
+
+```sh
+npm run test:e2e -- --workers=2
+npm run test:visual -- --workers=1
+npm run test:a11y -- --workers=1
+npm run build:demo
+npm run preview -- --host 127.0.0.1 --port 4190 --strictPort
+```
+
+Com preview rodando, em outro terminal execute `npm run lighthouse`. São12auditorias sequenciais,3por página/perfil, com HTML/JSON e medianas em reports/lighthouse. LIGHTHOUSE_BASE_URL permite auditar outro host. CHROME_PATH seleciona um Chromium instalado. A versão validada, ambiente, resultados e limitações constam nos relatórios e entrega. Não rode E2E/baselines ao mesmo tempo que as medições.
+
+Baselines e regras de atualização: [BASELINES.md](docs/BASELINES.md). Exports manuais do Figma e diferenças conhecidas: [VISUAL_REVIEW.md](docs/VISUAL_REVIEW.md). Não trocar slots de arte por imagens aleatórias nem atualizar todos os snapshots sem revisão.
+
+
+Validação final desta etapa: **206/206 testes em desenvolvimento (16.4m)**, **38/38 selecionados no build otimizado (1.9m)** e **12/12 comparações visuais estritas (21.7s)**. Tipos/lint/build/demo e instalação limpa aprovados. Falhas intermediárias, agrupamento sem ampliar timeout, relatórios e limitações estão em STAGE5_DELIVERY.md. Lighthouse completo foi executado, mas **Performance do detalhe mobile84 permanece abaixo de90**; não se declara aprovação integral nem publicação validada.

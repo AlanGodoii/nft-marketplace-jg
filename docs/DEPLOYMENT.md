@@ -3,13 +3,31 @@
 ## Vercel
 
 1. Acesse https://vercel.com/new e importe `AlanGodoii/nft-marketplace-jg` pela sua conta GitHub.
-2. Selecione a branch `feat/etapa5-finalizacao` para validar esta entrega antes do merge; depois configure `main` como Production Branch quando o PR tiver sido revisado/integrado.
+2. A importação pode usar `main` inicialmente. Para publicar esta etapa antes do merge, abra **Deployments → Create Deployment**, informe a Git Reference **feat/etapa5-finalizacao** e confirme o SHA mais recente dessa branch. Essa implantação terá sua própria URL HTTPS. Não avalie a Etapa5 usando uma implantação antiga da main.
 3. Framework: Vite. Root Directory: raiz do repositório. Install: `npm ci`. Build: `npm run build:demo`. Output: `dist`. Node: 24.x.
 4. Defina `VITE_ENABLE_MOCKS=true` e `VITE_MOCK_SCENARIO=normal` também no painel, caso existam overrides. Não cadastre senhas/tokens reais no frontend. As mesmas flags públicas estão em `.env.production` e `.env.demo`.
 5. Clique Deploy e copie a URL HTTPS. Desative Deployment Protection para o ambiente destinado ao avaliador, de modo que ele não precise de uma conta Vercel.
 6. Registre URL e SHA publicado em `docs/STAGE5_DELIVERY.md` somente após as verificações abaixo. Não confundir preview local ou deploy protegido com URL pública validada.
 
+Uma implantação Preview da Vercel pode ser usada pelo avaliador desde que esteja publicamente acessível, sem Deployment Protection. Se preferir usar o domínio de produção antes do merge, use **Promote to Production** na implantação correta, ou configure a Production Branch nas configurações de Git/Environments. Isso não exige integrar o PR na main. Após o merge revisado, volte a usar main como branch de produção.
+
+Alternativa pelo terminal do VS Code (publica o checkout selecionado, sem fazer merge):
+
+```powershell
+git fetch origin
+git switch feat/etapa5-finalizacao
+git pull --ff-only
+npm ci
+npm run build:demo
+npx vercel login
+npx vercel --prod
+```
+
+Na primeira execução, selecione sua conta, vincule/crie o projeto e confirme a pasta raiz. Preserve os parâmetros de vercel.json. O login ocorre na sua conta; nenhum token precisa ser adicionado ao código. Copie a URL retornada e envie-a para a validação. Se a branch local ainda não existir, `git switch` normalmente cria o acompanhamento da branch remota homônima; se não o fizer, use `git switch --track origin/feat/etapa5-finalizacao`.
+
 `vercel.json` configura fallback SPA e impede cache obsoleto do worker MSW. Assets existentes continuam servidos como arquivos. Não há servidor API ou Socket.IO externo: o navegador intercepta REST e WebSocket com MSW, inicializado antes do cliente Engine.IO. Endpoints usam a origem corrente; não dependem de localhost. HTTPS é necessário para Service Worker e Web Crypto.
+
+`.vercelignore` exclui logs, relatórios e diretórios temporários do upload CLI; a Vercel gera um novo dist durante o build. `.env.production`, `.env.demo`, fontes e mockServiceWorker.js permanecem incluídos. Os relatórios Lighthouse continuam versionados no GitHub para o avaliador, sem aumentar o pacote público de execução.
 
 Alternativa: Netlify, build `npm run build:demo`, publish `dist`; `public/_redirects` fornece fallback. Em ambos os hosts publique `mockServiceWorker.js` na raiz. APIs de mocks funcionam no navegador, portanto um curl direto a `/api/nfts` não é uma verificação da API simulada.
 
@@ -33,3 +51,5 @@ No PowerShell, defina primeiro `$env:TEST_BASE_URL="https://SUA-URL-PUBLICA"` e 
 ## Estado desta execução
 
 Não há integração Vercel conectada. O plugin Sites foi inspecionado, porém seus auxiliares obrigatórios de sincronização/empacotamento não estão instalados neste executor e o recurso `scripts/site-workflow.mjs` não pôde ser lido. Não foi criado um Site órfão nem utilizada uma rota alternativa sem proveniência. **Deploy público permanece pendente de execução e validação pelo usuário.** Os testes locais não substituem a compra na URL publicada.
+
+O usuário confirmou nesta etapa que ainda não possui URL pública e solicitou a preparação da Vercel/instruções para a branch não integrada. Não se declara publicação validada antes do fornecimento e teste da URL HTTPS.

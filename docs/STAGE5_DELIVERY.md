@@ -68,3 +68,86 @@ npm run typecheck, npm run lint, npm run build e npm run build:demo: código0. L
 A primeira regressão foi interrompida após97aprovados,4falhas,2interrompidos e95nãoexecutados(8.4m, código130). As quatro falhas eram exclusivamente os testes novos de axe/navegação que acumulavam9ou10rotas, incluindo refreshs, no mesmo teste: timeout global30s em desenvolvimento, confirmado pelos traces. Esses mesmos cenários haviam passado no build otimizado; não são usados como aprovação da suíte integral.
 
 Os testes foram divididos em grupos independentes, preservando todas as rotas/refreshs/asserções: navegação pública/privada e três grupos de três telas por largura na auditoria axe. Nenhum timeout foi ampliado e nenhum teste anterior foi alterado. Repetição específica em desenvolvimento: **14/14 aprovados (2.1m)**. A nova suíte integral contém206casos (176anteriores +16perfil +4rotas +10acessibilidade). Resultados finais abaixo, após execução. Traces originais preservados em work/stage5/final-results.
+
+
+## Requisitos concluídos nesta etapa e limites
+
+- Perfil completo funcional: consulta/edição, avatar validado, senha com hash/salt e revogação, cache/mutations/erros e isolamento. Contratos e cenários em PROFILE_API.md.
+- Publicação preparada: produção com mocks, fallback SPA, worker, Vercel/Netlify e instruções para branch ainda não integrada. **Publicação não realizada/validada**, conforme confirmação do usuário de que ainda não possui URL.
+- Baselines das quatro telas em três larguras, testes de acessibilidade e auditoria Lighthouse efetivamente utilizados. Comparação padrão exige snapshots existentes (updateSnapshots:none); atualização somente explícita e revisada.
+- Catálogo36NFTs, auth, favoritos, carrinho, carteiras, checkout/pedidos idempotentes e Socket.IO preservados; os cinco arquivos de testes anteriores permanecem sem alterações nesta etapa.
+
+**Pendências:** URL HTTPS e compra/socket/refresh no host real; arte original403/limite Figma e fidelidade fina dos nove frames; Performance do detalhe mobile84<90; revisão humana integral/zoom nativo em todas as telas; distribuição pública de traces funcionais como artefatos CI. A matriz detalha escopo/evidência por requisito, sem converter contagem em nota garantida.
+
+## Instruções para o avaliador
+
+1. Checkout da branch/commit deste PR, npm ci, npx playwright install chromium, npm run dev. Node24 foi utilizado. Configuração/variáveis públicas no README; não são necessários segredos/backend privado.
+2. Entre como alice@kurio.test ou bob@kurio.test, senha Kurio123! após reset. Cada conta tem carteira Ethereum independente.
+3. Abra /nfts/nft-002, adicione ao carrinho, opcionalmente aplique KURIO10, abra checkout, conecte carteira simulada, revalide/revise, aceite e finalize. Aguarde confirmed/recibo vindo da API.
+4. Em /perfil edite dados/avatar; mudar senha encerra sessões e exige a nova credencial. Reset documentado restaura contas/senhas fictícias. Nunca coloque credenciais reais na demonstração.
+5. Para preço/estoque/timeout/reconexão e eventos repetidos/antigos, use os controles de STAGE4_CHECKOUT_SOCKET.md; perfil usa faults de PROFILE_API.md. Não altere caches/setters para simular backend.
+6. Execute npm run typecheck, npm run lint, npm run build, npm run build:demo, npm run test:e2e -- --workers=2 e npm run test:visual -- --workers=1. Auditoria separada: preview otimizado4190 e npm run lighthouse. Não rodar navegadores de teste simultaneamente com Lighthouse.
+7. Para publicar antes do merge, siga DEPLOYMENT.md usando feat/etapa5-finalizacao. Envie a URL HTTPS e o SHA da implantação para validar a versão real. Não usar uma implantação antiga da main como evidência da Etapa5.
+
+
+### Regressão integral definitiva
+
+**206/206 testes aprovados (16.4m), código0**, desktop/mobile,2workers;176anteriores +16perfil +4rotas +10acessibilidade. .last-run.json confirma passed e failedTests vazio. Nenhum dos cinco arquivos de testes anteriores foi alterado, nenhum teste desabilitado e nenhum timeout ampliado. Aviso informativo de arquivo lento em checkout.spec.ts, sem falha.
+
+Comando: TEST_BASE_URL=http://127.0.0.1:5190 PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium PLAYWRIGHT_HTML_OUTPUT_DIR=work/stage5/full-final-report npm run test:e2e -- --workers=2 --output=work/stage5/full-final-results. HTML local: work/stage5/full-final-report/index.html; log full-final-tests.log e resultados full-final-results. Isso não equivale a execução CI ou deploy público.
+
+
+### Validação definitiva do build e das baselines
+
+- Build otimizado com mocks em4190: **38/38 aprovados (1.9m), código0** —16perfil,4rotas/refresh,16Socket.IO e2compras completas. Fonte de aplicação85dd22e, mesma da auditoria final; sem servidor privado externo.
+- Comparação visual definitiva: **12/12 aprovados (21.7s), código0**, zero pixels diferentes, updateSnapshots:none, sem atualizar PNGs. Baselines originais inspecionadas e preservadas após as otimizações.
+- TypeScript e lint repetidos após agrupar os testes/configurar snapshots estritos: código0, dois avisos FastRefresh preexistentes. git diff --check passou.
+
+Comandos: TEST_BASE_URL=http://127.0.0.1:4190 PLAYWRIGHT_CHROMIUM_EXECUTABLE=/usr/bin/chromium npm run test:e2e -- tests/profile.spec.ts tests/deployment.spec.ts tests/realtime.spec.ts tests/checkout.spec.ts --grep 'perfil:|SPA:|D:|compra completa do catálogo' --workers=2; em seguida npm run test:visual -- --workers=1 com a mesma URL. HTML/logs/resultados em work/stage5/production-* e visual-delivery-*. .last-run.json confirma passed/failedTests vazio em ambos. Relatórios funcionais locais não são deploy/CI; HTML/JSON Lighthouse estão versionados em reports/lighthouse.
+
+## Inventário da entrega
+
+64 arquivos criados e17 modificados em relação à main eb156f5. Inclui contratos/handlers/hooks/tela/testes de perfil; deploy/flags/ignore; configuração e12PNG de baselines; teste axe/rotas; configuração/runner e relatórios Lighthouse; ajustes de bootstrap/detalhe/skeleton; documentação atualizada. Relatórios brutos gerados são colapsados no diff do PR por .gitattributes, mas os arquivos completos permanecem disponíveis.
+
+Arquivos de código/configuração/documentação (artefatos de auditoria e PNGs listados nos diretórios próprios):
+
+- `.env.production`
+- `.gitattributes`
+- `.vercelignore`
+- `ARCHITECTURE.md`
+- `README.md`
+- `docs/BASELINES.md`
+- `docs/DEPLOYMENT.md`
+- `docs/IMPLEMENTATION_PLAN.md`
+- `docs/PROFILE_API.md`
+- `docs/REQUIREMENTS_CHECKLIST.md`
+- `docs/STAGE5_DELIVERY.md`
+- `docs/VISUAL_REVIEW.md`
+- `index.html`
+- `lighthouse.config.mjs`
+- `package-lock.json`
+- `package.json`
+- `playwright.config.ts`
+- `playwright.visual.config.ts`
+- `public/_redirects`
+- `scripts/lighthouse.mjs`
+- `src/contracts/profile.ts`
+- `src/features/catalog/detail-skeleton.tsx`
+- `src/features/catalog/nft-detail-page.tsx`
+- `src/features/profile/profile-page.tsx`
+- `src/features/profile/queries.ts`
+- `src/index.css`
+- `src/main.tsx`
+- `src/mocks/browser.ts`
+- `src/mocks/commerce-db.ts`
+- `src/mocks/handlers/profile.ts`
+- `src/routes/nfts.$nftId.tsx`
+- `src/routes/perfil.tsx`
+- `tests/accessibility.spec.ts`
+- `tests/deployment.spec.ts`
+- `tests/fixtures/avatar.png`
+- `tests/profile.spec.ts`
+- `tests/visual.spec.ts`
+- `tsconfig.e2e.json`
+- `vercel.json`
+- `vite.config.ts`

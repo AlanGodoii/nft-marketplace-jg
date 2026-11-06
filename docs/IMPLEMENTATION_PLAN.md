@@ -6,7 +6,28 @@ Data: **05/11/2026**, America/Sao_Paulo. Prazo informado: **06/11/2026**, sem ho
 
 Base da auditoria inicial: `a99d26c769240a0e9f2e19cb53b09978a06b9917` de `origin/main`. Enunciado `docs/DESAFIO.md` lido integralmente. Evidências, comandos e 344 itens estão em `docs/REQUIREMENTS_CHECKLIST.md`. A auditoria inicial não modificou funcionalidades. O progresso atual da implementação está descrito abaixo.
 
-## Progresso etapa 4 — plano corrente
+## Plano corrente — etapa 5
+
+Base main eb156f5 confirmada, PR5 integrado, branch feat/etapa5-finalizacao. Perfil/avatar/senha concluídos,12baselines estritas e auditoria axe das nove telas aprovadas; configuração/relatórios Lighthouse entregues. Tipos/lint/build/demo e instalação limpa aprovados. Regressão integral da etapa5 tem resultado real no fechamento da entrega; números anteriores não substituem esta execução.
+
+**Não há URL pública validada.** O usuário confirmou não possuir URL e pediu configuração/instruções Vercel para a branch não integrada; docs/DEPLOYMENT.md fornece fluxo Git/CLI sem merge. Não insistir no Figma MCP bloqueado pelo plano Starter. Exports manuais detalhados em docs/VISUAL_REVIEW.md, sem arte aleatória.
+
+| Prioridade | Próximo trabalho / dependência | Estimativa aproximada | Validação |
+|---|---|---|---|
+| P0 | Usuário publicar feat/etapa5-finalizacao na Vercel, sem proteção de acesso, enviar URL HTTPS/SHA; depois revalidar |15–30min publicação +30–60min validação |Rotas/refresh, compra até recibo, MSW/Socket.IO e reconexão na URL real. Não aprovar deploy por preview local. |
+| P1 | Performance do detalhe mobile: mediana84<90; investigar custo inicial JS/MSW e cadeia de carregamento |2–4h |Lighthouse3execuções por cenário, mesmo perfil Slow4G/CPU4 e funcionalidades; comparar LCP/TBT sem esconder dados ou suprimir401 obrigatório. |
+| P1 | Receber exports originais e concluir comparação visual dos nove frames |3–6h + acesso externo |Mapa de assets, logo/hero/NFTs/galeria/ícones/avatares, cores/fontes/proporções; corrigir grid mobile/navegação conhecidos após conferência. Atualizar somente baselines intencionalmente alteradas. |
+| P1 | Auditoria humana complementar, zoom nativo e leitor de tela nas nove telas |1–2h |Foco/erros, reflow e navegação sem perda de conteúdo; axe/Lighthouse não cobrem tudo. |
+| P2 | SEO/qualidade restantes sem alterar contratos de sessão |30–90min |robots.txt válido (fallback atual retornaHTML, SEO91);401 anônimo de sessão explica BP96 e não deve ser mascarado exclusivamente para pontuação. |
+| P2 | Entregar traces/relatórios funcionais como artefatos públicos de CI |1–2h |Artifacts de falhas acessíveis ao avaliador; configuração já gera traces locais. |
+
+Lighthouse atual: Home mobile95/desktop100, detalhe mobile84/desktop99; Accessibility100, BestPractices96 e SEO91 em todos os cenários. Detalhe desktop melhorou87→99 e CLS0.2267→0.000014; mobile continua abaixo da meta. Assets indisponíveis limitam representatividade: repetir auditorias após incorporá-los e publicar o SHA final. Não inferir nota da Jungle Gaming ou conclusão global.
+
+Arquivos da próxima ação: vercel.json/.env.production/docs/DEPLOYMENT.md e TEST_BASE_URL para validação publicada; para performance, src/main.tsx, vite.config.ts, detalhe/skeleton/queries e runtimeMSW, guiados pelo trace. Para visual, public/assets e componentes/layouts existentes, preservando as206verificações funcionais e12baselines. Não refazer perfil, checkout ou Socket.IO.
+
+As seções seguintes são históricas; o plano corrente da etapa5 acima prevalece.
+
+## Progresso etapa 4 — histórico
 
 Base c52f872 confirmada, branch feat/etapa4-checkout-pedidos-socket, commits por checkpoint. Não houve alteração direta da main nem merge automático. Dependência do PR3 é mantida enquanto ele não estiver integrado.
 
@@ -184,3 +205,6 @@ Depois, conforme dependências: rotas e features de autenticação, detalhe, car
 ## Evidência que deve acompanhar cada incremento
 
 Executar `npm run build`, `npm run lint`, verificação de tipos e os testes afetados; registrar resultados reais e limites. Demonstração manual deve observar a UI e respostas/operações da simulação. Testes REST devem passar pelos handlers MSW; tempo real pelo cliente Socket.IO; nunca validar apenas que uma página ou título existe. Ao finalizar, atualizar o checklist requisito a requisito, promovendo a VALIDADO somente o comportamento efetivamente comprovado.
+
+
+Fechamento Etapa5:206/206 dev16.4m,38/38 selecionados no build1.9m,12/12 visualestrito21.7s, tipos/lint/build/demo/instalaçãolimpa aprovados. Prioridades restantes permanecem as do plano corrente: URL pública, Performance mobile, assets/fidelidade e revisão humana.
