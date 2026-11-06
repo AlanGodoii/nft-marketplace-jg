@@ -1,3 +1,4 @@
+import { inventoryView, inventoryBase } from './inventory'
 import { z } from 'zod'
 import { nftSchema, type Nft } from '@/contracts/nft'
 import { createNftFixtures } from './fixtures'
@@ -14,18 +15,22 @@ export function createMockDatabase(storage?: Pick<Storage, 'getItem' | 'setItem'
     const persisted = storage?.getItem(storageKey)
     if (persisted) state = stateSchema.parse(JSON.parse(persisted))
   } catch { state = seed() }
+  const reload = () => {
+    try { const persisted = storage?.getItem(storageKey); if (persisted) state = stateSchema.parse(JSON.parse(persisted)) } catch { /* Keep the last valid snapshot. */ }
+  }
   const save = () => {
     try { storage?.setItem(storageKey, JSON.stringify(state)) } catch { /* Storage unavailable: keep session state in memory. */ }
   }
   return {
-    snapshot: () => structuredClone(state),
+    snapshot: () => { reload(); return { ...structuredClone(state), nfts: state.nfts.map(inventoryView) } },
     reset: () => { state = seed(); save() },
     updateNft: (id: string, update: (current: Nft) => Nft) => {
+      reload()
       const index = state.nfts.findIndex(nft => nft.id === id)
       if (index < 0) return undefined
-      const next = nftSchema.parse(update(structuredClone(state.nfts[index])))
-      if (next.id !== id || next.version <= state.nfts[index].version) throw new Error('NFT update requires stable ID and a newer version')
-      state.nfts[index] = next
+      const next = nftSchema.parse(update(inventoryView(state.nfts[index])))
+      if (next.id !== id || next.version <= inventoryView(state.nfts[index]).version) throw new Error('NFT update requires stable ID and a newer version')
+      state.nfts[index] = inventoryBase(next)
       save()
       return structuredClone(next)
     },

@@ -1,5 +1,7 @@
 # Etapa 3 — autenticação, detalhes, favoritos e carrinho
 
+> Histórico da etapa3. Auth/favoritos/carrinho continuam preservados; a etapa4 acrescenta carteiras, checkout, pedidos e Socket.IO. Consulte docs/STAGE4_CHECKOUT_SOCKET.md e ARCHITECTURE.md para a estrutura atual, incluindo cotação vinculada às versões dos NFTs.
+
 Base: main em 2593a26, após a etapa P0 do catálogo. As nove rotas existentes foram mantidas, com `/favoritos` acrescentada. Não há criação de pedidos, pagamento final nem Socket.IO nesta etapa.
 
 ## Credenciais fictícias

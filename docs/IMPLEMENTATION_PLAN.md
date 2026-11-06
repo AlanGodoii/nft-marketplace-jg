@@ -4,6 +4,35 @@ Data: **05/11/2026**, America/Sao_Paulo. Prazo informado: **06/11/2026**, sem ho
 
 Base da auditoria inicial: `a99d26c769240a0e9f2e19cb53b09978a06b9917` de `origin/main`. Enunciado `docs/DESAFIO.md` lido integralmente. Evidências, comandos e 344 itens estão em `docs/REQUIREMENTS_CHECKLIST.md`. A auditoria inicial não modificou funcionalidades. O progresso atual da implementação está descrito abaixo.
 
+## Progresso etapa 4 — plano corrente
+
+Base c52f872 confirmada, branch feat/etapa4-checkout-pedidos-socket, commits por checkpoint. Não houve alteração direta da main nem merge automático. Dependência do PR3 é mantida enquanto ele não estiver integrado.
+
+A: carteiras principais/secundárias, edição/persistência/isolamento e conexão simulada. B: checkout/cotação privada, seleção, compatibilidade, validação e revisão. C: pedidos idempotentes, estados, timeout/refresh e recibo imutável, estoque ledger e remoção parcial. D: Socket.IO real no transporte WebSocket MSW3, eventos, versionamento, isolamento e reconciliação REST. E: regressão e validação no build otimizado, com resultados finais no fechamento E4 do checklist.
+
+Resultados já observados por checkpoint: baseline6/6; A6/6; B8/8; A+B+C30/30; D16/16; repetição específica de acessibilidade/sessão/larguras10/10. Fechamento:176/176 na regressão dev(16.2m),70/70 novos no build otimizado(3.6m); tipos/lint/build/demo aprovados,3avisos preexistentes. Instalação limpa com npm ci, tipos e build:demo aprovada; conferência adicional nas três larguras e guard terminal recusado/exploração simulada aprovada. Falhas intermediárias documentadas no fechamento E4, sem inferir aprovação pela soma de execuções repetidas.
+
+### Próxima implementação recomendada: perfil completo
+
+O último placeholder de funcionalidade obrigatória é o perfil. Implementar consulta/edição de dados, avatar e alteração de senha via MSW/Axios/Query, RHF/Zod, persistência e erros. Preservar sessão, carteiras/carrinho/pedidos e Socket.IO; mudança de senha deve ter política explícita de reautenticação/revogação. Não refazer compra ou tempo real já validados.
+
+| Prioridade | Trabalho restante / dependência | Estimativa ativa | Validação |
+|---|---|---|---|
+| P0 | Perfil/API/dados/avatar/senha; depende de auth e estado persistido existentes | 3–5h | Edição/refresh, arquivo inválido/tamanho, senha antiga/nova,401/409/500, A/B e cache/socket da sessão anterior |
+| P0 | Deploy público do commit revisado, com SPA fallback, mocks e Socket.IO | 1–2h | URL real, acesso direto/refresh, compra e evento no publicado; não confundir preview local com deploy |
+| P0 | Configuração/comando Lighthouse e3medições por início/detalhe mobile/desktop, mediana e HTML/JSON | 2–4h | Métricas reais LCP/CLS/TBT e categorias; justificar abaixo das metas sem inventar nota |
+| P1 | Resolver acesso aos assets originais403 e fechar fidelidade dos frames | 3–6h + acesso externo | Imagens/fontes efetivas e comparação390/768/1440; não trocar por arte arbitrária |
+| P1 | Regressão visual versionada de início/detalhe/carrinho/pagamento | 2–4h | Dados estáveis, baselines reais e screenshots comparados; atualizar somente com revisão |
+| P2 | Otimizações e ajustes de zoom/contraste medidos após Lighthouse/visual | 1–3h | Medições antes/depois e navegação/zoom sem perda de conteúdo |
+
+Estimativas aproximadas de uma pessoa; não são promessa para06/11/2026, sem horário de corte conhecido. Há risco de prazo por perfil, medição e assets externos; não declarar conformidade integral. Não usar testes funcionais para estimar uma nota garantida.
+
+Arquivos da próxima tarefa: src/routes/perfil.tsx, novos contracts/profile.ts, features/profile/*, mocks/handlers/profile.ts e estado commerce-db; reutilizar auth/lifecycle/identity/password e controles de sessão. Estender Playwright com perfil/avatar/senha; manter todas as suítes de compra/Socket.IO. Para entrega: configuração de hospedagem/SPA, comando/config Lighthouse, relatórios e baselines nas pastas próprias.
+
+### Histórico das etapas anteriores
+
+As seções seguintes preservam estimativas/pendências anteriores. **O plano corrente acima prevalece; checkout, carteiras, pedidos e Socket.IO já foram implementados na etapa4.**
+
 ## Progresso etapa 3 e plano restante — 05/11/2026
 
 Implementado sobre main2593a26: autenticação/sessão, guards e retorno, detalhe/edições, favoritos otimistas com rollback e carrinho visitante/usuário com merge, estoque, cupom e cotação Decimal. Catálogo36NFTs e testes preservados. Nove rotas originais mantidas; favoritos acrescentada. Contratos e evidências: docs/STAGE3_API.md e checklist. Validação final: tipos/lint/build/build:demo aprovados;106 testes dev (8.1m) e64 do build otimizado (3.6m) aprovados. Uma rodada concorrente anterior teve105 aprovados e1 timeout; repetição integral sequencial passou sem relaxar testes. Detalhes no fechamento E3 do checklist.

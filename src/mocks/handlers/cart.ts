@@ -26,7 +26,7 @@ export const cartHandlers = [
       const quantity = (existing?.quantity ?? 0) + input.quantity
       if (edition.availability.status !== 'available' || quantity > edition.availability.remaining) return null
       if (existing) existing.quantity = quantity
-      else cart.items.push({ id, ...input })
+      else cart.items.push({ id, generation: crypto.randomUUID(), ...input })
       cart.version += 1
       return cart
     })
