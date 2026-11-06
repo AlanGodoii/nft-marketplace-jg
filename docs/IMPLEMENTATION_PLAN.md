@@ -2,7 +2,34 @@
 
 Data: **05/11/2026**, America/Sao_Paulo. Prazo informado: **06/11/2026**, sem horário de corte conhecido.
 
-Base auditada: `a99d26c769240a0e9f2e19cb53b09978a06b9917` de `origin/main`. Enunciado `docs/DESAFIO.md` lido integralmente. Evidências, comandos e 344 itens estão em `docs/REQUIREMENTS_CHECKLIST.md`. Nenhuma implementação foi feita nesta tarefa.
+Base da auditoria inicial: `a99d26c769240a0e9f2e19cb53b09978a06b9917` de `origin/main`. Enunciado `docs/DESAFIO.md` lido integralmente. Evidências, comandos e 344 itens estão em `docs/REQUIREMENTS_CHECKLIST.md`. A auditoria inicial não modificou funcionalidades. O progresso atual da implementação está descrito abaixo.
+
+## Progresso etapa 3 e plano restante — 05/11/2026
+
+Implementado sobre main2593a26: autenticação/sessão, guards e retorno, detalhe/edições, favoritos otimistas com rollback e carrinho visitante/usuário com merge, estoque, cupom e cotação Decimal. Catálogo36NFTs e testes preservados. Nove rotas originais mantidas; favoritos acrescentada. Contratos e evidências: docs/STAGE3_API.md e checklist. Validação final: tipos/lint/build/build:demo aprovados;106 testes dev (8.1m) e64 do build otimizado (3.6m) aprovados. Uma rodada concorrente anterior teve105 aprovados e1 timeout; repetição integral sequencial passou sem relaxar testes. Detalhes no fechamento E3 do checklist.
+
+### Próxima implementação recomendada
+
+**P0 — checkout/pedidos idempotentes e transporte Socket.IO real.** Não foram implementados nesta etapa por limite explícito do escopo. Depender dos contratos atuais de sessão, carrinho e cotação; não refazer os módulos concluídos. Risco eliminatório continua máximo enquanto não houver compra confirmada somente pelo estado da simulação e eventos passando pelo cliente real.
+
+| Prioridade / dependência | Trabalho restante | Estimativa ativa | Validação |
+|---|---|---|---|
+| P0 / domínio atual | Contratos de carteira/pedido e persistência de idempotência; revalidar cotação, estoque, sessão e conteúdo no servidor simulado | 4–6h | Mesma chave recupera mesmo pedido; conteúdo diferente409; timeout não duplica |
+| P0 / contratos | Carteiras mínimas e checkout com confirmação baseada em resposta, pendente/sucesso/falha; recibo privado | 5–8h | Compra integral, duplo clique, falha, expiração, refresh e retorno ao pedido original |
+| P0 / estado central | Provar cliente Socket.IO com transporte de mocks; eventos versionados, duplicados/antigos, desconexão e reconciliação REST | 5–9h | Observar eventos no cliente real; não escrever diretamente no cache para simular transporte |
+| P0 / anteriores | E2E de compra/isolamento/tempo real e build otimizado | 3–5h | Dev+preview; falhas determinísticas, recibo de proprietário correto |
+| P1 | Perfil/avatar/senha e gestão completa de carteiras, erros/persistência | 4–7h | Validação, refresh, troca A/B, credenciais antigas/novas |
+| P1 | Recuperar assets originais (URLs atuais403), ajustar Figma desktop/mobile e baselines das quatro telas obrigatórias | 3–6h + acesso | Comparação em390/768/1440; regressão visual versionada |
+| P1 | Deploy funcional com refresh de rotas e MSW, Lighthouse e documentação final | 2–4h | URL pública, relatório real e reprodução local |
+| P2 | Performance medida, refinamentos visuais/a11y e orçamento de bundle | 2–4h | Corrigir gargalos apontados por medições; evitar otimização sem evidência |
+
+Estimativas aproximadas para uma pessoa, não promessa: P0 restante17–28h, além de P1/P2. Prazo amanhã06/11/2026 sem horário definido: risco alto de escopo; não declarar conformidade integral nem nota garantida. Reservar janela para validação e revisão do PR. Assets dependem de acesso externo; não substituir arte original por imagens arbitrárias.
+
+Arquivos a modificar na próxima tarefa: novos contracts/order.ts e wallet.ts, handlers/orders.ts e wallets.ts, domínio/persistência MSW para pedidos, src/routes/{checkout,carteiras,pedido.confirmacao,perfil}.tsx, integração Socket e hooks privados; reaproveitar src/mocks/cart-domain.ts, commerce-db.ts, src/features/auth/* e src/contracts/cart.ts. Estender tests/commerce.spec.ts ou separar suites de checkout/socket; preservar tests/catalog.spec.ts.
+
+### Histórico P0 e auditoria
+
+As seções abaixo descrevem o estado anterior e estimativas originais. **Não são o plano corrente nem ausência das funcionalidades da etapa3.**
 
 ## Progresso após implementação P0 de catálogo — 05/11/2026
 

@@ -1,17 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { PagePlaceholder } from '@/components/page-placeholder'
-import { buttonVariants } from '@/components/ui/button'
-
-export const Route = createFileRoute('/cadastro')({
-  component: Page,
-})
-
-function Page() {
-  return (
-    <PagePlaceholder title="Cadastro" description="Crie sua conta na Jungle Gaming.">
-      <Link to="/login" className={buttonVariants({ variant: 'outline' })}>
-        Já tenho uma conta
-      </Link>
-    </PagePlaceholder>
-  )
-}
+import { createFileRoute } from '@tanstack/react-router'
+import { RegisterPage } from '@/features/auth/auth-page'
+import { authSearch } from '@/features/auth/redirect'
+export const Route = createFileRoute('/cadastro')({ validateSearch: authSearch, component: RegisterPage })

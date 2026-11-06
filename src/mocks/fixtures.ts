@@ -22,8 +22,12 @@ export function createNftFixtures(): Nft[] {
       collection: { ...collections[index % 3] }, network: { ...networks[Math.floor(index / 3) % 3] },
       // Original Figma art has not been imported. Do not substitute arbitrary imagery.
       image: { src: null, alt: `Arte original de ${name} ainda não disponível` },
+      creator: { id: 'kurio-studio', name: 'Estúdio Kurio' },
+      gallery: Array.from({ length: 4 }, (_, view) => ({ src: null, alt: `Arte original de ${name} — vista ${view + 1} indisponível` })),
       price, availability,
-      editions: [{ id: `edition-${number}`, name: 'Edição original', supply: 10, price: { ...price }, availability: { ...availability } }],
+      editions: [{ id: `edition-${number}`, name: 'Edição original', supply: 10, price: { ...price }, availability: { ...availability } },
+        { id: `edition-${number}-limited`, name: 'Limitada 1/2', supply: 2, price: { ...price }, availability: { status: remaining ? 'available' : 'sold-out', remaining: Math.min(2, remaining) } },
+        { id: `edition-${number}-sold-out`, name: 'Edição esgotada', supply: 1, price: { ...price }, availability: { status: 'sold-out', remaining: 0 } }],
       createdAt: new Date(Date.UTC(2026, 9, index + 1)).toISOString(), version: 1,
     }
   })
