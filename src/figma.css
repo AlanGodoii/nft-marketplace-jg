@@ -562,3 +562,33 @@ body:has(.receipt-dialog) .mobile-bottom-nav,body:has(.receipt-dialog) .mobile-p
 @media(max-width:1023px) {
  .catalog-layout:has(.mobile-filters[open]) .catalog-refresh { position:static; justify-content:flex-end; }
 }
+@media(min-width:1024px) {
+ .profile-layout #avatar-help,.profile-layout form[aria-label="Alterar senha"] > p:first-of-type { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .profile-layout #avatar-error:empty,.profile-layout section[aria-labelledby="avatar-title"] > p[role="status"]:empty,.profile-layout form[aria-label="Alterar senha"] .field-error:empty { display:none; }
+ .profile-layout .avatar-actions button:last-child:disabled { display:inline-flex; }
+ .profile-layout .avatar-actions button:last-child { border:0; background:transparent; padding-inline:4px; }
+}
+@media(min-width:1024px) { .detail-skeleton .detail-info { min-height:480px; } }
+@media(max-width:1023px) {
+ .detail-skeleton { display:flex; flex-direction:column; gap:0; }
+ .detail-skeleton > * { margin:0; }
+ .detail-skeleton > nav { display:none; }
+ .detail-skeleton .detail-info { min-height:680px; }
+}
+@media(max-width:1023px) {
+ .page-checkout .mobile-page-bar > span { font-size:16px; }
+ .page-checkout main > section > a[href="/carrinho"] { display:none; }
+ .checkout-layout { align-items:stretch; }
+ .checkout-layout > div:first-child > form { width:100%; }
+ .checkout-layout .connection-panel { background:transparent; padding:0; display:grid; gap:8px; }
+ .connection-panel > * { margin:0; }
+ .connection-panel > h2,.connection-panel > label { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .connection-panel select { height:32px; padding:4px 10px; font-size:12px; }
+ .connection-panel > div { display:flex; flex-wrap:nowrap; gap:8px; }
+ .connection-panel > div button { flex:1; padding:4px 8px; min-width:0; font-size:11px; height:32px; }
+ .connection-panel > p[role] { font-size:11px; line-height:18px; }
+ .payment-wallet-options > button { padding:14px; min-height:92px; line-height:20px; }
+ .payment-wallet-options > button > span { gap:4px; }
+ .payment-wallet-options strong { line-height:20px; }
+ .payment-provider-options > button { padding:12px; min-height:64px; line-height:20px; }
+}
