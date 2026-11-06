@@ -461,5 +461,8 @@ body:has(.auth-card) [data-slot="dialog-overlay"] { background: #140d0a99; }
 .profile-layout textarea { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 8px; background: transparent; }
 .profile-avatar { width: 112px; height: 112px; border-radius: 50%; object-fit: cover; }
 .profile-avatar-empty { display: grid; place-items: center; background: var(--muted); font-size: 40px; }
+.detail-skeleton .detail-info { min-height: 681px; }
+.detail-skeleton-description { min-height: 157px; }
+@media (max-width: 767px) { .detail-skeleton .detail-info { min-height: 748px; } .detail-skeleton-description { min-height: 229px; } }
 @media (max-width: 767px) { .profile-layout { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 @media (prefers-reduced-motion: reduce) { .kurio-theme, .kurio-theme *, .kurio-theme *::before, .kurio-theme *::after, [data-slot="dialog-overlay"] { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
