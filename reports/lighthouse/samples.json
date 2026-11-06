@@ -1,0 +1,1502 @@
+[
+  {
+    "page": "home",
+    "profile": "mobile",
+    "run": 1,
+    "url": "http://127.0.0.1:4190/?search=&collection=&network=&minPrice=&maxPrice=&availableOnly=false&sort=recent&page=1&pageSize=6",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 94,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 761.1728,
+      "cumulative-layout-shift": 0.0003069452402323822,
+      "total-blocking-time": 292
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "score": 0.79,
+        "displayValue": "290 ms"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.58,
+        "displayValue": "220 ms"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.87,
+        "displayValue": "4,1 s"
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0.5,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0,
+        "displayValue": "Economia estimada de 140 ms"
+      }
+    ],
+    "json": "home-mobile-1.report.json",
+    "html": "home-mobile-1.report.html"
+  },
+  {
+    "page": "home",
+    "profile": "mobile",
+    "run": 2,
+    "url": "http://127.0.0.1:4190/?search=&collection=&network=&minPrice=&maxPrice=&availableOnly=false&sort=recent&page=1&pageSize=6",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 95,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 764.5686000000001,
+      "cumulative-layout-shift": 0.0003069452402323822,
+      "total-blocking-time": 271.5
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "score": 0.82,
+        "displayValue": "270 ms"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.86,
+        "displayValue": "140 ms"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.87,
+        "displayValue": "4,0 s"
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0.5,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0,
+        "displayValue": "Economia estimada de 150 ms"
+      }
+    ],
+    "json": "home-mobile-2.report.json",
+    "html": "home-mobile-2.report.html"
+  },
+  {
+    "page": "home",
+    "profile": "mobile",
+    "run": 3,
+    "url": "http://127.0.0.1:4190/?search=&collection=&network=&minPrice=&maxPrice=&availableOnly=false&sort=recent&page=1&pageSize=6",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 96,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 756.9444000000001,
+      "cumulative-layout-shift": 0.0003069452402323822,
+      "total-blocking-time": 221
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "score": 0.87,
+        "displayValue": "220 ms"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.83,
+        "displayValue": "150 ms"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.88,
+        "displayValue": "3,9 s"
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0.5,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0,
+        "displayValue": "Economia estimada de 140 ms"
+      }
+    ],
+    "json": "home-mobile-3.report.json",
+    "html": "home-mobile-3.report.html"
+  },
+  {
+    "page": "home",
+    "profile": "desktop",
+    "run": 1,
+    "url": "http://127.0.0.1:4190/?search=&collection=&network=&minPrice=&maxPrice=&availableOnly=false&sort=recent&page=1&pageSize=6",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 251.72809999999998,
+      "cumulative-layout-shift": 0.00023312241481557094,
+      "total-blocking-time": 0
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0.5,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0.5
+      }
+    ],
+    "json": "home-desktop-1.report.json",
+    "html": "home-desktop-1.report.html"
+  },
+  {
+    "page": "home",
+    "profile": "desktop",
+    "run": 2,
+    "url": "http://127.0.0.1:4190/?search=&collection=&network=&minPrice=&maxPrice=&availableOnly=false&sort=recent&page=1&pageSize=6",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 220.20010000000002,
+      "cumulative-layout-shift": 0.00023312241481557094,
+      "total-blocking-time": 0
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0.5,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0.5
+      }
+    ],
+    "json": "home-desktop-2.report.json",
+    "html": "home-desktop-2.report.html"
+  },
+  {
+    "page": "home",
+    "profile": "desktop",
+    "run": 3,
+    "url": "http://127.0.0.1:4190/?search=&collection=&network=&minPrice=&maxPrice=&availableOnly=false&sort=recent&page=1&pageSize=6",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 100,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 269.5872,
+      "cumulative-layout-shift": 0.00023312241481557094,
+      "total-blocking-time": 0
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0.5,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0.5
+      }
+    ],
+    "json": "home-desktop-3.report.json",
+    "html": "home-desktop-3.report.html"
+  },
+  {
+    "page": "detail",
+    "profile": "mobile",
+    "run": 1,
+    "url": "http://127.0.0.1:4190/nfts/nft-002",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 84,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 4115.9989,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 197
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.46,
+        "displayValue": "4,1 s"
+      },
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "score": 0.9,
+        "displayValue": "200 ms"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.77,
+        "displayValue": "170 ms"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.86,
+        "displayValue": "4,1 s"
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "title": "Elementos com rótulos de texto visíveis não têm nomes acessíveis correspondentes.",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0,
+        "displayValue": "Economia estimada de 150 ms"
+      }
+    ],
+    "json": "detail-mobile-1.report.json",
+    "html": "detail-mobile-1.report.html"
+  },
+  {
+    "page": "detail",
+    "profile": "mobile",
+    "run": 2,
+    "url": "http://127.0.0.1:4190/nfts/nft-002",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 83,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 4095.36345,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 207
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.47,
+        "displayValue": "4,1 s"
+      },
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "score": 0.89,
+        "displayValue": "210 ms"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.8,
+        "displayValue": "160 ms"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.86,
+        "displayValue": "4,1 s"
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "title": "Elementos com rótulos de texto visíveis não têm nomes acessíveis correspondentes.",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0,
+        "displayValue": "Economia estimada de 120 ms"
+      }
+    ],
+    "json": "detail-mobile-2.report.json",
+    "html": "detail-mobile-2.report.html"
+  },
+  {
+    "page": "detail",
+    "profile": "mobile",
+    "run": 3,
+    "url": "http://127.0.0.1:4190/nfts/nft-002",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 84,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 4083.022099999999,
+      "cumulative-layout-shift": 0,
+      "total-blocking-time": 191
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "mobile",
+      "throttling": {
+        "rttMs": 150,
+        "throughputKbps": 1638.4,
+        "requestLatencyMs": 562.5,
+        "downloadThroughputKbps": 1474.5600000000002,
+        "uploadThroughputKbps": 675,
+        "cpuSlowdownMultiplier": 4
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": true,
+        "width": 412,
+        "height": 823,
+        "deviceScaleFactor": 1.75,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Linux; Android 11; moto g power (2022)) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Mobile Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.47,
+        "displayValue": "4,1 s"
+      },
+      {
+        "id": "total-blocking-time",
+        "title": "Total Blocking Time",
+        "score": 0.9,
+        "displayValue": "190 ms"
+      },
+      {
+        "id": "max-potential-fid",
+        "title": "Max Potential First Input Delay",
+        "score": 0.86,
+        "displayValue": "140 ms"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "interactive",
+        "title": "Time to Interactive",
+        "score": 0.86,
+        "displayValue": "4,1 s"
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "title": "Elementos com rótulos de texto visíveis não têm nomes acessíveis correspondentes.",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0,
+        "displayValue": "Economia estimada de 130 ms"
+      }
+    ],
+    "json": "detail-mobile-3.report.json",
+    "html": "detail-mobile-3.report.html"
+  },
+  {
+    "page": "detail",
+    "profile": "desktop",
+    "run": 1,
+    "url": "http://127.0.0.1:4190/nfts/nft-002",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 905.9707999999998,
+      "cumulative-layout-shift": 0.0000138960891283696,
+      "total-blocking-time": 0
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.96,
+        "displayValue": "0,9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "title": "Elementos com rótulos de texto visíveis não têm nomes acessíveis correspondentes.",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0.5
+      }
+    ],
+    "json": "detail-desktop-1.report.json",
+    "html": "detail-desktop-1.report.html"
+  },
+  {
+    "page": "detail",
+    "profile": "desktop",
+    "run": 2,
+    "url": "http://127.0.0.1:4190/nfts/nft-002",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 879.6737,
+      "cumulative-layout-shift": 0.0000138960891283696,
+      "total-blocking-time": 7
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.97,
+        "displayValue": "0,9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "title": "Elementos com rótulos de texto visíveis não têm nomes acessíveis correspondentes.",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0.5
+      }
+    ],
+    "json": "detail-desktop-2.report.json",
+    "html": "detail-desktop-2.report.html"
+  },
+  {
+    "page": "detail",
+    "profile": "desktop",
+    "run": 3,
+    "url": "http://127.0.0.1:4190/nfts/nft-002",
+    "lighthouseVersion": "13.6.0",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/155.0.0.0 Safari/537.36",
+    "categories": {
+      "performance": 99,
+      "accessibility": 100,
+      "best-practices": 96,
+      "seo": 91
+    },
+    "metrics": {
+      "largest-contentful-paint": 920.8700999999999,
+      "cumulative-layout-shift": 0.0000138960891283696,
+      "total-blocking-time": 7
+    },
+    "settings": {
+      "output": [
+        "json",
+        "html"
+      ],
+      "maxWaitForFcp": 30000,
+      "maxWaitForLoad": 45000,
+      "pauseAfterFcpMs": 1000,
+      "pauseAfterLoadMs": 1000,
+      "networkQuietThresholdMs": 1000,
+      "cpuQuietThresholdMs": 1000,
+      "formFactor": "desktop",
+      "throttling": {
+        "rttMs": 40,
+        "throughputKbps": 10240,
+        "requestLatencyMs": 0,
+        "downloadThroughputKbps": 0,
+        "uploadThroughputKbps": 0,
+        "cpuSlowdownMultiplier": 1
+      },
+      "throttlingMethod": "simulate",
+      "screenEmulation": {
+        "mobile": false,
+        "width": 1350,
+        "height": 940,
+        "deviceScaleFactor": 1,
+        "disabled": false
+      },
+      "emulatedUserAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+      "auditMode": false,
+      "gatherMode": false,
+      "clearStorageTypes": [
+        "file_systems",
+        "shader_cache",
+        "service_workers",
+        "cache_storage"
+      ],
+      "disableStorageReset": false,
+      "debugNavigation": false,
+      "channel": "cli",
+      "usePassiveGathering": false,
+      "disableFullPageScreenshot": false,
+      "skipAboutBlank": false,
+      "blankPage": "about:blank",
+      "ignoreStatusCode": false,
+      "locale": "pt",
+      "blockedUrlPatterns": null,
+      "additionalTraceCategories": null,
+      "extraHeaders": null,
+      "precomputedLanternData": null,
+      "onlyAudits": null,
+      "onlyCategories": [
+        "performance",
+        "accessibility",
+        "best-practices",
+        "seo"
+      ],
+      "skipAudits": null
+    },
+    "warnings": [],
+    "failedAudits": [
+      {
+        "id": "largest-contentful-paint",
+        "title": "Largest Contentful Paint",
+        "score": 0.96,
+        "displayValue": "0,9 s"
+      },
+      {
+        "id": "errors-in-console",
+        "title": "Erros do navegador foram registrados no console",
+        "score": 0
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "title": "Elementos com rótulos de texto visíveis não têm nomes acessíveis correspondentes.",
+        "score": 0
+      },
+      {
+        "id": "unused-javascript",
+        "title": "Reduza o JavaScript não usado",
+        "score": 0,
+        "displayValue": "Economia estimada de 100 KiB"
+      },
+      {
+        "id": "robots-txt",
+        "title": "robots.txt não é válido",
+        "score": 0,
+        "displayValue": "32 erros encontrados"
+      },
+      {
+        "id": "network-dependency-tree-insight",
+        "title": "Árvore de dependência da rede",
+        "score": 0
+      },
+      {
+        "id": "render-blocking-insight",
+        "title": "Solicitações que bloquearam a renderização",
+        "score": 0.5
+      }
+    ],
+    "json": "detail-desktop-3.report.json",
+    "html": "detail-desktop-3.report.html"
+  }
+]
