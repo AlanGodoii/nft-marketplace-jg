@@ -12,6 +12,7 @@
     "test:e2e": "playwright test",
     "build:demo": "tsc -b && vite build --mode demo",
     "test:visual": "playwright test --config=playwright.visual.config.ts",
+    "test:desktop": "playwright test --config=playwright.desktop.config.ts",
     "test:a11y": "playwright test tests/accessibility.spec.ts",
     "lighthouse": "node scripts/lighthouse.mjs"
   },

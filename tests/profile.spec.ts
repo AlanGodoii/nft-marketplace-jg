@@ -87,7 +87,7 @@ test('perfil: troca de usuário mantém dados e avatar privados', async ({ page 
   const avatar = `data:image/png;base64,${readFileSync('tests/fixtures/avatar.png').toString('base64')}`
   expect((await request(page, '/api/profile/avatar', 'PUT', { version: p.version, avatar })).status).toBe(200)
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
   await login(page, 'bob', '/perfil')
   await expect(page.getByLabel('Nome de exibição', { exact: true })).toHaveValue('Bob')
   await expect(page.getByLabel('Biografia')).toHaveValue('')

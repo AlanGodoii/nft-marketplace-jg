@@ -10,7 +10,11 @@ interface Props extends Pick<CatalogControls, 'filters' | 'onFiltersChange'> {
 export function CatalogToolbar({ total, filters, onFiltersChange, disabled }: Props) {
   return (
     <div className="catalog-toolbar">
-      <div className="flex flex-wrap items-baseline justify-between gap-3">
+      <div className="desktop-catalog-tabs desktop-home-only" role="group" aria-label="Categorias do catálogo" aria-describedby="catalog-tabs-policy">
+        {([['all', 'Todos os NFTs'], ['new', 'Novos lançamentos'], ['trending', 'Em alta']] as const).map(([tab, label]) => <button key={tab} type="button" disabled={disabled} aria-pressed={(filters.tab ?? 'all') === tab} onClick={() => onFiltersChange({ ...filters, tab })}>{label}</button>)}
+      </div>
+      <p id="catalog-tabs-policy" className="sr-only">Novos lançamentos: publicados desde 1 de novembro de 2026. Em alta: seleção de edições disponíveis, sem estatística de vendas.</p>
+      <div className="catalog-heading flex flex-wrap items-baseline justify-between gap-3">
         <h2 id="catalog-title" className="text-2xl font-bold">Explore os NFTs</h2>
         <p className="text-xs text-muted-foreground">{total !== undefined ? `${total} NFTs encontrados` : 'Catálogo indisponível'}</p>
       </div>

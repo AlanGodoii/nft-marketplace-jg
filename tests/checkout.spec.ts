@@ -33,7 +33,7 @@ test('A: carteiras isoladas e API retorna 400,401,404,409', async ({ page }) => 
   const { id: _id, version: _version, ...input } = wallet
   expect((await request(page, '/api/wallets', 'POST', input)).status).toBe(409)
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
   await login(page, 'bob')
   await expect(page.getByText(`0x${'2'.repeat(40)}`, { exact: true })).toBeVisible()
   await expect(page.getByText(wallet.address, { exact: true })).toHaveCount(0)
@@ -270,7 +270,7 @@ test('C: backend bloqueia cotação alterada ou expirada e pedido privado de out
   const created = await request(page, '/api/orders', 'POST', second.input, { 'Idempotency-Key': 'private-order-alice' })
   expect(created.status).toBe(201)
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
-  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
   await login(page, 'bob')
   expect((await request(page, `/api/orders/${created.body.id}`, 'GET')).status).toBe(404)
   expect((await request(page, `/api/__mock/orders/${created.body.id}/settle`, 'POST', { status: 'confirmed' })).status).toBe(404)

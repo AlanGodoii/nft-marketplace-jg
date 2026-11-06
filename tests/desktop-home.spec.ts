@@ -1,0 +1,98 @@
+import { expect, test } from '@playwright/test'
+import { reset, login, add, request } from './helpers/market'
+import AxeBuilder from '@axe-core/playwright'
+
+test.beforeEach(async ({ page }) => { await reset(page) })
+for (const width of [1280, 1440, 1920]) {
+  test(`Home original desktop: composição, imagens e acessibilidade em ${width}px`, async ({ page }, testInfo) => {
+    await page.setViewportSize({ width, height: 1000 })
+    await page.goto('/')
+    await expect(page.locator('.nft-grid .nft-card h3')).toHaveCount(6)
+    await expect(page.getByRole('heading', { name: 'SEJA DONO DO FUTURO DA ARTE DIGITAL' })).toBeVisible()
+    await expect(page.locator('.desktop-primary-nav a')).toHaveText(['Início', 'Mercado', 'Criadores', 'Aprenda'])
+    await expect(page.locator('.desktop-primary-nav .is-active')).toHaveAttribute('aria-current', 'page')
+    const positions = await page.locator('.nft-grid .nft-card').evaluateAll(nodes => nodes.slice(0,4).map(node => ({ x: node.getBoundingClientRect().x, y: node.getBoundingClientRect().y })))
+    expect(positions[0].y).toBe(positions[2].y); expect(positions[3].y).toBeGreaterThan(positions[0].y)
+    await expect(page.locator('.journal-grid article')).toHaveCount(4)
+    await page.locator('.home-footer').scrollIntoViewIfNeeded()
+    await page.evaluate(async () => {
+      await document.fonts.ready
+      for (let top = 0; top < document.body.scrollHeight; top += 700) { window.scrollTo(0, top); await new Promise(resolve => setTimeout(resolve, 40)) }
+      await Promise.all([...document.images].filter(img => img.getBoundingClientRect().width > 0).map(img => img.decode()))
+      window.scrollTo(0, 0)
+    })
+    const assets = await page.locator('.desktop-card-art img, .desktop-home-hero img, .home-promos img, .journal-grid img, .home-spotlight img').evaluateAll(images => images.map(node => { const img = node as HTMLImageElement; return { src: img.currentSrc, loaded: img.complete && img.naturalWidth > 1, width: img.clientWidth, height: img.clientHeight } }))
+    expect(assets.every(asset => asset.loaded && asset.width > 0 && asset.height > 0)).toBe(true)
+    expect(assets.every(asset => asset.src.includes('/assets/figma/home/'))).toBe(true)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true)
+    const axe = await new AxeBuilder({ page }).analyze()
+    expect(axe.violations).toEqual([])
+    await page.screenshot({ path: testInfo.outputPath(`home-desktop-${width}.png`), fullPage: true })
+  })
+}
+test('header: busca, destino editorial e conta com carrinho real', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: 'Abrir busca do mercado' }).click()
+  await page.getByLabel('Buscar no mercado').fill('Sage')
+  await page.getByRole('button', { name: 'Buscar', exact: true }).click()
+  await expect(page.locator('.nft-card h3')).toHaveCount(6)
+  await expect(page.locator('.nft-card h3').first()).toContainText('Sage')
+  expect(new URL(page.url()).searchParams.get('search')).toBe('Sage')
+  await page.locator('.desktop-primary-nav').getByRole('link', { name: 'Aprenda' }).click()
+  await expect(page).toHaveURL(/#diario$/)
+  await add(page)
+  await page.goto('/')
+  await expect(page.locator('.desktop-cart > span')).toHaveText('1')
+  await login(page, 'alice', '/')
+  await page.locator('.desktop-account summary').click()
+  await page.locator('.desktop-account').getByRole('link', { name: 'Perfil', exact: true }).click()
+  await expect(page.getByRole('heading', { name: 'Perfil', exact: true })).toBeVisible()
+})
+test('abas, contagens reais, combinações, histórico e refresh', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('.desktop-filters .filter-collection .filter-option-list button')).toHaveText(['Genesis(12)', 'Nomads(12)', 'Signals(12)'])
+  await page.getByRole('button', { name: 'Novos lançamentos', exact: true }).click()
+  await expect(page.locator('.nft-card h3')).toHaveCount(5)
+  await expect(page.getByText('Página 1 de 1', { exact: true })).toBeVisible()
+  expect(new URL(page.url()).searchParams.get('tab')).toBe('new')
+  await page.reload()
+  await expect(page.getByRole('button', { name: 'Novos lançamentos', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  await page.getByRole('button', { name: 'Em alta', exact: true }).click()
+  await expect(page.getByText('28 NFTs encontrados', { exact: true })).toBeVisible()
+  await page.goBack()
+  await expect(page.getByRole('button', { name: 'Novos lançamentos', exact: true })).toHaveAttribute('aria-pressed', 'true')
+  await page.getByRole('button', { name: 'Todos os NFTs', exact: true }).click()
+  await page.locator('.desktop-filters .filter-collection .filter-option-list').getByRole('button', { name: /Genesis.*12/ }).click()
+  await page.locator('.desktop-filters .filter-network .filter-option-list').getByRole('button', { name: /Polygon.*12/ }).click()
+  await expect(page.locator('.nft-card h3')).toHaveCount(4)
+  expect(new URL(page.url()).searchParams.get('network')).toBe('polygon')
+  await page.locator('.desktop-filters').getByLabel('Máximo', { exact: true }).fill('1.5')
+  await page.getByRole('button', { name: 'Aplicar', exact: true }).click()
+  await expect(page.locator('.nft-card h3')).toHaveCount(3)
+  await expect(page.getByText('3 NFTs encontrados', { exact: true })).toBeVisible()
+  await expect(page.locator('.desktop-filters .filter-collection .filter-option-list button').first()).toHaveText('Genesis(12)')
+})
+test('editorial e newsletter informam limites, sem sucesso fictício', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('button', { name: /^Ler mais: Como funciona/ }).click()
+  await expect(page.getByRole('dialog')).toContainText('não está disponível')
+  await page.keyboard.press('Escape')
+  await page.getByLabel('E-mail para novidades').fill('teste@example.test')
+  await page.getByRole('button', { name: 'Enviar', exact: true }).click()
+  await expect(page.getByRole('status').filter({ hasText: 'Nenhum e-mail foi enviado' })).toBeVisible()
+  await page.getByRole('button', { name: 'Facebook (link indisponível)', exact: true }).click()
+  await expect(page.getByRole('status').filter({ hasText: 'nenhum envio ou navegação externa' })).toBeVisible()
+})
+test('assets enriquecem persistência antiga sem alterar identidade, preço ou estoque', async ({ page }) => {
+  const before = (await request(page, '/api/nfts/nft-002', 'GET')).body.item
+  await page.evaluate(() => {
+    const key = 'kurio.mock.database.v2'
+    const db = JSON.parse(localStorage.getItem(key)!)
+    for (const nft of db.nfts) delete nft.image.desktopSrc
+    localStorage.setItem(key, JSON.stringify(db))
+  })
+  const after = (await request(page, '/api/nfts/nft-002', 'GET')).body.item
+  expect(after.image.desktopSrc).toBe('/assets/figma/home/sage-nomad.webp')
+  expect(after.id).toBe(before.id); expect(after.name).toBe(before.name)
+  expect(after.price).toEqual(before.price); expect(after.editions).toEqual(before.editions); expect(after.availability).toEqual(before.availability)
+})

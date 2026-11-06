@@ -19,7 +19,7 @@ async function login(page: Page, who: 'alice' | 'bob' = 'alice', destination = '
 async function logout(page: Page) {
   await page.getByRole('button', { name: 'Sair', exact: true }).click()
   await expect(page.getByLabel('Usuário conectado')).toHaveCount(0)
-  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
 }
 async function detail(page: Page, id = 'nft-002') {
   await page.goto(`/nfts/${id}`)
@@ -431,5 +431,5 @@ test('falha ao verificar sessão oferece recuperação sem descartar credenciais
 test('retorno de login não permite redirecionar para domínio externo', async ({ page }) => {
   await login(page, 'alice', '//example.com')
   expect(new URL(page.url()).pathname).toBe('/')
-  await expect(page.getByRole('heading', { name: /Descubra o seu/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /Descubra o seu|SEJA DONO DO FUTURO/ })).toBeVisible()
 })
