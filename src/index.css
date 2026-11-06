@@ -477,7 +477,7 @@ body:has(.auth-card) [data-slot="dialog-overlay"] { background: #140d0a99; }
   .home-desktop main > .realtime-feedback:has(button) { position: static; width: auto; height: auto; overflow: visible; clip-path: none; margin-bottom: 16px; }
   .desktop-home-header { padding-top: 24px; }
   .desktop-header-inner { display: flex; align-items: center; position: relative; height: 45px; border-bottom: 1px solid #4b382b; }
-  .desktop-wordmark { font-size: 14px; font-weight: 700; letter-spacing: 1.4px; }
+  .desktop-wordmark { min-width: 172px; font-size: 14px; font-weight: 700; letter-spacing: 1.4px; }
   .desktop-primary-nav { display: flex; gap: 40px; margin-inline: auto; height: 100%; align-items: center; }
   .desktop-primary-nav a { height: 100%; display: flex; align-items: center; font-size: 16px; border-bottom: 2px solid transparent; }
   .desktop-primary-nav a.is-active { color: var(--primary); border-bottom-color: var(--primary); font-weight: 700; }
