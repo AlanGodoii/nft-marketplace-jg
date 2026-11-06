@@ -1,22 +1,31 @@
 import { z } from 'zod'
 import { userSchema } from '@/contracts/auth'
 import { seededAccounts } from './users'
+import { walletSchema, connectionSchema } from '@/contracts/wallet'
+import { orderSchema } from '@/contracts/order'
+import { checkoutQuoteSchema } from '@/contracts/checkout'
+import { seedWallets } from './wallet-seeds'
 
 const storedCartSchema = z.object({
   version: z.number().int().nonnegative(), couponCode: z.string().nullable(), notices: z.array(z.string()),
-  items: z.array(z.object({ id: z.string(), nftId: z.string(), editionId: z.string(), quantity: z.number().int().positive() })),
+  items: z.array(z.object({ id: z.string(), nftId: z.string(), editionId: z.string(), generation: z.string().optional(), quantity: z.number().int().positive() })),
 })
 const stateSchema = z.object({
   version: z.literal(1),
   retiredGuests: z.array(z.string()).default([]),
   accounts: z.array(userSchema.extend({ salt: z.string(), passwordHash: z.string() })),
   sessions: z.array(z.object({ tokenHash: z.string(), userId: z.string(), expiresAt: z.number() })),
+  orders: z.record(z.string(), orderSchema.extend({ settleAt: z.number().nullable(), outcome: z.enum(['confirmed', 'rejected']), purchasedLines: z.array(z.object({ id: z.string(), generation: z.string().optional(), quantity: z.number().int().positive() })) })).default({}),
+  idempotency: z.record(z.string(), z.object({ fingerprint: z.string(), orderId: z.string() })).default({}),
+  quotes: z.record(z.string(), checkoutQuoteSchema.extend({ userId: z.string() })).default({}),
+  wallets: z.record(z.string(), z.array(walletSchema)).default(seedWallets),
+  connections: z.record(z.string(), connectionSchema.extend({ walletVersion: z.number().int() })).default({}),
   favorites: z.record(z.string(), z.array(z.string())), carts: z.record(z.string(), storedCartSchema),
 })
 export type CommerceState = z.infer<typeof stateSchema>
 export type StoredCart = z.infer<typeof storedCartSchema>
 export const commerceStorageKey = 'kurio.mock.commerce.v1'
-const seed = (): CommerceState => ({ version: 1, retiredGuests: [], accounts: structuredClone(seededAccounts), sessions: [], favorites: {}, carts: {} })
+const seed = (): CommerceState => ({ version: 1, retiredGuests: [], accounts: structuredClone(seededAccounts), sessions: [], favorites: {}, carts: {}, wallets: seedWallets(), connections: {}, quotes: {}, orders: {}, idempotency: {} })
 let memory = seed()
 function read(): CommerceState {
   try {

@@ -2,6 +2,7 @@ import type { Cart, Quote } from '@/contracts/cart'
 import type { StoredCart, CommerceState } from './commerce-db'
 import { storedCart } from './commerce-db'
 import { getMockDatabase } from './db'
+import { networkFee as currentNetworkFee, couponExpired } from './scenarios'
 import { eth, money } from './money'
 
 export function cartView(cart: StoredCart): Cart {
@@ -41,7 +42,7 @@ export function mergeGuestCart(state: CommerceState, guestId: string, userId: st
   return notices
 }
 export function validateCoupon(code: string): string | null {
-  if (code === 'EXPIRADO') return 'Este cupom expirou.'
+  if (code === 'EXPIRADO' || (code === 'KURIO10' && couponExpired())) return 'Este cupom expirou.'
   if (code !== 'KURIO10') return 'Cupom inválido.'
   return null
 }
@@ -50,7 +51,7 @@ export function createQuote(cart: StoredCart, owner: string): Quote | undefined 
   if (view.items.some(item => !item.available) || (cart.couponCode && validateCoupon(cart.couponCode))) return undefined
   const subtotal = view.items.reduce((sum, item) => sum.add(item.lineTotal), money('0'))
   const discount = cart.couponCode === 'KURIO10' ? subtotal.mul('0.10').toDecimalPlaces(18) : money('0')
-  const networkFee = view.items.length ? money('0.016') : money('0')
+  const networkFee = view.items.length ? money(currentNetworkFee()) : money('0')
   const revision = view.items.map(item => `${item.nft.id}.${item.nft.version}`).join('-') || 'empty'
   return { reference: `quote:${owner}:${cart.version}:${revision}`, cartVersion: cart.version, expiresAt: new Date(Date.now() + 60000).toISOString(), currency: 'ETH', subtotal: eth(subtotal), discount: eth(discount), networkFee: eth(networkFee), total: eth(subtotal.minus(discount).add(networkFee)), couponCode: cart.couponCode }
 }

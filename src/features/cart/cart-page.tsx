@@ -35,7 +35,7 @@ function CartSummary({ cart }: { cart: Cart }) {
   const mutation = useCartMutation()
   const busy = useCartBusy()
   const form = useForm<{ code: string }>({ resolver: zodResolver(couponSchema), defaultValues: { code: '' } })
-  const totals = quote.data?.cartVersion === cart.version ? quote.data : undefined
+  const totals = quote.snapshotCurrent && quote.data?.cartVersion === cart.version ? quote.data : undefined
   return <aside className="cart-summary space-y-6" aria-labelledby="summary-title">
     <h2 id="summary-title" className="text-xl font-bold">Resumo do carrinho</h2>
     <form noValidate className="space-y-3" onSubmit={form.handleSubmit(async values => {
@@ -56,9 +56,9 @@ function CartSummary({ cart }: { cart: Cart }) {
         <div className="border-t pt-4 font-bold text-primary"><dt>Total</dt><dd data-testid="total">{totals.total} ETH</dd></div>
       </dl>
       <p className="text-xs break-all text-muted-foreground">Referência: {totals.reference}</p>
-      <p className="text-xs text-muted-foreground">Cotação estimada. Preço, estoque e taxas serão revalidados no futuro checkout.</p>
+      <p className="text-xs text-muted-foreground">Cotação estimada. Preço, estoque e taxas serão revalidados no checkout.</p>
       <Link to="/checkout" className={buttonVariants({ className: 'w-full', variant: 'outline' })}>Revisar no checkout</Link>
-      <p className="text-xs">A finalização da compra ainda não está disponível.</p>
+
     </>}
     {quote.isFetching && totals && <p role="status">Atualizando cotação…</p>}
   </aside>

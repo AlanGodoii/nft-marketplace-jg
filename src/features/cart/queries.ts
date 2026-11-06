@@ -3,6 +3,7 @@ import { cartSchema, quoteSchema, type CartItemInput, type Cart } from '@/contra
 import { api } from '@/lib/api'
 import { getGuestId, identityEpoch } from '@/lib/identity'
 import { scopedRequest } from '@/lib/scoped-request'
+import { useRealtime } from '@/features/realtime/state'
 import { useSession } from '@/features/auth/api'
 export function useCartScope() {
   const session = useSession()
@@ -16,10 +17,12 @@ export function useCart() {
   })
 }
 export function useQuote(cart?: Cart) {
-  const { scope, ready } = useCartScope()
-  return useQuery({ queryKey: ['cart', scope, 'quote', cart?.version], enabled: ready && !!cart, staleTime: 0,
+  const { scope, ready } = useCartScope(); const live = useRealtime()
+  const snapshotCurrent = !!cart && cart.items.every(item => item.nft.version >= (live.nftVersions[item.nftId] ?? 0))
+  const query = useQuery({ queryKey: ['cart', scope, 'quote', cart?.version, cart?.items.map(item => `${item.id}:${item.nft.version}`)], enabled: ready && snapshotCurrent, staleTime: 0,
     queryFn: async ({ signal }) => quoteSchema.parse((await api.get<unknown>('/cart/quote', { signal })).data),
   })
+  return { ...query, snapshotCurrent }
 }
 type CartAction = { type: 'add'; item: CartItemInput } | { type: 'update'; id: string; quantity: number } | { type: 'remove'; id: string } | { type: 'coupon'; code: string } | { type: 'remove-coupon' }
 export function useCartMutation() {
