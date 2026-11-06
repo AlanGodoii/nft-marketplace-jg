@@ -289,6 +289,8 @@ test('API rejeita quantidades negativas, fracionárias, acima do estoque e campo
 test('estoque alterado bloqueia adição sem perder itens existentes', async ({ page }) => {
   await add(page, 'nft-003')
   await detail(page)
+  // Preserve the REST stale-stock race even when live updates are available.
+  await mock(page, '/api/__mock/socket', { action: 'disconnect' })
   await mock(page, '/api/__mock/stock', { nftId: 'nft-002', editionId: 'edition-002', remaining: 0 })
   await page.getByRole('button', { name: 'Adicionar ao carrinho' }).click()
   await expect(page.getByRole('alert')).toContainText('Quantidade indisponível')
