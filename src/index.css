@@ -494,7 +494,7 @@ body:has(.auth-card) [data-slot="dialog-overlay"] { background: #140d0a99; }
   .desktop-header-search { position: absolute; top: 70px; right: 0; z-index: 30; background: #241612; border: 1px solid var(--border); padding: 16px; width: 410px; display: flex; gap: 10px; flex-wrap: wrap; border-radius: 6px; }
   .desktop-header-search label { width: 100%; font-size: 13px; }
   .desktop-header-search input { flex: 1; width: 200px; }
-  .home-desktop .desktop-home-hero { display: grid; grid-template-columns: minmax(0,1fr) 450px; height: 450px; margin-inline: 20px; position: relative; }
+  .home-desktop .desktop-home-hero { display: grid; grid-template-columns: minmax(0,1fr) 450px; height: 450px; margin-left: 40px; margin-right: 0; position: relative; }
   .desktop-hero-copy { padding-top: 42px; }
   .desktop-hero-copy > p:first-child { font-size: 14px; font-weight: 700; letter-spacing: 1px; }
   .desktop-hero-copy h1 { margin-top: 8px; font-size: 44px; line-height: 1.6; font-weight: 700; letter-spacing: -.7px; }
