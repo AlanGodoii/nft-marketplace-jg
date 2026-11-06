@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { ImagePlus } from 'lucide-react'
 import { useWallets, useSaveWallet } from '@/features/wallets/queries'
 import type { Wallet } from '@/contracts/wallet'
@@ -90,12 +90,13 @@ function PasswordEditor() {
 function LinkedWalletFields({ wallet }: {wallet:Wallet}) {
   const save = useSaveWallet()
   const form = useForm<{label:string;ens:string}>({defaultValues:{label:wallet.label,ens:wallet.collector.ensName}})
+  useEffect(()=>form.reset({label:wallet.label,ens:wallet.collector.ensName}),[form,wallet.label,wallet.collector.ensName])
   return <form className="linked-wallet-form" aria-label="Carteira vinculada ao perfil" onSubmit={form.handleSubmit(values=>{
     const {id:_id,version:_version,...input}=wallet
     save.mutate({id:wallet.id,input:{...input,label:values.label,collector:{...input.collector,ensName:values.ens}}})
   })}>
-    <div className="linked-wallet-ens"><label htmlFor="profile-wallet-ens">Nome ENS</label><Input id="profile-wallet-ens" {...form.register('ens')} /></div>
-    <div className="linked-wallet-label"><label htmlFor="profile-wallet-label">Apelido da carteira</label><Input id="profile-wallet-label" {...form.register('label')} /></div>
+    <div className="linked-wallet-ens"><label htmlFor="profile-wallet-ens">Nome ENS</label><Input id="profile-wallet-ens" disabled={save.isPending} {...form.register('ens')} /></div>
+    <div className="linked-wallet-label"><label htmlFor="profile-wallet-label">Apelido da carteira</label><Input id="profile-wallet-label" disabled={save.isPending} {...form.register('label')} /></div>
     <Button type="submit" disabled={save.isPending}>Salvar carteira vinculada</Button>
     {save.isError && <p role="alert">{apiErrorMessage(save.error)}</p>}{save.isSuccess && <p role="status">Carteira vinculada atualizada.</p>}
   </form>
@@ -106,7 +107,7 @@ export function ProfilePage() {
   return <AccountLayout><section className="profile-page space-y-8"><div><h1 className="text-3xl font-bold">Perfil do colecionador</h1></div>
     {profile.isPending ? <LoadingState label="Carregando perfil…" /> : profile.isError ? <ErrorState message={apiErrorMessage(profile.error)} retry={() => void profile.refetch()} /> : <div className="profile-layout" key={profile.data.id}>
       <ProfileEditor profile={profile.data} />
-      {primary ? <LinkedWalletFields wallet={primary} key={`${primary.id}:${primary.version}`} /> : <p className="linked-wallet-form"><Link to="/carteiras">Cadastre uma carteira para adicionar ENS e apelido.</Link></p>}
+      {primary ? <LinkedWalletFields wallet={primary} key={primary.id} /> : <p className="linked-wallet-form"><Link to="/carteiras">Cadastre uma carteira para adicionar ENS e apelido.</Link></p>}
       <AvatarEditor profile={profile.data} /><PasswordEditor />
     </div>}
   </section></AccountLayout>

@@ -61,14 +61,14 @@ function Detail({ nft }: { nft: Nft }) {
           </select>
           <p role="status" className="text-sm">{available ? `${edition.availability.remaining} unidades disponíveis` : 'Edição esgotada ou indisponível'}</p>
           <label htmlFor="nft-quantity" className="block">Quantidade</label>
-          <div className="quantity-stepper"><Button variant="ghost" type="button" aria-label="Diminuir quantidade" disabled={!available || busy || quantity <= 1} onClick={() => stepQuantity(-1)}><Minus aria-hidden="true" /></Button>
+          <div className="purchase-actions"><div className="quantity-stepper"><Button variant="ghost" type="button" aria-label="Diminuir quantidade" disabled={!available || busy || quantity <= 1} onClick={() => stepQuantity(-1)}><Minus aria-hidden="true" /></Button>
           <Input className="max-w-32" id="nft-quantity" type="number" min="1" max={edition.availability.remaining} step="1" {...form.register('quantity', { valueAsNumber: true })} disabled={!available || busy} aria-invalid={!!form.formState.errors.quantity} aria-describedby="nft-quantity-error" />
           <Button variant="ghost" type="button" aria-label="Aumentar quantidade" disabled={!available || busy || quantity >= edition.availability.remaining} onClick={() => stepQuantity(1)}><Plus aria-hidden="true" /></Button></div>
           {!desktop && <p className="mobile-detail-price" data-testid="edition-price">{edition.price.amount} ETH</p>}
-          <p id="nft-quantity-error" className="field-error">{form.formState.errors.quantity?.message}</p>
           <Button type="submit" disabled={!available || busy || session.isPending || session.isError}>{add.isPending ? 'Adicionando…' : 'Comprar'}</Button>
+          {desktop && <div className="detail-desktop-favorite"><FavoriteButton nft={nft} compact /></div>}
+          <p id="nft-quantity-error" className="field-error">{form.formState.errors.quantity?.message}</p></div>
         </form>
-        {desktop && <div className="detail-desktop-favorite"><FavoriteButton nft={nft} compact /></div>}
         {add.isSuccess && <p role="status">NFT adicionado ao carrinho. <Link to="/carrinho" className="underline">Ver carrinho</Link></p>}
         {add.isError && <p role="alert">{apiErrorMessage(add.error)}</p>}
         <dl className="detail-metadata space-y-2 text-sm text-muted-foreground"><div><dt className="inline">ID do token: </dt><dd className="inline">{nft.id}</dd></div><div><dt className="inline">Coleção: </dt><dd className="inline">{nft.collection.name}</dd></div><div><dt className="inline">Criador: </dt><dd className="inline">{nft.creator.name}</dd></div><div><dt className="inline">Rede: </dt><dd className="inline">{nft.network.name}</dd></div></dl>

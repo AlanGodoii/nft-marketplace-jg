@@ -12,7 +12,7 @@ export function FavoriteButton({ nft, compact = false }: { nft: Nft; compact?: b
   const router = useRouter()
   const selected = favorites.data?.items.some(item => item.id === nft.id) ?? false
   return <div className="space-y-2">
-    <Button className={compact ? 'compact-favorite' : undefined} aria-label={selected ? 'Remover dos favoritos' : 'Adicionar aos favoritos'} variant="outline" aria-pressed={selected} disabled={session.isPending || (!!session.data && (favorites.isPending || favorites.isError)) || mutation.isPending}
+    <Button type="button" className={compact ? 'compact-favorite' : undefined} aria-label={selected ? 'Remover dos favoritos' : 'Adicionar aos favoritos'} variant="outline" aria-pressed={selected} disabled={session.isPending || (!!session.data && (favorites.isPending || favorites.isError)) || mutation.isPending}
       onClick={() => { if (!session.data) { void router.navigate({ to: '/login', search: { redirect: router.state.location.href } }); return } mutation.mutate(!selected) }}>
       {compact ? <><Heart aria-hidden="true" fill={selected ? 'currentColor' : 'none'} /><span>Favoritos</span></> : selected ? 'Remover dos favoritos' : 'Adicionar aos favoritos'}
     </Button>

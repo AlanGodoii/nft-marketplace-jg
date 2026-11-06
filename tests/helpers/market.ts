@@ -48,9 +48,11 @@ export async function apiQuote(page: Page) {
 
 export async function openCollector(page: Page) {
  const panel=page.locator('.checkout-collector-details')
- if(await panel.count() && await panel.getAttribute('open')===null) await panel.locator('summary').click()
+ await panel.waitFor({state:'attached'})
+ if(await panel.getAttribute('open')===null) await panel.locator('summary').click()
 }
 export async function openCheckoutItems(page: Page) {
  const panel=page.locator('.checkout-items-details')
- if(await panel.count() && await panel.getAttribute('open')===null) await panel.locator('summary').click()
+ await panel.waitFor({state:'attached'})
+ if(await panel.getAttribute('open')===null) await panel.locator('summary').click()
 }

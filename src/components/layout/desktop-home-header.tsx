@@ -35,7 +35,7 @@ function HomeHeader() {
     <div className="kurio-container desktop-header-inner">
       <Link to="/" aria-label="Kurio — início" className="desktop-wordmark">KURIO</Link>
       <nav aria-label="Navegação principal" className="desktop-primary-nav">
-        <Link to="/" search={true} hash="" resetScroll activeOptions={{ exact: true, includeHash: true, includeSearch: false }} activeProps={{ className: 'is-active', 'aria-current': 'page' }} onClick={revisit('')}>Início</Link>
+        <Link to="/" className={!isHome && ['/perfil','/carteiras','/favoritos','/login','/cadastro'].includes(pathname) ? 'is-active' : undefined} search={true} hash="" resetScroll activeOptions={{ exact: true, includeHash: true, includeSearch: false }} activeProps={{ className: 'is-active', 'aria-current': 'page' }} onClick={revisit('')}>Início</Link>
         {([['catalogo', 'Mercado'], ['criadores', 'Criadores'], ['diario', 'Aprenda']] as const).map(([target, label]) => <Link key={target} to="/" search={isHome ? true : {}} hash={target} className={!isHome && target === 'catalogo' && (pathname.startsWith('/nfts/') || ['/carrinho', '/checkout', '/pedido/confirmacao'].includes(pathname)) ? 'is-active' : undefined} hashScrollIntoView={{ block: 'start', behavior: 'instant' }} activeOptions={{ exact: true, includeHash: true, includeSearch: false }} activeProps={{ className: 'is-active', 'aria-current': 'page' }} onClick={revisit(target)} title={`Ir à seção ${label} desta página`}>{label}</Link>)}
       </nav>
       <div className="desktop-header-actions">

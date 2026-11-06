@@ -47,6 +47,7 @@ function LoginForm() {
   </form>
 }
 function RegisterForm() {
+  const desktop = useDesktop()
   const { finish } = useAuthDestination()
   const [visible,setVisible] = useState<Record<string,boolean>>({})
   type Values = z.infer<typeof registerFormSchema>
@@ -61,7 +62,7 @@ function RegisterForm() {
       <FieldError id={`register-${key}-error`} message={form.formState.errors[key]?.message} />
     </div>)}
     {mutation.isError && <p role="alert">{apiErrorMessage(mutation.error)}</p>}
-    <Button type="submit" disabled={mutation.isPending}>{mutation.isPending ? 'Criando conta…' : 'Criar conta'}</Button>
+    <Button type="submit" disabled={mutation.isPending}>{mutation.isPending ? 'Criando conta…' : desktop ? 'Criar conta' : 'Criar perfil'}</Button>
   </form>
 }
 export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
@@ -73,7 +74,7 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   const switchLink = <Link to={mode === 'login' ? '/cadastro' : '/login'} search={{ redirect: destination }}>{mode === 'login' ? 'Novo na Kurio? Crie uma conta' : 'Já tem uma conta? Entre'}</Link>
   if (!desktop) return <section className="mobile-auth-page"><Link className="auth-wordmark" to="/" aria-label="Kurio — início">KURIO</Link><h1>{title}</h1>{form}<SocialOptions /><div className="auth-switch">{switchLink}</div></section>
   return <><AuthBackdrop /><Dialog open onOpenChange={open => { if (!open) void router.navigate({ to: '/' }) }}>
-      <DialogContent className="kurio-theme auth-card">
+      <DialogContent className="kurio-theme auth-card" initialFocus={()=>document.getElementById(mode === 'login' ? 'login-email' : 'register-name')}>
         <div className="auth-title-tabs"><DialogTitle>{title}</DialogTitle><span aria-hidden="true">|</span><Link to={mode === 'login' ? '/cadastro' : '/login'} search={{ redirect: destination }}>{mode === 'login' ? 'Criar conta' : 'Entrar'}</Link></div>
         <DialogDescription>{description}</DialogDescription>
         {form}<SocialOptions /><div className="auth-switch">{switchLink}</div>

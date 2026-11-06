@@ -528,3 +528,37 @@ body:has(.receipt-dialog) .figma-app > main { visibility:hidden; }
  .checkout-layout .connection-panel > p.break-all { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
 }
 body:has(.receipt-dialog) .mobile-bottom-nav,body:has(.receipt-dialog) .mobile-page-bar { display:none; }
+.purchase-actions > .field-error:empty { display:none; }
+@media(min-width:1024px) {
+ .detail-purchase-form { display:flex; flex-direction:column; align-items:stretch; gap:8px; }
+ .detail-purchase-form > label[for="nft-quantity"] { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .purchase-actions { display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-top:8px !important; }
+ .purchase-actions .quantity-stepper { margin-right:auto; }
+ .purchase-actions > button[type="submit"] { height:42px; min-width:130px; border-radius:2px; text-transform:uppercase; }
+ .purchase-actions .compact-favorite { height:42px; border-color:var(--primary); color:var(--primary); border-radius:4px; }
+ .purchase-actions > .field-error { width:100%; }
+}
+@media(max-width:1023px) {
+ .detail-info { display:grid; grid-template-columns:minmax(0,1fr); }
+ .detail-purchase-form { display:contents; }
+ .detail-purchase-form > label:first-child,.detail-purchase-form > .edition-pills,.detail-purchase-form > select,.detail-purchase-form > p[role="status"] { order:2; }
+ .detail-metadata { order:3; }
+ .detail-purchase-form > label[for="nft-quantity"] { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .purchase-actions { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:18px; align-items:center; order:4; margin-top:12px; }
+ .purchase-actions .quantity-stepper { grid-row:1; grid-column:1; }
+ .purchase-actions .mobile-detail-price { position:static; grid-row:1; grid-column:2; }
+ .purchase-actions > button[type="submit"] { grid-column:1/-1; grid-row:2; min-height:54px; border-radius:32px; font-weight:700; }
+ .purchase-actions > .field-error { grid-column:1/-1; }
+ .detail-info > p[role] { order:5; }
+}
+@media(min-width:1024px) {
+ .figma-app > .home-footer { max-width:1200px; width:calc(100% - 48px); margin-inline:auto; }
+ .figma-app .home-footer > .kurio-container,.figma-app .footer-contact > .kurio-container { width:100%; }
+}
+@media(min-width:1024px) {
+ .desktop-header-inner { flex-wrap:wrap; height:auto; min-height:45px; }
+ .linked-wallet-form > button { max-width:100%; white-space:normal; }
+}
+@media(max-width:1023px) {
+ .catalog-layout:has(.mobile-filters[open]) .catalog-refresh { position:static; justify-content:flex-end; }
+}
