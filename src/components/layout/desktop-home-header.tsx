@@ -15,6 +15,7 @@ export function DesktopHomeHeader() {
 function HomeHeader() {
   const [searchOpen, setSearchOpen] = useState(false)
   const [term, setTerm] = useState('')
+  const currentSearch = useRouterState({ select: state => typeof state.location.search.search === 'string' ? state.location.search.search : '' })
   const searchInput = useRef<HTMLInputElement>(null)
   const searchToggle = useRef<HTMLButtonElement>(null)
   useEffect(() => { if (searchOpen) searchInput.current?.focus() }, [searchOpen])
@@ -30,7 +31,7 @@ function HomeHeader() {
         <a href="#catalogo">Mercado</a><a href="#criadores">Criadores</a><a href="#diario">Aprenda</a>
       </nav>
       <div className="desktop-header-actions">
-        <Button ref={searchToggle} variant="ghost" aria-label="Abrir busca do mercado" aria-expanded={searchOpen} aria-controls="header-market-search" onClick={() => setSearchOpen(value => !value)}><Search aria-hidden="true" /></Button>
+        <Button ref={searchToggle} variant="ghost" aria-label="Abrir busca do mercado" aria-expanded={searchOpen} aria-controls="header-market-search" onClick={() => { if (!searchOpen) setTerm(currentSearch); setSearchOpen(value => !value) }}><Search aria-hidden="true" /></Button>
         <Link to="/carrinho" aria-label={quantity === undefined ? 'Carrinho' : `Carrinho, ${quantity} itens`} className="desktop-cart"><ShoppingCart aria-hidden="true" />{quantity !== undefined && <span aria-hidden="true">{quantity}</span>}</Link>
         {session.data ? <><details className="desktop-account"><summary><UserRound aria-hidden="true" /><span role="status" aria-label="Usuário conectado">{session.data.user.name}</span></summary>
           <div><Link to="/perfil">Perfil</Link><Link to="/carteiras">Carteiras</Link><Link to="/favoritos">Favoritos</Link><Link to="/pedido/confirmacao">Pedidos</Link></div>
